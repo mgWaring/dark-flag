@@ -5,25 +5,25 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour
 {
-    //Speed multipliers values editable in unity editor.
-    public float accelerationVar = 1;
-    public float yawSpeedVar = 100;
+    public float accelerationVar = 10;
+    public float yawSpeedVar = 10;
     //public float rollSpeedVar = 1;
     //public float maxSpeed = 10;
     //public float minSpeed = -10;
 
-    //Default speed values when active.
     float accelerationMult = 0;
     float yawSpeedMult = 0;
     //float rollSpeedMult = 0;
+    
     float acceleration = 0;
     float yawSpeed = 0;
     Vector3 yawAngularVelocity = new Vector3(0, 0, 0);
+    
     Rigidbody vehicleRB;
 
-    //Add strafe?
+    bool movementInputCheck = false;
 
-    //GetComponent<Rigidbody>().AddForce(Vector3.forward * variable, ForceMode.Acceleration);
+    //Add strafe?
 
     private void Start()
     {
@@ -39,13 +39,11 @@ public class MovementController : MonoBehaviour
     void FixedUpdate()
     {
         acceleration = SpeedSet(accelerationMult, accelerationVar);
-        vehicleRB.AddForce(Vector3.forward * acceleration, ForceMode.Acceleration);
+        vehicleRB.AddRelativeForce(Vector3.forward * acceleration * Time.fixedDeltaTime, ForceMode.Force);
 
         //Yaw stuff still needs to be cleaned up, sorry.
         yawSpeed = SpeedSet(yawSpeedMult, yawSpeedVar);
         yawAngularVelocity = Vector3.up * yawSpeed;
-        
-        
         Quaternion deltaRotation = Quaternion.Euler(yawAngularVelocity * Time.fixedDeltaTime);
         vehicleRB.MoveRotation(vehicleRB.rotation * deltaRotation);
 
@@ -89,11 +87,23 @@ public class MovementController : MonoBehaviour
 
     float SpeedSet(float multiplier, float variable)
     {
-        float acceleration = 0;
+        float speed = 0;
 
-        acceleration = multiplier * variable;
+        speed = multiplier * variable;
         Debug.Log(acceleration);
 
-        return acceleration;
+        return speed;
+    }
+
+    bool MoveInputCheck(float accelerationMult, float yawSpeedMult)
+    {
+        bool inputCheck = false;
+        if (accelerationMult + yawSpeedMult != 0)
+        {
+            inputCheck = true;
+        }
+
+
+        return inputCheck;
     }
 }
