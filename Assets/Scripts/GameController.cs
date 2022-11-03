@@ -10,18 +10,26 @@ public class GameController : MonoBehaviour
     public Transform startingPositions;
     public RaceTimer raceTimer;
     public TextMeshProUGUI countdownText;
+    public GameObject checkpoints;
     [HideInInspector] public string state;
 
     float preRaceTimer = 5.0f;
-    Dictionary<string, float> finishes = new Dictionary<string, float>();
+    Dictionary<Racer, float> finishes = new Dictionary<Racer, float>();
+    Racer[] racers;
 
     void Start()
     {
         state = "prerace";
+        racers = new Racer[playerCount];
         for(int i = 0; i < playerCount; i++) {
             Vector3 pos = startingPositions.GetChild(i).transform.position;
             GameObject newship = Instantiate(ship);
+            Racer racer = newship.GetComponent<Racer>();
+            racer.id = i;
+            racer.lastCheckpoint = checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
+            racer.nextCheckpoint = checkpoints.transform.GetChild(1).GetComponent<Checkpoint>();
             newship.transform.position = pos;
+            racers[i] = racer;
         }
     }
 
@@ -34,8 +42,8 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void registerFinish(string name) {
-        finishes.Add(name, raceTimer.currentTime);
+    public void registerFinish(Racer racer) {
+        finishes.Add(racer, raceTimer.currentTime);
         if (finishes.Count == playerCount) {
             state = "finished";
             raceTimer.running = false;
