@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 
@@ -11,11 +12,12 @@ public class GameController : MonoBehaviour
     public RaceTimer raceTimer;
     public TextMeshProUGUI countdownText;
     public GameObject checkpoints;
+    public GameObject scoreboard;
     [HideInInspector] public string state;
+    [HideInInspector] public Racer[] racers;
+    [HideInInspector] public Dictionary<Racer, float> finishes = new Dictionary<Racer, float>();
 
     float preRaceTimer = 5.0f;
-    Dictionary<Racer, float> finishes = new Dictionary<Racer, float>();
-    Racer[] racers;
 
     void Start()
     {
@@ -35,10 +37,24 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
+        updatePositions();
         if (state == "prerace") {
             handlePreRace();
         } else {
             handleRace();
+        }
+    }
+
+    void updatePositions() {
+        var ordered = from r in racers orderby r.GetPosition() descending, FinishFor(r) select r;
+        racers = ordered.ToArray();
+    }
+
+    float FinishFor(Racer racer) {
+        if (finishes.ContainsKey(racer)) {
+            return finishes[racer];
+        } else {
+            return 0.0f;
         }
     }
 
@@ -47,7 +63,12 @@ public class GameController : MonoBehaviour
         if (finishes.Count == playerCount) {
             state = "finished";
             raceTimer.running = false;
+            scoreboard.active = true;
         }
+    }
+
+    public int positionFor(Racer racer) {
+        return System.Array.IndexOf(racers, racer);
     }
 
     void handlePreRace() {
