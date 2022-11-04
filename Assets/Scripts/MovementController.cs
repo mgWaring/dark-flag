@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Net.WebSockets;
 using System;
 using UnityEngine;
+using System.Threading;
+using Unity.Mathematics;
 
 //Add this script to the vehicle object that has a rigidbody.
 public class MovementController : MonoBehaviour
@@ -10,20 +12,20 @@ public class MovementController : MonoBehaviour
     //Change accelerationVar to adjust forward and backwards speed.
     public float accelerationVar = 6000;
     //Change yawSpeedVar to adjust yaw rotational speed.
-    public float yawSpeedVar = 5;
+    public float yawSpeedVar = 4;
 
-    //public float rollSpeedVar = 1;
-    //public float maxSpeed = 10;
-    //public float minSpeed = -10;
+    public float rollSpeedVar = 1;
 
+    //accelerationMult and yawMult determine direction when they are either +1 or -1. Cuts power when they are 0.
     float accelerationMult = 0;
     float yawSpeedMult = 0;
-    //float rollSpeedMult = 0;
     
     float acceleration = 0;
     float yawSpeed = 0;
     Vector3 yawAngularVelocity = new Vector3(0, 0, 0);
-    
+    float rollSpeed = 0;
+    Vector3 rollAngularVelocity = new Vector3(0, 0, 0);
+
     Rigidbody vehicleRB;
 
     bool movementInputCheck = false;
@@ -33,11 +35,10 @@ public class MovementController : MonoBehaviour
     Vector3 distanceTravelledMath;
     float newTimeStamp;
     float oldTimeStamp;
-    float timePassedMath;
     float timePassed;
     float distanceTravelled = 0;
     float vehicleVelocity;
-    
+
     
    
 
@@ -59,29 +60,26 @@ public class MovementController : MonoBehaviour
         
         newPosition = transform.position;
         newTimeStamp = Time.realtimeSinceStartup;
-        distanceTravelledMath = newPosition - oldPosition;
-        timePassedMath = newTimeStamp - oldTimeStamp;
-        distanceTravelled = distanceTravelledMath.magnitude;
-        vehicleVelocity = distanceTravelled * timePassedMath;
+        vehicleVelocity = VelocityCalculator(newPosition, oldPosition,  newTimeStamp, oldTimeStamp);
 
-
-        //
-        MoveInputCheck(accelerationMult, yawSpeedMult);
         acceleration = SpeedSet(accelerationMult, accelerationVar);
-        vehicleRB.AddRelativeForce(Vector3.forward * acceleration * Time.fixedDeltaTime, ForceMode.Acceleration);
-        
-        //
+        vehicleRB.AddRelativeForce(Vector3.forward * (acceleration * (vehicleVelocity + 1)) * Time.fixedDeltaTime, ForceMode.Acceleration);
 
         oldPosition = transform.position;
         oldTimeStamp = Time.realtimeSinceStartup;
-        
 
-        //Yaw stuff still needs to be cleaned up, sorry.
+        
         yawSpeed = SpeedSet(yawSpeedMult, yawSpeedVar);
         yawAngularVelocity = Vector3.up * yawSpeed;
-        Quaternion deltaRotation = Quaternion.Euler(yawAngularVelocity * Time.fixedDeltaTime);
-        vehicleRB.MoveRotation(vehicleRB.rotation * deltaRotation);
+        Quaternion yawDeltaRotation = Quaternion.Euler(yawAngularVelocity * Time.fixedDeltaTime);
+        vehicleRB.MoveRotation(vehicleRB.rotation * yawDeltaRotation);
 
+
+
+        //rollSpeed = rollSpeedVar * vehicleVelocity * accelerationMult * yawSpeedMult;
+        //rollAngularVelocity = Vector3.forward * rollSpeed;
+        //Quaternion rollDeltaRotation = Quaternion.Euler(rollAngularVelocity * Time.fixedDeltaTime);
+        //vehicleRB.MoveRotation(vehicleRB.rotation * rollDeltaRotation);
 
         //Debug.Log(transform.position);
         //Debug.Log(newPosition + " - " + currentPosition + " = " + distanceTravelled);
@@ -89,7 +87,7 @@ public class MovementController : MonoBehaviour
         //Debug.Log("Speed = " + Math.Round(distanceTravelled*1000, 0));
         //Debug.Log(vehicleRB.velocity);
         Debug.Log("Speed = " + Math.Round(vehicleVelocity*1000, 0));
-
+        //Debug.Log(rollSpeed);
     }
 
 
@@ -148,5 +146,17 @@ public class MovementController : MonoBehaviour
 
 
         return inputCheck;
+    }
+
+    float VelocityCalculator(Vector3 newPosition, Vector3 oldPosition, float newTimeStamp, float oldTimeStamp)
+    {
+        float velocityA = 0;
+        distanceTravelledMath = newPosition - oldPosition;
+        timePassed = newTimeStamp - oldTimeStamp;
+        distanceTravelled = distanceTravelledMath.magnitude;
+        velocityA = distanceTravelled * timePassed;
+
+
+        return velocityA;
     }
 }
