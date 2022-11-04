@@ -1917,7 +1917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b1de23efe04244fa3a0e3077131ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ship: {fileID: 7803731750430973727, guid: 89ef2a03b0363514997ffacc17b577b7, type: 3}
+  ship: {fileID: 8508418995549443820, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
   playerCount: 1
   startingPositions: {fileID: 1066296504}
   raceTimer: {fileID: 765611359}

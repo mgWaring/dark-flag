@@ -32,6 +32,8 @@ public class GameController : MonoBehaviour
             Quaternion rot = startPos.rotation;
             GameObject newship = Instantiate(ship);
             Racer racer = newship.GetComponent<Racer>();
+            MovementController mc = newship.GetComponentInChildren<MovementController>();
+            mc.enabled = false;
             racer.id = i;
             racer.lastCheckpoint = checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
             racer.nextCheckpoint = checkpoints.transform.GetChild(1).GetComponent<Checkpoint>();
@@ -93,7 +95,7 @@ public class GameController : MonoBehaviour
             state = "race";
             raceTimer.running = true;
             countdownText.SetText("ACTIVATE!");
-            MovementController mc = racers[0].gameObject.GetComponent<MovementController>();
+            MovementController mc = racers[0].gameObject.GetComponentInChildren<MovementController>();
             mc.enabled = true;
         } else if (preRaceTimer <= 1.0f) {
             countdownText.SetText("1");

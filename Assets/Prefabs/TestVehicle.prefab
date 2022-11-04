@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8508418995549443821}
+  - component: {fileID: 3972715105725700650}
   m_Layer: 0
   m_Name: TestVehicle
   m_TagString: Ship
@@ -32,6 +33,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3972715105725700650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508418995549443820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38dbc332d2fac114dbdd4fd7cc7e4eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  lastCheckpoint: {fileID: 0}
+  nextCheckpoint: {fileID: 0}
 --- !u!1 &8508418996507249048
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +340,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7806884510970846798, guid: d23292945f31c6445afbb8473b088a96, type: 3}
       propertyPath: yawSpeedVar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -7806884510970846798, guid: d23292945f31c6445afbb8473b088a96, type: 3}
+      propertyPath: accelerationVar
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1554312566498007305, guid: d23292945f31c6445afbb8473b088a96, type: 3}
