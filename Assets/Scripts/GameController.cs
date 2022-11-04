@@ -23,6 +23,8 @@ public class GameController : MonoBehaviour
 
     float preRaceTimer = 5.0f;
     float postRaceTimer = 10.0f;
+    int playerId = 0;
+    Racer playerRacer;
 
     void Start()
     {
@@ -39,8 +41,9 @@ public class GameController : MonoBehaviour
             Racer racer = newship.GetComponent<Racer>();
             MovementController mc = newship.GetComponentInChildren<MovementController>();
             mc.enabled = false;
-            if (i == 0) {
+            if (i == playerId) {
                 speedUI.target = mc.gameObject;
+                playerRacer = racer;
             }
             racer.id = i;
             racer.lastCheckpoint = lastCheck;
@@ -95,17 +98,24 @@ public class GameController : MonoBehaviour
             times.Add(0.0f);
         } else if (times.Count <= lapCount) {
             times.Add(raceTimer.currentTime);
+            racer.lap += 1;
+            if (racer.id == playerId && RacerIsFinished(racer)) {
+                scoreboard.SetActive(true);
+            }
         }
 
         if (laps.Values.All(l => l.Count > lapCount)) {
             state = "postrace";
             raceTimer.running = false;
-            scoreboard.SetActive(true);
         }
     }
 
     public int positionFor(Racer racer) {
         return System.Array.IndexOf(racers, racer);
+    }
+
+    public int positionForPlayer() {
+        return System.Array.IndexOf(racers, playerRacer);
     }
 
     void handlePreRace() {

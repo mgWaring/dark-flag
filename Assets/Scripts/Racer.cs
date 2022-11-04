@@ -7,9 +7,15 @@ public class Racer : MonoBehaviour
     [HideInInspector] public int id;
     [HideInInspector] public Checkpoint lastCheckpoint;
     [HideInInspector] public Checkpoint nextCheckpoint;
+    [HideInInspector] public int lap = 0;
+    int checkpointCount;
+
+    void Start() {
+        checkpointCount = lastCheckpoint.gameObject.transform.parent.childCount;
+    }
 
     public float GetPosition() {
-        int b = lastCheckpoint.id;
+        int b = lastCheckpoint.id + (lap * checkpointCount);
 
         if (nextCheckpoint) {
             float total = Vector3.Distance(nextCheckpoint.transform.position, lastCheckpoint.transform.position);
