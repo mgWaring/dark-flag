@@ -23,7 +23,7 @@ public class InGameMenu : MonoBehaviour
 
     void Update() {
         if (Input.GetKeyUp("escape")) {
-            child.active = !child.active;
+            child.SetActive(!child.activeSelf);
         }
     }
 }

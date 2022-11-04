@@ -16,9 +16,10 @@ public class GameController : MonoBehaviour
     public GameObject scoreboard;
     public Camera playerCam;
     public SpeedUI speedUI;
+    public int lapCount = 1;
     [HideInInspector] public string state;
     [HideInInspector] public Racer[] racers;
-    [HideInInspector] public Dictionary<Racer, float> finishes = new Dictionary<Racer, float>();
+    [HideInInspector] public Dictionary<Racer, List<float>> laps = new Dictionary<Racer, List<float>>();
 
     float preRaceTimer = 5.0f;
     float postRaceTimer = 10.0f;
@@ -27,6 +28,9 @@ public class GameController : MonoBehaviour
     {
         state = "prerace";
         racers = new Racer[playerCount];
+        int checkpointCount = checkpoints.transform.childCount;
+        Checkpoint lastCheck = checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<Checkpoint>();
+        Checkpoint nextCheck = checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
         for(int i = 0; i < playerCount; i++) {
             Transform startPos = startingPositions.GetChild(i).transform;
             Vector3 pos = startPos.position;
@@ -39,11 +43,12 @@ public class GameController : MonoBehaviour
                 speedUI.target = mc.gameObject;
             }
             racer.id = i;
-            racer.lastCheckpoint = checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
-            racer.nextCheckpoint = checkpoints.transform.GetChild(1).GetComponent<Checkpoint>();
+            racer.lastCheckpoint = lastCheck;
+            racer.nextCheckpoint = nextCheck;
             newship.transform.position = pos;
             newship.transform.rotation = rot;
             racers[i] = racer;
+            laps[racer] = new List<float>();
         }
         Transform first = racers[0].transform;
         Transform camTransform = playerCam.transform;
@@ -72,20 +77,30 @@ public class GameController : MonoBehaviour
         racers = ordered.ToArray();
     }
 
+    public bool RacerIsFinished(Racer racer) {
+        return laps[racer].Count > lapCount;
+    }
+
     float FinishFor(Racer racer) {
-        if (finishes.ContainsKey(racer)) {
-            return finishes[racer];
+        if (laps[racer].Count > lapCount) {
+            return laps[racer].Last();
         } else {
             return 0.0f;
         }
     }
 
-    public void registerFinish(Racer racer) {
-        finishes.Add(racer, raceTimer.currentTime);
-        if (finishes.Count == playerCount) {
+    public void registerLap(Racer racer) {
+        List<float> times = laps[racer];
+        if (times.Count == 0) {
+            times.Add(0.0f);
+        } else if (times.Count <= lapCount) {
+            times.Add(raceTimer.currentTime);
+        }
+
+        if (laps.Values.All(l => l.Count > lapCount)) {
             state = "postrace";
             raceTimer.running = false;
-            scoreboard.active = true;
+            scoreboard.SetActive(true);
         }
     }
 

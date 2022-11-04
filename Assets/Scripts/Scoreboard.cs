@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 public class Scoreboard : MonoBehaviour
 {
@@ -26,8 +27,8 @@ public class Scoreboard : MonoBehaviour
             row.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("{0}", i + 1);
             row.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = string.Format("{0}", racer.id);
 
-            if (gameController.finishes.ContainsKey(racer)) {
-                float finish = gameController.finishes[racer];
+            if (gameController.RacerIsFinished(racer)) {
+                float finish = gameController.laps[racer].Last();
                 row.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = string.Format("{0:N2}", finish);
             } else {
                 row.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = string.Format("DNF");

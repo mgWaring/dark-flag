@@ -18,10 +18,14 @@ public class Checkpoint : MonoBehaviour
             if (this == racer.nextCheckpoint) {
                 Checkpoint next = NextCheckpoint();
                 if (next == null) {
-                    gameController.registerFinish(racer);
+                    racer.lastCheckpoint = this;
+                    racer.nextCheckpoint = transform.parent.GetChild(0).GetComponent<Checkpoint>();
                 } else {
                     racer.lastCheckpoint = this;
                     racer.nextCheckpoint = next;
+                    if (id == 0) {
+                        gameController.registerLap(racer);
+                    }
                 }
             }
         }
