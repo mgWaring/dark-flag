@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     public GameObject checkpoints;
     public GameObject scoreboard;
     public Camera playerCam;
+    public SpeedUI speedUI;
     [HideInInspector] public string state;
     [HideInInspector] public Racer[] racers;
     [HideInInspector] public Dictionary<Racer, float> finishes = new Dictionary<Racer, float>();
@@ -34,6 +35,9 @@ public class GameController : MonoBehaviour
             Racer racer = newship.GetComponent<Racer>();
             MovementController mc = newship.GetComponentInChildren<MovementController>();
             mc.enabled = false;
+            if (i == 0) {
+                speedUI.target = mc.gameObject;
+            }
             racer.id = i;
             racer.lastCheckpoint = checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
             racer.nextCheckpoint = checkpoints.transform.GetChild(1).GetComponent<Checkpoint>();
