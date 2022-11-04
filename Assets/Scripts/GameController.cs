@@ -93,10 +93,8 @@ public class GameController : MonoBehaviour
             state = "race";
             raceTimer.running = true;
             countdownText.SetText("ACTIVATE!");
-            for (int i = 0; i < playerCount; i++) {
-                MovementController mc = racers[i].gameObject.GetComponent<MovementController>();
-                mc.enabled = true;
-            }
+            MovementController mc = racers[0].gameObject.GetComponent<MovementController>();
+            mc.enabled = true;
         } else if (preRaceTimer <= 1.0f) {
             countdownText.SetText("1");
         } else if (preRaceTimer <= 2.0f) {
