@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.WebSockets;
+using System;
 using UnityEngine;
 
+//Add this script to the vehicle object that has a rigidbody.
 public class MovementController : MonoBehaviour
 {
-    public float accelerationVar = 10;
-    public float yawSpeedVar = 10;
+    //Change accelerationVar to adjust forward and backwards speed.
+    public float accelerationVar = 6000;
+    //Change yawSpeedVar to adjust yaw rotational speed.
+    public float yawSpeedVar = 5;
+
     //public float rollSpeedVar = 1;
     //public float maxSpeed = 10;
     //public float minSpeed = -10;
@@ -23,6 +28,19 @@ public class MovementController : MonoBehaviour
 
     bool movementInputCheck = false;
 
+    Vector3 oldPosition;
+    Vector3 newPosition;
+    Vector3 distanceTravelledMath;
+    float newTimeStamp;
+    float oldTimeStamp;
+    float timePassedMath;
+    float timePassed;
+    float distanceTravelled = 0;
+    float vehicleVelocity;
+    
+    
+   
+
     //Add strafe?
 
     private void Start()
@@ -38,14 +56,39 @@ public class MovementController : MonoBehaviour
 
     void FixedUpdate()
     {
+        
+        newPosition = transform.position;
+        newTimeStamp = Time.realtimeSinceStartup;
+        distanceTravelledMath = newPosition - oldPosition;
+        timePassedMath = newTimeStamp - oldTimeStamp;
+        distanceTravelled = distanceTravelledMath.magnitude;
+        vehicleVelocity = distanceTravelled * timePassedMath;
+
+
+        //
+        MoveInputCheck(accelerationMult, yawSpeedMult);
         acceleration = SpeedSet(accelerationMult, accelerationVar);
-        vehicleRB.AddRelativeForce(Vector3.forward * acceleration * Time.fixedDeltaTime, ForceMode.Force);
+        vehicleRB.AddRelativeForce(Vector3.forward * acceleration * Time.fixedDeltaTime, ForceMode.Acceleration);
+        
+        //
+
+        oldPosition = transform.position;
+        oldTimeStamp = Time.realtimeSinceStartup;
+        
 
         //Yaw stuff still needs to be cleaned up, sorry.
         yawSpeed = SpeedSet(yawSpeedMult, yawSpeedVar);
         yawAngularVelocity = Vector3.up * yawSpeed;
         Quaternion deltaRotation = Quaternion.Euler(yawAngularVelocity * Time.fixedDeltaTime);
         vehicleRB.MoveRotation(vehicleRB.rotation * deltaRotation);
+
+
+        //Debug.Log(transform.position);
+        //Debug.Log(newPosition + " - " + currentPosition + " = " + distanceTravelled);
+        //Debug.Log(Math.Round(newSpeed*1000, 2));
+        //Debug.Log("Speed = " + Math.Round(distanceTravelled*1000, 0));
+        //Debug.Log(vehicleRB.velocity);
+        Debug.Log("Speed = " + Math.Round(vehicleVelocity*1000, 0));
 
     }
 
@@ -90,7 +133,7 @@ public class MovementController : MonoBehaviour
         float speed = 0;
 
         speed = multiplier * variable;
-        Debug.Log(acceleration);
+        //Debug.Log(acceleration);
 
         return speed;
     }
