@@ -350,6 +350,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vehicle-Body
       objectReference: {fileID: 0}
+    - target: {fileID: 1554312566498007305, guid: d23292945f31c6445afbb8473b088a96, type: 3}
+      propertyPath: m_TagString
+      value: Ship
+      objectReference: {fileID: 0}
     - target: {fileID: 6973131828070309127, guid: d23292945f31c6445afbb8473b088a96, type: 3}
       propertyPath: m_RootOrder
       value: 0
