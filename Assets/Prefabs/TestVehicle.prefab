@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: 7505132950396116454}
   - component: {fileID: 4063442319365698124}
   - component: {fileID: 710578369071010362}
-  - component: {fileID: 5616632624483691830}
   m_Layer: 0
   m_Name: TestVehicle
   m_TagString: Ship
@@ -119,8 +118,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverRayYOffset: {x: 0, y: -1, z: 0}
-  hoverRayDistance: 0.5
-  hoverForce: 280
+  hoverRayDistance: 1
+  hoverForce: 26.8
+  hoverConstant: 2.5
 --- !u!136 &7505132950396116454
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -243,21 +243,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364859f9d6905674f8878a04139576ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5616632624483691830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8508418995549443820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5d6b189f7798e942b51336d9d8ea211, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hoverRayYOffset: {x: 0, y: -1, z: 0}
-  hoverRayDistance: 1
-  hoverForce: 10
 --- !u!1001 &3373895108588121592
 PrefabInstance:
   m_ObjectHideFlags: 0

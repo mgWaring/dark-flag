@@ -464,11 +464,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7297732876776564532, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: hoverForce
-      value: 280
+      value: 26.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297732876776564532, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: hoverConstant
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7297732876776564532, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: hoverRayDistance
-      value: 1.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8508418995549443820, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: m_Name
@@ -518,7 +522,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8578232230251462750, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
 --- !u!1 &1879051616
 GameObject:
