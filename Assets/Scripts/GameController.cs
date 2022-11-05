@@ -24,7 +24,7 @@ public class GameController : MonoBehaviour
 
     float preRaceTimer = 5.0f;
     float postRaceTimer = 10.0f;
-    int playerId = 0;
+    public int playerId = 0;
     [HideInInspector] public Racer playerRacer;
 
     void Start()

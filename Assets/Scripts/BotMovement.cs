@@ -6,6 +6,8 @@ public class BotMovement : MonoBehaviour
 {
     public LayerMask wallLayer;
     public float sensorDistance;
+    public float sensorTightness = 0.1f;
+    public float stillMoveDistance = 20.0f;
     MovementController mc;
     Rigidbody rb;
 
@@ -48,13 +50,13 @@ public class BotMovement : MonoBehaviour
             }
         } else {
             if (leftHit.collider != null && rightHit.collider == null) {
-                if (leftHit.distance > 50) {
+                if (leftHit.distance > stillMoveDistance) {
                     mc.MoveForward();
                 }
                 mc.MoveRight();
             }
             if (leftHit.collider == null && rightHit.collider != null) {
-                if (rightHit.distance > 50) {
+                if (rightHit.distance > stillMoveDistance) {
                     mc.MoveForward();
                 }
                 mc.MoveLeft();
@@ -66,7 +68,7 @@ public class BotMovement : MonoBehaviour
     }
 
     Vector3 RightDir() {
-        return transform.forward + (transform.right * 0.1f);
+        return transform.forward + (transform.right * sensorTightness);
     }
 
     Vector3 ForwardDir() {
@@ -74,6 +76,6 @@ public class BotMovement : MonoBehaviour
     }
 
     Vector3 LeftDir() {
-        return transform.forward - (transform.right * 0.1f);
+        return transform.forward - (transform.right * sensorTightness);
     }
 }

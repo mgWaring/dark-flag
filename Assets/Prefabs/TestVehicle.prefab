@@ -89,6 +89,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   sensorDistance: 22.5
+  sensorTightness: 0.2
+  stillMoveDistance: 25
 --- !u!114 &3199054139710719634
 MonoBehaviour:
   m_ObjectHideFlags: 0
