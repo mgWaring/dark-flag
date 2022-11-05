@@ -39,7 +39,7 @@ public class AntiGravManager : MonoBehaviour
 
         if (GroundDetector(hoverRay1))
         {
-            vehicleRB.AddRelativeForce(Vector3.up * hoverForce, ForceMode.);
+            vehicleRB.AddRelativeForce(Vector3.up * hoverForce, ForceMode.Force);
         }
     }
 
