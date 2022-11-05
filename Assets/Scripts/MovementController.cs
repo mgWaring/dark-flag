@@ -63,7 +63,7 @@ public class MovementController : MonoBehaviour
         vehicleVelocity = VelocityCalculator(newPosition, oldPosition,  newTimeStamp, oldTimeStamp);
 
         acceleration = SpeedSet(accelerationMult, accelerationVar);
-        vehicleRB.AddRelativeForce(Vector3.forward * (acceleration * (vehicleVelocity + 1)) * Time.fixedDeltaTime, ForceMode.Acceleration);
+        vehicleRB.AddRelativeForce(Vector3.forward * acceleration * Time.fixedDeltaTime, ForceMode.Acceleration);
 
         oldPosition = transform.position;
         oldTimeStamp = Time.realtimeSinceStartup;
@@ -73,6 +73,7 @@ public class MovementController : MonoBehaviour
         yawAngularVelocity = Vector3.up * yawSpeed;
         Quaternion yawDeltaRotation = Quaternion.Euler(yawAngularVelocity * Time.fixedDeltaTime);
         vehicleRB.MoveRotation(vehicleRB.rotation * yawDeltaRotation);
+
 
 
 

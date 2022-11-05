@@ -51,6 +51,7 @@ MonoBehaviour:
   id: 0
   lastCheckpoint: {fileID: 0}
   nextCheckpoint: {fileID: 0}
+  lap: 0
 --- !u!54 &4620487441135030737
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -81,6 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   accelerationVar: 6000
   yawSpeedVar: 5
+  rollSpeedVar: 1
 --- !u!65 &4762247900446137606
 BoxCollider:
   m_ObjectHideFlags: 0
