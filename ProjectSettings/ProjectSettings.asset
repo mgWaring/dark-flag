@@ -708,11 +708,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 2
-  cloudProjectId: 
+  cloudProjectId: 8ac608d7-92a9-4840-b3eb-4c58ec795b6b
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: dark flag
+  organizationId: manichus
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
