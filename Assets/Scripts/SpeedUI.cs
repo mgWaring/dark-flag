@@ -18,6 +18,7 @@ public class SpeedUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = string.Format("{0:N2}", rb.velocity.magnitude);
+        float val = rb.velocity.magnitude / 90.0f * 1000.0f;
+        text.text = string.Format("{0:N0} mph", val);
     }
 }
