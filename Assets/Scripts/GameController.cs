@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     public GameObject scoreboard;
     public Camera playerCam;
     public SpeedUI speedUI;
+    public LapTimer lapTimer;
     public int lapCount = 1;
     [HideInInspector] public string state;
     [HideInInspector] public Racer[] racers;
@@ -24,7 +25,7 @@ public class GameController : MonoBehaviour
     float preRaceTimer = 5.0f;
     float postRaceTimer = 10.0f;
     int playerId = 0;
-    Racer playerRacer;
+    [HideInInspector] public Racer playerRacer;
 
     void Start()
     {
@@ -99,14 +100,18 @@ public class GameController : MonoBehaviour
         } else if (times.Count <= lapCount) {
             times.Add(raceTimer.currentTime);
             racer.lap += 1;
-            if (racer.id == playerId && RacerIsFinished(racer)) {
-                scoreboard.SetActive(true);
+            if (racer.id == playerId) {
+                lapTimer.Lap();
+                if (RacerIsFinished(racer)) {
+                    scoreboard.SetActive(true);
+                }
             }
         }
 
         if (laps.Values.All(l => l.Count > lapCount)) {
             state = "postrace";
             raceTimer.running = false;
+            lapTimer.running = false;
         }
     }
 
@@ -123,6 +128,7 @@ public class GameController : MonoBehaviour
         if (preRaceTimer <= 0.0f) {
             state = "race";
             raceTimer.running = true;
+            lapTimer.running = true;
             countdownText.SetText("ACTIVATE!");
             MovementController mc = racers[0].gameObject.GetComponentInChildren<MovementController>();
             mc.enabled = true;

@@ -5,7 +5,6 @@ using TMPro;
 
 public class RaceTimer : MonoBehaviour
 {
-    public TextMeshProUGUI text;
     [HideInInspector] public bool running;
     [HideInInspector] public float currentTime;
 
@@ -19,7 +18,6 @@ public class RaceTimer : MonoBehaviour
     {
         if (running) { 
             currentTime += Time.deltaTime;
-            text.text = string.Format("{0:N2}", currentTime);
         }
     }
 }
