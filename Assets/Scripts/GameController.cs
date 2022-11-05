@@ -47,6 +47,9 @@ public class GameController : MonoBehaviour
                 bot.enabled = false;
                 speedUI.target = mc.gameObject;
                 playerRacer = racer;
+            } else {
+                PlayerMovement pm = newship.GetComponent<PlayerMovement>();
+                pm.enabled = false;
             }
             racer.id = i;
             racer.lastCheckpoint = lastCheck;
@@ -106,6 +109,8 @@ public class GameController : MonoBehaviour
                 lapTimer.Lap();
                 if (RacerIsFinished(racer)) {
                     scoreboard.SetActive(true);
+                    racer.gameObject.GetComponent<BotMovement>().enabled = true;
+                    racer.gameObject.GetComponent<PlayerMovement>().enabled = false;
                 }
             }
         }
