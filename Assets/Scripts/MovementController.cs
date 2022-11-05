@@ -5,16 +5,16 @@ using System;
 using UnityEngine;
 using System.Threading;
 using Unity.Mathematics;
+using System.ComponentModel;
+using System.Net.NetworkInformation;
 
 //Add this script to the vehicle object that has a rigidbody.
 public class MovementController : MonoBehaviour
 {
     //Change accelerationVar to adjust forward and backwards speed.
-    public float accelerationVar = 6000;
+    public float accelerationVar = 6000f;
     //Change yawSpeedVar to adjust yaw rotational speed.
-    public float yawSpeedVar = 4;
-
-    public float rollSpeedVar = 1;
+    public float yawSpeedVar = 4.3f;
 
     //accelerationMult and yawMult determine direction when they are either +1 or -1. Cuts power when they are 0.
     float accelerationMult = 0;
@@ -23,8 +23,13 @@ public class MovementController : MonoBehaviour
     float acceleration = 0;
     float yawSpeed = 0;
     Vector3 yawAngularVelocity = new Vector3(0, 0, 0);
+
+
     float rollSpeed = 0;
-    Vector3 rollAngularVelocity = new Vector3(0, 0, 0);
+    public float rollSpeedVar = 1;
+    Vector3 rollTorque = new Vector3(0, 0, 0);
+
+
 
     Rigidbody vehicleRB;
 
@@ -38,21 +43,43 @@ public class MovementController : MonoBehaviour
     float timePassed;
     float distanceTravelled = 0;
     float vehicleVelocity;
+    
+    //public Vector3 offset = new Vector3(0f, 0.5f, 0.8f);
+    //public float rayDistance = 10;
+
+    Collider vehicleCollider;
 
     
-   
+    //Transform directionVector = transform.position;
+    //Vector3 relativeDirection = new Vector3(0, 0, 0);
+    //Vector3 relativeDirection = directionVector.InverseTransformPoin(transform.position);
+
+
+
 
     //Add strafe?
 
     private void Start()
     {
         vehicleRB = GetComponent<Rigidbody>();
+        vehicleCollider = GetComponent<CapsuleCollider>();
+
     }
 
     void Update()
     {
         accelerationMult = AcceleratorInputCheck();
         yawSpeedMult = YawInputCheck();
+
+        //Vector3 relativePoint = transform.InverseTransformPoint(0, 0.5f, 0.8f);
+        //RaycastHit hit;
+        //Ray testRay = new Ray(transform.localPosition + offset, transform.forward);
+        //Debug.DrawRay(vehicleCollider.transform.localPosition + offset, vehicleCollider.transform.forward, Color.red, 9999999, true); ;
+        //if (Physics.Raycast(testRay, out hit, rayDistance))
+        //{
+
+            //Debug.Log("I've hit " + hit.collider);
+        //}
     }
 
     void FixedUpdate()
@@ -74,6 +101,14 @@ public class MovementController : MonoBehaviour
         Quaternion yawDeltaRotation = Quaternion.Euler(yawAngularVelocity * Time.fixedDeltaTime);
         vehicleRB.MoveRotation(vehicleRB.rotation * yawDeltaRotation);
 
+        
+
+
+        //will roll in the wrong direction if going backwards.
+        //rollSpeed =  accelerationMult * (yawSpeedMult * -1) * vehicleVelocity * rollSpeedVar;
+        //vehicleRB.AddRelativeTorque(Vector3.forward * rollSpeed * Time.fixedDeltaTime, ForceMode.Acceleration);
+
+
 
 
 
@@ -87,8 +122,10 @@ public class MovementController : MonoBehaviour
         //Debug.Log(Math.Round(newSpeed*1000, 2));
         //Debug.Log("Speed = " + Math.Round(distanceTravelled*1000, 0));
         //Debug.Log(vehicleRB.velocity);
-        Debug.Log("Speed = " + Math.Round(vehicleVelocity*1000, 0));
+        //Debug.Log("Speed = " + Math.Round(vehicleVelocity*1000, 0));
         //Debug.Log(rollSpeed);
+        //Debug.Log(oldTimeStamp);
+
     }
 
 

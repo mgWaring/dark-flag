@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5086239167291271808}
   m_Layer: 0
   m_Name: TrackTileStraightWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 4821216009642605515}
   m_Layer: 0
   m_Name: TrackTileStraightWall (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 3225052255113985425}
   m_Layer: 0
   m_Name: TrackTileStraight
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

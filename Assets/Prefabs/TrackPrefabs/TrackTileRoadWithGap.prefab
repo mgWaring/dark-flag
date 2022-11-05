@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 651224655350993003}
   m_Layer: 0
   m_Name: TrackTileRoadWithGap
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 8322231793611331092}
   m_Layer: 0
   m_Name: TrackTileWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
