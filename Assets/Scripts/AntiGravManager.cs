@@ -10,7 +10,7 @@ public class AntiGravManager : MonoBehaviour
     public Vector3 hoverRayYOffset = new Vector3(0.0f, -1.0f, 0.0f);
     public float hoverRayDistance = 1.0f;
 
-    public float hoverForce = 10;
+    public float hoverForce = 280f;
 
     RaycastHit hitInfo;
     LayerMask hoverMask;

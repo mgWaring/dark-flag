@@ -333,6 +333,63 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1001 &1110638429
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4013535060949288006, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013535060949288006, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -41.747658
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013535060949288006, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.0967128
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013535060949288006, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -81.16765
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013535060949288006, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9837492
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013535060949288006, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.1795479
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013535060949288006, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013535060949288006, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013535060949288006, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -20.687
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013535060949288006, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013535060949288006, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6681099453942110777, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Name
+      value: TrackTileStraight
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f4f67581c078251438302d8703ac11c1, type: 3}
 --- !u!4 &1363348294 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8508418995549443821, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
@@ -346,8 +403,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3199054139710719634, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: offset.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199054139710719634, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: offset.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199054139710719634, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: rayDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199054139710719634, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: yawSpeedVar
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199054139710719634, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: rollSpeedVar
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 4057962643135393986, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: m_Drag
@@ -369,6 +442,14 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4620487441135030737, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620487441135030737, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 5309367906841637513, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: m_TagString
       value: Ship
@@ -381,25 +462,33 @@ PrefabInstance:
       propertyPath: accelerationVar
       value: 6000
       objectReference: {fileID: 0}
+    - target: {fileID: 7297732876776564532, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: hoverForce
+      value: 280
+      objectReference: {fileID: 0}
+    - target: {fileID: 7297732876776564532, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: hoverRayDistance
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 8508418995549443820, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: m_Name
       value: TestVehicle
       objectReference: {fileID: 0}
     - target: {fileID: 8508418995549443821, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8508418995549443821, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -39.07
       objectReference: {fileID: 0}
     - target: {fileID: 8508418995549443821, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 5.74
       objectReference: {fileID: 0}
     - target: {fileID: 8508418995549443821, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -84.4
       objectReference: {fileID: 0}
     - target: {fileID: 8508418995549443821, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: m_LocalRotation.w
