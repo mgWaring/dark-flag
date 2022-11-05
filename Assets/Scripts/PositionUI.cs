@@ -19,7 +19,6 @@ public class PositionUI : MonoBehaviour
     }
 
     string PositionFromInt(int pos) {
-        Debug.Log(pos);
         switch(pos) {
             case 0:
               return "1st";

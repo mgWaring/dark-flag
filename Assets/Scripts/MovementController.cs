@@ -19,6 +19,8 @@ public class MovementController : MonoBehaviour
     //accelerationMult and yawMult determine direction when they are either +1 or -1. Cuts power when they are 0.
     float accelerationMult = 0;
     float yawSpeedMult = 0;
+    string accDir = "";
+    string yawDir = "";
     
     float acceleration = 0;
     float yawSpeed = 0;
@@ -53,6 +55,8 @@ public class MovementController : MonoBehaviour
     {
         accelerationMult = AcceleratorInputCheck();
         yawSpeedMult = YawInputCheck();
+        yawDir = "";
+        accDir = "";
     }
 
     void FixedUpdate()
@@ -91,18 +95,32 @@ public class MovementController : MonoBehaviour
         //Debug.Log(rollSpeed);
     }
 
+    public void MoveForward() {
+        accDir = "forward";
+    }
 
+    public void MoveBackward() {
+        accDir = "backward";
+    }
+
+    public void MoveRight() {
+        yawDir = "right";
+    }
+
+    public void MoveLeft() {
+        yawDir = "left";
+    }
 
     float AcceleratorInputCheck()
     {
         float accelerationMult = 0;
         //Checks for forward or backwards input.
-        if (Input.GetKey(KeyCode.W))
+        if (accDir == "forward")
         {
             accelerationMult = accelerationMult + 1;
         }
         
-        if (Input.GetKey(KeyCode.S))
+        if (accDir == "backward")
         {
             accelerationMult = accelerationMult - 1;
         }
@@ -114,12 +132,12 @@ public class MovementController : MonoBehaviour
     {
         float yawMult = 0;
         //Checks for left or right input.
-        if (Input.GetKey(KeyCode.D))
+        if (yawDir == "right")
         {
             yawMult = yawSpeedMult + 1;
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (yawDir == "left")
         {
             yawMult = yawSpeedMult - 1;
         }
