@@ -11,10 +11,12 @@ GameObject:
   - component: {fileID: 8508418995549443821}
   - component: {fileID: 3972715105725700650}
   - component: {fileID: 4620487441135030737}
+  - component: {fileID: 8578232230251462750}
   - component: {fileID: 3199054139710719634}
   - component: {fileID: 7297732876776564532}
   - component: {fileID: 7505132950396116454}
   - component: {fileID: 4063442319365698124}
+  - component: {fileID: 710578369071010362}
   m_Layer: 0
   m_Name: TestVehicle
   m_TagString: Ship
@@ -70,6 +72,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &8578232230251462750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508418995549443820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dce19d038045c046a98a5a5d84f84a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  sensorDistance: 22.5
 --- !u!114 &3199054139710719634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +227,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &710578369071010362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508418995549443820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 364859f9d6905674f8878a04139576ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3373895108588121592
 PrefabInstance:
   m_ObjectHideFlags: 0

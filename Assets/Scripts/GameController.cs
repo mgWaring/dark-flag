@@ -43,6 +43,8 @@ public class GameController : MonoBehaviour
             MovementController mc = newship.GetComponentInChildren<MovementController>();
             mc.enabled = false;
             if (i == playerId) {
+                BotMovement bot = newship.GetComponent<BotMovement>();
+                bot.enabled = false;
                 speedUI.target = mc.gameObject;
                 playerRacer = racer;
             }
@@ -130,8 +132,10 @@ public class GameController : MonoBehaviour
             raceTimer.running = true;
             lapTimer.running = true;
             countdownText.SetText("ACTIVATE!");
-            MovementController mc = racers[0].gameObject.GetComponentInChildren<MovementController>();
-            mc.enabled = true;
+            for (int i = 0; i <= playerCount; i++) {
+                MovementController mc = racers[i].gameObject.GetComponentInChildren<MovementController>();
+                mc.enabled = true;
+            }
         } else if (preRaceTimer <= 1.0f) {
             countdownText.SetText("1");
         } else if (preRaceTimer <= 2.0f) {
