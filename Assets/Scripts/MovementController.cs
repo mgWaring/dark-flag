@@ -8,6 +8,8 @@ using Unity.Mathematics;
 using System.ComponentModel;
 using System.Net.NetworkInformation;
 
+//I am aware that this script is a mess, I am not done with it yet.
+
 //Add this script to the vehicle object that has a rigidbody.
 public class MovementController : MonoBehaviour
 {

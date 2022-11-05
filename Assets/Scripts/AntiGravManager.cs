@@ -1,11 +1,13 @@
 using UnityEngine;
 
+//Add this script to the vehicle object that has a rigidbody.
+//Forces applied by the AntiGravManager are affected by the rigidbody mass.
 public class AntiGravManager : MonoBehaviour
-{
+{    
     Rigidbody vehicleRB;
-    Collider vehicleCL;//Not used at the moment.
+    Collider vehicleCL;//Not used at the moment. Delete if still unused before final release of game.
 
-    public Vector3 hoverRayYOffset = new Vector3(0.0f, -1.0f, 0.0f);//Not used at the moment.
+    public Vector3 hoverRayYOffset = new Vector3(0.0f, -1.0f, 0.0f);//Not used at the moment. Delete if still unused before final release of game.
     public float hoverRayDistance = 1.0f;
 
     public float hoverForce = 26.8f;
@@ -18,31 +20,27 @@ public class AntiGravManager : MonoBehaviour
 
     Ray hoverRay1;
     Vector3 hoverRay1XZOffset = new Vector3(0.0f, 0.0f, 0.0f);
-    Vector3 hoverRay1CombOffset;//Not used at the moment.
-
-
+    Vector3 hoverRay1CombOffset;//Not used at the moment. Delete if still unused before final release of game.
 
     void Start()
     {
         vehicleRB = GetComponent <Rigidbody>();
-        vehicleCL = GetComponent <CapsuleCollider>();//Not used at the moment.
+        vehicleCL = GetComponent <CapsuleCollider>();//Not used at the moment. Delete if still unused before final release of game.
         hoverMask = LayerMask.GetMask("Ship");
-        hoverRay1CombOffset = OffsetCombiner(hoverRay1XZOffset);//Not used at the moment.
-
+        hoverRay1CombOffset = OffsetCombiner(hoverRay1XZOffset);//Not used at the moment. Delete if still unused before final release of game.
     }
 
     private void FixedUpdate()
     {
         hoverRay1 = new Ray(transform.localPosition, transform.up * -1);
-        //Leave these comments here please.
+        //Leave these comments here please. Delete if still unused before final release of game.
         //Debug.DrawRay(transform.localPosition, transform.up * 10 * -1, Color.yellow, 1, true);
         //Debug.DrawRay(vehicleCollider.transform.localPosition + offset, vehicleCollider.transform.forward, Color.red, 9999999, true);        
 
         if (GroundDetector(hoverRay1))
         {
             vehicleRB.AddRelativeForce(Vector3.up * HoverSmoother(hoverRay1), ForceMode.Force);
-        }
-        
+        }        
     }
     
     bool GroundDetector(Ray inputRay)
@@ -87,5 +85,4 @@ public class AntiGravManager : MonoBehaviour
         //Debug.Log("From HoverSmoother in AntiGravManager. newHoverForce = " + newHoverForce);
         return newHoverForce;
     }
-
 }
