@@ -2081,7 +2081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 8508418995549443820, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
-  playerCount: 4
+  playerCount: 1
   raceTimer: {fileID: 765611359}
   countdownText: {fileID: 1226155478}
   scoreboard: {fileID: 1044541642}
@@ -2091,7 +2091,7 @@ MonoBehaviour:
   lapCount: 4
   state: 
   racers: []
-  playerId: 4
+  playerId: 0
   playerRacer: {fileID: 0}
   map: 1
 --- !u!114 &765611359
