@@ -7,6 +7,7 @@ using System.Threading;
 using Unity.Mathematics;
 using System.ComponentModel;
 using System.Net.NetworkInformation;
+using UnityEngine.InputSystem;
 
 //I am aware that this script is a mess, I am not done with it yet.
 
@@ -72,8 +73,8 @@ public class MovementController : MonoBehaviour
 
     void Update()
     {
-        accelerationMult = AcceleratorInputCheck();
-        yawSpeedMult = YawInputCheck();
+        /*accelerationMult = AcceleratorInputCheck();
+        yawSpeedMult = YawInputCheck();*/
         yawDir = "";
         accDir = "";
 
@@ -134,7 +135,7 @@ public class MovementController : MonoBehaviour
 
     }
 
-    public void MoveForward() {
+    /*public void MoveForward() {
         accDir = "forward";
     }
 
@@ -148,10 +149,27 @@ public class MovementController : MonoBehaviour
 
     public void MoveLeft() {
         yawDir = "left";
+    }*/
+
+    public void ThrustController(float input)
+    {
+        accelerationMult = input;
+
+        //Debug.Log("From ThrustController in PlayerMovement. thrustValue = " + thrustValue);
     }
 
-    float AcceleratorInputCheck()
+    public void YawController(float input)
     {
+        yawSpeedMult = input;
+
+        //Debug.Log("From YawController in PlayerMovement. thrustValue = " + yawValue);
+    }
+
+
+    /*float AcceleratorInputCheck()
+    {
+        
+        
         float accelerationMult = 0;
         //Checks for forward or backwards input.
         if (accDir == "forward")
@@ -182,7 +200,7 @@ public class MovementController : MonoBehaviour
         }
 
         return yawMult;
-    }
+    }*/
 
     float SpeedSet(float multiplier, float variable)
     {

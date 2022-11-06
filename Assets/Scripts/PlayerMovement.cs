@@ -1,21 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public class PlayerMovement : MonoBehaviour
 {
     MovementController mc;
+    public InputAction thrustInput;
+    public InputAction yawInput;
 
-    // Start is called before the first frame update
     void Start()
     {
       mc = GetComponent<MovementController>();
     }
 
-    // Update is called once per frame
+    private void OnEnable()
+    {
+        thrustInput.Enable();
+        yawInput.Enable();
+    }
+
+    private void OnDisable()
+    {
+        thrustInput.Disable();
+        yawInput.Disable();
+    }
+
     void Update()
     {
-        if (Input.GetKey(KeyCode.W)) {
+        /*if (Input.GetKey(KeyCode.W)) {
             mc.MoveForward();
         }
         if (Input.GetKey(KeyCode.S)) {
@@ -26,6 +40,9 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.D)) {
             mc.MoveRight();
-        }
+        }*/
+
+        mc.ThrustController(thrustInput.ReadValue<float>());
+        mc.YawController(yawInput.ReadValue<float>());
     }
 }

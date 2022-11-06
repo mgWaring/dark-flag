@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BotMovement : MonoBehaviour
 {
+    public float botSpeedMult = 1.0f;
     public LayerMask wallLayer;
     public float sensorDistance;
     MovementController mc;
@@ -23,7 +24,8 @@ public class BotMovement : MonoBehaviour
         float rot = DetectDirection();
         transform.Rotate(0.0f, rot, 0.0f);
         if (rot < 30) {
-            mc.MoveForward();
+            //mc.MoveForward();
+            mc.ThrustController(botSpeedMult);
         }
     }
 
