@@ -44,8 +44,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 140.70328, y: 10, z: 9.999998}
+  m_Center: {x: -53.608192, y: 5, z: 0.000000032715874}
 --- !u!114 &1214405026723574247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +59,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &267913945587336776
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,8 +103,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 87.3676, y: 10, z: 10.985379}
+  m_Center: {x: -38.683865, y: 5, z: 0.4926901}
 --- !u!114 &254049636827784169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +118,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &381701555159072598
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,8 +162,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 58.81014, y: 10, z: 11.111023}
+  m_Center: {x: 24.405079, y: 5, z: -0.5555101}
 --- !u!114 &547437702783459046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,7 +177,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &917887396554917387
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,8 +221,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 98.26652, y: 10, z: 15.891065}
+  m_Center: {x: -44.133263, y: 5, z: 2.9455266}
 --- !u!114 &826980806226963752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,7 +236,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &1267099418328305801
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,8 +280,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 115.055725, y: 9.412474, z: 9.999998}
+  m_Center: {x: -26.514837, y: 4.706237, z: 4.6290757e-15}
 --- !u!114 &8978922048584937763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,7 +295,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &1476483456287953549
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,8 +339,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 163.2042, y: 10, z: 10}
+  m_Center: {x: 76.6021, y: 5, z: 0}
 --- !u!114 &6670780061696696710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +354,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &1596408047316020689
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,8 +672,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 226.5262, y: 10, z: 9.999998}
+  m_Center: {x: 108.26276, y: 5, z: -2.0081918e-14}
 --- !u!114 &2152588427222533212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,7 +687,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &3329717002236022667
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,8 +731,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 142.95587, y: 10, z: 9.999998}
+  m_Center: {x: 66.477936, y: 5, z: 9.60799e-15}
 --- !u!114 &7568151385362252683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,7 +746,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &3335546899754815700
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,7 +834,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3720152507110033755}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 1.2, z: -170.7}
+  m_LocalPosition: {x: -10.98, y: 1.2, z: -170.7}
   m_LocalScale: {x: 0.1, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -860,8 +852,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 149.87225, y: 10, z: 10}
+  m_Center: {x: -69.93613, y: 5, z: 0}
 --- !u!114 &190147673036664932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,7 +867,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &4321501159735578438
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,8 +911,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 63.9114, y: 10, z: 11.993423}
+  m_Center: {x: -26.9557, y: 5, z: 0.99671173}
 --- !u!114 &4537749905128126235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,7 +926,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &4508444794682261279
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,8 +970,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 160.1877, y: 10, z: 9.999998}
+  m_Center: {x: 63.495415, y: 5, z: -1.1727198e-14}
 --- !u!114 &2481385611966584863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,7 +985,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &4795268693447002779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,8 +1029,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 149.83606, y: 10, z: 9.999998}
+  m_Center: {x: 33.14916, y: 5, z: -4.8678086e-15}
 --- !u!114 &4298613962689360818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1055,7 +1044,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &4872817293443897468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,8 +1088,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 164.97311, y: 10, z: 9.999998}
+  m_Center: {x: -77.48654, y: 5, z: -1.7859046e-15}
 --- !u!114 &5846389849697114311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1115,7 +1103,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &5038515722823853229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1160,8 +1147,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 117.729416, y: 10, z: 10}
+  m_Center: {x: -1.4391708, y: 5, z: 0}
 --- !u!114 &8154362067000228214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1175,7 +1162,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &5188759765515283547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1423,8 +1409,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 165.30319, y: 10, z: 10}
+  m_Center: {x: -77.651596, y: 5, z: 0}
 --- !u!114 &6553172542868004619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1438,7 +1424,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &5814136074451850128
 GameObject:
   m_ObjectHideFlags: 0
@@ -13778,8 +13763,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 89.90404, y: 10, z: 11.67041}
+  m_Center: {x: 14.634747, y: 5, z: 0.8352055}
 --- !u!114 &8316182533841396723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13793,7 +13778,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &6158347707690074566
 GameObject:
   m_ObjectHideFlags: 0
@@ -13838,8 +13822,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 102.81822, y: 10, z: 9.999998}
+  m_Center: {x: -46.409054, y: 5, z: 4.5539168e-15}
 --- !u!114 &3183246847200497985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13853,7 +13837,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &6686853597996124708
 GameObject:
   m_ObjectHideFlags: 0
@@ -13937,8 +13920,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 193.22528, y: 10, z: 10}
+  m_Center: {x: 91.61264, y: 5, z: 0}
 --- !u!114 &3571380743869178471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13952,7 +13935,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &8216775937771543933
 GameObject:
   m_ObjectHideFlags: 0
@@ -13997,8 +13979,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 158.74069, y: 10, z: 9.999998}
+  m_Center: {x: 74.370285, y: 5, z: 4.000137e-15}
 --- !u!114 &1053359887230601652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14012,7 +13994,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &8897548930340142529
 GameObject:
   m_ObjectHideFlags: 0
@@ -14088,8 +14069,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 103.80653, y: 10, z: 9.999998}
+  m_Center: {x: -46.90323, y: 5, z: 4.9050492e-15}
 --- !u!114 &1290367103564794141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14103,7 +14084,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
 --- !u!1 &9147282361710433792
 GameObject:
   m_ObjectHideFlags: 0
@@ -14148,8 +14128,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
+  m_Size: {x: 159.68948, y: 10, z: 9.999998}
+  m_Center: {x: -52.44724, y: 5, z: -8.844305e-15}
 --- !u!114 &1518492478598933749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14163,4 +14143,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  gameController: {fileID: 0}
