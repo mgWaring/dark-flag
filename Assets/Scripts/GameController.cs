@@ -9,10 +9,8 @@ public class GameController : MonoBehaviour
 {
     public GameObject ship;
     public int playerCount;
-    public Transform startingPositions;
     public RaceTimer raceTimer;
     public TextMeshProUGUI countdownText;
-    public GameObject checkpoints;
     public GameObject scoreboard;
     public Camera playerCam;
     public SpeedUI speedUI;
@@ -26,9 +24,19 @@ public class GameController : MonoBehaviour
     float postRaceTimer = 10.0f;
     public int playerId = 0;
     [HideInInspector] public Racer playerRacer;
+    GameObject checkpoints;
+    Transform startingPositions;
+    Map map;
+    public string mapFabName;
 
     void Start()
     {
+
+        GameObject mapFab = Resources.Load<GameObject>("Prefabs/TrackJanktownSpeedway");
+        GameObject mapObj = Instantiate(mapFab);
+        map = mapObj.GetComponent<Map>();
+        checkpoints = map.checkpoints;
+        startingPositions = map.startingPositions;
         state = "prerace";
         racers = new Racer[playerCount];
         int checkpointCount = checkpoints.transform.childCount;
