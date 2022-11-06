@@ -5,9 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject singleplayerOptions;
+    public GameObject mainMenuOptions;
+
     public void SinglePlayer()
     {
-        SceneManager.LoadScene(1);
+        singleplayerOptions.SetActive(true);
+        mainMenuOptions.SetActive(false);
     }
 
     public void Exit()

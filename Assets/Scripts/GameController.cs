@@ -32,6 +32,15 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        if (CrossScene.cameFromMainMenu) {
+            if (CrossScene.players == 0) {
+                playerId = 9;
+            } else {
+                playerId = 0;
+            }
+            playerCount = CrossScene.players + CrossScene.bots;
+            map = CrossScene.map;
+        }
 
         GameObject mapFab = map switch {
             MapFabName.JanktownSpeedway => Resources.Load<GameObject>("Prefabs/TrackJanktownSpeedway"),
