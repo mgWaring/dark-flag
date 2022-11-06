@@ -26,17 +26,22 @@ public class GameController : MonoBehaviour
     [HideInInspector] public Racer playerRacer;
     GameObject checkpoints;
     Transform startingPositions;
-    Map map;
-    public string mapFabName;
+    Map mMap;
+    public enum MapFabName { JanktownSpeedway, ScrapPalace};
+    public MapFabName map;
 
     void Start()
     {
 
-        GameObject mapFab = Resources.Load<GameObject>("Prefabs/TrackJanktownSpeedway");
+        GameObject mapFab = map switch {
+            MapFabName.JanktownSpeedway => Resources.Load<GameObject>("Prefabs/TrackJanktownSpeedway"),
+            MapFabName.ScrapPalace => Resources.Load<GameObject>("Prefabs/TrackScrapPalace"),
+            _ => Resources.Load<GameObject>("Prefabs/TrackJanktownSpeedway")
+        };
         GameObject mapObj = Instantiate(mapFab);
-        map = mapObj.GetComponent<Map>();
-        checkpoints = map.checkpoints;
-        startingPositions = map.startingPositions;
+        mMap = mapObj.GetComponent<Map>();
+        checkpoints = mMap.checkpoints;
+        startingPositions = mMap.startingPositions;
         state = "prerace";
         racers = new Racer[playerCount];
         int checkpointCount = checkpoints.transform.childCount;

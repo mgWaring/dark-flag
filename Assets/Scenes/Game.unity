@@ -2093,7 +2093,7 @@ MonoBehaviour:
   racers: []
   playerId: 4
   playerRacer: {fileID: 0}
-  mapFabName: 
+  map: 1
 --- !u!114 &765611359
 MonoBehaviour:
   m_ObjectHideFlags: 0
