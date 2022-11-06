@@ -29,7 +29,7 @@ public class BotMovement : MonoBehaviour
             transform.Rotate(0.0f, rot * Time.deltaTime * 20, 0.0f);
         }
         if (rot < 20) {
-            mc.MoveForward();
+            mc.ThrustController(botSpeedMult);
         }
     }
 
