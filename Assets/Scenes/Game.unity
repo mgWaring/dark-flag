@@ -2091,7 +2091,7 @@ MonoBehaviour:
   lapCount: 4
   state: 
   racers: []
-  playerId: 1
+  playerId: 0
   playerRacer: {fileID: 0}
   map: 0
 --- !u!114 &765611359

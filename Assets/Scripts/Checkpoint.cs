@@ -25,8 +25,7 @@ public class Checkpoint : MonoBehaviour
                 } else {
                     racer.lastCheckpoint = this;
                     racer.nextCheckpoint = next;
-                    if (id == 0) {
-                        Debug.Log("END OF LAP");
+                    if (gameController != null && id == 0) {
                         gameController.registerLap(racer);
                     }
                 }

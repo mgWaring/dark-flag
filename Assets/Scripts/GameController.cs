@@ -81,7 +81,13 @@ public class GameController : MonoBehaviour
             racers[i] = racer;
             laps[racer] = new List<float>();
         }
-        Transform first = racers[0].transform;
+        if (playerRacer == null) {
+            playerRacer = racers[0];
+            playerId = 0;
+            MovementController mc = playerRacer.gameObject.GetComponentInChildren<MovementController>();
+            speedUI.target = mc.gameObject;
+        }
+        Transform first = playerRacer.transform;
         Transform camTransform = playerCam.transform;
         camTransform.SetParent(first);
         camTransform.position = first.position;
@@ -122,7 +128,6 @@ public class GameController : MonoBehaviour
 
     public void registerLap(Racer racer) {
         List<float> times = laps[racer];
-        Debug.Log("HI");
         if (times.Count == 0) {
             times.Add(0.0f);
         } else if (times.Count <= lapCount) {
