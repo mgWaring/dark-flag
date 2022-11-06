@@ -2708,6 +2708,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackPieceObstaclePillar (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
 --- !u!4 &186099739690951394 stripped
@@ -2839,6 +2843,22 @@ PrefabInstance:
     - target: {fileID: 4224087271992411477, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 8.703873
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 3.8519363
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 10.732829
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 4.8664145
       objectReference: {fileID: 0}
     - target: {fileID: 6681099453942110777, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Name
@@ -2976,6 +2996,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackPieceObstaclePillar
       objectReference: {fileID: 0}
+    - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
 --- !u!4 &186099739707297558 stripped
@@ -3037,6 +3061,10 @@ PrefabInstance:
     - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
       propertyPath: m_Name
       value: TrackPieceObstaclePillar (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
@@ -3403,6 +3431,10 @@ PrefabInstance:
     - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
       propertyPath: m_Name
       value: TrackPieceObstaclePillar (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
@@ -3812,6 +3844,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackPieceObstaclePillar (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
 --- !u!4 &186099739815926790 stripped
@@ -4174,6 +4210,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackPieceObstaclePillar (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
 --- !u!4 &186099739165587082 stripped
@@ -4305,6 +4345,10 @@ PrefabInstance:
     - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
       propertyPath: m_Name
       value: TrackPieceObstaclePillar (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
@@ -4605,6 +4649,30 @@ PrefabInstance:
     - target: {fileID: 4224087271992411477, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 5.351809
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 2.1759462
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.z
+      value: 0.0000010238798
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 5.824866
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 2.4124372
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.z
+      value: 0.0000000032258893
       objectReference: {fileID: 0}
     - target: {fileID: 6681099453942110777, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Name
@@ -4976,6 +5044,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 6.944959
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 2.9724784
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 6.2502036
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 2.6251018
+      objectReference: {fileID: 0}
     - target: {fileID: 6681099453942110777, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Name
       value: TrackTileStraight (29)
@@ -5185,6 +5269,22 @@ PrefabInstance:
     - target: {fileID: 4224087271992411477, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 9.034826
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 4.0174117
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 9.73612
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 4.36806
       objectReference: {fileID: 0}
     - target: {fileID: 6681099453942110777, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Name
@@ -5668,6 +5768,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackPieceObstaclePillar (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
 --- !u!4 &186099740751165025 stripped
@@ -5729,6 +5833,10 @@ PrefabInstance:
     - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
       propertyPath: m_Name
       value: TrackPieceObstaclePillar (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
@@ -6067,6 +6175,10 @@ PrefabInstance:
     - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
       propertyPath: m_Name
       value: TrackPieceObstaclePillar (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
@@ -6594,6 +6706,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 9.147224
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 4.073612
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 10.790286
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 4.895143
+      objectReference: {fileID: 0}
     - target: {fileID: 6681099453942110777, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Name
       value: TrackTileStraight (34)
@@ -6898,6 +7026,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 5.538208
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 2.269104
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 4.0625963
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 1.5312982
+      objectReference: {fileID: 0}
     - target: {fileID: 6681099453942110777, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Name
       value: TrackTileStraight (39)
@@ -6963,6 +7107,10 @@ PrefabInstance:
     - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
       propertyPath: m_Name
       value: TrackPieceObstaclePillar (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
@@ -7169,6 +7317,22 @@ PrefabInstance:
     - target: {fileID: 4224087271992411477, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 8.253784
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 3.6268897
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 9.802078
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 4.401039
       objectReference: {fileID: 0}
     - target: {fileID: 6681099453942110777, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Name
@@ -7458,6 +7622,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 8.482772
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 3.7413833
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 7.1708865
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 3.0854433
+      objectReference: {fileID: 0}
     - target: {fileID: 6681099453942110777, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Name
       value: TrackTileStraight (38)
@@ -7692,6 +7872,30 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 9.460408
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 4.2301903
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.z
+      value: -0.000000007270921
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 11.633079
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 5.3165283
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.z
+      value: -0.000000036271416
+      objectReference: {fileID: 0}
     - target: {fileID: 6681099453942110777, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Name
       value: TrackTileStraight (35)
@@ -7762,6 +7966,22 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 12.62522
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 5.81261
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 12.387355
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 5.6936736
+      objectReference: {fileID: 0}
     - target: {fileID: 6681099453942110777, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Name
       value: TrackTileStraight (37)
@@ -7831,6 +8051,22 @@ PrefabInstance:
     - target: {fileID: 4224087271992411477, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 8.514236
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 3.7571182
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 7.0826397
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 3.0413218
       objectReference: {fileID: 0}
     - target: {fileID: 6681099453942110777, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Name
@@ -7967,6 +8203,10 @@ PrefabInstance:
     - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
       propertyPath: m_Name
       value: TrackPieceObstaclePillar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
@@ -8396,6 +8636,30 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 9.598102
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 4.299035
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821216009642605515, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.z
+      value: -0.000000008059049
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Size.y
+      value: 10.671651
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.y
+      value: 4.835817
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086239167291271808, guid: f4f67581c078251438302d8703ac11c1, type: 3}
+      propertyPath: m_Center.z
+      value: -0.000000009229513
+      objectReference: {fileID: 0}
     - target: {fileID: 6681099453942110777, guid: f4f67581c078251438302d8703ac11c1, type: 3}
       propertyPath: m_Name
       value: TrackTileStraight (36)
@@ -8462,6 +8726,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrackPieceObstaclePillar (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
 --- !u!4 &186099740381887653 stripped
@@ -8523,6 +8791,10 @@ PrefabInstance:
     - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
       propertyPath: m_Name
       value: TrackPieceObstaclePillar
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627244524044040652, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbe2ec51a5bd1b944b6224e2264c3a4c, type: 3}
