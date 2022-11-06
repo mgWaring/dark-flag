@@ -178,6 +178,10 @@ public class GameController : MonoBehaviour
             countdownText.SetText("2");
         } else if (preRaceTimer <= 3.0f) {
             countdownText.SetText("3");
+        } else if (preRaceTimer <= 4.0f) {
+            countdownText.SetText("4");
+        } else if (preRaceTimer <= 5.0f) {
+            countdownText.SetText("5");
         }
     }
 
