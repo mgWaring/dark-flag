@@ -19,11 +19,23 @@ public class BotMovement : MonoBehaviour
 
     void Update()
     {
+        LimitVelocity();
         TurnIfWrongWay();
         float rot = DetectDirection();
-        transform.Rotate(0.0f, rot, 0.0f);
-        if (rot < 30) {
-            mc.ThrustController(botSpeedMult);
+        transform.Rotate(0.0f, rot * Time.deltaTime * 20, 0.0f);
+        if (rot > 60) {
+            transform.Rotate(0.0f, rot, 0.0f);
+        } else {
+            transform.Rotate(0.0f, rot * Time.deltaTime * 20, 0.0f);
+        }
+        if (rot < 20) {
+            mc.MoveForward();
+        }
+    }
+
+    void LimitVelocity() {
+        if (rb.velocity.magnitude > 45) {
+            rb.velocity *= 0.7f;
         }
     }
 
@@ -39,11 +51,14 @@ public class BotMovement : MonoBehaviour
 
     float DetectDirection() {
         RaycastHit hit;
+        float buffer = 0.0f;
         if (Physics.Raycast(transform.position, transform.right.normalized, out hit, 2.5f, wallLayer)) {
             rb.AddRelativeForce(Vector3.right * -1f, ForceMode.Impulse);
+            buffer += 10.0f;
         }
         if (Physics.Raycast(transform.position, (transform.right * -1).normalized, out hit, 2.5f, wallLayer)) {
             rb.AddRelativeForce(Vector3.right * 1f, ForceMode.Impulse);
+            buffer += 10.0f;
         }
 
         if (!Physics.Raycast(transform.position, transform.forward.normalized, out hit, sensorDistance, wallLayer)) {
@@ -56,13 +71,13 @@ public class BotMovement : MonoBehaviour
             Vector3 rdir = (transform.forward - ((i/10.0f) * transform.right)).normalized;
             if (!Physics.Raycast(transform.position, ldir, out hit, sensorDistance, wallLayer)) {
                 Debug.DrawRay(transform.position, ldir * sensorDistance, Color.green);
-                return i * 4.5f + 5.0f;
+                return i * 4.5f + 7.5f + buffer;
             } else {
                 Debug.DrawRay(transform.position, ldir * sensorDistance, Color.red);
             }
             if (!Physics.Raycast(transform.position, rdir, out hit, sensorDistance, wallLayer)) {
                 Debug.DrawRay(transform.position, rdir * sensorDistance, Color.green);
-                return i * - 4.5f + 5.0f;
+                return i * - 4.5f - 7.5f - buffer;
             } else {
                 Debug.DrawRay(transform.position, rdir * sensorDistance, Color.red);
             }
@@ -73,13 +88,13 @@ public class BotMovement : MonoBehaviour
             Vector3 rdir = (((i/10.0f) * transform.forward) + transform.right).normalized;
             if (!Physics.Raycast(transform.position, ldir, out hit, sensorDistance, wallLayer)) {
                 Debug.DrawRay(transform.position, ldir * sensorDistance, Color.green);
-                return 45 + (i * 4.5f + 5.0f);
+                return 45 + (i * 4.5f);
             } else {
                 Debug.DrawRay(transform.position, ldir * sensorDistance, Color.red);
             }
             if (!Physics.Raycast(transform.position, rdir, out hit, sensorDistance, wallLayer)) {
                 Debug.DrawRay(transform.position, rdir * sensorDistance, Color.green);
-                return -45 - (i * 4.5f + 5.0f);
+                return -45 - (i * 4.5f);
             } else {
                 Debug.DrawRay(transform.position, rdir * sensorDistance, Color.red);
             }

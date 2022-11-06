@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
     [HideInInspector] public Dictionary<Racer, List<float>> laps = new Dictionary<Racer, List<float>>();
 
     float preRaceTimer = 5.0f;
-    float postRaceTimer = 10.0f;
+    float postRaceTimer = 20.0f;
     public int playerId = 0;
     [HideInInspector] public Racer playerRacer;
     GameObject checkpoints;
@@ -40,6 +40,7 @@ public class GameController : MonoBehaviour
             }
             playerCount = CrossScene.players + CrossScene.bots;
             map = CrossScene.map;
+            lapCount = CrossScene.laps;
         }
 
         GameObject mapFab = map switch {
@@ -81,7 +82,13 @@ public class GameController : MonoBehaviour
             racers[i] = racer;
             laps[racer] = new List<float>();
         }
-        Transform first = racers[0].transform;
+        if (playerRacer == null) {
+            playerRacer = racers[0];
+            playerId = 0;
+            MovementController mc = playerRacer.gameObject.GetComponentInChildren<MovementController>();
+            speedUI.target = mc.gameObject;
+        }
+        Transform first = playerRacer.transform;
         Transform camTransform = playerCam.transform;
         camTransform.SetParent(first);
         camTransform.position = first.position;
@@ -93,10 +100,11 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        updatePositions();
         if (state == "prerace") {
+            updatePositions();
             handlePreRace();
         } else if (state == "race") {
+            updatePositions();
             handleRace();
         } else if (state == "postrace") {
             handlePostRace();
@@ -122,7 +130,6 @@ public class GameController : MonoBehaviour
 
     public void registerLap(Racer racer) {
         List<float> times = laps[racer];
-        Debug.Log("HI");
         if (times.Count == 0) {
             times.Add(0.0f);
         } else if (times.Count <= lapCount) {
