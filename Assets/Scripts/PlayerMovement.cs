@@ -1,9 +1,13 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 //Add this script to vehicles that the player will be controlling.
 public class PlayerMovement : MonoBehaviour
 {
     MovementController mc;
+    public InputAction thrustInput;
+    public InputAction yawInput;
+
 
     void Start()
     {

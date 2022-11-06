@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BotMovement : MonoBehaviour
 {
+    public float botSpeedMult = 1.0f;
     public LayerMask wallLayer;
     public float sensorDistance;
     MovementController mc;
