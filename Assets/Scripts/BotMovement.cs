@@ -16,14 +16,13 @@ public class BotMovement : MonoBehaviour
         racer = GetComponent<Racer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         TurnIfWrongWay();
         float rot = DetectDirection();
         transform.Rotate(0.0f, rot, 0.0f);
         if (rot < 30) {
-            mc.MoveForward();
+            mc.ThrustController(botSpeedMult);
         }
     }
 

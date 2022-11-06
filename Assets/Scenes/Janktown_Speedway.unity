@@ -402,6 +402,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 710578369071010362, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: yawInput.m_Id
+      value: ba898fcd-280d-47a3-a86d-9342eabb84db
+      objectReference: {fileID: 0}
+    - target: {fileID: 710578369071010362, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: yawInput.m_Name
+      value: Yaw Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 710578369071010362, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: thrustInput.m_Id
+      value: 020ccf6d-871c-43ef-8284-ef68c3efa2e4
+      objectReference: {fileID: 0}
+    - target: {fileID: 710578369071010362, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: thrustInput.m_Name
+      value: Thrust Input
+      objectReference: {fileID: 0}
     - target: {fileID: 3199054139710719634, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: offset.y
       value: 0.5
@@ -416,7 +432,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3199054139710719634, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: yawSpeedVar
-      value: 4
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3199054139710719634, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: rollSpeedVar
