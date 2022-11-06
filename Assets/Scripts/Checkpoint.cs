@@ -10,7 +10,6 @@ public class Checkpoint : MonoBehaviour
     void Start() {
         id = transform.GetSiblingIndex();
         gameController = GameObject.Find("/GameController").GetComponent<GameController>();
-        Debug.Log(gameController);
     }
 
     void OnTriggerEnter(Collider collider) {
