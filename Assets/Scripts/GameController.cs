@@ -113,6 +113,7 @@ public class GameController : MonoBehaviour
 
     public void registerLap(Racer racer) {
         List<float> times = laps[racer];
+        Debug.Log("HI");
         if (times.Count == 0) {
             times.Add(0.0f);
         } else if (times.Count <= lapCount) {
@@ -151,7 +152,7 @@ public class GameController : MonoBehaviour
             raceTimer.running = true;
             lapTimer.running = true;
             countdownText.SetText("ACTIVATE!");
-            for (int i = 0; i <= playerCount; i++) {
+            for (int i = 0; i < playerCount; i++) {
                 MovementController mc = racers[i].gameObject.GetComponentInChildren<MovementController>();
                 mc.enabled = true;
             }

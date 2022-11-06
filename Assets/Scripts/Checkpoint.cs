@@ -5,10 +5,12 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
     [HideInInspector] public int id;
-    public GameController gameController;
+    GameController gameController;
 
     void Start() {
         id = transform.GetSiblingIndex();
+        gameController = GameObject.Find("/GameController").GetComponent<GameController>();
+        Debug.Log(gameController);
     }
 
     void OnTriggerEnter(Collider collider) {
@@ -24,6 +26,7 @@ public class Checkpoint : MonoBehaviour
                     racer.lastCheckpoint = this;
                     racer.nextCheckpoint = next;
                     if (id == 0) {
+                        Debug.Log("END OF LAP");
                         gameController.registerLap(racer);
                     }
                 }
