@@ -40,6 +40,7 @@ public class GameController : MonoBehaviour
             }
             playerCount = CrossScene.players + CrossScene.bots;
             map = CrossScene.map;
+            lapCount = CrossScene.laps;
         }
 
         GameObject mapFab = map switch {
