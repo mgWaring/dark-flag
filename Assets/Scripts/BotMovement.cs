@@ -6,76 +6,102 @@ public class BotMovement : MonoBehaviour
 {
     public LayerMask wallLayer;
     public float sensorDistance;
-    public float sensorTightness = 0.1f;
-    public float stillMoveDistance = 20.0f;
     MovementController mc;
     Rigidbody rb;
+    Racer racer;
 
     void Start() {
         mc = GetComponent<MovementController>();
         rb = GetComponent<Rigidbody>();
+        racer = GetComponent<Racer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        RaycastHit forwardHit;
-        RaycastHit leftHit;
-        RaycastHit rightHit;
-
-        Physics.Raycast(transform.position, ForwardDir(), out forwardHit, sensorDistance, wallLayer);
-        Physics.Raycast(transform.position, LeftDir(), out leftHit, sensorDistance, wallLayer);
-        Physics.Raycast(transform.position, RightDir(), out rightHit, sensorDistance, wallLayer);
-
-        Debug.DrawRay(transform.position, ForwardDir() * sensorDistance, Color.red);
-        Debug.DrawRay(transform.position, RightDir() * sensorDistance, Color.red);
-        Debug.DrawRay(transform.position, LeftDir() * sensorDistance, Color.red);
-
-        if (forwardHit.collider != null) {
-            if (rb.velocity.magnitude > 10) {
-                mc.MoveBackward();
-            } 
-            if (leftHit.collider != null && rightHit.collider == null) {
-                mc.MoveRight();
-            }
-            if (leftHit.collider == null && rightHit.collider != null) {
-                mc.MoveLeft();
-            }
-            if (leftHit.collider != null && rightHit.collider != null) {
-                if (leftHit.distance > rightHit.distance) {
-                    mc.MoveLeft();
-                } else {
-                    mc.MoveRight();
-                }
-            }
-        } else {
-            if (leftHit.collider != null && rightHit.collider == null) {
-                if (leftHit.distance > stillMoveDistance) {
-                    mc.MoveForward();
-                }
-                mc.MoveRight();
-            }
-            if (leftHit.collider == null && rightHit.collider != null) {
-                if (rightHit.distance > stillMoveDistance) {
-                    mc.MoveForward();
-                }
-                mc.MoveLeft();
-            }
-            if (leftHit.collider == null && rightHit.collider == null) {
-                mc.MoveForward();
-            }
+        TurnIfWrongWay();
+        float rot = DetectDirection();
+        transform.Rotate(0.0f, rot, 0.0f);
+        if (rot < 30) {
+            mc.MoveForward();
         }
     }
 
-    Vector3 RightDir() {
-        return transform.forward + (transform.right * sensorTightness);
-    }
+    void TurnIfWrongWay() {
+        Vector3 target = racer.nextCheckpoint.transform.position;
+        target.y = transform.position.y;
+        float shipDist = Vector3.Distance(transform.position, target);
+        float forwardDist = Vector3.Distance(transform.position + (transform.forward * 0.1f), target);
+        if (forwardDist > shipDist) {
+            transform.Rotate(0.0f, 180.0f, 0.0f);
+        }
+    } 
 
-    Vector3 ForwardDir() {
-        return transform.forward;
-    }
+    float DetectDirection() {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.right.normalized, out hit, 2.5f, wallLayer)) {
+            rb.AddRelativeForce(Vector3.right * -1f, ForceMode.Impulse);
+        }
+        if (Physics.Raycast(transform.position, (transform.right * -1).normalized, out hit, 2.5f, wallLayer)) {
+            rb.AddRelativeForce(Vector3.right * 1f, ForceMode.Impulse);
+        }
 
-    Vector3 LeftDir() {
-        return transform.forward - (transform.right * sensorTightness);
+        if (!Physics.Raycast(transform.position, transform.forward.normalized, out hit, sensorDistance, wallLayer)) {
+            Debug.DrawRay(transform.position, transform.forward * sensorDistance, Color.green);
+            return 0.0f;
+        }
+
+        for (float i = 0; i <= 10; i += 1.0f) {
+            Vector3 ldir = (transform.forward + ((i/10.0f) * transform.right)).normalized;
+            Vector3 rdir = (transform.forward - ((i/10.0f) * transform.right)).normalized;
+            if (!Physics.Raycast(transform.position, ldir, out hit, sensorDistance, wallLayer)) {
+                Debug.DrawRay(transform.position, ldir * sensorDistance, Color.green);
+                return i * 4.5f + 5.0f;
+            } else {
+                Debug.DrawRay(transform.position, ldir * sensorDistance, Color.red);
+            }
+            if (!Physics.Raycast(transform.position, rdir, out hit, sensorDistance, wallLayer)) {
+                Debug.DrawRay(transform.position, rdir * sensorDistance, Color.green);
+                return i * - 4.5f + 5.0f;
+            } else {
+                Debug.DrawRay(transform.position, rdir * sensorDistance, Color.red);
+            }
+        }
+
+        for (float i = 10.0f; i >= 0; i -= 1.0f) {
+            Vector3 ldir = (((i/10.0f) * transform.forward) - transform.right).normalized;
+            Vector3 rdir = (((i/10.0f) * transform.forward) + transform.right).normalized;
+            if (!Physics.Raycast(transform.position, ldir, out hit, sensorDistance, wallLayer)) {
+                Debug.DrawRay(transform.position, ldir * sensorDistance, Color.green);
+                return 45 + (i * 4.5f + 5.0f);
+            } else {
+                Debug.DrawRay(transform.position, ldir * sensorDistance, Color.red);
+            }
+            if (!Physics.Raycast(transform.position, rdir, out hit, sensorDistance, wallLayer)) {
+                Debug.DrawRay(transform.position, rdir * sensorDistance, Color.green);
+                return -45 - (i * 4.5f + 5.0f);
+            } else {
+                Debug.DrawRay(transform.position, rdir * sensorDistance, Color.red);
+            }
+        }
+
+        for (float i = 10.0f; i >= 0; i -= 1.0f) {
+            Vector3 ldir = (((i/10.0f) * -transform.forward) - transform.right).normalized;
+            Vector3 rdir = (((i/10.0f) * -transform.forward) + transform.right).normalized;
+            if (!Physics.Raycast(transform.position, ldir, out hit, sensorDistance, wallLayer)) {
+                Debug.DrawRay(transform.position, ldir * sensorDistance, Color.green);
+                return 90 + (i * 4.5f + 5.0f);
+            } else {
+                Debug.DrawRay(transform.position, ldir * sensorDistance, Color.red);
+            }
+            if (!Physics.Raycast(transform.position, rdir, out hit, sensorDistance, wallLayer)) {
+                Debug.DrawRay(transform.position, rdir * sensorDistance, Color.green);
+                return -90 - (i * 4.5f + 5.0f);
+            } else {
+                Debug.DrawRay(transform.position, rdir * sensorDistance, Color.red);
+            }
+        }
+
+        return 0.0f;
     }
 }

@@ -119,6 +119,7 @@ public class GameController : MonoBehaviour
             state = "postrace";
             raceTimer.running = false;
             lapTimer.running = false;
+            scoreboard.SetActive(true);
         }
     }
 
