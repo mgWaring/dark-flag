@@ -19,11 +19,23 @@ public class BotMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        LimitVelocity();
         TurnIfWrongWay();
         float rot = DetectDirection();
-        transform.Rotate(0.0f, rot, 0.0f);
-        if (rot < 30) {
+        transform.Rotate(0.0f, rot * Time.deltaTime * 20, 0.0f);
+        if (rot > 60) {
+            transform.Rotate(0.0f, rot, 0.0f);
+        } else {
+            transform.Rotate(0.0f, rot * Time.deltaTime * 20, 0.0f);
+        }
+        if (rot < 20) {
             mc.MoveForward();
+        }
+    }
+
+    void LimitVelocity() {
+        if (rb.velocity.magnitude > 50) {
+            rb.velocity *= 0.8f;
         }
     }
 
@@ -56,13 +68,13 @@ public class BotMovement : MonoBehaviour
             Vector3 rdir = (transform.forward - ((i/10.0f) * transform.right)).normalized;
             if (!Physics.Raycast(transform.position, ldir, out hit, sensorDistance, wallLayer)) {
                 Debug.DrawRay(transform.position, ldir * sensorDistance, Color.green);
-                return i * 4.5f + 5.0f;
+                return i * 4.5f + 7.5f;
             } else {
                 Debug.DrawRay(transform.position, ldir * sensorDistance, Color.red);
             }
             if (!Physics.Raycast(transform.position, rdir, out hit, sensorDistance, wallLayer)) {
                 Debug.DrawRay(transform.position, rdir * sensorDistance, Color.green);
-                return i * - 4.5f + 5.0f;
+                return i * - 4.5f + 7.5f;
             } else {
                 Debug.DrawRay(transform.position, rdir * sensorDistance, Color.red);
             }
@@ -73,13 +85,13 @@ public class BotMovement : MonoBehaviour
             Vector3 rdir = (((i/10.0f) * transform.forward) + transform.right).normalized;
             if (!Physics.Raycast(transform.position, ldir, out hit, sensorDistance, wallLayer)) {
                 Debug.DrawRay(transform.position, ldir * sensorDistance, Color.green);
-                return 45 + (i * 4.5f + 5.0f);
+                return 45 + (i * 4.5f);
             } else {
                 Debug.DrawRay(transform.position, ldir * sensorDistance, Color.red);
             }
             if (!Physics.Raycast(transform.position, rdir, out hit, sensorDistance, wallLayer)) {
                 Debug.DrawRay(transform.position, rdir * sensorDistance, Color.green);
-                return -45 - (i * 4.5f + 5.0f);
+                return -45 - (i * 4.5f);
             } else {
                 Debug.DrawRay(transform.position, rdir * sensorDistance, Color.red);
             }

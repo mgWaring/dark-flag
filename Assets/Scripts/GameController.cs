@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
     [HideInInspector] public Dictionary<Racer, List<float>> laps = new Dictionary<Racer, List<float>>();
 
     float preRaceTimer = 5.0f;
-    float postRaceTimer = 10.0f;
+    float postRaceTimer = 20.0f;
     public int playerId = 0;
     [HideInInspector] public Racer playerRacer;
     GameObject checkpoints;
@@ -100,10 +100,11 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        updatePositions();
         if (state == "prerace") {
+            updatePositions();
             handlePreRace();
         } else if (state == "race") {
+            updatePositions();
             handleRace();
         } else if (state == "postrace") {
             handlePostRace();
