@@ -19,8 +19,17 @@ public class InGameMenu : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    void Start() {
+    void OnEnable()
+    {
         menuInput.Enable();
+    }
+
+    void OnDisable()
+    {
+        menuInput.Disable();
+    }
+
+    void Start() {
         child = transform.GetChild(0).gameObject;
     }
 

@@ -7,7 +7,6 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject ship;
     public int playerCount;
     public RaceTimer raceTimer;
     public TextMeshProUGUI countdownText;
@@ -61,10 +60,12 @@ public class GameController : MonoBehaviour
             Transform startPos = startingPositions.GetChild(i).transform;
             Vector3 pos = startPos.position;
             Quaternion rot = startPos.rotation;
+            GameObject ship = Resources.Load<GameObject>("Prefabs/testShip");
             GameObject newship = Instantiate(ship);
             Racer racer = newship.GetComponent<Racer>();
             MovementController mc = newship.GetComponentInChildren<MovementController>();
             mc.enabled = false;
+            mc.shipName = "testShip";
             if (i == playerId) {
                 BotMovement bot = newship.GetComponent<BotMovement>();
                 bot.enabled = false;

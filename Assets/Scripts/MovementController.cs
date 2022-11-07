@@ -25,13 +25,14 @@ public class MovementController : MonoBehaviour
 
     Rigidbody vehicleRB;
     ShipProfiles sb;
+    [HideInInspector] public string shipName;
 
     private void Start()
     {
         vehicleRB = GetComponent<Rigidbody>();
         sb = GetComponent<ShipProfiles>();
-        accelerationVar = sb.ProfileHunter("testShip", "thrust_speed");
-        yawSpeedVar = sb.ProfileHunter("testShip", "yaw_speed");
+        accelerationVar = sb.ProfileHunter(shipName, "thrust_speed");
+        yawSpeedVar = sb.ProfileHunter(shipName, "yaw_speed");
     }
 
     void FixedUpdate()

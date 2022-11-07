@@ -17,9 +17,8 @@ GameObject:
   - component: {fileID: 7297732876776564532}
   - component: {fileID: 710578369071010362}
   - component: {fileID: 4063442319365698124}
-  - component: {fileID: -7220872026358430689}
   m_Layer: 0
-  m_Name: TestVehicle
+  m_Name: testShip
   m_TagString: Ship
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dce19d038045c046a98a5a5d84f84a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botSpeedMult: 1
   wallLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -116,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cadb928ff937734185da66104222987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationVar: 6000
-  yawSpeedVar: 100
+  sb: {fileID: 11400000, guid: df7167afaf0f7524292a1d3b8ede34d3, type: 2}
+  shipName: 
 --- !u!114 &7297732876776564532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,9 +129,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverRayYOffset: {x: 0, y: -1, z: 0}
-  hoverRayDistance: 1
-  hoverForce: 26.8
-  hoverConstant: 2.5
 --- !u!114 &710578369071010362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,18 +375,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-7220872026358430689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8508418995549443820}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df1493a341390574282e2ebb9fab3a55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3373895108588121592
 PrefabInstance:
   m_ObjectHideFlags: 0
