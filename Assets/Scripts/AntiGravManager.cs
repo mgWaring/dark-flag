@@ -22,6 +22,7 @@ public class AntiGravManager : MonoBehaviour
     Vector3 hoverRay1CombOffset;//Not used at the moment. Delete if still unused before final release of game.
 
     ShipProfiles sb;
+    [HideInInspector] public string shipName;
 
     void Start()
     {
@@ -31,9 +32,9 @@ public class AntiGravManager : MonoBehaviour
         hoverRay1CombOffset = OffsetCombiner(hoverRay1XZOffset);//Not used at the moment. Delete if still unused before final release of game.
         
         sb = GetComponent<ShipProfiles>();
-        hoverForce = sb.ProfileHunter("testShip", "hover_force");
-        hoverConstant = sb.ProfileHunter("testShip", "hover_constant");
-        hoverRayDistance = sb.ProfileHunter("testShip", "hover_height");
+        hoverForce = sb.ProfileHunter(shipName, "hover_force");
+        hoverConstant = sb.ProfileHunter(shipName, "hover_constant");
+        hoverRayDistance = sb.ProfileHunter(shipName, "hover_height");
     }
 
     private void FixedUpdate()

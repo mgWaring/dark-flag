@@ -7,7 +7,6 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
-    public GameObject ship;
     public int playerCount;
     public RaceTimer raceTimer;
     public TextMeshProUGUI countdownText;
@@ -27,8 +26,7 @@ public class GameController : MonoBehaviour
     GameObject checkpoints;
     Transform startingPositions;
     Map mMap;
-    public enum MapFabName { JanktownSpeedway, ScrapPalace};
-    public MapFabName map;
+    public MapScriptable map;
 
     void Start()
     {
@@ -43,12 +41,7 @@ public class GameController : MonoBehaviour
             lapCount = CrossScene.laps;
         }
 
-        GameObject mapFab = map switch {
-            MapFabName.JanktownSpeedway => Resources.Load<GameObject>("Prefabs/TrackJanktownSpeedway"),
-            MapFabName.ScrapPalace => Resources.Load<GameObject>("Prefabs/TrackScrapPalace"),
-            _ => Resources.Load<GameObject>("Prefabs/TrackJanktownSpeedway")
-        };
-        GameObject mapObj = Instantiate(mapFab);
+        GameObject mapObj = Instantiate(map.prefab);
         mMap = mapObj.GetComponent<Map>();
         checkpoints = mMap.checkpoints;
         startingPositions = mMap.startingPositions;
@@ -61,10 +54,14 @@ public class GameController : MonoBehaviour
             Transform startPos = startingPositions.GetChild(i).transform;
             Vector3 pos = startPos.position;
             Quaternion rot = startPos.rotation;
+            GameObject ship = Resources.Load<GameObject>("Prefabs/testShip");
             GameObject newship = Instantiate(ship);
             Racer racer = newship.GetComponent<Racer>();
             MovementController mc = newship.GetComponentInChildren<MovementController>();
             mc.enabled = false;
+            mc.shipName = "testShip";
+            AntiGravManager agm = newship.GetComponentInChildren<AntiGravManager>();
+            agm.shipName = "testShip";
             if (i == playerId) {
                 BotMovement bot = newship.GetComponent<BotMovement>();
                 bot.enabled = false;
