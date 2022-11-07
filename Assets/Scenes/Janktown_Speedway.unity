@@ -333,6 +333,11 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &239086587 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8508418995549443820, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+  m_PrefabInstance: {fileID: 1745739311}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1110638429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -395,6 +400,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8508418995549443821, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
   m_PrefabInstance: {fileID: 1745739311}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1363348304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 239086587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cadb928ff937734185da66104222987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1745739311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -402,6 +419,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7220872026358430689, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: testShipYawSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -7220872026358430689, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: testShipHoverForce
+      value: 26.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -7220872026358430689, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: testShipHoverHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7220872026358430689, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: testShipHoverConstant
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 710578369071010362, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: yawInput.m_Id
       value: ba898fcd-280d-47a3-a86d-9342eabb84db
@@ -457,6 +490,10 @@ PrefabInstance:
     - target: {fileID: 4057962643135393986, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620487441135030737, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+      propertyPath: m_Mass
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4620487441135030737, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
       propertyPath: m_UseGravity
@@ -548,6 +585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
+    - {fileID: 3199054139710719634, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
 --- !u!1 &1879051616
 GameObject:

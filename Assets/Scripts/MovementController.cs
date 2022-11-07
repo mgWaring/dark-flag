@@ -2,12 +2,11 @@ using UnityEngine;
 
 //Add this script to the vehicle object that has a rigidbody.
 public class MovementController : MonoBehaviour
-{
+{    
     //Change accelerationVar to adjust forward and backwards speed.
-    public float accelerationVar = 6000f;
+    float accelerationVar;
     //Change yawSpeedVar to adjust yaw rotational speed.
-    public float yawSpeedVar = 100.0f;
-
+    float yawSpeedVar;
     //accelerationMult and yawMult determine direction as positive or negative numbers.
     float accelerationMult = 0;
     float yawSpeedMult = 0;    
@@ -25,10 +24,14 @@ public class MovementController : MonoBehaviour
     float vehicleVelocity;
 
     Rigidbody vehicleRB;
+    ShipProfiles sb;
 
     private void Start()
     {
         vehicleRB = GetComponent<Rigidbody>();
+        sb = GetComponent<ShipProfiles>();
+        accelerationVar = sb.ProfileHunter("testShip", "thrust_speed");
+        yawSpeedVar = sb.ProfileHunter("testShip", "yaw_speed");
     }
 
     void FixedUpdate()

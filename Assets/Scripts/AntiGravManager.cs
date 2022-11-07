@@ -8,10 +8,9 @@ public class AntiGravManager : MonoBehaviour
     Collider vehicleCL;//Not used at the moment. Delete if still unused before final release of game.
 
     public Vector3 hoverRayYOffset = new Vector3(0.0f, -1.0f, 0.0f);//Not used at the moment. Delete if still unused before final release of game.
-    public float hoverRayDistance = 1.0f;
-
-    public float hoverForce = 26.8f;
-    public float hoverConstant = 2.5f;
+    float hoverRayDistance;
+    float hoverForce;
+    float hoverConstant;
     float hoverRegulator;
     float distanceToFloor;
 
@@ -22,12 +21,19 @@ public class AntiGravManager : MonoBehaviour
     Vector3 hoverRay1XZOffset = new Vector3(0.0f, 0.0f, 0.0f);
     Vector3 hoverRay1CombOffset;//Not used at the moment. Delete if still unused before final release of game.
 
+    ShipProfiles sb;
+
     void Start()
     {
         vehicleRB = GetComponent <Rigidbody>();
         vehicleCL = GetComponent <CapsuleCollider>();//Not used at the moment. Delete if still unused before final release of game.
         hoverMask = LayerMask.GetMask("Ship");
         hoverRay1CombOffset = OffsetCombiner(hoverRay1XZOffset);//Not used at the moment. Delete if still unused before final release of game.
+        
+        sb = GetComponent<ShipProfiles>();
+        hoverForce = sb.ProfileHunter("testShip", "hover_force");
+        hoverConstant = sb.ProfileHunter("testShip", "hover_constant");
+        hoverRayDistance = sb.ProfileHunter("testShip", "hover_height");
     }
 
     private void FixedUpdate()
@@ -40,7 +46,8 @@ public class AntiGravManager : MonoBehaviour
         if (GroundDetector(hoverRay1))
         {
             vehicleRB.AddRelativeForce(Vector3.up * HoverSmoother(hoverRay1), ForceMode.Force);
-        }        
+        }
+        Debug.Log("hoverForce = " + hoverForce + "hoverConstant = " + hoverConstant + "hoverRayDistance = " + hoverRayDistance);
     }
     
     bool GroundDetector(Ray inputRay)

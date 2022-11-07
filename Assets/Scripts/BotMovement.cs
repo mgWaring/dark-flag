@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class BotMovement : MonoBehaviour
 {
-    public float botSpeedMult = 1.0f;
+    float botSpeedMult;
     public LayerMask wallLayer;
     public float sensorDistance;
     MovementController mc;
+    ShipProfiles sb;
     Rigidbody rb;
     Racer racer;
 
     void Start() {
         mc = GetComponent<MovementController>();
+        sb = GetComponent<ShipProfiles>();
         rb = GetComponent<Rigidbody>();
         racer = GetComponent<Racer>();
+
+        botSpeedMult = sb.ProfileHunter("testShip", "bot_speed_modifier");
     }
 
     void Update()

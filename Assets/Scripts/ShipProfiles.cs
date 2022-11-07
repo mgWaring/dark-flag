@@ -20,15 +20,15 @@ public class ShipProfiles : MonoBehaviour
         /*
             Ship stats stored by Profiles()
             ---------------------------------------
-            0) Mass (rb).
-            1) Drag (rb).
-            2) Angular drag (rb).
-            3) Speed speed (mc).
-            4) Yaw speed (mc).        
-            5) Hover force (agm).
-            6) Hover constant (agm).
-            7) Hover height (agm).
-            8) Bot speed modifier (bm).
+            0) "mass" (rb).
+            1) "drag" (rb).
+            2) "angular_drag" (rb).
+            3) "thrust_speed" (mc).
+            4) "yaw_speed" (mc).        
+            5) "hover_force" (agm).
+            6) "hover_constant" (agm).
+            7) "hover_height" (agm).
+            8) "bot_speed_modifier" (bm).
         */
 
         float requestedValue;
