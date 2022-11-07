@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 710578369071010362}
   - component: {fileID: 4063442319365698124}
   - component: {fileID: -7220872026358430689}
+  - component: {fileID: -5371999305099932976}
   m_Layer: 0
   m_Name: TestVehicle
   m_TagString: Ship
@@ -99,7 +100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dce19d038045c046a98a5a5d84f84a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botSpeedMult: 1
   wallLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -116,8 +116,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cadb928ff937734185da66104222987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationVar: 6000
-  yawSpeedVar: 100
 --- !u!114 &7297732876776564532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,9 +129,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverRayYOffset: {x: 0, y: -1, z: 0}
-  hoverRayDistance: 1
-  hoverForce: 26.8
-  hoverConstant: 2.5
 --- !u!114 &710578369071010362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,6 +385,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df1493a341390574282e2ebb9fab3a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testShipMass: 3
+  testShipDrag: 1.5
+  testShipAngularDrag: 90
+  testShipThrustSpeed: 6000
+  testShipYawSpeed: 100
+  testShipHoverForce: 26.8
+  testShipHoverConstant: 2.5
+  testShipHoverHeight: 1
+  testShipBotSpeedModifier: 1
+--- !u!114 &-5371999305099932976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508418995549443820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0780e607f437d240bc9ef9420934205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3373895108588121592
