@@ -2,9 +2,10 @@ using UnityEngine;
 
 //Use ProfileHunter() where relevant to aquire ship stats.
 public class ShipProfiles : MonoBehaviour
-{   
+{
+    public ShipsScriptable ship;
     //testShip public floats are here for development, delete before final release.
-    public float testShipMass = 3.0f;
+    public float testShipMass = 3;
     public float testShipDrag = 1.5f;
     public float testShipAngularDrag = 90.0f;
     public float testShipThrustSpeed = 6000.0f;
@@ -13,7 +14,36 @@ public class ShipProfiles : MonoBehaviour
     public float testShipHoverConstant = 2.5f;
     public float testShipHoverHeight = 1.0f;
     public float testShipBotSpeedModifier = 1.0f;
-    
+
+    /*GameObject shipObj;
+    string shipName;
+    float shipMass;
+    float shipDrag;
+    float shipAngularDrag;
+    float shipThrustSpeed;
+    float shipYawSpeed;
+    float shipHoverForce;
+    float shipHoverConstant;
+    float shipHoverHeight;
+    float shipBotSpeedModifier;
+
+    private void Start()
+    {
+        ShipsScriptable ship;
+        name = ship.shipName;
+        shipMass = ship.mass;
+        shipDrag = ship.drag;
+        shipAngularDrag = ship.angularDrag;
+        shipThrustSpeed = ship.thrustSpeed;
+        shipYawSpeed = ship.yawSpeed;
+        shipHoverForce = ship.hoverForce;
+        shipHoverConstant = ship.hoverConstant;
+        shipHoverHeight = ship.hoverHeight;
+        shipBotSpeedModifier = ship.botSpeedModifier;
+        Debug.Log("+++++++++++++++++++++" + shipYawSpeed + "++++++++++++++++++++++++");
+
+    }*/
+
     //Private function that stores stat values for different ships.
     private float Profiles(int profileIndex, int statIndex)
     {
@@ -44,6 +74,7 @@ public class ShipProfiles : MonoBehaviour
 
         return requestedValue;
     }
+   
 
     //Public function that searches through Profiles() for a stat value.
     public float ProfileHunter(string shipName, string shipStatName)
