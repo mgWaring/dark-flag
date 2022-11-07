@@ -4849,3 +4849,6 @@ MonoBehaviour:
   lapSelector: {fileID: 855748363}
   playerSelector: {fileID: 2018488965}
   botSelector: {fileID: 1414855083}
+  maps:
+  - {fileID: 11400000, guid: b99a1e71936ac3c46afb7dd00490402e, type: 2}
+  - {fileID: 11400000, guid: 45c55deb856152741b3a968aa5063252, type: 2}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class SinglePlayerOptions : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class SinglePlayerOptions : MonoBehaviour
     public Selector lapSelector;
     public Selector playerSelector;
     public Selector botSelector;
+    public MapScriptable[] maps;
 
     public void Back()
     {
@@ -26,22 +28,13 @@ public class SinglePlayerOptions : MonoBehaviour
         int.TryParse(playerSelector.value, out playerCount);
         int.TryParse(botSelector.value, out botCount);
 
-        switch(mapSelector.value) {
-            case "Janktown":
-                CrossScene.map = GameController.MapFabName.JanktownSpeedway;
-                break;
-            case "Scrap Palace":
-                CrossScene.map = GameController.MapFabName.ScrapPalace;
-                break;
-            default:
-                CrossScene.map = GameController.MapFabName.JanktownSpeedway;
-                break;
-        }
+        CrossScene.map = maps.Single(m => m.name == mapSelector.value);
         CrossScene.laps = lapCount;
         CrossScene.players = playerCount;
         CrossScene.bots = botCount;
         CrossScene.cameFromMainMenu = true;
         SceneManager.LoadScene(1);
     }
+
 }
 
