@@ -66,6 +66,8 @@ public class GameController : MonoBehaviour
             MovementController mc = newship.GetComponentInChildren<MovementController>();
             mc.enabled = false;
             mc.shipName = "testShip";
+            AntiGravManager agm = newship.GetComponentInChildren<AntiGravManager>();
+            agm.shipName = "testShip";
             if (i == playerId) {
                 BotMovement bot = newship.GetComponent<BotMovement>();
                 bot.enabled = false;
