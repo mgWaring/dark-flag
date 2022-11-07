@@ -40,7 +40,6 @@ public class MovementController : MonoBehaviour
         newPosition = transform.position;
         newTimeStamp = Time.realtimeSinceStartup;
         vehicleVelocity = VelocityCalculator(newPosition, oldPosition,  newTimeStamp, oldTimeStamp);
-        Debug.Log("From MovementController. Speed = " + vehicleVelocity);
 
         //Adds thrust force to vehicle.
         acceleration = SpeedSet(accelerationMult, accelerationVar);
