@@ -92,7 +92,7 @@ public class ShipSelector : MonoBehaviour
             if (i == 0) {
                 info = new RacerInfo(PlayerPrefs.GetString("playerName"), selectableShipNames[index], false);
             } else {
-                info = new RacerInfo(PlayerPrefs.GetString("playerName"), selectableShipNames[index], true);
+                info = new RacerInfo(selectableShipNames);
             }
             racers[i] = info;
         }
@@ -112,6 +112,8 @@ public class ShipSelector : MonoBehaviour
         ship.GetComponent<PlayerMovement>().enabled = false;
         ship.GetComponent<MovementController>().enabled = false;
         ship.GetComponent<BotMovement>().enabled = false;
+        ship.GetComponent<AntiGravManager>().enabled = false;
+        ship.GetComponent<RigidbodyController>().enabled = false;
         ship.GetComponent<Racer>().enabled = false;
         ship.transform.SetParent(shipHolder);
         ship.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
