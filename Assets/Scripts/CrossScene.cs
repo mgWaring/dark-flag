@@ -6,5 +6,4 @@ public static class CrossScene
     public static int bots { get; set; }
     public static bool cameFromMainMenu { get; set; }
     public static RacerInfo[] racerInfo { get; set; }
-    public static string playerName { get; set; }
 }

@@ -92,7 +92,7 @@ public class ShipSelector : MonoBehaviour
         for (int i = 0; i < racerCount; i++) {
             RacerInfo info;
             if (i == 0) {
-                info = new RacerInfo(CrossScene.playerName, value, false);
+                info = new RacerInfo(PlayerPrefs.GetString("playerName"), value, false);
             } else {
                 info = new RacerInfo(selectableShipNames);
             }

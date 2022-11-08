@@ -5,18 +5,18 @@ using TMPro;
 
 public class MainMenuSettings : MonoBehaviour
 {
-    public TextMeshProUGUI nameText;
+    public TMP_InputField inputField;
 
-    void Start()
+    void OnEnable()
     {
-        if (CrossScene.playerName != "") {
-            nameText.text = CrossScene.playerName;
-        }
+        string playerName = PlayerPrefs.GetString("playerName");
+        if (playerName != "") {
+            inputField.text = playerName;
+        };
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        CrossScene.playerName = nameText.text;
+    public void SaveSettings() {
+        PlayerPrefs.SetString("playerName", inputField.text);
+        PlayerPrefs.Save();
     }
 }
