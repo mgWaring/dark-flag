@@ -24,8 +24,8 @@ public class AntiGravManager : MonoBehaviour
     Ray rollRay1;
     Ray rollRay2;
     float rollDiff;
-    public float rollRayDistance = 10.0f;//Put this in the scriptable objects when a good default is found.
-    public float rollForce = 10000.0f;//Put this in the scriptable objects when a good default is found.
+    float rollRayDistance;
+    float rollForce;
     RaycastHit rollHit1;
     RaycastHit rollHit2;
     float rollHitInfo1;
@@ -34,14 +34,14 @@ public class AntiGravManager : MonoBehaviour
     Ray pitchRay1;
     Ray pitchRay2;
     float pitchDiff;
-    public float pitchRayDistance = 10.0f;//Put this in the scriptable objects when a good default is found.
-    public float pitchForce = 10000.0f;//Put this in the scriptable objects when a good default is found.
+    float pitchRayDistance;
+    float pitchForce;
     RaycastHit pitchHit1;
     RaycastHit pitchHit2;
     float pitchHitInfo1;
     float pitchHitInfo2;
 
-    public float debugRayTime = 1.0f;
+    public float debugRayTime = 0.1f;
 
     [HideInInspector] public ShipsScriptable ss;
 
@@ -55,6 +55,10 @@ public class AntiGravManager : MonoBehaviour
         hoverForce = ss.hoverForce;
         hoverConstant = ss.hoverConstant;
         hoverRayDistance = ss.hoverHeight;
+        rollForce = ss.rollForce;
+        rollRayDistance = ss.rollRayDistance;
+        pitchForce = ss.pitchForce;
+        pitchRayDistance = ss.pitchRayDistance;
 
     }
 
