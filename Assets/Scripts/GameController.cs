@@ -211,4 +211,12 @@ public class GameController : MonoBehaviour
             SceneManager.LoadScene(0);
         }
     }
+
+    public float bestLapFor(Racer racer) {
+        if (laps[racer].Count == 1) {
+            return 0.0f;
+        } else {
+            return laps[racer].GetRange(1, laps[racer].Count - 1).Min();
+        }
+    }
 }
