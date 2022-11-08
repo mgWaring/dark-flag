@@ -2,7 +2,7 @@
 using UnityEngine;
 using Utils;
 
-namespace RelaySystem {
+namespace Managers {
     public class SpawnManager : LonelyNetworkBehaviour<SpawnManager> {
         private readonly NetworkVariable<int> _playersInGame = new NetworkVariable<int>(0);
 

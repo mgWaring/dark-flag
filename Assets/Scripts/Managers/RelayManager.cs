@@ -10,7 +10,7 @@ using Unity.Services.Relay;
 using UnityEngine;
 using Utils;
 
-namespace RelaySystem {
+namespace Managers {
     public class RelayManager : LonelyMonoBehaviour<RelayManager> {
         [SerializeField] private int maxPlayers = 4;
 
