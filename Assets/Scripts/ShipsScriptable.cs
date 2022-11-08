@@ -14,6 +14,8 @@ public class ShipsScriptable : ScriptableObject
     public float hoverForce = 26.8f;
     public float hoverConstant = 2.5f;
     public float hoverHeight = 1.0f;
+    public float rollForce = 100.0f;
+    public float rollRayDistance = 10.0f;
     public float botSpeedModifier = 1.0f;
 }
  

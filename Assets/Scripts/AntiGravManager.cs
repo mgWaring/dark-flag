@@ -31,6 +31,18 @@ public class AntiGravManager : MonoBehaviour
     float rollHitInfo1;
     float rollHitInfo2;
 
+    Ray pitchRay1;
+    Ray pitchRay2;
+    float pitchDiff;
+    public float pitchRayDistance = 10.0f;//Put this in the scriptable objects when a good default is found.
+    public float pitchForce = 10000.0f;//Put this in the scriptable objects when a good default is found.
+    RaycastHit pitchHit1;
+    RaycastHit pitchHit2;
+    float pitchHitInfo1;
+    float pitchHitInfo2;
+
+    public float debugRayTime = 1.0f;
+
     [HideInInspector] public ShipsScriptable ss;
 
     void Start()
@@ -51,38 +63,38 @@ public class AntiGravManager : MonoBehaviour
         hoverRay1 = new Ray(transform.localPosition, transform.up * -1);
         rollRay1 = new Ray(transform.localPosition,  (transform.up + transform.right) * -1);
         rollRay2 = new Ray(transform.localPosition, (transform.up + (transform.right * -1)) * -1);
+        pitchRay1 = new Ray(transform.localPosition, (transform.up + transform.forward) * -1);
+        pitchRay2 = new Ray(transform.localPosition, (transform.up + (transform.forward * -1)) * -1);
         //Leave these comments here please. Delete if still unused before final release of game.
-        //Debug.DrawRay(transform.localPosition, transform.up * 10 * -1, Color.yellow, 1, true);
+        Debug.DrawRay(transform.localPosition, transform.up * hoverRayDistance * -1, Color.green, debugRayTime, true);
         //Debug.DrawRay(vehicleCollider.transform.localPosition + offset, vehicleCollider.transform.forward, Color.red, 9999999, true);
-        Debug.DrawRay(transform.localPosition, (transform.up + transform.right)* 10 * -1, Color.green, 10, true);
-        Debug.DrawRay(transform.localPosition, (transform.up + (transform.right * -1)) * 10 * -1, Color.green, 10, true);
+        Debug.DrawRay(transform.localPosition, (transform.up + transform.right)* rollRayDistance * -1, Color.blue, debugRayTime, true);
+        Debug.DrawRay(transform.localPosition, (transform.up + (transform.right * -1)) * rollRayDistance * -1, Color.blue, debugRayTime, true);
+        Debug.DrawRay(transform.localPosition, (transform.up + transform.forward) * pitchRayDistance * -1, Color.red, debugRayTime, true);
+        Debug.DrawRay(transform.localPosition, (transform.up + (transform.forward * -1)) * pitchRayDistance * -1, Color.red, debugRayTime, true);
 
-        if (GroundDetector(hoverRay1))
+        if (Physics.Raycast(hoverRay1, out hoverHitInfo, hoverRayDistance))
         {
             vehicleRB.AddRelativeForce(Vector3.up * HoverSmoother(hoverRay1), ForceMode.Force);
         }
-        
-        if (Physics.Raycast(rollRay1, out rollHit1, rollRayDistance))
+
+        if ((Physics.Raycast(rollRay1, out rollHit1, rollRayDistance)) | (Physics.Raycast(rollRay2, out rollHit2, rollRayDistance)))
         {
             rollHitInfo1 = rollHit1.distance;
-        }
-        if (Physics.Raycast(rollRay2, out rollHit2, rollRayDistance))
-        {
             rollHitInfo2 = rollHit2.distance;
+            rollDiff = rollHitInfo1 - rollHitInfo2;
+            vehicleRB.AddRelativeTorque(Vector3.forward * rollDiff * rollForce * Time.fixedDeltaTime, ForceMode.Force);
+            Debug.Log("rollDiff = " + rollDiff + " rollHitInfo1 = " + rollHitInfo1 + " rollHitInfo2 = " + rollHitInfo2);
         }
-        
-        
-        
-        rollDiff = rollHitInfo2 - rollHitInfo1;
-        vehicleRB.AddRelativeTorque(Vector3.forward * rollDiff * rollForce * Time.fixedDeltaTime, ForceMode.Force);
-        Debug.Log("rollDiff = " + rollDiff + " rollHitInfo1 = " + rollHitInfo1 + " rollHitInfo2 = " + rollHitInfo2 + " hitInfo.distance = " + hoverHitInfo.distance);
-        //Debug.Log("hoverRay1 = " + hoverRay1 + " rollRay1 = " + rollRay1 + " rollRay2 = " + rollRay2);
 
-
-
-
-
-        //Debug.Log("hoverForce = " + hoverForce + "hoverConstant = " + hoverConstant + "hoverRayDistance = " + hoverRayDistance);
+        if ((Physics.Raycast(pitchRay1, out pitchHit1, pitchRayDistance)) | (Physics.Raycast(pitchRay2, out pitchHit2, pitchRayDistance)))
+        {
+            pitchHitInfo1 = pitchHit1.distance;
+            pitchHitInfo2 = pitchHit2.distance;
+            pitchDiff = pitchHitInfo2 - pitchHitInfo1;
+            vehicleRB.AddRelativeTorque(Vector3.right * pitchDiff * pitchForce * Time.fixedDeltaTime, ForceMode.Force);
+            Debug.Log("pitchDiff = " + pitchDiff + " pitchHitInfo1 = " + pitchHitInfo1 + " pitchHitInfo2 = " + pitchHitInfo2);
+        }
     }
     
     bool GroundDetector(Ray inputRay)
@@ -92,18 +104,12 @@ public class AntiGravManager : MonoBehaviour
         if (Physics.Raycast(inputRay, out hoverHitInfo, hoverRayDistance))
         {
             groundDetected = true;
-            //Debug.Log("From GroundDetector() in AntiGravManager. Ray hit " + hitInfo.collider);
-            //Debug.Log(hitInfo.distance);
         }
-        /*
-        if (Physics.Raycast(inputRay, out hitInfo, hoverRayDistance, hoverMask))
-        {
-            groundDetected = false;
-            //Debug.Log("From GroundDetector() in AntiGravManager. " + hoverMask + " detected.");
-        }
-        */
+
         return groundDetected;
     }
+
+
 
     float HoverSmoother(Ray inputRay)
     {

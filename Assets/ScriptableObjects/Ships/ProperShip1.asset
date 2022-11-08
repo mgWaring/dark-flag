@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 969a8e50c389cff4185b3520113875ce, type: 3}
-  m_Name: LongShip
+  m_Name: ProperShip1
   m_EditorClassIdentifier: 
-  shipName: longShip
-  shipModel: {fileID: 8508418995549443820, guid: dac3942921fa85b4e83c3b78db20b48d, type: 3}
-  mass: 2.9
+  shipName: properShip01
+  shipModel: {fileID: 4298976098401725311, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
+  mass: 2.5
   drag: 1.5
-  angularDrag: 90
-  thrustSpeed: 7000
-  yawSpeed: 90
-  hoverForce: 26.8
+  angularDrag: 1
+  thrustSpeed: 6000
+  yawSpeed: 100
+  hoverForce: 50
   hoverConstant: 2.5
-  hoverHeight: 1
+  hoverHeight: 3
   botSpeedModifier: 1
