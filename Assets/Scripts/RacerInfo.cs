@@ -5,21 +5,22 @@ using System.Collections.Generic;
 public class RacerInfo
 {
     public string name { get; set; }
-    public string ship { get; set; }
+    public ShipsScriptable ship { get; set; }
     public bool isBot { get; set; }
 
-    public RacerInfo(string iName, string iShip, bool iIsBot) {
+    public RacerInfo(string iName, ShipsScriptable iShip, bool iIsBot) {
         name = iName;
         ship = iShip;
         isBot = iIsBot;
     }
 
-    public RacerInfo(string iName, string iShip) {
+    public RacerInfo(string iName, ShipsScriptable iShip) {
         name = iName;
         ship = iShip;
         isBot = false;
     }
 
+    /*
     public RacerInfo() {
         name = generateFakeName();
         ship = "testShip";
@@ -32,6 +33,7 @@ public class RacerInfo
         ship = ships[rand.Next(ships.Length)];
         isBot = true;
     }
+    */
 
     // totally necessary
     string generateFakeName() {

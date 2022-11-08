@@ -34,17 +34,6 @@ public class GameController : MonoBehaviour
             playerCount = CrossScene.racerInfo.Length;
             map = CrossScene.map;
             lapCount = CrossScene.laps;
-        } else {
-            CrossScene.racerInfo = new RacerInfo[playerCount];
-            if (playerId < playerCount) {
-                CrossScene.racerInfo[playerId] = new RacerInfo("TestUser", "testShip");
-            }
-
-            for (int i = 0; i < playerCount; i++) {
-                if (CrossScene.racerInfo[i] == null) {
-                    CrossScene.racerInfo[i] = new RacerInfo();
-                }
-            }
         }
 
         GameObject mapObj = Instantiate(map.prefab);
@@ -61,14 +50,17 @@ public class GameController : MonoBehaviour
             Transform startPos = startingPositions.GetChild(i).transform;
             Vector3 pos = startPos.position;
             Quaternion rot = startPos.rotation;
-            GameObject ship = Resources.Load<GameObject>(string.Format("Prefabs/{0}", info.ship));
-            GameObject newship = Instantiate(ship);
+            GameObject newship = Instantiate(info.ship.shipModel);
             Racer racer = newship.GetComponent<Racer>();
             MovementController mc = newship.GetComponentInChildren<MovementController>();
             mc.enabled = false;
-            mc.shipName = info.ship;
+            mc.ss = info.ship;
             AntiGravManager agm = newship.GetComponentInChildren<AntiGravManager>();
-            agm.shipName = info.ship;
+            agm.ss = info.ship;
+            RigidbodyController rbc = newship.GetComponentInChildren<RigidbodyController>();
+            rbc.ss = info.ship;
+            BotMovement bm = newship.GetComponentInChildren<BotMovement>();
+            bm.ss = info.ship;
             if (info.isBot) {
                 PlayerMovement pm = newship.GetComponent<PlayerMovement>();
                 pm.enabled = false;

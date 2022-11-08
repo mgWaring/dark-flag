@@ -13,25 +13,23 @@ public class ShipSelector : MonoBehaviour
     public TextMeshProUGUI handlingText;
     public TextMeshProUGUI weightText;
     public TextMeshProUGUI durabilityText;
-    public string[] selectableShipNames;
+    public ShipsScriptable[] selectableShipNames;
     public Transform shipHolder;
     public GameObject confirmationModal;
     GameObject[] selectableShips;
     GameObject currentShip;
     int index = 0;
-    [HideInInspector] public string value;
+    [HideInInspector] public ShipsScriptable value;
     public InputAction leftInput;
     public InputAction rightInput;
     public InputAction submitInput;
     public InputAction backInput;
     float submitTimer = 0.25f;
-    ShipProfiles sb;
 
     // Start is called before the first frame update
     void Start()
     {
-        sb = GetComponent<ShipProfiles>();
-        selectableShips = selectableShipNames.Select(name => Resources.Load<GameObject>(string.Format("Prefabs/{0}", name))).ToArray();
+        selectableShips = selectableShipNames.Select(name => name.shipModel).ToArray();
         SetValues();
     }
 
@@ -92,9 +90,9 @@ public class ShipSelector : MonoBehaviour
         for (int i = 0; i < racerCount; i++) {
             RacerInfo info;
             if (i == 0) {
-                info = new RacerInfo(PlayerPrefs.GetString("playerName"), value, false);
+                info = new RacerInfo(PlayerPrefs.GetString("playerName"), selectableShipNames[index], false);
             } else {
-                info = new RacerInfo(selectableShipNames);
+                info = new RacerInfo(PlayerPrefs.GetString("playerName"), selectableShipNames[index], true);
             }
             racers[i] = info;
         }
@@ -119,10 +117,10 @@ public class ShipSelector : MonoBehaviour
         ship.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
         ship.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
-        nameText.text = string.Format("Name: {0}", value);
-        speedText.text = string.Format("Max Speed: {0}", sb.ProfileHunter(value, "thrust_speed"));
-        handlingText.text = string.Format("Handling: {0}", sb.ProfileHunter(value, "yaw_speed"));
-        weightText.text = string.Format("Weight: {0}", sb.ProfileHunter(value, "mass"));
+        nameText.text = string.Format("Name: {0}", value.shipName);
+        speedText.text = string.Format("Max Speed: {0}", value.thrustSpeed);
+        handlingText.text = string.Format("Handling: {0}",value.yawSpeed);
+        weightText.text = string.Format("Weight: {0}", value.mass);
         durabilityText.text = string.Format("Durability: {0}", "1");
     }
 

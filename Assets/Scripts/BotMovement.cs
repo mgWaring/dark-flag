@@ -8,17 +8,16 @@ public class BotMovement : MonoBehaviour
     public LayerMask wallLayer;
     public float sensorDistance;
     MovementController mc;
-    ShipProfiles sb;
     Rigidbody rb;
     Racer racer;
+    [HideInInspector] public ShipsScriptable ss;
 
     void Start() {
         mc = GetComponent<MovementController>();
-        sb = GetComponent<ShipProfiles>();
         rb = GetComponent<Rigidbody>();
         racer = GetComponent<Racer>();
 
-        botSpeedMult = sb.ProfileHunter("testShip", "bot_speed_modifier");
+        botSpeedMult = ss.botSpeedModifier;
     }
 
     void Update()

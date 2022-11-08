@@ -4,16 +4,14 @@ using UnityEngine;
 public class RigidbodyController : MonoBehaviour
 {
     Rigidbody rb;
-    ShipProfiles sp;
+    [HideInInspector]public ShipsScriptable ss;
 
     //Sets rigidbody values.
     private void Start()
     {
-        sp = GetComponent<ShipProfiles>();
-
         rb = GetComponent<Rigidbody>();
-        rb.mass = sp.ProfileHunter("testShip", "mass");
-        rb.drag = sp.ProfileHunter("testShip", "drag");
-        rb.angularDrag = sp.ProfileHunter("testShip", "angular_drag");
+        rb.mass = ss.mass;
+        rb.drag = ss.drag;
+        rb.angularDrag = ss.angularDrag;
     }
 }

@@ -21,8 +21,7 @@ public class AntiGravManager : MonoBehaviour
     Vector3 hoverRay1XZOffset = new Vector3(0.0f, 0.0f, 0.0f);
     Vector3 hoverRay1CombOffset;//Not used at the moment. Delete if still unused before final release of game.
 
-    ShipProfiles sb;
-    [HideInInspector] public string shipName;
+    [HideInInspector] public ShipsScriptable ss;
 
     void Start()
     {
@@ -31,10 +30,9 @@ public class AntiGravManager : MonoBehaviour
         hoverMask = LayerMask.GetMask("Ship");
         hoverRay1CombOffset = OffsetCombiner(hoverRay1XZOffset);//Not used at the moment. Delete if still unused before final release of game.
         
-        sb = GetComponent<ShipProfiles>();
-        hoverForce = sb.ProfileHunter(shipName, "hover_force");
-        hoverConstant = sb.ProfileHunter(shipName, "hover_constant");
-        hoverRayDistance = sb.ProfileHunter(shipName, "hover_height");
+        hoverForce = ss.hoverForce;
+        hoverConstant = ss.hoverConstant;
+        hoverRayDistance = ss.hoverHeight;
     }
 
     private void FixedUpdate()
@@ -48,7 +46,7 @@ public class AntiGravManager : MonoBehaviour
         {
             vehicleRB.AddRelativeForce(Vector3.up * HoverSmoother(hoverRay1), ForceMode.Force);
         }
-        Debug.Log("hoverForce = " + hoverForce + "hoverConstant = " + hoverConstant + "hoverRayDistance = " + hoverRayDistance);
+        //Debug.Log("hoverForce = " + hoverForce + "hoverConstant = " + hoverConstant + "hoverRayDistance = " + hoverRayDistance);
     }
     
     bool GroundDetector(Ray inputRay)
@@ -76,7 +74,7 @@ public class AntiGravManager : MonoBehaviour
         Vector3 combinedOffset = new Vector3(0, 0, 0);
         combinedOffset = hoverRayYOffset + xzOffset;
 
-        Debug.Log(combinedOffset);
+        //Debug.Log(combinedOffset);
         return combinedOffset;
     }
 
