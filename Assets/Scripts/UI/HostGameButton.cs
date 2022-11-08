@@ -22,7 +22,7 @@ namespace UI {
             var gameUp = await RelayManager.Instance.HostGame();
 
             if (gameUp) {
-                SceneManager.LoadSceneAsync("Multiplayer");
+                SceneManager.LoadSceneAsync("Pregame");
             }
         }
 

@@ -13,7 +13,7 @@ namespace UI {
             var connected = await RelayManager.Instance.JoinGame(input.text);
         
             if (connected) {
-                SceneManager.LoadSceneAsync("Multiplayer");
+                SceneManager.LoadSceneAsync("Pregame");
             }
         }
     }

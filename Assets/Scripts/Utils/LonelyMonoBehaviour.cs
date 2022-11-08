@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Utils {
     public class LonelyMonoBehaviour<T> : MonoBehaviour where T : Component {
 
-        private static T _instance = null;
+        private static T _instance;
         public static T Instance {
             get {
                 if (_instance == null) _instance = FindObjectOfType<T>();
