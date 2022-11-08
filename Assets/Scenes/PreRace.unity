@@ -1175,7 +1175,7 @@ MonoBehaviour:
   durabilityText: {fileID: 24190509}
   selectableShipNames:
   - testShip
-  - testShip
+  - longShip
   shipHolder: {fileID: 2130054422}
   confirmationModal: {fileID: 1271520471}
   value: 
