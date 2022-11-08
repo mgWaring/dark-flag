@@ -26,6 +26,13 @@ public class RacerInfo
         isBot = true;
     }
 
+    public RacerInfo(string[] ships) {
+        name = generateFakeName();
+        var rand = new Random();
+        ship = ships[rand.Next(ships.Length)];
+        isBot = true;
+    }
+
     // totally necessary
     string generateFakeName() {
         string[] names = {
