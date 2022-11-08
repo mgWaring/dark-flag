@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
     public SpeedUI speedUI;
     public LapTimer lapTimer;
     public int lapCount = 1;
+    public ShipsScriptable shipScriptable;
     [HideInInspector] public string state;
     [HideInInspector] public Racer[] racers;
     [HideInInspector] public Dictionary<Racer, List<float>> laps = new Dictionary<Racer, List<float>>();
@@ -34,6 +35,18 @@ public class GameController : MonoBehaviour
             playerCount = CrossScene.racerInfo.Length;
             map = CrossScene.map;
             lapCount = CrossScene.laps;
+        } else {
+            CrossScene.racerInfo = new RacerInfo[playerCount];
+            if (playerId < playerCount) {
+                CrossScene.racerInfo[playerId] = new RacerInfo(PlayerPrefs.GetString("playerName"), shipScriptable);
+            }
+
+            ShipsScriptable[] available = new ShipsScriptable[] { shipScriptable };
+            for (int i = 0; i < playerCount; i++) {
+                if (CrossScene.racerInfo[i] == null) {
+                    CrossScene.racerInfo[i] = new RacerInfo(available);
+                }
+            }
         }
 
         GameObject mapObj = Instantiate(map.prefab);

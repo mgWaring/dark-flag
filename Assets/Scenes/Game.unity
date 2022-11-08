@@ -2080,7 +2080,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b1de23efe04244fa3a0e3077131ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCount: 2
+  playerCount: 1
   raceTimer: {fileID: 765611359}
   countdownText: {fileID: 1226155478}
   scoreboard: {fileID: 1044541642}
@@ -2088,9 +2088,10 @@ MonoBehaviour:
   speedUI: {fileID: 2081601132}
   lapTimer: {fileID: 553016916}
   lapCount: 4
+  shipScriptable: {fileID: 11400000, guid: ab38fa60089fbed40af712c21048d41c, type: 2}
   state: 
   racers: []
-  playerId: 2
+  playerId: 0
   playerRacer: {fileID: 0}
   map: {fileID: 11400000, guid: b99a1e71936ac3c46afb7dd00490402e, type: 2}
 --- !u!114 &765611359
