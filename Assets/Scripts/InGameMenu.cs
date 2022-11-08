@@ -18,7 +18,7 @@ public class InGameMenu : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 
     void OnEnable()

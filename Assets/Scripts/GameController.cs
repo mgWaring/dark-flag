@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
     [HideInInspector] public Dictionary<Racer, List<float>> laps = new Dictionary<Racer, List<float>>();
 
     float preRaceTimer = 5.0f;
-    float postRaceTimer = 20.0f;
+    float postRaceTimer = 10.0f;
     public int playerId = 0;
     [HideInInspector] public Racer playerRacer;
     GameObject checkpoints;
@@ -31,14 +31,20 @@ public class GameController : MonoBehaviour
     void Start()
     {
         if (CrossScene.cameFromMainMenu) {
-            if (CrossScene.players == 0) {
-                playerId = 9;
-            } else {
-                playerId = 0;
-            }
-            playerCount = CrossScene.players + CrossScene.bots;
+            playerCount = CrossScene.racerInfo.Length;
             map = CrossScene.map;
             lapCount = CrossScene.laps;
+        } else {
+            CrossScene.racerInfo = new RacerInfo[playerCount];
+            if (playerId < playerCount) {
+                CrossScene.racerInfo[playerId] = new RacerInfo("TestUser", "testShip");
+            }
+
+            for (int i = 0; i < playerCount; i++) {
+                if (CrossScene.racerInfo[i] == null) {
+                    CrossScene.racerInfo[i] = new RacerInfo();
+                }
+            }
         }
 
         GameObject mapObj = Instantiate(map.prefab);
@@ -51,27 +57,30 @@ public class GameController : MonoBehaviour
         Checkpoint lastCheck = checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<Checkpoint>();
         Checkpoint nextCheck = checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
         for(int i = 0; i < playerCount; i++) {
+            RacerInfo info = CrossScene.racerInfo[i];
             Transform startPos = startingPositions.GetChild(i).transform;
             Vector3 pos = startPos.position;
             Quaternion rot = startPos.rotation;
-            GameObject ship = Resources.Load<GameObject>("Prefabs/testShip");
+            GameObject ship = Resources.Load<GameObject>(string.Format("Prefabs/{0}", info.ship));
             GameObject newship = Instantiate(ship);
             Racer racer = newship.GetComponent<Racer>();
             MovementController mc = newship.GetComponentInChildren<MovementController>();
             mc.enabled = false;
-            mc.shipName = "testShip";
+            mc.shipName = info.ship;
             AntiGravManager agm = newship.GetComponentInChildren<AntiGravManager>();
-            agm.shipName = "testShip";
-            if (i == playerId) {
+            agm.shipName = info.ship;
+            if (info.isBot) {
+                PlayerMovement pm = newship.GetComponent<PlayerMovement>();
+                pm.enabled = false;
+            } else {
                 BotMovement bot = newship.GetComponent<BotMovement>();
                 bot.enabled = false;
                 speedUI.target = mc.gameObject;
                 playerRacer = racer;
-            } else {
-                PlayerMovement pm = newship.GetComponent<PlayerMovement>();
-                pm.enabled = false;
+                playerId = i;
             }
             racer.id = i;
+            racer.name = info.name;
             racer.lastCheckpoint = lastCheck;
             racer.nextCheckpoint = nextCheck;
             newship.transform.position = pos;

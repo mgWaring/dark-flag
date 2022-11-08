@@ -25,7 +25,7 @@ public class Scoreboard : MonoBehaviour
             GameObject row = transform.GetChild(i + 1).gameObject;
             Racer racer = gameController.racers[i];
             row.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("{0}", i + 1);
-            row.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = string.Format("{0}", racer.id);
+            row.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = racer.name;
 
             if (gameController.RacerIsFinished(racer)) {
                 float finish = gameController.laps[racer].Last();
