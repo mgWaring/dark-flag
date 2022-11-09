@@ -13,6 +13,7 @@ public class ShipDurability : MonoBehaviour
     State state = State.Healthy;
     GameObject explosion;
     bool isBot;
+    [HideInInspector] public ShipsScriptable ss;
 
     void Start() {
         rb = GetComponent<Rigidbody>();
@@ -83,7 +84,10 @@ public class ShipDurability : MonoBehaviour
                 collidedSpeed = new Vector3(0.0f, 0.0f, 0.0f);
             }
             float diff = (rb.velocity - collidedSpeed).magnitude;
-            hp = hp - (diff * 2);
+            float removal = (diff * 2) - ss.armour;
+            if (removal > 0.0f) {
+                hp = hp - removal;
+            }
         }
     }
 }

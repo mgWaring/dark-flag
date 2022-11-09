@@ -22,4 +22,9 @@ MonoBehaviour:
   hoverForce: 26.8
   hoverConstant: 2.5
   hoverHeight: 1
+  rollForce: 100
+  rollRayDistance: 10
+  pitchForce: 100
+  pitchRayDistance: 10
   botSpeedModifier: 1
+  armour: 5

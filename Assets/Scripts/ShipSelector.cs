@@ -123,7 +123,7 @@ public class ShipSelector : MonoBehaviour
         speedText.text = string.Format("Max Speed: {0}", value.thrustSpeed);
         handlingText.text = string.Format("Handling: {0}",value.yawSpeed);
         weightText.text = string.Format("Weight: {0}", value.mass);
-        durabilityText.text = string.Format("Durability: {0}", "1");
+        durabilityText.text = string.Format("Durability: {0}", value.armour);
     }
 
     public void GoLeft() {
