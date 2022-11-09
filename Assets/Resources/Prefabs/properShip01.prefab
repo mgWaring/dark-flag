@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 4298976098401725308}
   - component: {fileID: 749492794039491753}
   - component: {fileID: 889617204627106426}
+  - component: {fileID: 5422218481244537763}
   m_Layer: 0
   m_Name: properShip01
   m_TagString: Untagged
@@ -117,9 +118,9 @@ MeshCollider:
   m_GameObject: {fileID: 4298976098401725311}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 2212009239438826721, guid: 0f6ea22973f4f04458d5bc1eff464f64, type: 3}
 --- !u!114 &4298976098401725299
@@ -148,10 +149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hoverRayYOffset: {x: 0, y: -1, z: 0}
-  rollRayDistance: 10
-  rollForce: 10000
-  pitchRayDistance: 10
-  pitchForce: 10000
   debugRayTime: 1
   ss: {fileID: 0}
 --- !u!114 &4298976098401725309
@@ -217,12 +214,12 @@ MonoBehaviour:
     m_Name: Thrust Input
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 357401a2-63fe-4889-8448-4952d3128e8e
+    m_Id: 9a1f55b5-68e5-435b-b3f5-a5a4826086b0
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
-    - m_Name: 1D Axis
-      m_Id: 28e9c958-2e90-4dc3-ba13-075b5e589ac3
+    - m_Name: 1D Axis Keyboard
+      m_Id: b1b2f0c3-9c51-41f0-bb4c-cd13596d173f
       m_Path: 1DAxis
       m_Interactions: 
       m_Processors: 
@@ -230,7 +227,7 @@ MonoBehaviour:
       m_Action: Thrust Input
       m_Flags: 4
     - m_Name: negative
-      m_Id: 89924a44-f4aa-496b-9c6d-4aa31e640bfa
+      m_Id: 9f7ee58f-0470-48cd-81d8-eb1ecdd003b3
       m_Path: <Keyboard>/s
       m_Interactions: 
       m_Processors: 
@@ -238,8 +235,56 @@ MonoBehaviour:
       m_Action: Thrust Input
       m_Flags: 8
     - m_Name: positive
-      m_Id: 12442292-2948-4b99-bee9-5c1470221778
+      m_Id: 52460fde-457b-439c-ae3f-ab8d4b1e6ce1
       m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Thrust Input
+      m_Flags: 8
+    - m_Name: 1D Axis Mouse
+      m_Id: 7f6e1245-8350-4de6-ba93-568158ccedf6
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Thrust Input
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: 44b807a9-ee24-4e69-999e-8f1e6ba25d94
+      m_Path: <Mouse>/rightButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Thrust Input
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: 8ef8fb60-996a-4797-90cf-4d578dbc02c5
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Thrust Input
+      m_Flags: 8
+    - m_Name: 1D Axis Gamepad Buttons
+      m_Id: f540d64e-fe0d-47da-9c16-990ddbe314e6
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Thrust Input
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: 1b16a2bc-50e1-4da4-9bb0-7e513d4d767d
+      m_Path: <Gamepad>/leftTrigger
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Thrust Input
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: 0c3d4385-dfdd-4ed5-a494-f2fc743a6103
+      m_Path: <Gamepad>/rightTrigger
       m_Interactions: 
       m_Processors: 
       m_Groups: 
@@ -250,12 +295,12 @@ MonoBehaviour:
     m_Name: Yaw Input
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: a0160878-8b8e-4ed5-9d1e-1a88cb349fbf
+    m_Id: 568707f4-8424-4435-80d4-149828eea2d4
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
-    - m_Name: 1D Axis
-      m_Id: 7ed5f9dc-e2ee-4002-ac56-d0aed6ef5b89
+    - m_Name: 1D Axis Keyboard
+      m_Id: f6512811-c9ab-4866-8e10-e081d6488235
       m_Path: 1DAxis
       m_Interactions: 
       m_Processors: 
@@ -263,7 +308,7 @@ MonoBehaviour:
       m_Action: Yaw Input
       m_Flags: 4
     - m_Name: negative
-      m_Id: ae9d605f-2d10-4cb8-a7bd-ef0a5dda2b2e
+      m_Id: 014db393-29c3-4159-96d5-8f8a5f3ca754
       m_Path: <Keyboard>/a
       m_Interactions: 
       m_Processors: 
@@ -271,14 +316,51 @@ MonoBehaviour:
       m_Action: Yaw Input
       m_Flags: 8
     - m_Name: positive
-      m_Id: 8b4f60fa-bc2e-42bf-a60d-5653bcebce00
+      m_Id: 461b620a-71c5-4c97-8e0e-24f0debeec8c
       m_Path: <Keyboard>/d
       m_Interactions: 
       m_Processors: 
       m_Groups: 
       m_Action: Yaw Input
       m_Flags: 8
+    - m_Name: 1D Axis Gamepad Stick
+      m_Id: c7f64bca-123c-4568-b7e2-b00062a49430
+      m_Path: 1DAxis
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Yaw Input
+      m_Flags: 4
+    - m_Name: negative
+      m_Id: 80bb76c3-180c-473b-81fb-4913507a0bef
+      m_Path: <Gamepad>/leftStick/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Yaw Input
+      m_Flags: 8
+    - m_Name: positive
+      m_Id: 3a472951-20c8-41a9-bc09-962708cf230a
+      m_Path: <Gamepad>/leftStick/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Yaw Input
+      m_Flags: 8
     m_Flags: 0
+--- !u!65 &5422218481244537763
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298976098401725311}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.09931266, y: 0.14956, z: 0.085291654}
+  m_Center: {x: 0.02888944, y: 0.06285018, z: -0.01152133}
 --- !u!1001 &4298976100277407161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -304,15 +386,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f6ea22973f4f04458d5bc1eff464f64, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f6ea22973f4f04458d5bc1eff464f64, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f6ea22973f4f04458d5bc1eff464f64, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f6ea22973f4f04458d5bc1eff464f64, type: 3}
       propertyPath: m_LocalRotation.w
@@ -374,11 +456,37 @@ MeshCollider:
   m_GameObject: {fileID: 3992562211882070248}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2212009239438826721, guid: 0f6ea22973f4f04458d5bc1eff464f64, type: 3}
+--- !u!65 &7556515112652770652
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3992562211882070248}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.034080237, y: 0.124931425, z: 0.07350938}
+  m_Center: {x: -0.0012241146, y: 0.057185255, z: -0.009012717}
+--- !u!65 &7735538277868124012
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3992562211882070248}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.09263044, y: 0.050455984, z: 0.04303378}
+  m_Center: {x: 0.028661275, y: 0.05571942, z: -0.007482216}
 --- !u!4 &4333516727793003090 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0f6ea22973f4f04458d5bc1eff464f64, type: 3}
