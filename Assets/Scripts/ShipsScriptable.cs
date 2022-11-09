@@ -19,6 +19,7 @@ public class ShipsScriptable : ScriptableObject
     public float pitchForce = 100.0f;
     public float pitchRayDistance = 10.0f;
     public float botSpeedModifier = 1.0f;
+    public float armour = 0.0f;
 
     //26.8hf 2.5hc don't delete.
 }

@@ -70,12 +70,12 @@ public class AntiGravManager : MonoBehaviour
         pitchRay1 = new Ray(transform.localPosition, (transform.up + transform.forward) * -1);
         pitchRay2 = new Ray(transform.localPosition, (transform.up + (transform.forward * -1)) * -1);
         //Leave these comments here please. Delete if still unused before final release of game.
-        Debug.DrawRay(transform.localPosition, transform.up * hoverRayDistance * -1, Color.green, debugRayTime, true);
+        // Debug.DrawRay(transform.localPosition, transform.up * hoverRayDistance * -1, Color.green, debugRayTime, true);
         //Debug.DrawRay(vehicleCollider.transform.localPosition + offset, vehicleCollider.transform.forward, Color.red, 9999999, true);
-        Debug.DrawRay(transform.localPosition, (transform.up + transform.right)* rollRayDistance * -1, Color.blue, debugRayTime, true);
-        Debug.DrawRay(transform.localPosition, (transform.up + (transform.right * -1)) * rollRayDistance * -1, Color.blue, debugRayTime, true);
-        Debug.DrawRay(transform.localPosition, (transform.up + transform.forward) * pitchRayDistance * -1, Color.red, debugRayTime, true);
-        Debug.DrawRay(transform.localPosition, (transform.up + (transform.forward * -1)) * pitchRayDistance * -1, Color.red, debugRayTime, true);
+        // Debug.DrawRay(transform.localPosition, (transform.up + transform.right)* rollRayDistance * -1, Color.blue, debugRayTime, true);
+        // Debug.DrawRay(transform.localPosition, (transform.up + (transform.right * -1)) * rollRayDistance * -1, Color.blue, debugRayTime, true);
+        // Debug.DrawRay(transform.localPosition, (transform.up + transform.forward) * pitchRayDistance * -1, Color.red, debugRayTime, true);
+        // Debug.DrawRay(transform.localPosition, (transform.up + (transform.forward * -1)) * pitchRayDistance * -1, Color.red, debugRayTime, true);
 
         if (Physics.Raycast(hoverRay1, out hoverHitInfo, hoverRayDistance))
         {
@@ -88,7 +88,7 @@ public class AntiGravManager : MonoBehaviour
             rollHitInfo2 = rollHit2.distance;
             rollDiff = rollHitInfo2 - rollHitInfo1;
             vehicleRB.AddRelativeTorque(Vector3.forward * rollDiff * rollForce * Time.fixedDeltaTime, ForceMode.Force);
-            Debug.Log("rollDiff = " + rollDiff + " rollHitInfo1 = " + rollHitInfo1 + " rollHitInfo2 = " + rollHitInfo2);
+            // Debug.Log("rollDiff = " + rollDiff + " rollHitInfo1 = " + rollHitInfo1 + " rollHitInfo2 = " + rollHitInfo2);
         }
 
         if ((Physics.Raycast(pitchRay1, out pitchHit1, pitchRayDistance)) | (Physics.Raycast(pitchRay2, out pitchHit2, pitchRayDistance)))
@@ -97,7 +97,7 @@ public class AntiGravManager : MonoBehaviour
             pitchHitInfo2 = pitchHit2.distance;
             pitchDiff = pitchHitInfo1 - pitchHitInfo2;
             vehicleRB.AddRelativeTorque(Vector3.right * pitchDiff * pitchForce * Time.fixedDeltaTime, ForceMode.Force);
-            Debug.Log("pitchDiff = " + pitchDiff + " pitchHitInfo1 = " + pitchHitInfo1 + " pitchHitInfo2 = " + pitchHitInfo2);
+            // Debug.Log("pitchDiff = " + pitchDiff + " pitchHitInfo1 = " + pitchHitInfo1 + " pitchHitInfo2 = " + pitchHitInfo2);
         }
     }
     

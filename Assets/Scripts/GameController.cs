@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     public GameObject scoreboard;
     public Camera playerCam;
     public SpeedUI speedUI;
+    public DurabilityUI durabilityUI;
     public LapTimer lapTimer;
     public int lapCount = 1;
     public ShipsScriptable shipScriptable;
@@ -81,6 +82,7 @@ public class GameController : MonoBehaviour
                 BotMovement bot = newship.GetComponent<BotMovement>();
                 bot.enabled = false;
                 speedUI.target = mc.gameObject;
+                durabilityUI.target = mc.gameObject;
                 playerRacer = racer;
                 playerId = i;
             }
@@ -98,6 +100,7 @@ public class GameController : MonoBehaviour
             playerId = 0;
             MovementController mc = playerRacer.gameObject.GetComponentInChildren<MovementController>();
             speedUI.target = mc.gameObject;
+            durabilityUI.target = mc.gameObject;
         }
         Transform first = playerRacer.transform;
         Transform camTransform = playerCam.transform;
