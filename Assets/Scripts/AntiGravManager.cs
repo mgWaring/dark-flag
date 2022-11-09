@@ -4,6 +4,9 @@ using UnityEngine;
 //Forces applied by the AntiGravManager are affected by the rigidbody mass.
 public class AntiGravManager : MonoBehaviour
 {    
+    //+++++++++++++++++ITS A MESS RIGHT NOW, DONT LOOK++++++++++++++++++++
+    
+    
     Rigidbody vehicleRB;
     Collider vehicleCL;//Not used at the moment. Delete if still unused before final release of game.
 
@@ -111,7 +114,7 @@ public class AntiGravManager : MonoBehaviour
             rollHitInfo21 = rollHit21.distance;
             rollDiff = rollHitInfo21 - rollHitInfo11;
             vehicleRB.AddRelativeTorque(Vector3.forward * rollDiff * rollForce * Time.fixedDeltaTime, ForceMode.Force);
-            Debug.Log("rollDiff = " + rollDiff + " rollHitInfo1 = " + rollHitInfo11 + " rollHitInfo2 = " + rollHitInfo21);
+            //Debug.Log("rollDiff = " + rollDiff + " rollHitInfo1 = " + rollHitInfo11 + " rollHitInfo2 = " + rollHitInfo21);
         }
 
         if ((Physics.Raycast(pitchRay1, out pitchHit1, pitchRayDistance)) | (Physics.Raycast(pitchRay2, out pitchHit2, pitchRayDistance)))
@@ -120,7 +123,7 @@ public class AntiGravManager : MonoBehaviour
             pitchHitInfo2 = pitchHit2.distance;
             pitchDiff = pitchHitInfo1 - pitchHitInfo2;
             vehicleRB.AddRelativeTorque(Vector3.right * pitchDiff * pitchForce * Time.fixedDeltaTime, ForceMode.Force);
-            Debug.Log("pitchDiff = " + pitchDiff + " pitchHitInfo1 = " + pitchHitInfo1 + " pitchHitInfo2 = " + pitchHitInfo2);
+            /Info.Debug.Log("pitchDiff = " + pitchDiff + " pitchHitInfo1 = " + pitchHitInfo1 + " pitchHitInfo2 = " + pitchHitInfo2);
         }
     }
     
