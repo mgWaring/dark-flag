@@ -14,12 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: properShip01
   shipModel: {fileID: 4298976098401725311, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
-  mass: 2.5
+  mass: 3
   drag: 1.5
-  angularDrag: 1
+  angularDrag: 5
   thrustSpeed: 6000
-  yawSpeed: 100
-  hoverForce: 50
+  yawSpeed: 120
+  hoverForce: 40
   hoverConstant: 2.5
-  hoverHeight: 3
+  hoverHeight: 2
+  rollForce: 250
+  rollRayDistance: 2
+  pitchForce: 250
+  pitchRayDistance: 2
   botSpeedModifier: 1

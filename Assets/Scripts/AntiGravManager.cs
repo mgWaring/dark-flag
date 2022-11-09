@@ -11,7 +11,7 @@ public class AntiGravManager : MonoBehaviour
     float hoverRayDistance;
     float hoverForce;
     float hoverConstant;
-    float hoverRegulator;
+    
     float distanceToFloor;
 
     RaycastHit hoverHitInfo;
@@ -86,7 +86,7 @@ public class AntiGravManager : MonoBehaviour
         {
             rollHitInfo1 = rollHit1.distance;
             rollHitInfo2 = rollHit2.distance;
-            rollDiff = rollHitInfo1 - rollHitInfo2;
+            rollDiff = rollHitInfo2 - rollHitInfo1;
             vehicleRB.AddRelativeTorque(Vector3.forward * rollDiff * rollForce * Time.fixedDeltaTime, ForceMode.Force);
             Debug.Log("rollDiff = " + rollDiff + " rollHitInfo1 = " + rollHitInfo1 + " rollHitInfo2 = " + rollHitInfo2);
         }
@@ -95,7 +95,7 @@ public class AntiGravManager : MonoBehaviour
         {
             pitchHitInfo1 = pitchHit1.distance;
             pitchHitInfo2 = pitchHit2.distance;
-            pitchDiff = pitchHitInfo2 - pitchHitInfo1;
+            pitchDiff = pitchHitInfo1 - pitchHitInfo2;
             vehicleRB.AddRelativeTorque(Vector3.right * pitchDiff * pitchForce * Time.fixedDeltaTime, ForceMode.Force);
             Debug.Log("pitchDiff = " + pitchDiff + " pitchHitInfo1 = " + pitchHitInfo1 + " pitchHitInfo2 = " + pitchHitInfo2);
         }
@@ -118,6 +118,7 @@ public class AntiGravManager : MonoBehaviour
     float HoverSmoother(Ray inputRay)
     {
         float newHoverForce = 0.0f;
+        float hoverRegulator;
 
         Physics.Raycast(inputRay, out hoverHitInfo, hoverRayDistance);//Maybe ass the mask to this one.
         distanceToFloor = hoverHitInfo.distance;

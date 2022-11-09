@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4298976098401725303}
   - component: {fileID: 4298976098401725302}
   - component: {fileID: 4298976098401725297}
-  - component: {fileID: 4298976098401725296}
   - component: {fileID: 4298976098401725299}
   - component: {fileID: 4298976098401725298}
   - component: {fileID: 4298976098401725309}
@@ -35,7 +34,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4298976098401725311}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -109,20 +108,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4298976098401725296
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4298976098401725311}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2212009239438826721, guid: 0f6ea22973f4f04458d5bc1eff464f64, type: 3}
 --- !u!114 &4298976098401725299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,6 +421,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 207f4fbee27393c4aa70ecbf0857435d, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 0f6ea22973f4f04458d5bc1eff464f64, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c78d962d72ef044887a8e80eb9fd8dd, type: 2}
     - target: {fileID: 919132149155446097, guid: 0f6ea22973f4f04458d5bc1eff464f64, type: 3}
       propertyPath: m_Name
       value: JT_SHIP_01
