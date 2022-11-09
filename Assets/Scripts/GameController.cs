@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
     [HideInInspector] public Racer[] racers;
     [HideInInspector] public Dictionary<Racer, List<float>> laps = new Dictionary<Racer, List<float>>();
 
-    float preRaceTimer = 5.0f;
+    float countdownTimer = 5.0f;
     float postRaceTimer = 10.0f;
     public int playerId = 0;
     [HideInInspector] public Racer playerRacer;
@@ -104,6 +104,11 @@ public class GameController : MonoBehaviour
             speedUI.target = mc.gameObject;
             durabilityUI.target = mc.gameObject;
         }
+
+        playerCam.gameObject.GetComponent<Animator>().Play(map.cameraClipName);
+    }
+
+    void AttachCamera() {
         Transform first = playerRacer.transform;
         Transform camTransform = playerCam.transform;
         camTransform.SetParent(first);
@@ -117,13 +122,24 @@ public class GameController : MonoBehaviour
     void Update()
     {
         if (state == "prerace") {
-            updatePositions();
             handlePreRace();
+        } else if (state == "countdown") {
+            updatePositions();
+            handleCountdown();
         } else if (state == "race") {
             updatePositions();
             handleRace();
         } else if (state == "postrace") {
             handlePostRace();
+        }
+    }
+
+    void handlePreRace() {
+        Animator anim = playerCam.gameObject.GetComponent<Animator>();
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f) {
+            anim.enabled = false;
+            AttachCamera();
+            state = "countdown";
         }
     }
 
@@ -177,9 +193,9 @@ public class GameController : MonoBehaviour
         return System.Array.IndexOf(racers, playerRacer);
     }
 
-    void handlePreRace() {
-        preRaceTimer -= Time.deltaTime;
-        if (preRaceTimer <= 0.0f) {
+    void handleCountdown() {
+        countdownTimer -= Time.deltaTime;
+        if (countdownTimer <= 0.0f) {
             state = "race";
             raceTimer.running = true;
             lapTimer.running = true;
@@ -188,22 +204,22 @@ public class GameController : MonoBehaviour
                 MovementController mc = racers[i].gameObject.GetComponentInChildren<MovementController>();
                 mc.enabled = true;
             }
-        } else if (preRaceTimer <= 1.0f) {
+        } else if (countdownTimer <= 1.0f) {
             countdownText.SetText("1");
-        } else if (preRaceTimer <= 2.0f) {
+        } else if (countdownTimer <= 2.0f) {
             countdownText.SetText("2");
-        } else if (preRaceTimer <= 3.0f) {
+        } else if (countdownTimer <= 3.0f) {
             countdownText.SetText("3");
-        } else if (preRaceTimer <= 4.0f) {
+        } else if (countdownTimer <= 4.0f) {
             countdownText.SetText("4");
-        } else if (preRaceTimer <= 5.0f) {
+        } else if (countdownTimer <= 5.0f) {
             countdownText.SetText("5");
         }
     }
 
     void handleRace() {
-        if (preRaceTimer >= -1.0f) {
-            preRaceTimer -= Time.deltaTime;
+        if (countdownTimer >= -1.0f) {
+            countdownTimer -= Time.deltaTime;
         } else {
             countdownText.SetText("");
         }

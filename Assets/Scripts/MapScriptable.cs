@@ -7,4 +7,5 @@ public class MapScriptable : ScriptableObject
 {
     public string name;
     public GameObject prefab;
+    public string cameraClipName;
 }

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Janktown
   prefab: {fileID: 5814136075095897797, guid: a2a38c88c9a7264479f17a7c854ff380, type: 3}
+  cameraClipName: JanktownOpeningCamera

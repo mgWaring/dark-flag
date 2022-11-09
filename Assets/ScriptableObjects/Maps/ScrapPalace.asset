@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Scrap Palace
   prefab: {fileID: 2157989023783136929, guid: 4845cdb3023023044a0aad2fe14059e4, type: 3}
+  cameraClipName: ScrapPalaceOpeningCamera
