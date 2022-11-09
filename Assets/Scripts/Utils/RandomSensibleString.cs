@@ -1,13 +1,20 @@
+namespace Utils {
+    public static class RandomSensibleString {
+        private static readonly string[] List1 = { "Fast", "Wide", "Hairy", "Extremely", "Long" };
+        private static readonly string[] List2 = { "White", "YeastFree", "Windy", "Loose", "Bendy" };
+        private static readonly string[] List3 = { "Cat", "Cabbage", "Rotunda", "Brewery", "TrainCar" };
 
-using System;
-public class RandomSensibleString {
-    private static string[] list1 = new string[5]{ "Fast", "Wide", "Hairy", "Extremely", "Long" };
-    private static string[] list2 = new string[5]{ "White", "YeastFree", "Windy", "Loose", "Bendy" };
-    private static string[] list3 = new string[5]{ "Cat", "Cabbage", "Rotunda", "Brewery", "TrainCar" };
-    public static string GenerateString(){
-        string str1 = list1[UnityEngine.Random.Range(0, list1.Length)];
-        string str2 =  list2[UnityEngine.Random.Range(0, list2.Length)];;
-        string str3 =  list3[UnityEngine.Random.Range(0, list3.Length)];;
-        return String.Format("{0}-{1}-{2}", str1, str2, str3);
+        private static readonly string[] NameList =
+            { "Wendy", "Lewis", "Sheena", "Nic", "Alex", "Evelyn", "Boris", "Max", "Petria", "Emir" };
+        public static string GenerateString(){
+            var str1 = List1[UnityEngine.Random.Range(0, List1.Length)];
+            var str2 =  List2[UnityEngine.Random.Range(0, List2.Length)];
+            var str3 =  List3[UnityEngine.Random.Range(0, List3.Length)];
+            return $"{str1}-{str2}-{str3}";
+        }
+
+        public static string GenerateNameString() {
+            return NameList[UnityEngine.Random.Range(0, NameList.Length)];
+        }
     }
 }
