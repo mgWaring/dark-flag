@@ -13,6 +13,7 @@ public class ShipDurability : MonoBehaviour
     State state = State.Healthy;
     GameObject explosion;
     bool isBot;
+    public AudioClip[] clips;
     [HideInInspector] public ShipsScriptable ss;
 
     void Start() {
@@ -76,6 +77,7 @@ public class ShipDurability : MonoBehaviour
 
     void OnCollisionEnter(Collision other) {
         if(other.gameObject.tag != "Checkpoint") {
+
             Rigidbody collidedRB = other.gameObject.GetComponent<Rigidbody>();
             Vector3 collidedSpeed;
             if (collidedRB) {
@@ -86,6 +88,12 @@ public class ShipDurability : MonoBehaviour
             float diff = (rb.velocity - collidedSpeed).magnitude;
             float removal = (diff * 2) - ss.armour;
             if (removal > 0.0f) {
+                AudioSource source = GetComponent<AudioSource>();
+                if (!source.isPlaying) {
+                    var rand = new System.Random();
+                    var clip = clips[rand.Next(clips.Length)];
+                    source.PlayOneShot(clip, 1.0f);
+                }
                 hp = hp - removal;
             }
         }
