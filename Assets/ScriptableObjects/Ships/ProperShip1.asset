@@ -27,3 +27,4 @@ MonoBehaviour:
   pitchForce: 250
   pitchRayDistance: 2
   botSpeedModifier: 1
+  armour: 20

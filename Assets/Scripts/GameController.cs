@@ -75,6 +75,8 @@ public class GameController : MonoBehaviour
             rbc.ss = info.ship;
             BotMovement bm = newship.GetComponentInChildren<BotMovement>();
             bm.ss = info.ship;
+            ShipDurability sp = newship.GetComponentInChildren<ShipDurability>();
+            sp.ss = info.ship;
             if (info.isBot) {
                 PlayerMovement pm = newship.GetComponent<PlayerMovement>();
                 pm.enabled = false;

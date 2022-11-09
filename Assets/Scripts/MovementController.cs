@@ -26,6 +26,16 @@ public class MovementController : MonoBehaviour
     Rigidbody vehicleRB;
     [HideInInspector] public ShipsScriptable ss;
 
+    public void Reset() {
+        accelerationMult = 0;
+        yawSpeedMult = 0;
+        acceleration = 0;
+        yawSpeed = 0;
+        yawAngularVelocity = Vector3.zero;
+        vehicleRB.velocity = Vector3.zero;
+        vehicleRB.angularVelocity = Vector3.zero;
+    }
+
     private void Start()
     {
         vehicleRB = GetComponent<Rigidbody>();

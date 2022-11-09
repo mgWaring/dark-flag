@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 215.281, g: 226.4905, b: 204.55315, a: 1}
+  m_IndirectSpecularColor: {r: 215.61914, g: 226.90332, b: 204.93488, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1271,7 +1271,6 @@ GameObject:
   m_Component:
   - component: {fileID: 732778978}
   - component: {fileID: 732778977}
-  - component: {fileID: 732778979}
   m_Layer: 0
   m_Name: ShipSelectionController
   m_TagString: Untagged
@@ -1418,28 +1417,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &732778979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 732778976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df1493a341390574282e2ebb9fab3a55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ship: {fileID: 0}
-  testShipMass: 3
-  testShipDrag: 1.5
-  testShipAngularDrag: 90
-  testShipThrustSpeed: 6000
-  testShipYawSpeed: 100
-  testShipHoverForce: 26.8
-  testShipHoverConstant: 2.5
-  testShipHoverHeight: 1
-  testShipBotSpeedModifier: 1
 --- !u!1 &975237417
 GameObject:
   m_ObjectHideFlags: 0
