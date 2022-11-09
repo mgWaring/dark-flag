@@ -123,7 +123,7 @@ public class AntiGravManager : MonoBehaviour
             pitchHitInfo2 = pitchHit2.distance;
             pitchDiff = pitchHitInfo1 - pitchHitInfo2;
             vehicleRB.AddRelativeTorque(Vector3.right * pitchDiff * pitchForce * Time.fixedDeltaTime, ForceMode.Force);
-            /Info.Debug.Log("pitchDiff = " + pitchDiff + " pitchHitInfo1 = " + pitchHitInfo1 + " pitchHitInfo2 = " + pitchHitInfo2);
+            //Info.Debug.Log("pitchDiff = " + pitchDiff + " pitchHitInfo1 = " + pitchHitInfo1 + " pitchHitInfo2 = " + pitchHitInfo2);
         }
     }
     
