@@ -65,6 +65,7 @@ public class ShipDurability : MonoBehaviour
                     } else {
                         GetComponent<PlayerMovement>().enabled = true;
                     }
+                    GetComponent<MovementController>().Reset();
                 } else if (deathTimer <= 1.0f) {
                     HideShip();
                 }
