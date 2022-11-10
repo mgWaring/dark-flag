@@ -2117,7 +2117,7 @@ MonoBehaviour:
   racers: []
   playerId: 0
   playerRacer: {fileID: 0}
-  map: {fileID: 11400000, guid: b99a1e71936ac3c46afb7dd00490402e, type: 2}
+  map: {fileID: 11400000, guid: 45c55deb856152741b3a968aa5063252, type: 2}
 --- !u!114 &765611359
 MonoBehaviour:
   m_ObjectHideFlags: 0
