@@ -2103,7 +2103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b1de23efe04244fa3a0e3077131ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCount: 2
+  playerCount: 1
   raceTimer: {fileID: 765611359}
   countdownText: {fileID: 1226155478}
   scoreboard: {fileID: 1044541642}
