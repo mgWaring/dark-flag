@@ -55,10 +55,11 @@ public class AntiGravManager : MonoBehaviour
     Collider mCollider;
     Vector3 minCollider;
 
-    [HideInInspector] public ShipsScriptable ss;
+    ShipsScriptable ss;
 
     void Start()
     {
+        ss = GetComponent<Ship>().details;
         vehicleRB = GetComponent <Rigidbody>();
         //hoverMask = LayerMask.GetMask("Ship");
         hoverRay1CombOffset = OffsetCombiner(hoverRay1XZOffset);//Not used at the moment. Delete if still unused before final release of game.

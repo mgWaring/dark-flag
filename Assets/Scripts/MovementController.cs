@@ -24,7 +24,7 @@ public class MovementController : MonoBehaviour
     float vehicleVelocity;
 
     Rigidbody vehicleRB;
-    [HideInInspector] public ShipsScriptable ss;
+    ShipsScriptable ss;
 
     public void Reset() {
         accelerationMult = 0;
@@ -38,6 +38,7 @@ public class MovementController : MonoBehaviour
 
     private void Start()
     {
+        ss = GetComponent<Ship>().details;
         vehicleRB = GetComponent<Rigidbody>();
         accelerationVar = ss.thrustSpeed;
         yawSpeedVar = ss.yawSpeed;

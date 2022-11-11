@@ -14,9 +14,10 @@ public class ShipDurability : MonoBehaviour
     GameObject explosion;
     bool isBot;
     public AudioClip[] clips;
-    [HideInInspector] public ShipsScriptable ss;
+    ShipsScriptable ss;
 
     void Start() {
+        ss = GetComponent<Ship>().details;
         rb = GetComponent<Rigidbody>();
         startHeight = transform.position.y;
         isBot = GetComponent<BotMovement>().enabled;

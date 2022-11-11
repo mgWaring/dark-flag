@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 5422218481244537763}
   - component: {fileID: 7370398645800970976}
   - component: {fileID: 3287847817425627180}
+  - component: {fileID: 8286877713419928190}
   m_Layer: 0
   m_Name: properShip01
   m_TagString: Ship
@@ -422,6 +423,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8286877713419928190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298976098401725311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41b5aa3d6a76ebb4ea09851401ee5133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  details: {fileID: 11400000, guid: 30016bfa08dcb144cad2c27c1f708494, type: 2}
 --- !u!1001 &711913471024130718
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -764,11 +778,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3581ad222ebc8940a94226aca086c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mColliderPos1: 1
-  mColliderPos2: 2
-  mColliderPos3: 3
-  mColliderPos4: 4
-  mColliderPos5: 5
 --- !u!4 &4333516727793003090 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0f6ea22973f4f04458d5bc1eff464f64, type: 3}

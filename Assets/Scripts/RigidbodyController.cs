@@ -4,11 +4,12 @@ using UnityEngine;
 public class RigidbodyController : MonoBehaviour
 {
     Rigidbody rb;
-    [HideInInspector]public ShipsScriptable ss;
+    ShipsScriptable ss;
 
     //Sets rigidbody values.
     private void Start()
     {
+        ss = GetComponent<Ship>().details;
         rb = GetComponent<Rigidbody>();
         rb.mass = ss.mass;
         rb.drag = ss.drag;

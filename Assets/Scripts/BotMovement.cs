@@ -10,9 +10,10 @@ public class BotMovement : MonoBehaviour
     MovementController mc;
     Rigidbody rb;
     Racer racer;
-    [HideInInspector] public ShipsScriptable ss;
+    ShipsScriptable ss;
 
     void Start() {
+        ss = GetComponent<Ship>().details;
         mc = GetComponent<MovementController>();
         rb = GetComponent<Rigidbody>();
         racer = GetComponent<Racer>();

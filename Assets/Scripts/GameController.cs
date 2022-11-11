@@ -68,15 +68,6 @@ public class GameController : MonoBehaviour
             Racer racer = newship.GetComponent<Racer>();
             MovementController mc = newship.GetComponentInChildren<MovementController>();
             mc.enabled = false;
-            mc.ss = info.ship;
-            AntiGravManager agm = newship.GetComponentInChildren<AntiGravManager>();
-            agm.ss = info.ship;
-            RigidbodyController rbc = newship.GetComponentInChildren<RigidbodyController>();
-            rbc.ss = info.ship;
-            BotMovement bm = newship.GetComponentInChildren<BotMovement>();
-            bm.ss = info.ship;
-            ShipDurability sp = newship.GetComponentInChildren<ShipDurability>();
-            sp.ss = info.ship;
             if (info.isBot) {
                 PlayerMovement pm = newship.GetComponent<PlayerMovement>();
                 pm.enabled = false;
