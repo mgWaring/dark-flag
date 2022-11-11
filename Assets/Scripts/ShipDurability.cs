@@ -75,18 +75,9 @@ public class ShipDurability : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision other) {
-        if(other.gameObject.tag != "Checkpoint") {
-
-            Rigidbody collidedRB = other.gameObject.GetComponent<Rigidbody>();
-            Vector3 collidedSpeed;
-            if (collidedRB) {
-                collidedSpeed = collidedRB.velocity;
-            } else {
-                collidedSpeed = new Vector3(0.0f, 0.0f, 0.0f);
-            }
-            float diff = (rb.velocity - collidedSpeed).magnitude;
-            float removal = (diff * 2) - ss.armour;
+    void OnCollisionEnter(Collision collision) {
+        if(collision.gameObject.tag != "Checkpoint") {
+            float removal = collision.impulse.magnitude - ss.armour;
             if (removal > 0.0f) {
                 AudioSource source = GetComponent<AudioSource>();
                 if (!source.isPlaying) {
