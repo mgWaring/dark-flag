@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 
 //Add this script to the vehicle object that has a rigidbody.
 //Forces applied by the AntiGravManager are affected by the rigidbody mass.
@@ -104,27 +105,33 @@ public class AntiGravManager : MonoBehaviour
         Debug.DrawRay(transform.localPosition, (transform.up + transform.forward) * pitchRayDistance * -1, Color.red, debugRayTime, true);
         Debug.DrawRay(transform.localPosition, (transform.up + (transform.forward * -1)) * pitchRayDistance * -1, Color.red, debugRayTime, true);
 
-        if (Physics.Raycast(hoverRay1, out hoverHitInfo, hoverRayDistance))
+        bool cont = false;
+        if (Physics.Raycast(hoverRay1, out hoverHitInfo, 50.0f))
         {
-            vehicleRB.AddRelativeForce(Vector3.up * HoverSmoother(hoverRay1), ForceMode.Force);
+            if (hoverHitInfo.distance <= hoverRayDistance) {
+                vehicleRB.AddRelativeForce(Vector3.up * HoverSmoother(hoverRay1), ForceMode.Force);
+                cont = true;
+            }
         }
 
-        if ((Physics.Raycast(rollRay11, out rollHit11, rollRayDistance1)) | (Physics.Raycast(rollRay21, out rollHit21, rollRayDistance1)))
-        {
-            rollHitInfo11 = rollHit11.distance;
-            rollHitInfo21 = rollHit21.distance;
-            rollDiff = rollHitInfo21 - rollHitInfo11;
-            vehicleRB.AddRelativeTorque(Vector3.forward * rollDiff * rollForce * Time.fixedDeltaTime, ForceMode.Force);
-            //Debug.Log("rollDiff = " + rollDiff + " rollHitInfo1 = " + rollHitInfo11 + " rollHitInfo2 = " + rollHitInfo21);
-        }
+        if (cont) {
+            if ((Physics.Raycast(rollRay11, out rollHit11, rollRayDistance1)) | (Physics.Raycast(rollRay21, out rollHit21, rollRayDistance1)))
+            {
+                rollHitInfo11 = rollHit11.distance;
+                rollHitInfo21 = rollHit21.distance;
+                rollDiff = rollHitInfo21 - rollHitInfo11;
+                vehicleRB.AddRelativeTorque(Vector3.forward * rollDiff * rollForce * Time.fixedDeltaTime, ForceMode.Force);
+                //Debug.Log("rollDiff = " + rollDiff + " rollHitInfo1 = " + rollHitInfo11 + " rollHitInfo2 = " + rollHitInfo21);
+            }
 
-        if ((Physics.Raycast(pitchRay1, out pitchHit1, pitchRayDistance)) | (Physics.Raycast(pitchRay2, out pitchHit2, pitchRayDistance)))
-        {
-            pitchHitInfo1 = pitchHit1.distance;
-            pitchHitInfo2 = pitchHit2.distance;
-            pitchDiff = pitchHitInfo1 - pitchHitInfo2;
-            vehicleRB.AddRelativeTorque(Vector3.right * pitchDiff * pitchForce * Time.fixedDeltaTime, ForceMode.Force);
-            //Info.Debug.Log("pitchDiff = " + pitchDiff + " pitchHitInfo1 = " + pitchHitInfo1 + " pitchHitInfo2 = " + pitchHitInfo2);
+            if ((Physics.Raycast(pitchRay1, out pitchHit1, pitchRayDistance)) | (Physics.Raycast(pitchRay2, out pitchHit2, pitchRayDistance)))
+            {
+                pitchHitInfo1 = pitchHit1.distance;
+                pitchHitInfo2 = pitchHit2.distance;
+                pitchDiff = pitchHitInfo1 - pitchHitInfo2;
+                vehicleRB.AddRelativeTorque(Vector3.right * pitchDiff * pitchForce * Time.fixedDeltaTime, ForceMode.Force);
+                //Info.Debug.Log("pitchDiff = " + pitchDiff + " pitchHitInfo1 = " + pitchHitInfo1 + " pitchHitInfo2 = " + pitchHitInfo2);
+            }
         }
     }
     
@@ -146,15 +153,20 @@ public class AntiGravManager : MonoBehaviour
     {
         float newHoverForce = 0.0f;
         float hoverRegulator;
+        RaycastHit hoverFrontHitInfo;
+        RaycastHit hoverBackHitInfo;
 
         Physics.Raycast(inputRay, out hoverHitInfo, hoverRayDistance);//Maybe ass the mask to this one.
-        distanceToFloor = hoverHitInfo.distance;
+        Physics.Raycast(transform.position + transform.forward, transform.position + transform.up * -1, out hoverFrontHitInfo, hoverRayDistance);
+        Physics.Raycast(transform.position - transform.forward, transform.position + transform.up * -1, out hoverBackHitInfo, hoverRayDistance);
+        float[] distanceArray = new float[] { hoverHitInfo.distance, hoverFrontHitInfo.distance, hoverBackHitInfo.distance };
+        distanceToFloor = distanceArray.Min();
         //hoverRegulator increases as distance to the floor lowers. Can be adjusted by changing hoverConstant.
-        hoverRegulator = (hoverConstant / (distanceToFloor + 1));
+        hoverRegulator = (hoverConstant * 2 / (distanceToFloor + 1));
         newHoverForce = hoverForce * hoverRegulator;
 
         //Debug.Log("From HoverSmoother in AntiGravManager. newHoverForce = " + newHoverForce);
-        return newHoverForce;
+        return newHoverForce * ss.mass;
     }
 
     Vector3 OffsetCombiner(Vector3 xzOffset)
