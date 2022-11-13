@@ -57,15 +57,15 @@ public class AntiGravManager : MonoBehaviour
     public float stableForce = 100.0f;//move this to scriptables.
     Ray bowRay;
     RaycastHit bowHit;
-    public float bowHitDistance = 10.0f;
+    public float bowHitDistance = 0.6f;
     Ray sternRay;
     RaycastHit sternHit;
-    public float sternHitDistance = 10.0f;
+    public float sternHitDistance = 1.0f;
     Ray starboardRay;
     RaycastHit starboardHit;
     Ray portRay;
     RaycastHit portHit;
-    public float portStarHitDistance = 10.0f;
+    public float portStarHitDistance = 0.6f;
     public Vector3 stableOffsetVector = new Vector3(0.5f,0.5f,0.5f);
 
     void Start()
@@ -117,15 +117,20 @@ public class AntiGravManager : MonoBehaviour
             Debug.DrawRay(portRay.origin, portRay.direction * portStarHitDistance, Color.blue, debugRayTime, true);
         }
 
+        
+
         if (Physics.Raycast(rollRay1, out rollHit1, rollRayDistance) && Physics.Raycast(rollRay2, out rollHit2, rollRayDistance))
         {
             rollIsStable = true;
             //z torque.
-            rollHitInfo1 = rollHit1.distance;
-            rollHitInfo2= rollHit2.distance;
-            //If ship is rolling the wrong way, swap rollHitInfo 2 and rollHitInfo 1 below.
-            rollDiff = rollHitInfo2 - rollHitInfo1;
-            vehicleRB.AddRelativeTorque(Vector3.forward * RollPitchSmoother(rollDiff) * rollForce * Time.fixedDeltaTime, ForceMode.Impulse);
+            if (Physics.Raycast(starboardRay, portStarHitDistance) == false && Physics.Raycast(portRay, portStarHitDistance) == false)
+            {
+                rollHitInfo1 = rollHit1.distance;
+                rollHitInfo2 = rollHit2.distance;
+                //If ship is rolling the wrong way, swap rollHitInfo 2 and rollHitInfo 1 below.
+                rollDiff = rollHitInfo2 - rollHitInfo1;
+                vehicleRB.AddRelativeTorque(Vector3.forward * RollPitchSmoother(rollDiff) * rollForce * Time.fixedDeltaTime, ForceMode.Impulse);
+            }
             Debug.Log("rollIsStable" + rollIsStable);
         }
         else
@@ -140,11 +145,14 @@ public class AntiGravManager : MonoBehaviour
             //y force.
             vehicleRB.AddRelativeForce(Vector3.up * (HoverSmoother(new Ray[] { pitchRay1, pitchRay2/*, pitchRay3*/ }) * Time.fixedDeltaTime), ForceMode.Impulse);
             //x torque.
-            pitchHitInfo1 = pitchHit1.distance;
-            pitchHitInfo2 = pitchHit2.distance;
-            //If ship is pitching the wrong way, swap pitchHitInfo 2 and pitchHitInfo 1 below.
-            pitchDiff = pitchHitInfo1 - pitchHitInfo2;
-            vehicleRB.AddRelativeTorque(Vector3.right * RollPitchSmoother(pitchDiff) * pitchForce * Time.fixedDeltaTime, ForceMode.Impulse);
+            if (Physics.Raycast(bowRay, bowHitDistance) == false && Physics.Raycast(sternRay, sternHitDistance) == false)// stick %% pitchIstable in here?
+            {
+                pitchHitInfo1 = pitchHit1.distance;
+                pitchHitInfo2 = pitchHit2.distance;
+                //If ship is pitching the wrong way, swap pitchHitInfo 2 and pitchHitInfo 1 below.
+                pitchDiff = pitchHitInfo1 - pitchHitInfo2;
+                vehicleRB.AddRelativeTorque(Vector3.right * RollPitchSmoother(pitchDiff) * pitchForce * Time.fixedDeltaTime, ForceMode.Impulse);
+            }            
             Debug.Log("pitchIsStable" + pitchIsStable);
         }
         else
@@ -152,6 +160,7 @@ public class AntiGravManager : MonoBehaviour
             pitchIsStable = false;
             Debug.Log("pitchIsStable" + pitchIsStable);
         }
+
     }
 
     /*void SelfRight()

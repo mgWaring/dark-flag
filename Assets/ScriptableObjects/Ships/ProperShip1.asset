@@ -19,9 +19,8 @@ MonoBehaviour:
   angularDrag: 5
   thrustSpeed: 6000
   yawSpeed: 120
-  hoverForce: 5
+  hoverForce: 10
   hoverConstant: 10
-  hoverHeight: 10
   rollForce: 10
   rollRayDistance: 2
   pitchForce: 10

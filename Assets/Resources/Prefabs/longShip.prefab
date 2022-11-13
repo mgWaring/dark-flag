@@ -228,6 +228,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aGMRaysOn: 1
   debugRayTime: 0.1
+  stableForce: 100
+  bowHitDistance: 0.6
+  sternHitDistance: 1
+  portStarHitDistance: 0.6
+  stableOffsetVector: {x: 0.5, y: 0.5, z: 0.5}
 --- !u!114 &710578369071010362
 MonoBehaviour:
   m_ObjectHideFlags: 0
