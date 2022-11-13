@@ -71,7 +71,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4298976098401725311}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d81194458271ee543b89933cda4e9a26, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -84,7 +84,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4298976098401725311}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d81194458271ee543b89933cda4e9a26, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -115,12 +115,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aGMRaysOn: 1
-  debugRayTime: 1
+  debugRayTime: 0.02
   stableForce: 100
   bowHitDistance: 0.6
   sternHitDistance: 1
   portStarHitDistance: 0.6
-  stableOffsetVector: {x: 0.5, y: 0.5, z: 0.5}
+  roofHitDistance: 0.53
+  stableOffsetVector: {x: 0.1, y: 0.5, z: 0.5}
 --- !u!114 &4298976098401725309
 MonoBehaviour:
   m_ObjectHideFlags: 0
