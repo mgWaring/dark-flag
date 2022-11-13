@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8508418995549443821}
   - component: {fileID: 4620487441135030737}
-  - component: {fileID: 7505132950396116454}
+  - component: {fileID: 7896816846040746705}
   - component: {fileID: 3972715105725700650}
   - component: {fileID: 8578232230251462750}
   - component: {fileID: 3199054139710719634}
@@ -59,8 +59,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &7505132950396116454
-CapsuleCollider:
+--- !u!65 &7896816846040746705
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -69,10 +69,9 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.4835061
-  m_Height: 1.7487487
-  m_Direction: 2
-  m_Center: {x: 0, y: 0.5, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.29285002, z: 1.470113}
+  m_Center: {x: 0, y: 0.49679953, z: -0.0000104010105}
 --- !u!114 &3972715105725700650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +105,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   sensorDistance: 30
-  ss: {fileID: 0}
 --- !u!114 &3199054139710719634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +117,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cadb928ff937734185da66104222987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ss: {fileID: 0}
 --- !u!114 &7297732876776564532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,9 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d6b189f7798e942b51336d9d8ea211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverRayYOffset: {x: 0, y: -1, z: 0}
+  aGMRaysOn: 1
   debugRayTime: 1
-  ss: {fileID: 0}
 --- !u!114 &710578369071010362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,7 +389,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0780e607f437d240bc9ef9420934205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ss: {fileID: 0}
 --- !u!114 &3729504450652366076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,7 +414,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 50b762b5071dc48448a0523f5fe7d7bf, type: 3}
   - {fileID: 8300000, guid: da9a0aeb98c81f040a388d443bc5b23d, type: 3}
   - {fileID: 8300000, guid: 8c67bb42c92ea7445a5b2632471df706, type: 3}
-  ss: {fileID: 0}
 --- !u!114 &7078325486893012996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -508,7 +502,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7270657622907762981, guid: 9b52530dbe736894f91cc2c648c69840, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9b52530dbe736894f91cc2c648c69840, type: 3}
 --- !u!1001 &6646379497671994240
 PrefabInstance:
@@ -678,7 +673,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5053801778235649015, guid: fe812a51675cc934cb5cc994985701e3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fe812a51675cc934cb5cc994985701e3, type: 3}
 --- !u!1001 &8508418996296445089
 PrefabInstance:
@@ -751,5 +747,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7270657622907762981, guid: 9b52530dbe736894f91cc2c648c69840, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9b52530dbe736894f91cc2c648c69840, type: 3}

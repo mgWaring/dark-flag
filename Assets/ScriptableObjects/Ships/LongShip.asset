@@ -16,15 +16,17 @@ MonoBehaviour:
   shipModel: {fileID: 8508418995549443820, guid: dac3942921fa85b4e83c3b78db20b48d, type: 3}
   mass: 2.9
   drag: 1.5
-  angularDrag: 90
+  angularDrag: 5
   thrustSpeed: 7000
   yawSpeed: 90
-  hoverForce: 26.8
-  hoverConstant: 2.5
+  hoverForce: 10
+  hoverConstant: 10
   hoverHeight: 1
-  rollForce: 100
-  rollRayDistance: 10
-  pitchForce: 100
-  pitchRayDistance: 10
+  rollForce: 5
+  rollRayDistance: 2
+  pitchForce: 10
+  pitchRayDistance: 2
+  pitchRollConstant: 1.2
+  colRayOffset: {x: 0, y: 0, z: -0.5}
   botSpeedModifier: 1
   armour: 15

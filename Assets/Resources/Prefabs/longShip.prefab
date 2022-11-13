@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3078568799651813926}
   - component: {fileID: 8560510764289665818}
   - component: {fileID: 2381687781947966342}
-  - component: {fileID: 6804777160616124522}
   m_Layer: 8
   m_Name: Vehicle-Boosterlong
   m_TagString: Untagged
@@ -84,20 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &6804777160616124522
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3246964918697119964}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &8508418995549443820
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +93,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8508418995549443821}
   - component: {fileID: 4620487441135030737}
-  - component: {fileID: 7505132950396116454}
+  - component: {fileID: 1146367770103437947}
+  - component: {fileID: 8041205203649501308}
   - component: {fileID: 3972715105725700650}
   - component: {fileID: 8578232230251462750}
   - component: {fileID: 3199054139710719634}
@@ -157,8 +143,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!136 &7505132950396116454
-CapsuleCollider:
+--- !u!65 &1146367770103437947
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -167,10 +153,22 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.24717626
-  m_Height: 2.0514383
-  m_Direction: 2
-  m_Center: {x: 0, y: 0.5, z: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.49662697, y: 0.29316974, z: 1.9612103}
+  m_Center: {x: 0.0021627545, y: 0.49398106, z: 0}
+--- !u!65 &8041205203649501308
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508418995549443820}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.70744, y: 0.13760042, z: 0.31388783}
+  m_Center: {x: -0.0035527945, y: 0.6392102, z: -0.8781749}
 --- !u!114 &3972715105725700650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +202,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   sensorDistance: 30
-  ss: {fileID: 0}
 --- !u!114 &3199054139710719634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cadb928ff937734185da66104222987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ss: {fileID: 0}
 --- !u!114 &7297732876776564532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,9 +226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d6b189f7798e942b51336d9d8ea211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverRayYOffset: {x: 0, y: -1, z: 0}
+  aGMRaysOn: 1
   debugRayTime: 0.1
-  ss: {fileID: 0}
 --- !u!114 &710578369071010362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -491,7 +486,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0780e607f437d240bc9ef9420934205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ss: {fileID: 0}
 --- !u!114 &832047633836416138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -517,7 +511,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 50b762b5071dc48448a0523f5fe7d7bf, type: 3}
   - {fileID: 8300000, guid: da9a0aeb98c81f040a388d443bc5b23d, type: 3}
   - {fileID: 8300000, guid: 8c67bb42c92ea7445a5b2632471df706, type: 3}
-  ss: {fileID: 0}
 --- !u!114 &127339190607667991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,7 +535,6 @@ GameObject:
   - component: {fileID: 1004778191201492952}
   - component: {fileID: 5784368039618933938}
   - component: {fileID: 5470096194385135675}
-  - component: {fileID: 2886151518500152404}
   m_Layer: 8
   m_Name: Vehicle-Boosterlong (1)
   m_TagString: Untagged
@@ -615,20 +607,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &2886151518500152404
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8627623512659956771}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1001 &6646379497671994240
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -817,7 +795,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7270657622907762981, guid: 9b52530dbe736894f91cc2c648c69840, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9b52530dbe736894f91cc2c648c69840, type: 3}
 --- !u!1001 &7488073738616693544
 PrefabInstance:
@@ -890,7 +869,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5053801778235649015, guid: fe812a51675cc934cb5cc994985701e3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: fe812a51675cc934cb5cc994985701e3, type: 3}
 --- !u!1001 &8508418996296445089
 PrefabInstance:
@@ -967,5 +947,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7270657622907762981, guid: 9b52530dbe736894f91cc2c648c69840, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9b52530dbe736894f91cc2c648c69840, type: 3}
