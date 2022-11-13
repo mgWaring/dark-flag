@@ -5,12 +5,24 @@ using UnityEngine;
 public class AntiGravManager : MonoBehaviour
 {    
     //+++++++++++++++++ITS A MESS RIGHT NOW, DONT LOOK++++++++++++++++++++
-    
-    
-    Rigidbody vehicleRB;
-    Collider vehicleCL;//Not used at the moment. Delete if still unused before final release of game.
+    [HideInInspector] public ShipsScriptable ss;
 
-    public Vector3 hoverRayYOffset = new Vector3(0.0f, -1.0f, 0.0f);//Not used at the moment. Delete if still unused before final release of game.
+    //Unity editor options.//
+    public bool aGMRaysOn = true;
+    public float debugRayTime = 0.1f;
+    public Vector3 centerOffset = new Vector3(0, 0, 0);
+
+    Rigidbody vehicleRB;
+
+    //Collider finding stuff.
+    Collider[] colliderList;
+    Vector3[] colliderSizes;
+    Vector3 ultimateVector;    
+
+    //y axis force.
+    Ray hoverRay1;
+    Ray hoverRay2;
+    Ray hoverRay3;
     float hoverRayDistance;
     float hoverForce;
     float hoverConstant;
@@ -18,7 +30,7 @@ public class AntiGravManager : MonoBehaviour
     float distanceToFloor;
 
     RaycastHit hoverHitInfo;
-    LayerMask shipLayer;
+    //float distanceToFloor;      
 
     Ray hoverRay1;    
     Vector3 hoverRay1XZOffset = new Vector3(0.0f, 0.0f, 0.0f);
@@ -61,22 +73,20 @@ public class AntiGravManager : MonoBehaviour
     {
         ss = GetComponent<Ship>().details;
         vehicleRB = GetComponent <Rigidbody>();
-        //hoverMask = LayerMask.GetMask("Ship");
-        hoverRay1CombOffset = OffsetCombiner(hoverRay1XZOffset);//Not used at the moment. Delete if still unused before final release of game.
+
+        //Collider extent finding.
+        colliderList = GetComponents<Collider>();
+        colliderSizes = ExtentHunter();
+        ultimateVector = ExtentFighter();
         
+        //Gets information from relevent ShipsScriptable.
         hoverForce = ss.hoverForce;
         hoverConstant = ss.hoverConstant;
         hoverRayDistance = ss.hoverHeight;
         rollForce = ss.rollForce;
         rollRayDistance1 = ss.rollRayDistance;
-        rollRayDistance2 = ss.rollRayDistance;
         pitchForce = ss.pitchForce;
         pitchRayDistance = ss.pitchRayDistance;
-        /*
-        mCollider = GetComponent <Collider>();
-        minCollider = mCollider.bounds.extents;
-        */
-
     }
 
     private void FixedUpdate()
@@ -127,17 +137,38 @@ public class AntiGravManager : MonoBehaviour
             //Info.Debug.Log("pitchDiff = " + pitchDiff + " pitchHitInfo1 = " + pitchHitInfo1 + " pitchHitInfo2 = " + pitchHitInfo2);
         }
     }
-    
-    bool GroundDetector(Ray inputRay)
+
+    float HoverSmoother(Ray[] inputRays)
     {
-        bool groundDetected = false;
+        float distanceToFloor = 0.0f;
 
-        if (Physics.Raycast(inputRay, out hoverHitInfo, hoverRayDistance))
+        //Combines distance to floor of all rays passed in, then calculates the mean.
+        for (int i = 0; i < inputRays.Length; i++)
         {
-            groundDetected = true;
+            Physics.Raycast(inputRays[i], out hoverHitInfo, hoverRayDistance);
+            distanceToFloor = distanceToFloor + hoverHitInfo.distance;
         }
+        float averageDistance = distanceToFloor / inputRays.Length;        
 
-        return groundDetected;
+        //regulator increases as distance to the floor lowers. Can be adjusted by changing hoverConstant.
+        float regulator = hoverConstant / (averageDistance + 0.1f);
+        float newForce = hoverForce * regulator;
+
+        //Debug.Log("From HoverSmoother in AntiGravManager. newHoverForce = " + newHoverForce);
+        return newForce;
+    }
+
+    float RollPitchSmoother(float distanceDifference)
+    {
+        float newForce = 0.0f;
+
+        if (distanceDifference != newForce)
+        {
+            float regulator = (distanceDifference / pitchRollConstant);
+            newForce = hoverForce * regulator;
+        }
+        Debug.Log("newForce = " + newForce);
+        return newForce;
     }
 
 
@@ -157,12 +188,22 @@ public class AntiGravManager : MonoBehaviour
         return newHoverForce;
     }
 
-    Vector3 OffsetCombiner(Vector3 xzOffset)
-    {
-        Vector3 combinedOffset = new Vector3(0, 0, 0);
-        combinedOffset = hoverRayYOffset + xzOffset;
+            float contenderY = colliderSizes[q].y;
+            Debug.Log("ContenderY attacks " + championY + "with" + contenderY);
+            if (contenderY > championY)
+            {
+                championY = contenderY;
+                Debug.Log("New championY is " + championY);
+            }
+            else
+            {
+                Debug.Log("ChampionY holds their title at value " + championY);
+                //Delete else clause when done debugging.
+            }
+        }
 
-        //Debug.Log(combinedOffset);
-        return combinedOffset;
+        Vector3 championFusion = new Vector3(championX, championY, championZ);
+        Debug.Log("Your new ultimate Vector is " + championFusion);
+        return championFusion;
     }
 }
