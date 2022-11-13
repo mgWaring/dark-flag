@@ -19,12 +19,12 @@ MonoBehaviour:
   angularDrag: 5
   thrustSpeed: 6000
   yawSpeed: 120
-  hoverForce: 40
-  hoverConstant: 2.5
-  hoverHeight: 2
-  rollForce: 250
-  rollRayDistance: 2
-  pitchForce: 250
-  pitchRayDistance: 2
+  hoverForce: 5
+  hoverConstant: 10
+  hoverHeight: 10
+  rollForce: 10
+  rollRayDistance: 10
+  pitchForce: 10
+  pitchRayDistance: 10
   botSpeedModifier: 1
-  armour: 20
+  armour: 50
