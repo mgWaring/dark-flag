@@ -1,0 +1,29 @@
+{
+    "Race": {
+        "checkpoints": [
+            {
+                "steps": 390415,
+                "file_path": "results/withGroundCheck/Race/Race-390415.onnx",
+                "reward": null,
+                "creation_time": 1668335433.319464,
+                "auxillary_file_paths": [
+                    "results/withGroundCheck/Race/Race-390415.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 390415,
+            "file_path": "results/withGroundCheck/Race.onnx",
+            "reward": null,
+            "creation_time": 1668335433.319464,
+            "auxillary_file_paths": [
+                "results/withGroundCheck/Race/Race-390415.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cpu"
+    }
+}

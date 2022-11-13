@@ -41,6 +41,10 @@ public class ShipDurability : MonoBehaviour
 
     void Update() {
         if (hp <= 0.0f) {
+            RacerAgent agent = GetComponent<RacerAgent>();
+            if (agent != null) {
+                agent.Exploded();
+            }
             if (state == State.Healthy) {
                 if (isBot) {
                     GetComponent<BotMovement>().enabled = false;

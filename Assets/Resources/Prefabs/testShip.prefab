@@ -20,6 +20,9 @@ GameObject:
   - component: {fileID: 7829293728254985439}
   - component: {fileID: 3729504450652366076}
   - component: {fileID: 7078325486893012996}
+  - component: {fileID: 1555506591925676979}
+  - component: {fileID: 2818488401026564025}
+  - component: {fileID: 3481159393457553813}
   m_Layer: 8
   m_Name: testShip
   m_TagString: Ship
@@ -106,7 +109,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   sensorDistance: 30
-  ss: {fileID: 0}
 --- !u!114 &3199054139710719634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cadb928ff937734185da66104222987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ss: {fileID: 0}
 --- !u!114 &7297732876776564532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +135,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverRayYOffset: {x: 0, y: -1, z: 0}
   debugRayTime: 1
-  ss: {fileID: 0}
 --- !u!114 &710578369071010362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,7 +393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0780e607f437d240bc9ef9420934205, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ss: {fileID: 0}
 --- !u!114 &3729504450652366076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,7 +418,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 50b762b5071dc48448a0523f5fe7d7bf, type: 3}
   - {fileID: 8300000, guid: da9a0aeb98c81f040a388d443bc5b23d, type: 3}
   - {fileID: 8300000, guid: 8c67bb42c92ea7445a5b2632471df706, type: 3}
-  ss: {fileID: 0}
 --- !u!114 &7078325486893012996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,6 +431,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   details: {fileID: 11400000, guid: ab38fa60089fbed40af712c21048d41c, type: 2}
+--- !u!114 &1555506591925676979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508418995549443820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe80070493c07d4c9c2aabd5327ff48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 12000
+  mc: {fileID: 3199054139710719634}
+  racer: {fileID: 3972715105725700650}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  floorLayer:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!114 &2818488401026564025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508418995549443820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 4
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 2
+      BranchSizes: 
+    VectorActionSize: 02000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 1
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 5022602860645237092, guid: 6ae3a81d22cea8f469cc2737c29fdde9, type: 3}
+  m_InferenceDevice: 3
+  m_BehaviorType: 0
+  m_BehaviorName: Race
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 2
+--- !u!114 &3481159393457553813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508418995549443820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  TakeActionsBetweenDecisions: 1
 --- !u!1001 &3373895108588121592
 PrefabInstance:
   m_ObjectHideFlags: 0

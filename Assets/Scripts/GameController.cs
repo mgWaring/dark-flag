@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     public LapTimer lapTimer;
     public int lapCount = 1;
     public ShipsScriptable shipScriptable;
+    public bool InstantStart = false;
     [HideInInspector] public string state;
     [HideInInspector] public Racer[] racers;
     [HideInInspector] public Dictionary<Racer, List<float>> laps = new Dictionary<Racer, List<float>>();
@@ -97,6 +98,20 @@ public class GameController : MonoBehaviour
         }
 
         playerCam.gameObject.GetComponent<Animator>().Play(map.cameraClipName);
+
+        if (InstantStart) {
+            Animator anim = playerCam.gameObject.GetComponent<Animator>();
+            anim.enabled = false;
+            AttachCamera();
+            state = "race";
+            raceTimer.running = true;
+            lapTimer.running = true;
+            countdownText.SetText("ACTIVATE!");
+            for (int i = 0; i < playerCount; i++) {
+                MovementController mc = racers[i].gameObject.GetComponentInChildren<MovementController>();
+                mc.enabled = true;
+            }
+        }
     }
 
     void AttachCamera() {
@@ -151,16 +166,22 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void Reset() {
+        laps = new Dictionary<Racer, List<float>>();
+        laps[playerRacer] = new List<float>();
+    }
+
     public void registerLap(Racer racer) {
         List<float> times = laps[racer];
+
         if (times.Count == 0) {
             times.Add(0.0f);
-        } else if (times.Count <= lapCount) {
+        } else if (times.Count <= lapCount || InstantStart) {
             times.Add(raceTimer.currentTime);
             racer.lap += 1;
             if (racer.id == playerId) {
                 lapTimer.Lap();
-                if (RacerIsFinished(racer)) {
+                if (RacerIsFinished(racer) && !InstantStart) {
                     scoreboard.SetActive(true);
                     racer.gameObject.GetComponent<BotMovement>().enabled = true;
                     racer.gameObject.GetComponent<PlayerMovement>().enabled = false;
@@ -168,7 +189,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        if (laps.Values.All(l => l.Count > lapCount)) {
+        if (laps.Values.All(l => l.Count > lapCount) && !InstantStart) {
             state = "postrace";
             raceTimer.running = false;
             lapTimer.running = false;

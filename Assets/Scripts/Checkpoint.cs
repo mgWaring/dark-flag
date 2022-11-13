@@ -27,6 +27,10 @@ public class Checkpoint : MonoBehaviour
                     if (gameController != null && id == 0) {
                         gameController.registerLap(racer);
                     }
+                    RacerAgent agent = racer.gameObject.GetComponent<RacerAgent>();
+                    if (agent != null) {
+                        agent.AddCheckpoint(id);
+                    }
                 }
             }
         }
