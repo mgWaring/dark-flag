@@ -6,7 +6,6 @@ using UnityEngine;
 //Forces applied by the AntiGravManager are affected by the rigidbody mass.
 public class AntiGravManager : MonoBehaviour
 {
-    //+++++++++++++++++ITS A MESS RIGHT NOW, DONT LOOK++++++++++++++++++++
     ShipsScriptable ss;
 
     //Unity editor options.//
@@ -28,15 +27,15 @@ public class AntiGravManager : MonoBehaviour
     //float distanceToFloor;      
 
     //z axis torque.
-    Ray rollRay11;
-    Ray rollRay21;
+    Ray rollRay1;
+    Ray rollRay2;
     float rollDiff;
-    float rollRayDistance1;
+    float rollRayDistance;
     float rollForce;
-    RaycastHit rollHit11;
-    RaycastHit rollHit21;
-    float rollHitInfo11;
-    float rollHitInfo21;
+    RaycastHit rollHit1;
+    RaycastHit rollHit2;
+    float rollHitInfo1;
+    float rollHitInfo2;
 
     //x axis torque.
     Ray pitchRay1;
@@ -65,7 +64,7 @@ public class AntiGravManager : MonoBehaviour
         hoverForce = ss.hoverForce;
         hoverConstant = ss.hoverConstant;
         rollForce = ss.rollForce;
-        rollRayDistance1 = ss.rollRayDistance;
+        rollRayDistance = ss.rollRayDistance;
         pitchForce = ss.pitchForce;
         pitchRayDistance = ss.pitchRayDistance;
         pitchRollConstant = ss.pitchRollConstant;
@@ -74,8 +73,8 @@ public class AntiGravManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rollRay11 = new Ray(transform.localPosition + (transform.right * (ultimateVector.x - centerOffset.x)), transform.up * -1);
-        rollRay21 = new Ray(transform.localPosition - (transform.right * (ultimateVector.x + centerOffset.x)), transform.up * -1);
+        rollRay1 = new Ray(transform.localPosition + (transform.right * (ultimateVector.x - centerOffset.x)), transform.up * -1);
+        rollRay2 = new Ray(transform.localPosition - (transform.right * (ultimateVector.x + centerOffset.x)), transform.up * -1);
 
         pitchRay1 = new Ray(transform.localPosition + (transform.forward * (ultimateVector.z - centerOffset.z)), (transform.up * -1));
         pitchRay2 = new Ray(transform.localPosition - (transform.forward * (ultimateVector.z + centerOffset.z)), (transform.up * -1));
@@ -84,19 +83,21 @@ public class AntiGravManager : MonoBehaviour
         //Draws all rays for dev purposes.
         if (aGMRaysOn)
         {
-            Debug.DrawRay(rollRay11.origin, rollRay11.direction * rollRayDistance1, Color.blue, debugRayTime, true);
-            Debug.DrawRay(rollRay21.origin, rollRay21.direction * rollRayDistance1, Color.blue, debugRayTime, true);
+            Debug.DrawRay(rollRay1.origin, rollRay1.direction * rollRayDistance, Color.blue, debugRayTime, true);
+            Debug.DrawRay(rollRay2.origin, rollRay2.direction * rollRayDistance, Color.blue, debugRayTime, true);
 
             Debug.DrawRay(pitchRay1.origin, pitchRay1.direction * pitchRayDistance, Color.red, debugRayTime, true);
             Debug.DrawRay(pitchRay2.origin, pitchRay2.direction * pitchRayDistance, Color.red, debugRayTime, true);
             //Debug.DrawRay(pitchRay3.origin, pitchRay3.direction * pitchRayDistance, Color.red, debugRayTime, true);
         }
 
-        if ((Physics.Raycast(rollRay11, out rollHit11, rollRayDistance1)) && (Physics.Raycast(rollRay21, out rollHit21, rollRayDistance1)))
+        if ((Physics.Raycast(rollRay1, out rollHit1, rollRayDistance)) && (Physics.Raycast(rollRay2, out rollHit2, rollRayDistance)))
         {
-            rollHitInfo11 = rollHit11.distance;
-            rollHitInfo21 = rollHit21.distance;
-            rollDiff = rollHitInfo21 - rollHitInfo11;
+            //z torque.
+            rollHitInfo1 = rollHit1.distance;
+            rollHitInfo2= rollHit2.distance;
+            //If ship is rolling the wrong way, swap rollHitInfo 2 and rollHitInfo 1 below.
+            rollDiff = rollHitInfo2 - rollHitInfo1;
             vehicleRB.AddRelativeTorque(Vector3.forward * RollPitchSmoother(rollDiff) * rollForce * Time.fixedDeltaTime, ForceMode.Impulse);
         }
 
@@ -107,7 +108,8 @@ public class AntiGravManager : MonoBehaviour
             //x torque.
             pitchHitInfo1 = pitchHit1.distance;
             pitchHitInfo2 = pitchHit2.distance;
-            pitchDiff = pitchHitInfo1 - pitchHitInfo2;//May need to swap these around with the smoother in place. Could also put a lot more of this math in RollPitchSmoother.
+            //If ship is pitching the wrong way, swap pitchHitInfo 2 and pitchHitInfo 1 below.
+            pitchDiff = pitchHitInfo1 - pitchHitInfo2;
             vehicleRB.AddRelativeTorque(Vector3.right * RollPitchSmoother(pitchDiff) * pitchForce * Time.fixedDeltaTime, ForceMode.Impulse);
         }
     }
