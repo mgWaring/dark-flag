@@ -7,7 +7,7 @@ using UnityEngine;
 public class AntiGravManager : MonoBehaviour
 {
     //+++++++++++++++++ITS A MESS RIGHT NOW, DONT LOOK++++++++++++++++++++
-    [HideInInspector] public ShipsScriptable ss;
+    ShipsScriptable ss;
 
     //Unity editor options.//
     public bool aGMRaysOn = true;
@@ -60,7 +60,7 @@ public class AntiGravManager : MonoBehaviour
     void Start()
     {
         vehicleRB = GetComponent<Rigidbody>();
-
+        ss = GetComponent<Ship>().details;
         //Collider extent finding.
         colliderList = GetComponents<Collider>();
         colliderSizes = ExtentHunter();
@@ -102,12 +102,7 @@ public class AntiGravManager : MonoBehaviour
             //Debug.DrawRay(pitchRay3.origin, pitchRay3.direction * pitchRayDistance, Color.red, debugRayTime, true);
         }
 
-        if (Physics.Raycast(hoverRay1, out hoverHitInfo, hoverRayDistance))// put this in the pitch if statement?
-        {
-            vehicleRB.AddRelativeForce(Vector3.up * (HoverSmoother(new Ray[] { pitchRay1, pitchRay2/*, pitchRay3*/ }) * Time.fixedDeltaTime), ForceMode.Impulse);
-        }
-
-        if ((Physics.Raycast(rollRay11, out rollHit11, rollRayDistance1)) | (Physics.Raycast(rollRay21, out rollHit21, rollRayDistance1)))
+        if ((Physics.Raycast(rollRay11, out rollHit11, rollRayDistance1)) && (Physics.Raycast(rollRay21, out rollHit21, rollRayDistance1)))
         {
             rollHitInfo11 = rollHit11.distance;
             rollHitInfo21 = rollHit21.distance;
@@ -116,8 +111,11 @@ public class AntiGravManager : MonoBehaviour
             //Debug.Log("rollDiff = " + rollDiff + " rollHitInfo1 = " + rollHitInfo11 + " rollHitInfo2 = " + rollHitInfo21);
         }
 
-        if ((Physics.Raycast(pitchRay1, out pitchHit1, pitchRayDistance)) | (Physics.Raycast(pitchRay2, out pitchHit2, pitchRayDistance)))
+        if ((Physics.Raycast(pitchRay1, out pitchHit1, pitchRayDistance)) && (Physics.Raycast(pitchRay2, out pitchHit2, pitchRayDistance)))
         {
+            //y force.
+            vehicleRB.AddRelativeForce(Vector3.up * (HoverSmoother(new Ray[] { pitchRay1, pitchRay2/*, pitchRay3*/ }) * Time.fixedDeltaTime), ForceMode.Impulse);
+            //x torque.
             pitchHitInfo1 = pitchHit1.distance;
             pitchHitInfo2 = pitchHit2.distance;
             pitchDiff = pitchHitInfo1 - pitchHitInfo2;//May need to swap these around with the smoother in place. Could also put a lot more of this math in RollPitchSmoother.
