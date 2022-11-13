@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     public LapTimer lapTimer;
     public int lapCount = 1;
     public ShipsScriptable shipScriptable;
+    public bool straightToRace = false;
     [HideInInspector] public string state;
     [HideInInspector] public Racer[] racers;
     [HideInInspector] public Dictionary<Racer, List<float>> laps = new Dictionary<Racer, List<float>>();
@@ -36,6 +37,7 @@ public class GameController : MonoBehaviour
             playerCount = CrossScene.racerInfo.Length;
             map = CrossScene.map;
             lapCount = CrossScene.laps;
+            straightToRace = false;
         } else {
             CrossScene.racerInfo = new RacerInfo[playerCount];
             if (playerId < playerCount) {
@@ -97,6 +99,18 @@ public class GameController : MonoBehaviour
         }
 
         playerCam.gameObject.GetComponent<Animator>().Play(map.cameraClipName);
+
+        if (straightToRace) {
+            playerCam.gameObject.GetComponent<Animator>().enabled = false;
+            AttachCamera();
+            raceTimer.running = true;
+            lapTimer.running = true;
+            for (int i = 0; i < playerCount; i++) {
+                MovementController mc = racers[i].gameObject.GetComponentInChildren<MovementController>();
+                mc.enabled = true;
+            }
+            state = "race";
+        }
     }
 
     void AttachCamera() {

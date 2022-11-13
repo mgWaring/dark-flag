@@ -2113,6 +2113,7 @@ MonoBehaviour:
   lapTimer: {fileID: 553016916}
   lapCount: 4
   shipScriptable: {fileID: 11400000, guid: ab38fa60089fbed40af712c21048d41c, type: 2}
+  straightToRace: 0
   state: 
   racers: []
   playerId: 0
