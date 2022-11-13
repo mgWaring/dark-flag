@@ -18,6 +18,8 @@ public class ShipsScriptable : ScriptableObject
     public float rollRayDistance = 10.0f;
     public float pitchForce = 100.0f;
     public float pitchRayDistance = 10.0f;
+    public float pitchRollConstant = 1.2f;
+    public Vector3 colRayOffset = new Vector3(0, 0, 0);
     public float botSpeedModifier = 1.0f;
     public float armour = 0.0f;
 

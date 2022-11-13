@@ -12,7 +12,7 @@ public class AntiGravManager : MonoBehaviour
     //Unity editor options.//
     public bool aGMRaysOn = true;
     public float debugRayTime = 0.1f;
-    public Vector3 centerOffset = new Vector3(0, 0, 0);
+    Vector3 centerOffset;
 
     Rigidbody vehicleRB;
 
@@ -53,7 +53,9 @@ public class AntiGravManager : MonoBehaviour
     RaycastHit pitchHit2;
     float pitchHitInfo1;
     float pitchHitInfo2;
-    public float pitchRollConstant = 1.2f;//put in ss when you can figure out how to do that again.
+
+    float pitchRollConstant;
+
 
 
 
@@ -74,6 +76,8 @@ public class AntiGravManager : MonoBehaviour
         rollRayDistance1 = ss.rollRayDistance;
         pitchForce = ss.pitchForce;
         pitchRayDistance = ss.pitchRayDistance;
+        pitchRollConstant = ss.pitchRollConstant;
+        centerOffset = ss.colRayOffset;
     }
 
     private void FixedUpdate()
