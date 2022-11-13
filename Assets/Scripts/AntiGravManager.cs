@@ -91,7 +91,7 @@ public class AntiGravManager : MonoBehaviour
             //Debug.DrawRay(pitchRay3.origin, pitchRay3.direction * pitchRayDistance, Color.red, debugRayTime, true);
         }
 
-        if ((Physics.Raycast(rollRay1, out rollHit1, rollRayDistance)) && (Physics.Raycast(rollRay2, out rollHit2, rollRayDistance)))
+        if (Physics.Raycast(rollRay1, out rollHit1, rollRayDistance) && Physics.Raycast(rollRay2, out rollHit2, rollRayDistance))
         {
             //z torque.
             rollHitInfo1 = rollHit1.distance;
@@ -101,7 +101,7 @@ public class AntiGravManager : MonoBehaviour
             vehicleRB.AddRelativeTorque(Vector3.forward * RollPitchSmoother(rollDiff) * rollForce * Time.fixedDeltaTime, ForceMode.Impulse);
         }
 
-        if ((Physics.Raycast(pitchRay1, out pitchHit1, pitchRayDistance)) && (Physics.Raycast(pitchRay2, out pitchHit2, pitchRayDistance)))
+        if (Physics.Raycast(pitchRay1, out pitchHit1, pitchRayDistance) && Physics.Raycast(pitchRay2, out pitchHit2, pitchRayDistance))
         {
             //y force.
             vehicleRB.AddRelativeForce(Vector3.up * (HoverSmoother(new Ray[] { pitchRay1, pitchRay2/*, pitchRay3*/ }) * Time.fixedDeltaTime), ForceMode.Impulse);

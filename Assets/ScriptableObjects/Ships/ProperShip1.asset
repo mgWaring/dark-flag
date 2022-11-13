@@ -23,8 +23,10 @@ MonoBehaviour:
   hoverConstant: 10
   hoverHeight: 10
   rollForce: 10
-  rollRayDistance: 3
+  rollRayDistance: 2
   pitchForce: 10
-  pitchRayDistance: 3
+  pitchRayDistance: 2
+  pitchRollConstant: 1.2
+  colRayOffset: {x: 0.15, y: 0, z: 0}
   botSpeedModifier: 1
   armour: 50
