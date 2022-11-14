@@ -330,6 +330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  loadingMaterial: {fileID: 2100000, guid: d930857f31d3ca343aeea53678de7499, type: 2}
   explosionFab: {fileID: 344460545130609039, guid: 61b8654240662704487ac8ec41a6c9c9, type: 3}
   clips:
   - {fileID: 8300000, guid: 817a0380d251cf54e818f0a0e76c2e57, type: 3}

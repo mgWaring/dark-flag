@@ -7,20 +7,24 @@ public class ShipDurability : MonoBehaviour
     [HideInInspector] public float hp = 100.0f;
     Rigidbody rb;
     float startHeight;
+    public Material loadingMaterial;
     public GameObject explosionFab;
     float deathTimer = 1.25f;
-    enum State { Healthy, Exploding };
+    float spawnTimer = 1.5f;
+    enum State { Healthy, Exploding, Spawning };
     State state = State.Healthy;
     GameObject explosion;
     bool isBot;
     public AudioClip[] clips;
     ShipsScriptable ss;
+    Dictionary<int, Material[]> rememberedMaterials = new Dictionary<int, Material[]>();
 
     void Start() {
         ss = GetComponent<Ship>().details;
         rb = GetComponent<Rigidbody>();
         startHeight = transform.position.y;
         isBot = GetComponent<BotMovement>().enabled;
+        Physics.IgnoreLayerCollision(8, 9); // Ignore collisions between ships and loading ships
     }
 
     private void HideShip() {
@@ -40,6 +44,15 @@ public class ShipDurability : MonoBehaviour
     }
 
     void Update() {
+        if (state == State.Spawning) {
+            spawnTimer -= Time.deltaTime;
+            if (spawnTimer <= 0) {
+                spawnTimer = 1.5f;
+                ChangeMaterialBack();
+                state = State.Healthy;
+                gameObject.layer = 8; // ship layer
+            }
+        }
         if (hp <= 0.0f) {
             if (state == State.Healthy) {
                 if (isBot) {
@@ -62,7 +75,9 @@ public class ShipDurability : MonoBehaviour
                     transform.position = spawnPoint.position;
                     transform.rotation = spawnPoint.rotation;
                     deathTimer = 1.25f;
-                    state = State.Healthy;
+                    gameObject.layer = 9; // loading layer
+                    state = State.Spawning;
+                    ChangeMaterial();
                     if (isBot) {
                         GetComponent<BotMovement>().enabled = true;
                     } else {
@@ -73,6 +88,28 @@ public class ShipDurability : MonoBehaviour
                     HideShip();
                 }
             }
+        }
+    }
+
+    void ChangeMaterial() {
+        MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
+        for (int i = 0; i < meshes.Length; i++) { 
+            MeshRenderer mesh = meshes[i];
+            Material[] materials = mesh.materials;
+            Material[] newMaterials = new Material[materials.Length];
+            for (int j = 0; j < materials.Length; j++) {
+                newMaterials[j] = loadingMaterial;
+            }
+            rememberedMaterials[i] = materials;
+            mesh.materials = newMaterials;
+        }
+    }
+
+    void ChangeMaterialBack() {
+        MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
+        for (int i = 0; i < meshes.Length; i++) { 
+            MeshRenderer mesh = meshes[i];
+            mesh.materials = rememberedMaterials[i];
         }
     }
 

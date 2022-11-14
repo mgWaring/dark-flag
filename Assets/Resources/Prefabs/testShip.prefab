@@ -131,6 +131,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aGMRaysOn: 1
   debugRayTime: 1
+  stableForce: 100
+  bowHitDistance: 0.6
+  sternHitDistance: 0.2
+  portStarHitDistance: 0.53
+  roofHitDistance: 0.35
+  stableOffsetVector: {x: 0.1, y: 0, z: 0.5}
 --- !u!114 &710578369071010362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -402,6 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  loadingMaterial: {fileID: 2100000, guid: d930857f31d3ca343aeea53678de7499, type: 2}
   explosionFab: {fileID: 344460545130609039, guid: 61b8654240662704487ac8ec41a6c9c9, type: 3}
   clips:
   - {fileID: 8300000, guid: 817a0380d251cf54e818f0a0e76c2e57, type: 3}
@@ -520,6 +527,18 @@ PrefabInstance:
       propertyPath: accelerationVar
       value: 6000
       objectReference: {fileID: 0}
+    - target: {fileID: 410433339474649766, guid: d23292945f31c6445afbb8473b088a96, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 410433339474649766, guid: d23292945f31c6445afbb8473b088a96, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b0ae2a31e514fc44ba537f7816db3de7, type: 2}
+    - target: {fileID: 410433339474649766, guid: d23292945f31c6445afbb8473b088a96, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b0ae2a31e514fc44ba537f7816db3de7, type: 2}
     - target: {fileID: 1554312566498007305, guid: d23292945f31c6445afbb8473b088a96, type: 3}
       propertyPath: m_Name
       value: Vehicle-Body
