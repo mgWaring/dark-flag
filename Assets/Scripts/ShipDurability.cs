@@ -58,9 +58,9 @@ public class ShipDurability : MonoBehaviour
                     hp = 100.0f;
                     Destroy(explosion);
                     Racer racer = GetComponent<Racer>();
-                    Vector3 checkPos = racer.lastCheckpoint.transform.position; 
-                    transform.position = new Vector3(checkPos.x, startHeight, checkPos.z);
-                    transform.LookAt(racer.nextCheckpoint.transform.position);
+                    Transform spawnPoint = racer.lastCheckpoint.spawnPointFor(transform.position);
+                    transform.position = spawnPoint.position;
+                    transform.rotation = spawnPoint.rotation;
                     deathTimer = 1.25f;
                     state = State.Healthy;
                     if (isBot) {
