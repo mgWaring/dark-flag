@@ -1,13 +1,10 @@
-using System;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 //Add this script to the vehicle object that has a rigidbody and the colliders.
 //Forces applied by the AntiGravManager are affected by the rigidbody mass.
 public class AntiGravManager : MonoBehaviour
 {
-    //There is some stuff in here that may seem unused, but I probably have plans for whatever it is.
     ShipsScriptable ss;
 
     //Unity editor options.//
@@ -15,6 +12,7 @@ public class AntiGravManager : MonoBehaviour
     public float debugRayTime = 0.02f;    
 
     Rigidbody vehicleRB;
+    Vector3 stableOffsetVector;
 
     //Collider finding stuff.
     Collider[] colliderList;
@@ -25,8 +23,7 @@ public class AntiGravManager : MonoBehaviour
     //y axis force.
     float hoverForce;
     float hoverConstant;
-    RaycastHit hoverHitInfo;
-    //float distanceToFloor;      
+    RaycastHit hoverHitInfo;     
 
     //z axis torque.
     Ray rollRay1;
@@ -38,28 +35,26 @@ public class AntiGravManager : MonoBehaviour
     RaycastHit rollHit2;
     float rollHitInfo1;
     float rollHitInfo2;
+    bool pitchIsStable;
 
     //x axis torque.
     Ray pitchRay1;
     Ray pitchRay2;
-    Ray pitchRay3;
+    Ray bowRay;
     float pitchDiff;
     float pitchRayDistance;
+    float bowHitDistance = 0.6f;
     float pitchForce;
     float pitchRollConstant;
     RaycastHit pitchHit1;
     RaycastHit pitchHit2;
     float pitchHitInfo1;
     float pitchHitInfo2;
-
-    //self righting.
-    bool pitchIsStable;
-    bool rollIsStable;
-    Ray bowRay;
-    float bowHitDistance = 0.6f;
+    
+    
     Ray roofRay1;
     public float roofHitDistance = 0.35f;
-    Vector3 stableOffsetVector;
+    
 
     void Start()
     {
@@ -87,35 +82,30 @@ public class AntiGravManager : MonoBehaviour
     {
         rollRay1 = new Ray(transform.localPosition + (transform.right * (ultimateVector.x - centerOffset.x - stableOffsetVector.x)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//starboard
         rollRay2 = new Ray(transform.localPosition - (transform.right * (ultimateVector.x + centerOffset.x - stableOffsetVector.x)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//port
-
         pitchRay1 = new Ray(transform.localPosition + (transform.forward * (ultimateVector.z - centerOffset.z)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//bow
         pitchRay2 = new Ray(transform.localPosition - (transform.forward * (ultimateVector.z + centerOffset.z)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//stern
-
         bowRay = new Ray(pitchRay1.origin - (transform.forward * stableOffsetVector.z), transform.forward);
         //roofRay1 = new Ray(transform.localPosition + (transform.up * (ultimateVector.y + centerOffset.y + stableOffsetVector.y)), transform.up);
-;        //Draws all rays for dev purposes. Disable in editor.
+;       //Draws all rays for dev purposes. Disable in editor.
         if (aGMRaysOn)
         {
             Debug.DrawRay(rollRay1.origin, rollRay1.direction * rollRayDistance, Color.blue, debugRayTime, true);
             Debug.DrawRay(rollRay2.origin, rollRay2.direction * rollRayDistance, Color.blue, debugRayTime, true);
-
             Debug.DrawRay(pitchRay1.origin, pitchRay1.direction * pitchRayDistance, Color.red, debugRayTime, true);
             Debug.DrawRay(pitchRay2.origin, pitchRay2.direction * pitchRayDistance, Color.red, debugRayTime, true);
-
             Debug.DrawRay(bowRay.origin, bowRay.direction * bowHitDistance, Color.red, debugRayTime, true);
-
             //Debug.DrawRay(roofRay1.origin, roofRay1.direction * roofHitDistance, Color.green, debugRayTime, true);
         }
 
-        //These should probably be methods, I'll get to it at some point.
+        //Applies vertical force and pitch torque.
         if (Physics.Raycast(pitchRay1, out pitchHit1, pitchRayDistance) && Physics.Raycast(pitchRay2, out pitchHit2, pitchRayDistance))
         {
             pitchIsStable = true;
             //y force.
-            vehicleRB.AddRelativeForce(Vector3.up * (HoverSmoother(new Ray[] { pitchRay1, pitchRay2/*, pitchRay3*/ }) * Time.fixedDeltaTime), ForceMode.Impulse);
+            vehicleRB.AddRelativeForce(Vector3.up * (HoverSmoother(new Ray[] { pitchRay1, pitchRay2}) * Time.fixedDeltaTime), ForceMode.Impulse);
             //x torque.
             //This should turn off pitch stabalisation if really close to a wall.
-            if (Physics.Raycast(bowRay, bowHitDistance) == false)// stick %% pitchIstable in here?
+            if (Physics.Raycast(bowRay, bowHitDistance) == false)
             {
                 pitchHitInfo1 = pitchHit1.distance;
                 pitchHitInfo2 = pitchHit2.distance;
@@ -123,17 +113,15 @@ public class AntiGravManager : MonoBehaviour
                 pitchDiff = pitchHitInfo1 - pitchHitInfo2;
                 vehicleRB.AddRelativeTorque(Vector3.right * RollPitchSmoother(pitchDiff) * pitchForce * Time.fixedDeltaTime, ForceMode.Impulse);
             }
-            //Debug.Log("pitchIsStable" + pitchIsStable);
         }
         else
         {
             pitchIsStable = false;
-            //Debug.Log("pitchIsStable" + pitchIsStable);
         }
         
+        //Applies roll torque.
         if (Physics.Raycast(rollRay1, out rollHit1, rollRayDistance) && Physics.Raycast(rollRay2, out rollHit2, rollRayDistance) && pitchIsStable)
         {
-            rollIsStable = true;
             //z torque.
             //This should turn off roll stabalisation if really close to a wall.
             rollHitInfo1 = rollHit1.distance;
@@ -141,13 +129,7 @@ public class AntiGravManager : MonoBehaviour
             //If ship is rolling the wrong way, swap rollHitInfo 2 and rollHitInfo 1 below.
             rollDiff = rollHitInfo2 - rollHitInfo1;
             vehicleRB.AddRelativeTorque(Vector3.forward * RollPitchSmoother(rollDiff) * rollForce * Time.fixedDeltaTime, ForceMode.Impulse);
-            //Debug.Log("rollIsStable" + rollIsStable);
-        }
-        else
-        {
-            rollIsStable = false;
-            //Debug.Log("rollIsStable" + rollIsStable);
-        }        
+        }      
     }
 
     float HoverSmoother(Ray[] inputRays)

@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Ship")]
 public class ShipsScriptable : ScriptableObject
 {
-    //These values are the ones drawn from testShip. They can be changed.
+    //Please take a note of all ship specific values (the ones in unity, not here) before messing around with this.
     public string shipName;
     public GameObject shipModel;
     [Header("Rigidbody")]
@@ -23,10 +23,12 @@ public class ShipsScriptable : ScriptableObject
     public float pitchRayDistance = 10.0f;    
     public Vector3 colliderCalcOffset = new Vector3(0.15f, 0.0f, 0.0f);
     public Vector3 fineTuneOffset = new Vector3(0.0f, 0.0f, 0.0f);
+    [Header("Durability")]
+    public float armour = 50.0f;
+    public float fireDamage = 1.0f;
+    public float roofRayDistance = 0.35f;
+    public Vector3 roofRayOffset = new Vector3(0.0f, 0.0f, 0.0f);
     [Header("Other Values")]
     public float botSpeedModifier = 1.0f;
-    public float armour = 0.0f;
-
-    //26.8hf 2.5hc don't delete.
 }
  

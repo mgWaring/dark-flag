@@ -20,9 +20,14 @@ public class ShipDurability : MonoBehaviour
     bool isBot;
     public AudioClip[] clips;
     ShipsScriptable ss;
+    MapScriptable ms;
     Dictionary<int, Material[]> rememberedMaterials = new Dictionary<int, Material[]>();
     float heightLimit = 140.0f;
-    float fireDamage = 1.0f;
+    float depthLimit = -140.0f;
+    float fireDamage;
+    Ray roofRay;
+    float roofRayDistance;
+    Vector3 roofRayOffset;
 
     void Start() {
         ss = GetComponent<Ship>().details;
@@ -30,6 +35,9 @@ public class ShipDurability : MonoBehaviour
         startHeight = transform.position.y;
         isBot = GetComponent<BotMovement>().enabled;
         Physics.IgnoreLayerCollision(8, 9); // Ignore collisions between ships and loading ships
+        fireDamage = ss.fireDamage;
+        roofRayDistance = ss.roofRayDistance;
+        roofRayOffset = ss.roofRayOffset;
     }
 
     private void HideShip() {
@@ -103,6 +111,14 @@ public class ShipDurability : MonoBehaviour
                 }
             }
         }
+        //Checks if ship is on it's roof and applies fire damage if true.
+        roofRay = new Ray(transform.localPosition + (transform.up * roofRayOffset.y), transform.up);
+        Debug.DrawRay(roofRay.origin, roofRay.direction * roofRayDistance, Color.green, 0.02f, true);
+        if (Physics.Raycast(roofRay, roofRayDistance))
+        {
+            OnFire();
+        }
+        //Checks to see if player is above or below the kill ceiling/floor.
         YLimitCheck();
     }
 
@@ -147,9 +163,17 @@ public class ShipDurability : MonoBehaviour
     }
     void YLimitCheck()
     {
-        if (rb.position.y >= heightLimit || rb.position.y <= heightLimit * -1)
+        if (rb.position.y >= heightLimit || rb.position.y <= depthLimit)
         {
-            hp = hp - fireDamage;
+            OnFire();
         }
+        //Display out of bounds warning if getting really close?
+    }
+    void OnFire()
+    {
+        hp = hp - fireDamage;
+        //play fire sound.
+        //play fire animation.
+        //etc.
     }
 }
