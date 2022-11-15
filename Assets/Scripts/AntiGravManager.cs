@@ -49,12 +49,7 @@ public class AntiGravManager : MonoBehaviour
     RaycastHit pitchHit1;
     RaycastHit pitchHit2;
     float pitchHitInfo1;
-    float pitchHitInfo2;
-    
-    
-    Ray roofRay1;
-    public float roofHitDistance = 0.35f;
-    
+    float pitchHitInfo2;    
 
     void Start()
     {
@@ -85,7 +80,7 @@ public class AntiGravManager : MonoBehaviour
         pitchRay1 = new Ray(transform.localPosition + (transform.forward * (ultimateVector.z - centerOffset.z)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//bow
         pitchRay2 = new Ray(transform.localPosition - (transform.forward * (ultimateVector.z + centerOffset.z)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//stern
         bowRay = new Ray(pitchRay1.origin - (transform.forward * stableOffsetVector.z), transform.forward);
-        //roofRay1 = new Ray(transform.localPosition + (transform.up * (ultimateVector.y + centerOffset.y + stableOffsetVector.y)), transform.up);
+
 ;       //Draws all rays for dev purposes. Disable in editor.
         if (aGMRaysOn)
         {
@@ -94,7 +89,6 @@ public class AntiGravManager : MonoBehaviour
             Debug.DrawRay(pitchRay1.origin, pitchRay1.direction * pitchRayDistance, Color.red, debugRayTime, true);
             Debug.DrawRay(pitchRay2.origin, pitchRay2.direction * pitchRayDistance, Color.red, debugRayTime, true);
             Debug.DrawRay(bowRay.origin, bowRay.direction * bowHitDistance, Color.red, debugRayTime, true);
-            //Debug.DrawRay(roofRay1.origin, roofRay1.direction * roofHitDistance, Color.green, debugRayTime, true);
         }
 
         //Applies vertical force and pitch torque.

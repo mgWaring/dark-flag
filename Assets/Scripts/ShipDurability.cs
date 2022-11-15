@@ -22,8 +22,8 @@ public class ShipDurability : MonoBehaviour
     ShipsScriptable ss;
     MapScriptable ms;
     Dictionary<int, Material[]> rememberedMaterials = new Dictionary<int, Material[]>();
-    float heightLimit = 140.0f;
-    float depthLimit = -140.0f;
+    float heightLimit = 60.0f;
+    float depthLimit = -30.0f;
     float fireDamage;
     Ray roofRay;
     float roofRayDistance;

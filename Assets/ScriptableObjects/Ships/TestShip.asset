@@ -28,5 +28,8 @@ MonoBehaviour:
   pitchRayDistance: 2
   colliderCalcOffset: {x: 0, y: 0.4, z: -0.3}
   fineTuneOffset: {x: 0.1, y: 0, z: 0.5}
-  botSpeedModifier: 1
   armour: 50
+  fireDamage: 0.5
+  roofRayDistance: 0.2
+  roofRayOffset: {x: 0, y: 0.55, z: 0}
+  botSpeedModifier: 1
