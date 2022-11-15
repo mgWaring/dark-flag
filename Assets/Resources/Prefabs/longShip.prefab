@@ -150,7 +150,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8508418995549443820}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d81194458271ee543b89933cda4e9a26, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -163,7 +163,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8508418995549443820}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: d81194458271ee543b89933cda4e9a26, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -233,7 +233,7 @@ MonoBehaviour:
   sternHitDistance: 1
   portStarHitDistance: 0.6
   roofHitDistance: 0.35
-  stableOffsetVector: {x: 0.5, y: 0.5, z: 0.5}
+  stableOffsetVector: {x: 0.15, y: 0.5, z: 0.5}
 --- !u!114 &710578369071010362
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,6 +18,8 @@ public class ShipDurability : MonoBehaviour
     public AudioClip[] clips;
     ShipsScriptable ss;
     Dictionary<int, Material[]> rememberedMaterials = new Dictionary<int, Material[]>();
+    float heightLimit = 140.0f;
+    float fireDamage = 1.0f;
 
     void Start() {
         ss = GetComponent<Ship>().details;
@@ -89,6 +91,7 @@ public class ShipDurability : MonoBehaviour
                 }
             }
         }
+        YLimitCheck();
     }
 
     void ChangeMaterial() {
@@ -125,6 +128,13 @@ public class ShipDurability : MonoBehaviour
                 }
                 hp = hp - removal;
             }
+        }
+    }
+    void YLimitCheck()
+    {
+        if (rb.position.y >= heightLimit || rb.position.y <= heightLimit * -1)
+        {
+            hp = hp - fireDamage;
         }
     }
 }

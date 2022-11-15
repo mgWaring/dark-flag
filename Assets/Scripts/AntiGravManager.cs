@@ -57,18 +57,13 @@ public class AntiGravManager : MonoBehaviour
     bool rollIsStable;
     public float stableForce = 100.0f;//move this to scriptables.
     Ray bowRay;
-    RaycastHit bowHit;
     public float bowHitDistance = 0.6f;
-    Ray sternRay;
-    RaycastHit sternHit;
+    Ray sternRay; //sternRay currently not required.
     public float sternHitDistance = 0.2f;
-    Ray starboardRay;
-    RaycastHit starboardHit;
-    Ray portRay;
-    RaycastHit portHit;
+    Ray starboardRay;//starBoardRay currently not required.
+    Ray portRay;//portRay currently not required.
     public float portStarHitDistance = 0.53f;
     Ray roofRay1;
-    RaycastHit roofhit;
     public float roofHitDistance = 0.35f;
     public Vector3 stableOffsetVector = new Vector3(0.1f,0.0f,0.5f);
 
@@ -98,34 +93,55 @@ public class AntiGravManager : MonoBehaviour
         rollRay1 = new Ray(transform.localPosition + (transform.right * (ultimateVector.x - centerOffset.x - stableOffsetVector.x)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//starboard
         rollRay2 = new Ray(transform.localPosition - (transform.right * (ultimateVector.x + centerOffset.x - stableOffsetVector.x)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//port
 
-        pitchRay1 = new Ray(transform.localPosition + (transform.forward * (ultimateVector.z - centerOffset.z)), (transform.up * -1));//bow
-        pitchRay2 = new Ray(transform.localPosition - (transform.forward * (ultimateVector.z + centerOffset.z)), (transform.up * -1));//stern
+        pitchRay1 = new Ray(transform.localPosition + (transform.forward * (ultimateVector.z - centerOffset.z)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//bow
+        pitchRay2 = new Ray(transform.localPosition - (transform.forward * (ultimateVector.z + centerOffset.z)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//stern
 
         bowRay = new Ray(pitchRay1.origin - (transform.forward * stableOffsetVector.z), transform.forward);
-        sternRay = new Ray(pitchRay2.origin + (transform.forward * stableOffsetVector.z), transform.forward * -1);
-        starboardRay = new Ray(rollRay1.origin - (transform.right * stableOffsetVector.x), transform.right);
-        portRay = new Ray(rollRay2.origin + (transform.right * stableOffsetVector.x), transform.right * -1);
-        roofRay1 = new Ray(transform.localPosition + (transform.up * (ultimateVector.y + centerOffset.y + stableOffsetVector.y)), transform.up);
-
-        //Draws all rays for dev purposes. Disable in editor.
+        //sternRay = new Ray(pitchRay2.origin + (transform.forward * stableOffsetVector.z), transform.forward * -1);
+        //starboardRay = new Ray(rollRay1.origin - (transform.right * stableOffsetVector.x), transform.right);
+        //portRay = new Ray(rollRay2.origin + (transform.right * stableOffsetVector.x), transform.right * -1);
+        //roofRay1 = new Ray(transform.localPosition + (transform.up * (ultimateVector.y + centerOffset.y + stableOffsetVector.y)), transform.up);
+;        //Draws all rays for dev purposes. Disable in editor.
         if (aGMRaysOn)
         {
-            Debug.DrawRay(rollRay1.origin, rollRay1.direction * rollRayDistance, Color.blue, debugRayTime, true);
+            Debug.DrawRay(rollRay1.origin, rollRay1.direction * rollRayDistance, Color.white, debugRayTime, true);
             Debug.DrawRay(rollRay2.origin, rollRay2.direction * rollRayDistance, Color.blue, debugRayTime, true);
 
             Debug.DrawRay(pitchRay1.origin, pitchRay1.direction * pitchRayDistance, Color.red, debugRayTime, true);
             Debug.DrawRay(pitchRay2.origin, pitchRay2.direction * pitchRayDistance, Color.red, debugRayTime, true);
 
             Debug.DrawRay(bowRay.origin, bowRay.direction * bowHitDistance, Color.red, debugRayTime, true);
-            Debug.DrawRay(sternRay.origin, sternRay.direction * sternHitDistance, Color.red, debugRayTime, true);
-            Debug.DrawRay(starboardRay.origin, starboardRay.direction * portStarHitDistance, Color.blue, debugRayTime, true);
-            Debug.DrawRay(portRay.origin, portRay.direction * portStarHitDistance, Color.blue, debugRayTime, true);
-            Debug.DrawRay(roofRay1.origin, roofRay1.direction * roofHitDistance, Color.green, debugRayTime, true);
+            //Debug.DrawRay(sternRay.origin, sternRay.direction * sternHitDistance, Color.red, debugRayTime, true);
+            //Debug.DrawRay(starboardRay.origin, starboardRay.direction * portStarHitDistance, Color.blue, debugRayTime, true);
+            //Debug.DrawRay(portRay.origin, portRay.direction * portStarHitDistance, Color.blue, debugRayTime, true);
+            //Debug.DrawRay(roofRay1.origin, roofRay1.direction * roofHitDistance, Color.green, debugRayTime, true);
         }
 
-        
         //These should probably be methods, I'll get to it at some point.
-        if (Physics.Raycast(rollRay1, out rollHit1, rollRayDistance) && Physics.Raycast(rollRay2, out rollHit2, rollRayDistance))
+        if (Physics.Raycast(pitchRay1, out pitchHit1, pitchRayDistance) && Physics.Raycast(pitchRay2, out pitchHit2, pitchRayDistance))
+        {
+            pitchIsStable = true;
+            //y force.
+            vehicleRB.AddRelativeForce(Vector3.up * (HoverSmoother(new Ray[] { pitchRay1, pitchRay2/*, pitchRay3*/ }) * Time.fixedDeltaTime), ForceMode.Impulse);
+            //x torque.
+            //This should turn off pitch stabalisation if really close to a wall.
+            if (Physics.Raycast(bowRay, bowHitDistance) == false)// stick %% pitchIstable in here?
+            {
+                pitchHitInfo1 = pitchHit1.distance;
+                pitchHitInfo2 = pitchHit2.distance;
+                //If ship is pitching the wrong way, swap pitchHitInfo 2 and pitchHitInfo 1 below.
+                pitchDiff = pitchHitInfo1 - pitchHitInfo2;
+                vehicleRB.AddRelativeTorque(Vector3.right * RollPitchSmoother(pitchDiff) * pitchForce * Time.fixedDeltaTime, ForceMode.Impulse);
+            }
+            //Debug.Log("pitchIsStable" + pitchIsStable);
+        }
+        else
+        {
+            pitchIsStable = false;
+            //Debug.Log("pitchIsStable" + pitchIsStable);
+        }
+        
+        if (Physics.Raycast(rollRay1, out rollHit1, rollRayDistance) && Physics.Raycast(rollRay2, out rollHit2, rollRayDistance) && pitchIsStable)
         {
             rollIsStable = true;
             //z torque.
@@ -141,30 +157,7 @@ public class AntiGravManager : MonoBehaviour
         {
             rollIsStable = false;
             //Debug.Log("rollIsStable" + rollIsStable);
-        }
-
-        if (Physics.Raycast(pitchRay1, out pitchHit1, pitchRayDistance) && Physics.Raycast(pitchRay2, out pitchHit2, pitchRayDistance))
-        {
-            pitchIsStable = true;
-            //y force.
-            vehicleRB.AddRelativeForce(Vector3.up * (HoverSmoother(new Ray[] { pitchRay1, pitchRay2/*, pitchRay3*/ }) * Time.fixedDeltaTime), ForceMode.Impulse);
-            //x torque.
-            //This should turn off pitch stabalisation if really close to a wall.
-            if (Physics.Raycast(bowRay, bowHitDistance) == false && Physics.Raycast(sternRay, sternHitDistance) == false)// stick %% pitchIstable in here?
-            {
-                pitchHitInfo1 = pitchHit1.distance;
-                pitchHitInfo2 = pitchHit2.distance;
-                //If ship is pitching the wrong way, swap pitchHitInfo 2 and pitchHitInfo 1 below.
-                pitchDiff = pitchHitInfo1 - pitchHitInfo2;
-                vehicleRB.AddRelativeTorque(Vector3.right * RollPitchSmoother(pitchDiff) * pitchForce * Time.fixedDeltaTime, ForceMode.Impulse);
-            }            
-            //Debug.Log("pitchIsStable" + pitchIsStable);
-        }
-        else
-        {
-            pitchIsStable = false;
-            //Debug.Log("pitchIsStable" + pitchIsStable);
-        }
+        }        
     }
 
     float HoverSmoother(Ray[] inputRays)
