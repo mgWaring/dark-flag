@@ -28,6 +28,7 @@ public class ShipDurability : MonoBehaviour
     Ray roofRay;
     float roofRayDistance;
     Vector3 roofRayOffset;
+    float boostDamageRate;
 
     void Start() {
         ss = GetComponent<Ship>().details;
@@ -38,6 +39,7 @@ public class ShipDurability : MonoBehaviour
         fireDamage = ss.fireDamage;
         roofRayDistance = ss.roofRayDistance;
         roofRayOffset = ss.roofRayOffset;
+        boostDamageRate = ss.boostDamageRate;
     }
 
     private void HideShip() {
@@ -161,6 +163,7 @@ public class ShipDurability : MonoBehaviour
             }
         }
     }
+
     void YLimitCheck()
     {
         if (rb.position.y >= heightLimit || rb.position.y <= depthLimit)
@@ -169,11 +172,18 @@ public class ShipDurability : MonoBehaviour
         }
         //Display out of bounds warning if getting really close?
     }
+
     void OnFire()
     {
         hp = hp - fireDamage;
         //play fire sound.
         //play fire animation.
         //etc.
+    }
+
+    public void BoostDamage(float boostInput)
+    {
+        float damage = (boostDamageRate * boostInput);
+        hp = hp - damage;
     }
 }

@@ -9,6 +9,7 @@ public class MovementController : MonoBehaviour
     float yawSpeedVar;
     //accelerationMult and yawMult determine direction as positive or negative numbers.
     float accelerationMult = 0;
+    float boostMult;
     float yawSpeedMult = 0;    
     float acceleration = 0;
     float yawSpeed = 0;
@@ -41,6 +42,7 @@ public class MovementController : MonoBehaviour
         ss = GetComponent<Ship>().details;
         vehicleRB = GetComponent<Rigidbody>();
         accelerationVar = ss.thrustSpeed;
+        boostMult = ss.boost;
         yawSpeedVar = ss.yawSpeed;
     }
 
@@ -66,9 +68,9 @@ public class MovementController : MonoBehaviour
         oldTimeStamp = Time.realtimeSinceStartup;
     }
 
-    public void ThrustController(float input)
+    public void ThrustController(float thrustInput, float boostInput)
     {
-        accelerationMult = input;
+        accelerationMult = thrustInput * (boostInput + boostMult);
     }
 
     public void YawController(float input)

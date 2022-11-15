@@ -33,7 +33,7 @@ public class BotMovement : MonoBehaviour
             transform.Rotate(0.0f, rot * Time.deltaTime * 20, 0.0f);
         }
         if (rot < 20) {
-            mc.ThrustController(botSpeedMult);
+            mc.ThrustController(botSpeedMult, 0.0f);//The 0.0f is just a placeholder for bot boost.
         }
     }
 

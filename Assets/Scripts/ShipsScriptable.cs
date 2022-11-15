@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Ship")]
 public class ShipsScriptable : ScriptableObject
 {
-    //Please take a note of all ship specific values (the ones in unity, not here) before messing around with this.
+    //Please take a note of all ship specific values (the ones in unity, not here) before messing around with this. Re ordering the list can reset ships to default values.
     public string shipName;
     public GameObject shipModel;
     [Header("Rigidbody")]
@@ -12,6 +12,7 @@ public class ShipsScriptable : ScriptableObject
     public float angularDrag = 90.0f;
     [Header("MovementController")]
     public float thrustSpeed = 6000.0f;
+    public float boost = 1.0f;    
     public float yawSpeed = 100.0f;
     [Header("AntiGravManager")]
     public float hoverForce = 26.8f;
@@ -26,6 +27,7 @@ public class ShipsScriptable : ScriptableObject
     [Header("Durability")]
     public float armour = 50.0f;
     public float fireDamage = 1.0f;
+    public float boostDamageRate = 0.5f;
     public float roofRayDistance = 0.35f;
     public Vector3 roofRayOffset = new Vector3(0.0f, 0.0f, 0.0f);
     [Header("Other Values")]
