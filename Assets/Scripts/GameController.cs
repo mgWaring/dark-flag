@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class GameController : MonoBehaviour
-{
+public class GameController : MonoBehaviour {
+    [SerializeField] private bool devmode = false;
     public GameObject ship;
     public int playerCount;
     public RaceTimer raceTimer;
@@ -163,7 +164,7 @@ public class GameController : MonoBehaviour
 
     void handlePreRace() {
         preRaceTimer -= Time.deltaTime;
-        if (preRaceTimer <= 0.0f) {
+        if (preRaceTimer <= 0.0f || devmode) {
             state = "race";
             raceTimer.running = true;
             lapTimer.running = true;
@@ -172,16 +173,8 @@ public class GameController : MonoBehaviour
                 MovementController mc = racers[i].gameObject.GetComponentInChildren<MovementController>();
                 mc.enabled = true;
             }
-        } else if (preRaceTimer <= 1.0f) {
-            countdownText.SetText("1");
-        } else if (preRaceTimer <= 2.0f) {
-            countdownText.SetText("2");
-        } else if (preRaceTimer <= 3.0f) {
-            countdownText.SetText("3");
-        } else if (preRaceTimer <= 4.0f) {
-            countdownText.SetText("4");
-        } else if (preRaceTimer <= 5.0f) {
-            countdownText.SetText("5");
+        } else {
+            countdownText.SetText(Mathf.Ceil(preRaceTimer).ToString());
         }
     }
 

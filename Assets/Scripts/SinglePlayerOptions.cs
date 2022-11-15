@@ -25,6 +25,8 @@ public class SinglePlayerOptions : MonoBehaviour
         int.TryParse(lapSelector.value, out lapCount);
         int.TryParse(playerSelector.value, out playerCount);
         int.TryParse(botSelector.value, out botCount);
+        
+        //ove this to a gm so I can call it from my multiplayer menu too
 
         switch(mapSelector.value) {
             case "Janktown":
