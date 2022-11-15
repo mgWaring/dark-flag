@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 215.281, g: 226.4905, b: 204.55315, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2112,7 +2112,7 @@ MonoBehaviour:
   durabilityUI: {fileID: 2039097234}
   lapTimer: {fileID: 553016916}
   lapCount: 4
-  shipScriptable: {fileID: 11400000, guid: ab38fa60089fbed40af712c21048d41c, type: 2}
+  shipScriptable: {fileID: 11400000, guid: 30016bfa08dcb144cad2c27c1f708494, type: 2}
   straightToRace: 1
   state: 
   racers: []

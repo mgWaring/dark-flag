@@ -20,12 +20,13 @@ MonoBehaviour:
   thrustSpeed: 7000
   yawSpeed: 90
   hoverForce: 22
-  hoverConstant: 10
+  hoverStiffness: 10
+  pitchRollStiffness: 4.3
   rollForce: 8
   rollRayDistance: 8
   pitchForce: 10
   pitchRayDistance: 2
-  pitchRollConstant: 4.3
-  colRayOffset: {x: 0, y: 0.4, z: -0.2}
+  colliderCalcOffset: {x: 0, y: 0.4, z: -0.2}
+  fineTuneOffset: {x: 0.15, y: 0.5, z: 0.5}
   botSpeedModifier: 1
   armour: 30

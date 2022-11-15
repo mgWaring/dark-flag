@@ -55,17 +55,11 @@ public class AntiGravManager : MonoBehaviour
     //self righting.
     bool pitchIsStable;
     bool rollIsStable;
-    public float stableForce = 100.0f;//move this to scriptables.
     Ray bowRay;
-    public float bowHitDistance = 0.6f;
-    Ray sternRay; //sternRay currently not required.
-    public float sternHitDistance = 0.2f;
-    Ray starboardRay;//starBoardRay currently not required.
-    Ray portRay;//portRay currently not required.
-    public float portStarHitDistance = 0.53f;
+    float bowHitDistance = 0.6f;
     Ray roofRay1;
     public float roofHitDistance = 0.35f;
-    public Vector3 stableOffsetVector = new Vector3(0.1f,0.0f,0.5f);
+    Vector3 stableOffsetVector;
 
     void Start()
     {
@@ -79,13 +73,14 @@ public class AntiGravManager : MonoBehaviour
 
         //Gets information from relevent ShipsScriptable.
         hoverForce = ss.hoverForce;
-        hoverConstant = ss.hoverConstant;
+        hoverConstant = ss.hoverStiffness;
         rollForce = ss.rollForce;
         rollRayDistance = ss.rollRayDistance;
         pitchForce = ss.pitchForce;
         pitchRayDistance = ss.pitchRayDistance;
-        pitchRollConstant = ss.pitchRollConstant;
-        centerOffset = ss.colRayOffset;
+        pitchRollConstant = ss.pitchRollStiffness;
+        centerOffset = ss.colliderCalcOffset;
+        stableOffsetVector = ss.fineTuneOffset;
     }
 
     private void FixedUpdate()
@@ -97,23 +92,18 @@ public class AntiGravManager : MonoBehaviour
         pitchRay2 = new Ray(transform.localPosition - (transform.forward * (ultimateVector.z + centerOffset.z)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//stern
 
         bowRay = new Ray(pitchRay1.origin - (transform.forward * stableOffsetVector.z), transform.forward);
-        //sternRay = new Ray(pitchRay2.origin + (transform.forward * stableOffsetVector.z), transform.forward * -1);
-        //starboardRay = new Ray(rollRay1.origin - (transform.right * stableOffsetVector.x), transform.right);
-        //portRay = new Ray(rollRay2.origin + (transform.right * stableOffsetVector.x), transform.right * -1);
         //roofRay1 = new Ray(transform.localPosition + (transform.up * (ultimateVector.y + centerOffset.y + stableOffsetVector.y)), transform.up);
 ;        //Draws all rays for dev purposes. Disable in editor.
         if (aGMRaysOn)
         {
-            Debug.DrawRay(rollRay1.origin, rollRay1.direction * rollRayDistance, Color.white, debugRayTime, true);
+            Debug.DrawRay(rollRay1.origin, rollRay1.direction * rollRayDistance, Color.blue, debugRayTime, true);
             Debug.DrawRay(rollRay2.origin, rollRay2.direction * rollRayDistance, Color.blue, debugRayTime, true);
 
             Debug.DrawRay(pitchRay1.origin, pitchRay1.direction * pitchRayDistance, Color.red, debugRayTime, true);
             Debug.DrawRay(pitchRay2.origin, pitchRay2.direction * pitchRayDistance, Color.red, debugRayTime, true);
 
             Debug.DrawRay(bowRay.origin, bowRay.direction * bowHitDistance, Color.red, debugRayTime, true);
-            //Debug.DrawRay(sternRay.origin, sternRay.direction * sternHitDistance, Color.red, debugRayTime, true);
-            //Debug.DrawRay(starboardRay.origin, starboardRay.direction * portStarHitDistance, Color.blue, debugRayTime, true);
-            //Debug.DrawRay(portRay.origin, portRay.direction * portStarHitDistance, Color.blue, debugRayTime, true);
+
             //Debug.DrawRay(roofRay1.origin, roofRay1.direction * roofHitDistance, Color.green, debugRayTime, true);
         }
 
