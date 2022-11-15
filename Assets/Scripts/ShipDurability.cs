@@ -9,8 +9,11 @@ public class ShipDurability : MonoBehaviour
     float startHeight;
     public Material loadingMaterial;
     public GameObject explosionFab;
+    public MeshRenderer shieldRenderer;
     float deathTimer = 1.25f;
     float spawnTimer = 1.5f;
+    float shieldDisplayTimer = 0.25f;
+    bool showingShield = false;
     enum State { Healthy, Exploding, Spawning };
     State state = State.Healthy;
     GameObject explosion;
@@ -46,6 +49,15 @@ public class ShipDurability : MonoBehaviour
     }
 
     void Update() {
+        if (showingShield) {
+            shieldRenderer.enabled = true;
+            shieldDisplayTimer -= Time.deltaTime;
+            if (shieldDisplayTimer <= 0) {
+                shieldRenderer.enabled = false;
+                showingShield = false;
+                shieldDisplayTimer = 0.25f;
+            }
+        }
         if (state == State.Spawning) {
             spawnTimer -= Time.deltaTime;
             if (spawnTimer <= 0) {
@@ -106,6 +118,7 @@ public class ShipDurability : MonoBehaviour
             rememberedMaterials[i] = materials;
             mesh.materials = newMaterials;
         }
+        shieldRenderer.enabled = false;
     }
 
     void ChangeMaterialBack() {
@@ -114,11 +127,13 @@ public class ShipDurability : MonoBehaviour
             MeshRenderer mesh = meshes[i];
             mesh.materials = rememberedMaterials[i];
         }
+        shieldRenderer.enabled = false;
     }
 
     void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.tag != "Checkpoint") {
             float removal = collision.impulse.magnitude - ss.armour;
+            showingShield = true;
             if (removal > 0.0f) {
                 AudioSource source = GetComponent<AudioSource>();
                 if (!source.isPlaying) {
