@@ -28,6 +28,16 @@ public class FrontWeapon : MonoBehaviour
         currentFiringDelay = firingDelay;
     }
 
+    void OnTriggerEnter(Collider other) {
+        if (other.tag == "Pickup") {
+            Pickup pickup = other.gameObject.GetComponent<Pickup>();
+            if (pickup.type == Pickup.PickupType.Ammo) {
+                ammoCount += (int)pickup.value;
+                Destroy(other.gameObject);
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

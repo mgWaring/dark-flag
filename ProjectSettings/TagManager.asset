@@ -9,6 +9,7 @@ TagManager:
   - Floor
   - Checkpoint
   - Bullet
+  - Pickup
   layers:
   - Default
   - TransparentFX

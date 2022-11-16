@@ -149,12 +149,20 @@ public class ShipDurability : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other) {
-        Debug.Log("HIT");
         if (other.tag == "Bullet") {
             float removal = other.GetComponent<Bullet>().damage - ss.armour;
             showingShield = true;
             if (removal > 0.0f) {
                 hp = hp - removal;
+            }
+        } else if (other.tag == "Pickup") {
+            Pickup pickup = other.gameObject.GetComponent<Pickup>();
+            if (pickup.type == Pickup.PickupType.Health) {
+                hp += pickup.value;
+                if (hp >= 150f) {
+                    hp = 150f;
+                }
+                Destroy(other.gameObject);
             }
         }
     }
