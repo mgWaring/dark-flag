@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class BotMovement : MonoBehaviour
 {
-    public float botSpeedMult = 1.0f;
+    float botSpeedMult;
     public LayerMask wallLayer;
     public float sensorDistance;
     MovementController mc;
     Rigidbody rb;
     Racer racer;
+    ShipsScriptable ss;
 
     void Start() {
+        ss = GetComponent<Ship>().details;
         mc = GetComponent<MovementController>();
         rb = GetComponent<Rigidbody>();
         racer = GetComponent<Racer>();
+
+        botSpeedMult = ss.botSpeedModifier;
     }
 
     void Update()
@@ -29,7 +33,7 @@ public class BotMovement : MonoBehaviour
             transform.Rotate(0.0f, rot * Time.deltaTime * 20, 0.0f);
         }
         if (rot < 20) {
-            mc.ThrustController(botSpeedMult);
+            mc.ThrustController(botSpeedMult, 0.0f);//The 0.0f is just a placeholder for bot boost.
         }
     }
 

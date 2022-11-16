@@ -1,15 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Checkpoint : MonoBehaviour
 {
     [HideInInspector] public int id;
     GameController gameController;
+    Transform[] spawnPoints;
 
     void Start() {
+        spawnPoints = new Transform[transform.childCount];
+        for (int i = 0; i < transform.childCount; i++) {
+            spawnPoints[i] = transform.GetChild(i);
+        }
         id = transform.GetSiblingIndex();
         gameController = GameObject.Find("/GameController").GetComponent<GameController>();
+    }
+
+    public Transform spawnPointFor(Vector3 pos) {
+        if (spawnPoints.Length == 0) {
+            return transform;
+        } else if (spawnPoints.Length == 1) {
+            return spawnPoints[0];
+        } else {
+            return spawnPoints.OrderBy(t => Mathf.Abs(Vector3.Distance(pos, t.position))).ToArray()[0];
+        }
     }
 
     void OnTriggerEnter(Collider collider) {

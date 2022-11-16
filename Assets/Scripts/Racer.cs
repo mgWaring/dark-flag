@@ -3,6 +3,7 @@ using UnityEngine;
 public class Racer : MonoBehaviour
 {
     [HideInInspector] public int id;
+    [HideInInspector] public string name;
     [HideInInspector] public Checkpoint lastCheckpoint;
     [HideInInspector] public Checkpoint nextCheckpoint;
     [HideInInspector] public int lap = 0;

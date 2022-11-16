@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 969a8e50c389cff4185b3520113875ce, type: 3}
+  m_Name: LongShip
+  m_EditorClassIdentifier: 
+  shipName: longShip
+  shipModel: {fileID: 8508418995549443820, guid: dac3942921fa85b4e83c3b78db20b48d, type: 3}
+  mass: 2.9
+  drag: 1.5
+  angularDrag: 5
+  thrustSpeed: 7000
+  yawSpeed: 90
+  hoverForce: 22
+  hoverStiffness: 10
+  pitchRollStiffness: 4.3
+  rollForce: 8
+  rollRayDistance: 8
+  pitchForce: 10
+  pitchRayDistance: 2
+  colliderCalcOffset: {x: 0, y: 0.4, z: -0.2}
+  fineTuneOffset: {x: 0.15, y: 0.5, z: 0.5}
+  armour: 30
+  fireDamage: 0.5
+  roofRayDistance: 0.35
+  roofRayOffset: {x: 0, y: 0.45, z: 0}
+  botSpeedModifier: 1

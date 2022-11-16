@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 7803731750430973724}
   - component: {fileID: 5618022143135901947}
   - component: {fileID: 5233746000895803896}
+  - component: {fileID: -9148508981028630692}
+  - component: {fileID: 1309624034241190600}
+  - component: {fileID: -4703058958188822849}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Ship
@@ -131,6 +134,7 @@ MonoBehaviour:
   id: 0
   lastCheckpoint: {fileID: 0}
   nextCheckpoint: {fileID: 0}
+  lap: 0
 --- !u!114 &5233746000895803896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,10 +142,59 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7803731750430973727}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3cadb928ff937734185da66104222987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  accelerationVar: 50
-  yawSpeedVar: 1
+  shipName: 
+--- !u!114 &-9148508981028630692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7803731750430973727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dce19d038045c046a98a5a5d84f84a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  sensorDistance: 30
+--- !u!114 &1309624034241190600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7803731750430973727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df1493a341390574282e2ebb9fab3a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testShipMass: 3
+  testShipDrag: 1.5
+  testShipAngularDrag: 90
+  testShipThrustSpeed: 6000
+  testShipYawSpeed: 100
+  testShipHoverForce: 26.8
+  testShipHoverConstant: 2.5
+  testShipHoverHeight: 1
+  testShipBotSpeedModifier: 1
+--- !u!114 &-4703058958188822849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7803731750430973727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d6b189f7798e942b51336d9d8ea211, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverRayYOffset: {x: 0, y: -1, z: 0}

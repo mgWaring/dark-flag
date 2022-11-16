@@ -1,88 +1,205 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-//Add this script to the vehicle object that has a rigidbody.
+//Add this script to the vehicle object that has a rigidbody and the colliders.
 //Forces applied by the AntiGravManager are affected by the rigidbody mass.
 public class AntiGravManager : MonoBehaviour
-{    
+{
+    ShipsScriptable ss;
+
+    //Unity editor options.//
+    public bool aGMRaysOn = true;
+    public float debugRayTime = 0.02f;    
+
     Rigidbody vehicleRB;
-    Collider vehicleCL;//Not used at the moment. Delete if still unused before final release of game.
+    Vector3 stableOffsetVector;
 
-    public Vector3 hoverRayYOffset = new Vector3(0.0f, -1.0f, 0.0f);//Not used at the moment. Delete if still unused before final release of game.
-    public float hoverRayDistance = 1.0f;
+    //Collider finding stuff.
+    Collider[] colliderList;
+    Vector3[] colliderSizes;
+    Vector3 ultimateVector;
+    Vector3 centerOffset;
 
-    public float hoverForce = 26.8f;
-    public float hoverConstant = 2.5f;
-    float hoverRegulator;
-    float distanceToFloor;
+    //y axis force.
+    float hoverForce;
+    float hoverConstant;
+    RaycastHit hoverHitInfo;     
 
-    RaycastHit hitInfo;
-    LayerMask hoverMask;
+    //z axis torque.
+    Ray rollRay1;
+    Ray rollRay2;
+    float rollDiff;
+    float rollRayDistance;
+    float rollForce;
+    RaycastHit rollHit1;
+    RaycastHit rollHit2;
+    float rollHitInfo1;
+    float rollHitInfo2;
+    bool pitchIsStable;
 
-    Ray hoverRay1;
-    Vector3 hoverRay1XZOffset = new Vector3(0.0f, 0.0f, 0.0f);
-    Vector3 hoverRay1CombOffset;//Not used at the moment. Delete if still unused before final release of game.
+    //x axis torque.
+    Ray pitchRay1;
+    Ray pitchRay2;
+    Ray bowRay;
+    float pitchDiff;
+    float pitchRayDistance;
+    float bowHitDistance = 0.6f;
+    float pitchForce;
+    float pitchRollConstant;
+    RaycastHit pitchHit1;
+    RaycastHit pitchHit2;
+    float pitchHitInfo1;
+    float pitchHitInfo2;    
 
     void Start()
     {
-        vehicleRB = GetComponent <Rigidbody>();
-        vehicleCL = GetComponent <CapsuleCollider>();//Not used at the moment. Delete if still unused before final release of game.
-        hoverMask = LayerMask.GetMask("Ship");
-        hoverRay1CombOffset = OffsetCombiner(hoverRay1XZOffset);//Not used at the moment. Delete if still unused before final release of game.
+        ss = GetComponent<Ship>().details;
+        vehicleRB = GetComponent<Rigidbody>();        
+
+        //Collider extent finding.
+        colliderList = GetComponents<Collider>();
+        colliderSizes = ExtentHunter();
+        ultimateVector = ExtentFighter();
+
+        //Gets information from relevent ShipsScriptable.
+        hoverForce = ss.hoverForce;
+        hoverConstant = ss.hoverStiffness;
+        rollForce = ss.rollForce;
+        rollRayDistance = ss.rollRayDistance;
+        pitchForce = ss.pitchForce;
+        pitchRayDistance = ss.pitchRayDistance;
+        pitchRollConstant = ss.pitchRollStiffness;
+        centerOffset = ss.colliderCalcOffset;
+        stableOffsetVector = ss.fineTuneOffset;
     }
 
     private void FixedUpdate()
     {
-        hoverRay1 = new Ray(transform.localPosition, transform.up * -1);
-        //Leave these comments here please. Delete if still unused before final release of game.
-        //Debug.DrawRay(transform.localPosition, transform.up * 10 * -1, Color.yellow, 1, true);
-        //Debug.DrawRay(vehicleCollider.transform.localPosition + offset, vehicleCollider.transform.forward, Color.red, 9999999, true);        
+        rollRay1 = new Ray(transform.localPosition + (transform.right * (ultimateVector.x - centerOffset.x - stableOffsetVector.x)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//starboard
+        rollRay2 = new Ray(transform.localPosition - (transform.right * (ultimateVector.x + centerOffset.x - stableOffsetVector.x)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//port
+        pitchRay1 = new Ray(transform.localPosition + (transform.forward * (ultimateVector.z - centerOffset.z)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//bow
+        pitchRay2 = new Ray(transform.localPosition - (transform.forward * (ultimateVector.z + centerOffset.z)) + (transform.up * (ultimateVector.y + centerOffset.y)), transform.up * -1);//stern
+        bowRay = new Ray(pitchRay1.origin - (transform.forward * stableOffsetVector.z), transform.forward);
 
-        if (GroundDetector(hoverRay1))
+;       //Draws all rays for dev purposes. Disable in editor.
+        if (aGMRaysOn)
         {
-            vehicleRB.AddRelativeForce(Vector3.up * HoverSmoother(hoverRay1), ForceMode.Force);
-        }        
-    }
-    
-    bool GroundDetector(Ray inputRay)
-    {
-        bool groundDetected = false;
-
-        if (Physics.Raycast(inputRay, out hitInfo, hoverRayDistance))
-        {
-            groundDetected = true;
-            //Debug.Log("From GroundDetector() in AntiGravManager. Ray hit " + hitInfo.collider);
-            //Debug.Log(hitInfo.distance);
+            Debug.DrawRay(rollRay1.origin, rollRay1.direction * rollRayDistance, Color.blue, debugRayTime, true);
+            Debug.DrawRay(rollRay2.origin, rollRay2.direction * rollRayDistance, Color.blue, debugRayTime, true);
+            Debug.DrawRay(pitchRay1.origin, pitchRay1.direction * pitchRayDistance, Color.red, debugRayTime, true);
+            Debug.DrawRay(pitchRay2.origin, pitchRay2.direction * pitchRayDistance, Color.red, debugRayTime, true);
+            Debug.DrawRay(bowRay.origin, bowRay.direction * bowHitDistance, Color.red, debugRayTime, true);
         }
 
-        if (Physics.Raycast(inputRay, out hitInfo, hoverRayDistance, hoverMask))
+        //Applies vertical force and pitch torque.
+        if (Physics.Raycast(pitchRay1, out pitchHit1, pitchRayDistance) && Physics.Raycast(pitchRay2, out pitchHit2, pitchRayDistance))
         {
-            groundDetected = false;
-            //Debug.Log("From GroundDetector() in AntiGravManager. " + hoverMask + " detected.");
+            pitchIsStable = true;
+            //y force.
+            vehicleRB.AddRelativeForce(Vector3.up * (HoverSmoother(new Ray[] { pitchRay1, pitchRay2}) * Time.fixedDeltaTime), ForceMode.Impulse);
+            //x torque.
+            //This should turn off pitch stabalisation if really close to a wall.
+            if (Physics.Raycast(bowRay, bowHitDistance) == false)
+            {
+                pitchHitInfo1 = pitchHit1.distance;
+                pitchHitInfo2 = pitchHit2.distance;
+                //If ship is pitching the wrong way, swap pitchHitInfo 2 and pitchHitInfo 1 below.
+                pitchDiff = pitchHitInfo1 - pitchHitInfo2;
+                vehicleRB.AddRelativeTorque(Vector3.right * RollPitchSmoother(pitchDiff) * pitchForce * Time.fixedDeltaTime, ForceMode.Impulse);
+            }
+        }
+        else
+        {
+            pitchIsStable = false;
+        }
+        
+        //Applies roll torque.
+        if (Physics.Raycast(rollRay1, out rollHit1, rollRayDistance) && Physics.Raycast(rollRay2, out rollHit2, rollRayDistance) && pitchIsStable)
+        {
+            //z torque.
+            //This should turn off roll stabalisation if really close to a wall.
+            rollHitInfo1 = rollHit1.distance;
+            rollHitInfo2 = rollHit2.distance;
+            //If ship is rolling the wrong way, swap rollHitInfo 2 and rollHitInfo 1 below.
+            rollDiff = rollHitInfo2 - rollHitInfo1;
+            vehicleRB.AddRelativeTorque(Vector3.forward * RollPitchSmoother(rollDiff) * rollForce * Time.fixedDeltaTime, ForceMode.Impulse);
+        }      
+    }
+
+    float HoverSmoother(Ray[] inputRays)
+    {
+        float distanceToFloor = 0.0f;
+
+        //Combines distance to floor of all rays passed in, then calculates the mean.
+        for (int i = 0; i < inputRays.Length; i++)
+        {
+            Physics.Raycast(inputRays[i], out hoverHitInfo, pitchRayDistance);
+            distanceToFloor = distanceToFloor + hoverHitInfo.distance;
+        }
+        float averageDistance = distanceToFloor / inputRays.Length;
+
+        //regulator increases as distance to the floor lowers. Can be adjusted by changing hoverConstant.
+        float regulator = hoverConstant / (averageDistance + 0.1f);
+        float newForce = hoverForce * regulator;
+        return newForce;
+    }
+
+    float RollPitchSmoother(float distanceDifference)
+    {
+        float newForce = 0.0f;
+
+        if (distanceDifference != newForce)
+        {
+            //regulator increases with the difference between pitchRay1 & pitchRay2 distance to hit.
+            float regulator = (distanceDifference / pitchRollConstant);
+            newForce = hoverForce * regulator;
+        }
+        return newForce;
+    }
+
+    //Finds the extents of all colliders on parent object.
+    private Vector3[] ExtentHunter()
+    {
+        List<Vector3> colliderSizesList = new List<Vector3>();
+
+        for (int i = 0; i < colliderList.Length; i++)
+        {
+            colliderSizesList.Add(colliderList[i].bounds.extents);
         }
 
-        return groundDetected;
+        Vector3[] hunterArray = colliderSizesList.ToArray();
+        return hunterArray;
     }
 
-    Vector3 OffsetCombiner(Vector3 xzOffset)
+    //Compares extents and keeps the highest for x, y, z.
+    public Vector3 ExtentFighter()
     {
-        Vector3 combinedOffset = new Vector3(0, 0, 0);
-        combinedOffset = hoverRayYOffset + xzOffset;
+        float championZ = 0;
+        float championX = 0;
+        float championY = 0;
 
-        Debug.Log(combinedOffset);
-        return combinedOffset;
-    }
+        for (int q = 0; q < colliderSizes.Length; q++)
+        {
+            float contenderZ = colliderSizes[q].z;
+            if (contenderZ > championZ)
+            {
+                championZ = contenderZ;
+            }
 
-    float HoverSmoother(Ray inputRay)
-    {
-        float newHoverForce = 0.0f;
+            float contenderX = colliderSizes[q].x;
+            if (contenderX > championX)
+            {
+                championX = contenderX;
+            }
 
-        Physics.Raycast(inputRay, out hitInfo, hoverRayDistance);
-        distanceToFloor = hitInfo.distance;
-        //hoverRegulator increases as distance to the floor lowers. Can be adjusted by changing hoverConstant.
-        hoverRegulator = (hoverConstant / (distanceToFloor + 1));
-        newHoverForce = hoverForce * hoverRegulator;
+            float contenderY = colliderSizes[q].y;
+            if (contenderY > championY)
+            {
+                championY = contenderY;
+            }
+        }
 
-        //Debug.Log("From HoverSmoother in AntiGravManager. newHoverForce = " + newHoverForce);
-        return newHoverForce;
+        Vector3 championFusion = new Vector3(championX, championY, championZ);
+        return championFusion;
     }
 }

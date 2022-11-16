@@ -7,6 +7,8 @@ TagManager:
   - Ship
   - Wall
   - Floor
+  - Checkpoint
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -15,9 +17,9 @@ TagManager:
   - Water
   - UI
   - TrackWalls
-  - 
-  - 
-  - 
+  - TrackFloor
+  - Ship
+  - LoadingShips
   - 
   - 
   - 

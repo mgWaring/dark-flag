@@ -1,43 +1,59 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 //Add this script to the vehicle object that has a rigidbody.
 public class MovementController : MonoBehaviour
-{
-    //Change accelerationVar to adjust forward and backwards speed.
-    public float accelerationVar = 6000f;
-    //Change yawSpeedVar to adjust yaw rotational speed.
-    public float yawSpeedVar = 100.0f;
-
+{    
+    //Change accelerationVar in ss to adjust forward and backwards speed.
+    float accelerationVar;
+    //Change yawSpeedVar in ss to adjust yaw rotational speed.
+    float yawSpeedVar;
     //accelerationMult and yawMult determine direction as positive or negative numbers.
     float accelerationMult = 0;
-    float yawSpeedMult = 0;    
+    float boostMult;
+    float yawSpeedMult = 0;
+    float torqueLimit;
     float acceleration = 0;
     float yawSpeed = 0;
-    Vector3 yawAngularVelocity = new Vector3(0, 0, 0);    
+    Vector3 yawAngularVelocity = new Vector3(0, 0, 0);
 
-    Vector3 oldPosition;
-    Vector3 newPosition;
-    Vector3 distanceTravelledMath;
-    float newTimeStamp;
-    float oldTimeStamp;
-    float timePassed;
-    float distanceTravelled = 0;
-    float vehicleVelocity;
+    float velocity;
+    public Quaternion tiltMaxLeft;
+    public Quaternion tiltMaxRight;
+
 
     Rigidbody vehicleRB;
+    ShipsScriptable ss;
+
+    public void Reset() 
+    {
+        accelerationMult = 0;
+        yawSpeedMult = 0;
+        acceleration = 0;
+        yawSpeed = 0;
+        yawAngularVelocity = Vector3.zero;
+        vehicleRB.velocity = Vector3.zero;
+        vehicleRB.angularVelocity = Vector3.zero;
+        
+        
+
+    }
 
     private void Start()
     {
+        ss = GetComponent<Ship>().details;
         vehicleRB = GetComponent<Rigidbody>();
+        accelerationVar = ss.thrustSpeed;
+        boostMult = ss.boost;
+        yawSpeedVar = ss.yawSpeed;
+        torqueLimit = ss.torqueLimiter;
+        tiltMaxLeft = ss.turnTiltMaximum;
+        tiltMaxRight = Quaternion.Euler(0.0f, 0.0f, 360.0f - tiltMaxLeft.z);
     }
 
     void FixedUpdate()
-    {        
-        //Tracks speed.
-        newPosition = transform.position;
-        newTimeStamp = Time.realtimeSinceStartup;
-        vehicleVelocity = VelocityCalculator(newPosition, oldPosition,  newTimeStamp, oldTimeStamp);
-        Debug.Log("From MovementController. Speed = " + vehicleVelocity);
+    {
+        velocity = vehicleRB.velocity.magnitude;
 
         //Adds thrust force to vehicle.
         acceleration = SpeedSet(accelerationMult, accelerationVar);
@@ -48,20 +64,22 @@ public class MovementController : MonoBehaviour
         yawAngularVelocity = Vector3.up * yawSpeed;
         Quaternion yawDeltaRotation = Quaternion.Euler(yawAngularVelocity * Time.fixedDeltaTime);
         vehicleRB.MoveRotation(vehicleRB.rotation * yawDeltaRotation);
-
-        //Part of speed tracking.
-        oldPosition = transform.position;
-        oldTimeStamp = Time.realtimeSinceStartup;
+        //Adds a tilt when turning. Leans more at higher speeds. Adjust torqueLimiter in ss to change tilt amount.
+        if (vehicleRB.rotation.eulerAngles.z <= tiltMaxLeft.z || vehicleRB.rotation.eulerAngles.z >= tiltMaxRight.z)
+        {
+            vehicleRB.AddRelativeTorque(Vector3.forward * (yawSpeedMult * -1) * (velocity * torqueLimit), ForceMode.Force);
+        }
+        
     }
 
-    public void ThrustController(float input)
+    public void ThrustController(float thrustInput, float boostInput)
     {
-        accelerationMult = input;
+        accelerationMult = thrustInput * (boostInput + boostMult);
     }
 
-    public void YawController(float input)
+    public void YawController(float yawInput)
     {
-        yawSpeedMult = input;
+        yawSpeedMult = yawInput;
     }
 
     float SpeedSet(float multiplier, float variable)
@@ -70,17 +88,5 @@ public class MovementController : MonoBehaviour
         speed = multiplier * variable;
 
         return speed;
-    }
-
-    //VelocityCalculator is no longer required as we track speed elsewhere for the speedometer. Remove before final release.
-    float VelocityCalculator(Vector3 newPosition, Vector3 oldPosition, float newTimeStamp, float oldTimeStamp)
-    {
-        float velocityA = 0;
-        distanceTravelledMath = newPosition - oldPosition;
-        timePassed = newTimeStamp - oldTimeStamp;
-        distanceTravelled = distanceTravelledMath.magnitude;
-        velocityA = distanceTravelled * timePassed;
-
-        return velocityA;
     }
 }
