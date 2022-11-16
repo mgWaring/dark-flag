@@ -20,6 +20,7 @@ MonoBehaviour:
   thrustSpeed: 6000
   boost: 1
   yawSpeed: 120
+  strafeSpeed: 250
   hoverForce: 20
   hoverStiffness: 10
   pitchRollStiffness: 4.3

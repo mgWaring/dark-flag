@@ -17,7 +17,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-      mc = GetComponent<MovementController>();      
+      mc = GetComponent<MovementController>();
+      sd = GetComponent<ShipDurability>();
     }
 
     //Required for new input system. Don't ask me why.

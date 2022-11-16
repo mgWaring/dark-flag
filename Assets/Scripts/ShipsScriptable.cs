@@ -14,6 +14,8 @@ public class ShipsScriptable : ScriptableObject
     public float thrustSpeed = 6000.0f;
     public float boost = 1.0f;    
     public float yawSpeed = 100.0f;
+    public float torqueLimiter = 0.16f;
+    public Quaternion turnTiltMaximum = Quaternion.Euler(0.0f, 0.0f, 38.0f);//Only the z is needed.
     [Header("AntiGravManager")]
     public float hoverForce = 26.8f;
     public float hoverStiffness = 2.5f;
@@ -32,5 +34,6 @@ public class ShipsScriptable : ScriptableObject
     public Vector3 roofRayOffset = new Vector3(0.0f, 0.0f, 0.0f);
     [Header("Other Values")]
     public float botSpeedModifier = 1.0f;
+    public Vector3 cameraOffset = new Vector3(0.0f, 0.0f, 0.0f);
 }
  

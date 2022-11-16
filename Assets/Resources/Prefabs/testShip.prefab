@@ -283,6 +283,24 @@ MonoBehaviour:
       m_Action: Yaw Input
       m_Flags: 8
     m_Flags: 0
+  strafeInput:
+    m_Name: Strafe Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e040e901-7a66-4278-a5a4-62bb50683980
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  strafeInput2:
+    m_Name: Strafe Input 2
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6dc1af7d-206e-4cc2-9668-b4c18da49b35
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   cameraControl:
     m_Name: Camera Control
     m_Type: 0
