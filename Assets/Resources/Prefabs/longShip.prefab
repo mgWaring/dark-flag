@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 832047633836416138}
   - component: {fileID: 127339190607667991}
   - component: {fileID: 4756294736373349420}
+  - component: {fileID: 3997591739238780902}
   m_Layer: 8
   m_Name: longShip
   m_TagString: Ship
@@ -158,6 +159,7 @@ Transform:
   - {fileID: 2290810880079729024}
   - {fileID: 4393583059643168391}
   - {fileID: 4867513839447466438}
+  - {fileID: 652907728474031538}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -248,6 +250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cadb928ff937734185da66104222987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tiltMaxLeft: {x: 0, y: 0, z: 0, w: 0}
+  tiltMaxRight: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &7297732876776564532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -791,6 +795,47 @@ MonoBehaviour:
       m_Action: Fire Input
       m_Flags: 0
     m_Flags: 0
+--- !u!114 &3997591739238780902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508418995549443820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cce324c8f9f9fe4780c982bf79b7e82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bombPrefab: {fileID: 5502508073657117986, guid: 1c7172c84f444ee498d07e02ad0cdc94, type: 3}
+  bombSpawn: {fileID: 652907728474031538}
+  ammoCount: 1
+  firingDelay: 2
+  fireInput:
+    m_Name: Fire Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 168ac7f1-b02e-4b46-aff4-7ffae5897d48
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 791bc447-13a8-4182-8955-190dac2227dc
+      m_Path: <Keyboard>/b
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fire Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 5dd49cd9-12af-4843-9bc5-1fde04805936
+      m_Path: <Gamepad>/buttonEast
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fire Input
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &8627623512659956771
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,6 +919,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8881355327773379574
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 652907728474031538}
+  m_Layer: 0
+  m_Name: BombSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &652907728474031538
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8881355327773379574}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: -1.353}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8508418995549443821}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &1747433105943033451
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -148,13 +148,18 @@ public class ShipDurability : MonoBehaviour
         shieldRenderer.enabled = false;
     }
 
+    public void takeDamage(float damage) {
+        float removal = damage - ss.armour;
+        showingShield = true;
+        if (removal > 0.0f) {
+            hp = hp - removal;
+        }
+    }
+
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Bullet") {
             float removal = other.GetComponent<Bullet>().damage - ss.armour;
-            showingShield = true;
-            if (removal > 0.0f) {
-                hp = hp - removal;
-            }
+            takeDamage(other.GetComponent<Bullet>().damage);
         } else if (other.tag == "Pickup") {
             Pickup pickup = other.gameObject.GetComponent<Pickup>();
             if (pickup.type == Pickup.PickupType.Health) {
