@@ -2112,7 +2112,7 @@ MonoBehaviour:
   durabilityUI: {fileID: 2039097234}
   lapTimer: {fileID: 553016916}
   lapCount: 4
-  shipScriptable: {fileID: 11400000, guid: 30016bfa08dcb144cad2c27c1f708494, type: 2}
+  shipScriptable: {fileID: 11400000, guid: 627da91991676624387263bcf47ef8d4, type: 2}
   straightToRace: 1
   state: 
   racers: []

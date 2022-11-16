@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 7370398645800970976}
   - component: {fileID: 3287847817425627180}
   - component: {fileID: 8286877713419928190}
+  - component: {fileID: 4732455174172086529}
   m_Layer: 0
   m_Name: properShip01
   m_TagString: Ship
@@ -46,6 +47,7 @@ Transform:
   - {fileID: 5155191242835061166}
   - {fileID: 6125179922744195236}
   - {fileID: 6692602517214375007}
+  - {fileID: 6194179295276075254}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -688,6 +690,78 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   details: {fileID: 11400000, guid: 30016bfa08dcb144cad2c27c1f708494, type: 2}
+--- !u!114 &4732455174172086529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298976098401725311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 324b728aa7d55084bbcd391212ab9968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 4872813831117450451, guid: 9d4d65f72b086bf4ab3d2bae9c20639b, type: 3}
+  bulletSpawn: {fileID: 6194179295276075254}
+  ammoCount: 25
+  firingDelay: 0.1
+  fireInput:
+    m_Name: Fire Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 43bdd166-6762-4327-9bcb-6e1183de6aee
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 025559d1-49f9-4800-a797-03305670b88c
+      m_Path: <Gamepad>/buttonSouth
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fire Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: f389e69e-0032-4cf4-bc93-69a129118bc3
+      m_Path: <Keyboard>/space
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Fire Input
+      m_Flags: 0
+    m_Flags: 0
+--- !u!1 &5379698523083374124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6194179295276075254}
+  m_Layer: 0
+  m_Name: BulletSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6194179295276075254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5379698523083374124}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.984, y: 0.947, z: 0.421}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4298976098401725300}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &711913471024130718
 PrefabInstance:
   m_ObjectHideFlags: 0

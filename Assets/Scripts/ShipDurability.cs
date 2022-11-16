@@ -148,6 +148,17 @@ public class ShipDurability : MonoBehaviour
         shieldRenderer.enabled = false;
     }
 
+    void OnTriggerEnter(Collider other) {
+        Debug.Log("HIT");
+        if (other.tag == "Bullet") {
+            float removal = other.GetComponent<Bullet>().damage - ss.armour;
+            showingShield = true;
+            if (removal > 0.0f) {
+                hp = hp - removal;
+            }
+        }
+    }
+
     void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.tag != "Checkpoint") {
             float removal = collision.impulse.magnitude - ss.armour;
