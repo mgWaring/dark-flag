@@ -151,6 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cadb928ff937734185da66104222987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tiltMaxLeft: {x: 0, y: 0, z: 0, w: 0}
+  tiltMaxRight: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &7297732876776564532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,24 +317,6 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Yaw Input
       m_Flags: 8
-    m_Flags: 0
-  strafeInput:
-    m_Name: Strafe Input
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: e040e901-7a66-4278-a5a4-62bb50683980
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-  strafeInput2:
-    m_Name: Strafe Input 2
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 6dc1af7d-206e-4cc2-9668-b4c18da49b35
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
     m_Flags: 0
   cameraControl:
     m_Name: Camera Control
@@ -533,7 +517,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: fbe19f3c2bcd5b94d8105174f0d88e3c, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

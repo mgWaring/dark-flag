@@ -105,6 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cadb928ff937734185da66104222987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tiltMaxLeft: {x: 0, y: 0, z: 0, w: 0}
+  tiltMaxRight: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &4298976098401725298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,80 +292,6 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Yaw Input
       m_Flags: 8
-    m_Flags: 0
-  strafeInput:
-    m_Name: Strafe Input
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 27c2c7de-4b31-45f3-b3a7-81fb00d8548e
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 1D Axis Keyboard
-      m_Id: 6d626393-b40e-4eee-916b-8629e264d59d
-      m_Path: 1DAxis
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Strafe Input
-      m_Flags: 4
-    - m_Name: negative
-      m_Id: 3cda727b-618a-4620-83ec-dd9bf37ebaee
-      m_Path: <Keyboard>/q
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Strafe Input
-      m_Flags: 8
-    - m_Name: positive
-      m_Id: 01e830d6-3e6e-4ef4-ae71-1a2800dd6686
-      m_Path: <Keyboard>/e
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Strafe Input
-      m_Flags: 8
-    - m_Name: 1D Axis Gamepad
-      m_Id: 9209c720-f191-407a-a881-87546906858b
-      m_Path: 1DAxis
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Strafe Input
-      m_Flags: 4
-    - m_Name: negative
-      m_Id: 7f0145e5-24b4-4e52-b8fe-5c75e90fe0cf
-      m_Path: <Gamepad>/leftShoulder
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Strafe Input
-      m_Flags: 8
-    - m_Name: positive
-      m_Id: 49077519-e161-417a-97d8-ce78d41738bb
-      m_Path: <Gamepad>/rightShoulder
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Strafe Input
-      m_Flags: 8
-    m_Flags: 0
-  strafeInput2:
-    m_Name: Strafe Input 2
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 1aa3b733-6929-40e0-8e36-d8c306f2c373
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 6390ebab-ce01-4559-aeaa-3655d2604ea9
-      m_Path: <Gamepad>/buttonWest
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Strafe Input 2
-      m_Flags: 0
     m_Flags: 0
   cameraControl:
     m_Name: Camera Control
@@ -591,11 +519,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 2edd9bc3dc147a44fbbd059bfb7783d8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
+  m_Pitch: 1.2
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

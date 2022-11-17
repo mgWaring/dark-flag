@@ -24,6 +24,10 @@ public class MovementController : MonoBehaviour
 
     Rigidbody vehicleRB;
     ShipsScriptable ss;
+    //AudioClip engineSound;
+    AudioSource shipAudioSource;
+    float engineDefaultPitch = 1.0f;
+    float pitchLimiter = 0.9f;
 
     public void Reset() 
     {
@@ -34,9 +38,6 @@ public class MovementController : MonoBehaviour
         yawAngularVelocity = Vector3.zero;
         vehicleRB.velocity = Vector3.zero;
         vehicleRB.angularVelocity = Vector3.zero;
-        
-        
-
     }
 
     private void Start()
@@ -49,6 +50,11 @@ public class MovementController : MonoBehaviour
         torqueLimit = ss.torqueLimiter;
         tiltMaxLeft = ss.turnTiltMaximum;
         tiltMaxRight = Quaternion.Euler(0.0f, 0.0f, 360.0f - tiltMaxLeft.z);
+        shipAudioSource = GetComponent<AudioSource>();
+        //engineSound = ss.engineIdleSound;
+        shipAudioSource.Play();
+        
+
     }
 
     void FixedUpdate()
@@ -75,6 +81,8 @@ public class MovementController : MonoBehaviour
     public void ThrustController(float thrustInput, float boostInput)
     {
         accelerationMult = thrustInput * (boostInput + boostMult);
+        shipAudioSource.pitch = engineDefaultPitch + (pitchLimiter * velocity * Time.fixedDeltaTime);
+        Debug.Log(shipAudioSource.pitch);
     }
 
     public void YawController(float yawInput)

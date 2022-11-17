@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 215.61914, g: 226.90332, b: 204.93488, a: 1}
+  m_IndirectSpecularColor: {r: 215.281, g: 226.4905, b: 204.55315, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -490,7 +490,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: eaa8ba4865ebe9543b225448a30e3c6e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.75
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2112,7 +2112,7 @@ MonoBehaviour:
   durabilityUI: {fileID: 2039097234}
   lapTimer: {fileID: 553016916}
   lapCount: 4
-  shipScriptable: {fileID: 11400000, guid: ab38fa60089fbed40af712c21048d41c, type: 2}
+  shipScriptable: {fileID: 11400000, guid: 627da91991676624387263bcf47ef8d4, type: 2}
   straightToRace: 1
   state: 
   racers: []

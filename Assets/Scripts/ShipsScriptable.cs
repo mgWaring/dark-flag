@@ -32,6 +32,8 @@ public class ShipsScriptable : ScriptableObject
     public float boostDamageRate = 0.5f;
     public float roofRayDistance = 0.35f;
     public Vector3 roofRayOffset = new Vector3(0.0f, 0.0f, 0.0f);
+    [Header("Audio")]
+    public AudioClip engineIdleSound;
     [Header("Other Values")]
     public float botSpeedModifier = 1.0f;
     public Vector3 cameraOffset = new Vector3(0.0f, 0.0f, 0.0f);
