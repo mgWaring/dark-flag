@@ -1,13 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UI.Pregame;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class ShipSelector : MonoBehaviour
-{
+public class ShipSelector : MonoBehaviour {
+    //max
+    [SerializeField] private bool useModal;
+    [SerializeField] private PlayerTile playerTile;
+    public event Action<string> OnShipChange;
+
+    //andrew
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI handlingText;
@@ -27,14 +32,12 @@ public class ShipSelector : MonoBehaviour
     float submitTimer = 0.25f;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         selectableShips = selectableShipNames.Select(name => name.shipModel).ToArray();
         SetValues();
     }
 
-    void OnEnable()
-    {
+    void OnEnable() {
         leftInput.Enable();
         rightInput.Enable();
         submitInput.Enable();
@@ -42,8 +45,7 @@ public class ShipSelector : MonoBehaviour
     }
 
     //Required for new input system. Don't ask me why.
-    void OnDisable()
-    {
+    void OnDisable() {
         leftInput.Disable();
         rightInput.Disable();
         submitInput.Disable();
@@ -51,8 +53,7 @@ public class ShipSelector : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (submitTimer > 0.0f) {
             submitTimer -= Time.deltaTime;
         }
@@ -62,7 +63,7 @@ public class ShipSelector : MonoBehaviour
         } else if (leftInput.triggered) {
             GoLeft();
         }
-        
+
         if (submitInput.triggered && submitTimer <= 0.0f) {
             Confirm();
         } else if (backInput.triggered && confirmationModal.active) {
@@ -71,11 +72,19 @@ public class ShipSelector : MonoBehaviour
     }
 
     public void Confirm() {
-        if (confirmationModal.active) {
-            StartGame();
-        } else {
-            confirmationModal.SetActive(true);
+        if (confirmationModal) {
+            if (confirmationModal.active) {
+                StartGame();
+            } else {
+                confirmationModal.SetActive(true);
+            }
         }
+
+        BindDataToPlayer();
+    }
+
+    private void BindDataToPlayer() {
+        //playerTile.set
     }
 
     public void StartGame() {
@@ -94,6 +103,7 @@ public class ShipSelector : MonoBehaviour
             } else {
                 info = new RacerInfo(selectableShipNames);
             }
+
             racers[i] = info;
         }
 
@@ -103,10 +113,12 @@ public class ShipSelector : MonoBehaviour
     public void SetValues() {
         value = selectableShipNames[index];
         currentShip = selectableShips[index];
-
+        // if anything is listening for this event let it know
+        OnShipChange?.Invoke(value.shipName);
         if (shipHolder.childCount > 0) {
             Destroy(shipHolder.GetChild(0).gameObject);
         }
+
         GameObject ship = Instantiate(currentShip);
         ship.GetComponent<Rigidbody>().useGravity = false;
         ship.GetComponent<PlayerMovement>().enabled = false;
@@ -121,7 +133,7 @@ public class ShipSelector : MonoBehaviour
 
         nameText.text = string.Format("Name: {0}", value.shipName);
         speedText.text = string.Format("Max Speed: {0}", value.thrustSpeed);
-        handlingText.text = string.Format("Handling: {0}",value.yawSpeed);
+        handlingText.text = string.Format("Handling: {0}", value.yawSpeed);
         weightText.text = string.Format("Weight: {0}", value.mass);
         durabilityText.text = string.Format("Durability: {0}", value.armour);
     }
@@ -131,13 +143,16 @@ public class ShipSelector : MonoBehaviour
         if (index < 0) {
             index = selectableShipNames.Length - 1;
         }
+
         SetValues();
     }
+
     public void GoRight() {
         index += 1;
         if (selectableShipNames.Length <= index) {
             index = 0;
         }
+
         SetValues();
     }
 }

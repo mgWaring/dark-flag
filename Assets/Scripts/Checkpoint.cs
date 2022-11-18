@@ -41,7 +41,7 @@ public class Checkpoint : MonoBehaviour
                     racer.lastCheckpoint = this;
                     racer.nextCheckpoint = next;
                     if (gameController != null && id == 0) {
-                        gameController.registerLap(racer);
+                        gameController.RegisterLap(racer);
                     }
                 }
             }

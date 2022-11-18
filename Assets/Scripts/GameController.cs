@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using RelaySystem.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.Netcode;
 
 public class GameController : MonoBehaviour {
     [SerializeField] private bool devmode;
@@ -16,22 +18,23 @@ public class GameController : MonoBehaviour {
     public LapTimer lapTimer;
     public int lapCount = 1;
     public ShipsScriptable shipScriptable;
-    public bool straightToRace = false;
+    public bool straightToRace;
     [HideInInspector] public string state;
     [HideInInspector] public Racer[] racers;
-    [HideInInspector] public Dictionary<Racer, List<float>> laps = new Dictionary<Racer, List<float>>();
+    public Dictionary<Racer, List<float>> laps = new();
 
-    float countdownTimer = 5.0f;
-    float postRaceTimer = 10.0f;
-    public int playerId = 0;
+    private float _countdownTimer = 5.0f;
+    private float _postRaceTimer = 10.0f;
+    public int playerId;
     [HideInInspector] public Racer playerRacer;
-    GameObject checkpoints;
-    Transform startingPositions;
-    Map mMap;
+    private GameObject _checkpoints;
+    private Transform _startingPositions;
+    private Map _mMap;
     public MapScriptable map;
+    private Animator _anim;
 
-    void Start()
-    {
+    private void DoBasicSetup() {
+        _anim = playerCam.gameObject.GetComponent<Animator>();
         if (CrossScene.cameFromMainMenu) {
             playerCount = CrossScene.racerInfo.Length;
             map = CrossScene.map;
@@ -43,111 +46,127 @@ public class GameController : MonoBehaviour {
                 CrossScene.racerInfo[playerId] = new RacerInfo(PlayerPrefs.GetString("playerName"), shipScriptable);
             }
 
-            ShipsScriptable[] available = new ShipsScriptable[] { shipScriptable };
-            for (int i = 0; i < playerCount; i++) {
-                if (CrossScene.racerInfo[i] == null) {
-                    CrossScene.racerInfo[i] = new RacerInfo(available);
-                }
+            var available = new[] { shipScriptable };
+            for (var i = 0; i < playerCount; i++) {
+                CrossScene.racerInfo[i] ??= new RacerInfo(available);
             }
         }
+    }
 
-        GameObject mapObj = Instantiate(map.prefab);
-        mMap = mapObj.GetComponent<Map>();
-        checkpoints = mMap.checkpoints;
-        startingPositions = mMap.startingPositions;
+    private void Start() {
+        DoBasicSetup();
+        var mapObj = Instantiate(map.prefab);
+        _mMap = mapObj.GetComponent<Map>();
+        _checkpoints = _mMap.checkpoints;
+        _startingPositions = _mMap.startingPositions;
         state = "prerace";
         racers = new Racer[playerCount];
-        int checkpointCount = checkpoints.transform.childCount;
-        Checkpoint lastCheck = checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<Checkpoint>();
-        Checkpoint nextCheck = checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
-        for(int i = 0; i < playerCount; i++) {
-            RacerInfo info = CrossScene.racerInfo[i];
-            Transform startPos = startingPositions.GetChild(i).transform;
-            Vector3 pos = startPos.position;
-            Quaternion rot = startPos.rotation;
-            GameObject newship = Instantiate(info.ship.shipModel);
-            Racer racer = newship.GetComponent<Racer>();
-            MovementController mc = newship.GetComponentInChildren<MovementController>();
+        var checkpointCount = _checkpoints.transform.childCount;
+        var lastCheck = _checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<Checkpoint>();
+        var nextCheck = _checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
+        for (var i = 0; i < playerCount; i++) {
+            var info = CrossScene.racerInfo[i];
+            var startPos = _startingPositions.GetChild(i).transform;
+            var pos = startPos.position;
+            var rot = startPos.rotation;
+            var newShip = Instantiate(info.Ship.shipModel);
+            var racer = newShip.GetComponent<Racer>();
+            var mc = newShip.GetComponentInChildren<MovementController>();
             mc.enabled = false;
-            if (info.isBot) {
-                PlayerMovement pm = newship.GetComponent<PlayerMovement>();
+            if (info.IsBot) {
+                var pm = newShip.GetComponent<PlayerMovement>();
                 pm.enabled = false;
             } else {
-                BotMovement bot = newship.GetComponent<BotMovement>();
+                var bot = newShip.GetComponent<BotMovement>();
                 bot.enabled = false;
-                speedUI.target = mc.gameObject;
-                durabilityUI.target = mc.gameObject;
+                var o = mc.gameObject;
+                speedUI.target = o;
+                durabilityUI.target = o;
                 playerRacer = racer;
                 playerId = i;
             }
+
+            if (info.IsNetworkPlayer) {
+                var relevantClient = NetworkManager.Singleton.ConnectedClients[info.ClientId];
+                newShip.transform.parent = relevantClient.PlayerObject.transform;
+                relevantClient.PlayerObject.GetComponent<DFPlayer>().ClaimShip(newShip);
+            }
+
             racer.id = i;
-            racer.name = info.name;
+            racer.name = info.Name;
             racer.lastCheckpoint = lastCheck;
             racer.nextCheckpoint = nextCheck;
-            newship.transform.position = pos;
-            newship.transform.rotation = rot;
+            newShip.transform.position = pos;
+            newShip.transform.rotation = rot;
             racers[i] = racer;
             laps[racer] = new List<float>();
         }
-        if (playerRacer == null) {
-            playerRacer = racers[0];
-            playerId = 0;
-            MovementController mc = playerRacer.gameObject.GetComponentInChildren<MovementController>();
-            speedUI.target = mc.gameObject;
-            durabilityUI.target = mc.gameObject;
-        }
 
         playerCam.gameObject.GetComponent<Animator>().Play(map.cameraClipName);
-
-        if (straightToRace) {
-            playerCam.gameObject.GetComponent<Animator>().enabled = false;
-            AttachCamera();
-            raceTimer.running = true;
-            lapTimer.running = true;
-            for (int i = 0; i < playerCount; i++) {
-                MovementController mc = racers[i].gameObject.GetComponentInChildren<MovementController>();
-                mc.enabled = true;
-            }
-            state = "race";
-        }
+        
+        if (playerRacer == null) AssignPlayerToFirstTRacer();
+        if (!straightToRace) return;
+        //else
+        GoStraightToRace();
     }
 
-    void AttachCamera() {
-        Transform first = playerRacer.transform;
-        Transform camTransform = playerCam.transform;
+    private void AssignPlayerToFirstTRacer() {
+        playerRacer = racers[0];
+        playerId = 0;
+        var mc = playerRacer.gameObject.GetComponentInChildren<MovementController>();
+        var o = mc.gameObject;
+        speedUI.target = o;
+        durabilityUI.target = o;
+    }
+
+    private void GoStraightToRace() {
+        playerCam.gameObject.GetComponent<Animator>().enabled = false;
+        AttachCamera();
+        raceTimer.running = true;
+        lapTimer.running = true;
+        for (var i = 0; i < playerCount; i++) {
+            var mc = racers[i].gameObject.GetComponentInChildren<MovementController>();
+            mc.enabled = true;
+        }
+
+        state = "race";
+    }
+
+    private void AttachCamera() {
+        var first = playerRacer.transform;
+        var camTransform = playerCam.transform;
         camTransform.SetParent(first);
-        camTransform.position = first.position;
-        camTransform.position += first.up * 2;
-        camTransform.position -= first.forward * 3.5f;
+        Vector3 position;
+        position = first.position;
+        position += first.up * 2;
+        position -= first.forward * 3.5f;
+        camTransform.position = position;
         camTransform.rotation = first.rotation;
-        camTransform.Rotate(15,0,0);
+        camTransform.Rotate(15, 0, 0);
     }
 
-    void Update()
-    {
+    private void Update() {
         if (state == "prerace") {
-            handlePreRace();
+            HandlePreRace();
         } else if (state == "countdown") {
-            updatePositions();
-            handleCountdown();
+            UpdatePositions();
+            HandleCountdown();
         } else if (state == "race") {
-            updatePositions();
-            handleRace();
+            UpdatePositions();
+            HandleRace();
         } else if (state == "postrace") {
-            handlePostRace();
+            HandlePostRace();
         }
     }
 
-    void handlePreRace() {
-        Animator anim = playerCam.gameObject.GetComponent<Animator>();
-        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f) {
-            anim.enabled = false;
-            AttachCamera();
-            state = "countdown";
-        }
+    private void HandlePreRace() {
+        if (!(_anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f)) return;
+        _anim.enabled = false;
+        AttachCamera();
+        state = "countdown";
     }
 
-    void updatePositions() {
+    private void UpdatePositions() {
         var ordered = from r in racers orderby r.GetPosition() descending, FinishFor(r) select r;
         racers = ordered.ToArray();
     }
@@ -156,7 +175,7 @@ public class GameController : MonoBehaviour {
         return laps[racer].Count > lapCount;
     }
 
-    float FinishFor(Racer racer) {
+    private float FinishFor(Racer racer) {
         if (laps[racer].Count > lapCount) {
             return laps[racer].Last();
         } else {
@@ -164,8 +183,8 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public void registerLap(Racer racer) {
-        List<float> times = laps[racer];
+    public void RegisterLap(Racer racer) {
+        var times = laps[racer];
         if (times.Count == 0) {
             times.Add(0.0f);
         } else if (times.Count <= lapCount) {
@@ -189,47 +208,47 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public int positionFor(Racer racer) {
+    public int PositionFor(Racer racer) {
         return System.Array.IndexOf(racers, racer);
     }
 
-    public int positionForPlayer() {
+    public int PositionForPlayer() {
         return System.Array.IndexOf(racers, playerRacer);
     }
 
-    void handleCountdown() {
-        countdownTimer -= Time.deltaTime;
-        if (countdownTimer <= 0.0f || devmode) {
+    private void HandleCountdown() {
+        _countdownTimer -= Time.deltaTime;
+        if (_countdownTimer <= 0.0f || devmode) {
             state = "race";
             raceTimer.running = true;
             lapTimer.running = true;
             countdownText.SetText("ACTIVATE!");
-            for (int i = 0; i < playerCount; i++) {
-                MovementController mc = racers[i].gameObject.GetComponentInChildren<MovementController>();
+            for (var i = 0; i < playerCount; i++) {
+                var mc = racers[i].gameObject.GetComponentInChildren<MovementController>();
                 mc.enabled = true;
             }
         } else {
-            countdownText.SetText(Mathf.Ceil(countdownTimer).ToString());
+            countdownText.SetText(Mathf.Ceil(_countdownTimer).ToString());
         }
     }
 
-    void handleRace() {
-        if (countdownTimer >= -1.0f) {
-            countdownTimer -= Time.deltaTime;
+    private void HandleRace() {
+        if (_countdownTimer >= -1.0f) {
+            _countdownTimer -= Time.deltaTime;
         } else {
             countdownText.SetText("");
         }
     }
 
-    void handlePostRace() {
-        if (postRaceTimer > 0.0) {
-            postRaceTimer -= Time.deltaTime;
+    private void HandlePostRace() {
+        if (_postRaceTimer > 0.0) {
+            _postRaceTimer -= Time.deltaTime;
         } else {
             SceneManager.LoadScene(0);
         }
     }
 
-    public float bestLapFor(Racer racer) {
+    public float BestLapFor(Racer racer) {
         if (laps[racer].Count == 1) {
             return 0.0f;
         } else {

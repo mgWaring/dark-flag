@@ -1,6 +1,4 @@
 using Managers;
-using RelaySystem;
-using RelaySystem.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,7 +7,6 @@ using Utils;
 namespace UI {
     public class HostGameButton : MonoBehaviour
     {
-        [SerializeField] private TMP_Text joinCodeText;
         [SerializeField] private TMP_InputField input;
 
         private void Awake()
@@ -31,12 +28,6 @@ namespace UI {
         public void Start()
         {
             input.text = RandomSensibleString.GenerateString();
-            RelayManager.Instance.OnActiveRelayChange += UpdateActiveJoinCode;
-        }
-
-        private void UpdateActiveJoinCode(RelayHostData relayHostData)
-        {
-            joinCodeText.text = relayHostData.joinCode;
         }
     }
 }

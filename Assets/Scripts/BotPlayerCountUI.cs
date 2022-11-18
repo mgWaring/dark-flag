@@ -1,23 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class BotPlayerCountUI : MonoBehaviour
-{
+public class BotPlayerCountUI : MonoBehaviour {
+    [SerializeField] private int maxBots = 8;
     public Selector playerSelector;
     public Selector botSelector;
 
     // Update is called once per frame
-    void Update()
-    {
-        if (playerSelector.value == "1") {
-            botSelector.selection = new string[] {"0", "1", "2", "3", "4", "5", "6", "7"};
-            if (botSelector.value == "8") {
-                botSelector.index = 7;
-                botSelector.SetText();
-            }
-        } else if (playerSelector.value == "0") {
-            botSelector.selection = new string[] {"0", "1", "2", "3", "4", "5", "6", "7", "8"};
+    void Update() {
+        var occupiedSlots = 0;
+        if (playerSelector) {
+            int.TryParse(playerSelector.value, out occupiedSlots);
+        }
+
+        if (NetworkManager.Singleton) {
+            occupiedSlots = NetworkManager.Singleton.ConnectedClients.Count;
+        }
+
+        var bots = maxBots - occupiedSlots;
+        botSelector.selection = new string[bots];
+        for (var i = 0; i < (bots > 0 ? bots : 0); i++) botSelector.selection[i] = i.ToString();
+        if (botSelector.value == "8") {
+            botSelector.index = 7;
+            botSelector.SetText();
         }
     }
 }

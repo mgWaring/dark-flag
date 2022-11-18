@@ -1,62 +1,60 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 public class RacerInfo
 {
-    public string name { get; set; }
-    public ShipsScriptable ship { get; set; }
-    public bool isBot { get; set; }
+    public string Name { get; set; }
+    public ShipsScriptable Ship { get; set; }
+    public bool IsBot { get; set; }
+    public bool IsNetworkPlayer { get; set; }
+    public ulong ClientId { get; set; }
 
-    public RacerInfo(string iName, ShipsScriptable iShip, bool iIsBot) {
-        name = iName;
-        ship = iShip;
-        isBot = iIsBot;
+    public RacerInfo(string name, ShipsScriptable ship, ulong clientId) {
+        Name = name;
+        Ship = ship;
+        ClientId = clientId;
+        IsNetworkPlayer = true;
+    }
+    
+    public RacerInfo(string name, ShipsScriptable ship, bool isBot) {
+        Name = name;
+        Ship = ship;
+        IsBot = isBot;
     }
 
-    public RacerInfo(string iName, ShipsScriptable iShip) {
-        name = iName;
-        ship = iShip;
-        isBot = false;
+    public RacerInfo(string name, ShipsScriptable ship) {
+        Name = name;
+        Ship = ship;
     }
-
-    /*
-    public RacerInfo() {
-        name = generateFakeName();
-        ship = "testShip";
-        isBot = true;
-    }
-    */
-
+    
     public RacerInfo(ShipsScriptable[] ships) {
-        name = generateFakeName();
         var rand = new Random();
-        ship = ships[rand.Next(ships.Length)];
-        isBot = true;
+        Name = GenerateFakeName();
+        Ship = ships[rand.Next(ships.Length)];
+        IsBot = true;
     }
     
 
     // totally necessary
-    string generateFakeName() {
+    string GenerateFakeName() {
         string[] names = {
             "Abe",
             "Bart",
-            "Camembert",
-            "Doogal",
-            "Ephie",
+            "Camenbert",
+            "Dougal",
+            "Ephey", // * eh he he he he *
             "French",
             "Geoffrey",
             "Harriet",
             "Isiah",
             "Jonah",
-            "FuckingKevin",
+            "FUCKINGKEVIN",
             "Lionel",
             "Mary",
             "Nana",
-            "Orthello",
+            "Othello",
             "Pam",
             "Quintus",
-            "Ruaidhrigh",
+            "Ruaraidh",
             "Stephen",
             "Tarquin",
             "Uriah",
@@ -64,9 +62,11 @@ public class RacerInfo
             "Wesley",
             "Xena",
             "Yuna",
-            "Zander"
+            "Zander",
+            "Dirk Gently",
+            "Zanic"
         };
         var rand = new Random();
-        return string.Format("{0}Bot", names[rand.Next(names.Length)]);
+        return $"{names[rand.Next(names.Length)]}Bot";
     }
 }

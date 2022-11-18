@@ -363,7 +363,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: cbf79d38ba4443546b918f132aca2b0a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.03
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -474,7 +474,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 97f352a4318feb14da6ac7743bee66c9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.03
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -567,8 +567,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 875907939}
-  - component: {fileID: 875907938}
   - component: {fileID: 875907937}
+  - component: {fileID: 875907940}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -592,18 +592,6 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &875907938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 875907936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2a0a81f52194ece8300896218a4e386, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &875907939
 Transform:
   m_ObjectHideFlags: 0
@@ -619,6 +607,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &875907940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875907936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2a0a81f52194ece8300896218a4e386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1014459472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1231,7 +1231,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1687246602}
-    PlayerPrefab: {fileID: 0}
+    PlayerPrefab: {fileID: 3683553355460315779, guid: 65a3c7a500b2005468dd610b2c80d308, type: 3}
     NetworkPrefabs: []
     TickRate: 30
     ClientConnectionBufferTimeout: 10
@@ -2341,7 +2341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec38fca1ae8e5b042ba83259fe2a6587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joinCodeText: {fileID: 0}
   input: {fileID: 5122222955799070168}
 --- !u!222 &5122222955744642356
 CanvasRenderer:

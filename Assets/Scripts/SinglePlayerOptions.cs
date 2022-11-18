@@ -28,8 +28,6 @@ public class SinglePlayerOptions : MonoBehaviour
         int.TryParse(playerSelector.value, out playerCount);
         int.TryParse(botSelector.value, out botCount);
         
-        //ove this to a gm so I can call it from my multiplayer menu too
-
         CrossScene.map = maps.Single(m => m.name == mapSelector.value);
         CrossScene.laps = lapCount;
         CrossScene.players = playerCount;

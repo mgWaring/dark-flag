@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 namespace UI.Pregame {
     public class ReadyButton : MonoBehaviour {
-        
-        private bool _ready;
+
+        public bool _ready;
 
         [SerializeField] private Color readyColor = Color.green;
         [SerializeField] private Color notReadyColor = Color.red;

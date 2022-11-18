@@ -3,42 +3,51 @@ using TMPro;
 using UnityEngine;
 
 /*
-* Extend the player tile so that it can handle input to handle:
-* changing ship,
-* changing name,
+* todo: Extend the player tile so that it can handle input to handle:
 * changing colour,
 * changing anthem,
  * */
     
 namespace UI.Pregame {
     public class PlayerTile: MonoBehaviour{
-        public ulong pid;
+
         public DFPlayer Player;
-        public TMP_Text nameText;
+        public TMP_InputField nameInput;
+        public bool ready { get; }
+
+        [SerializeField] private ShipSelector _shipSelector;
+
+        private void OnEnable() {
+            _shipSelector.OnShipChange += SetPlayerShip;
+        }
+
+        private void OnDisable() {
+            _shipSelector.OnShipChange -= SetPlayerShip;
+        }
+
+        private void Start() {
+            nameInput.text = Player.playerName;
+            // when the input is changed update the player object with the new name
+            nameInput.onValueChanged.AddListener(SetPlayerName);
+        }
 
         void PopulateAnthemsList() {
             
         }
-        void PopulateShipList() {
-            
-        }
-        void SetName() {
-            nameText.text = Player.playerName;
+        
+        void SetPlayerName(string playerName) {
+            Player.playerName = playerName;
         }
 
-        void NextShip() {
-            Player.playerShipName = "next";
+        void SetPlayerShip(string shipName) {
+            Player.playerShipName = shipName;
         }
 
-        void PreviousShip() {
-            
-        }
-
-        void SetColour() {
+        void SetPlayerColour() {
             
         }
 
-        void SetAnthem() {
+        void SetPlayerAnthem() {
             
         }
     }

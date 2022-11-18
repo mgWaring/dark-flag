@@ -12,27 +12,36 @@ namespace UI.Pregame {
         [SerializeField] private GameObject playerTileContainer;
 
         public void Start() {
-            if (IsServer) {
-                CreateTileForClient(NetworkManager.LocalClient.PlayerObject);
-            }
+            Debug.Log("waking player list");
             SpawnManager.Instance.OnPlayerJoined += CreateTileForClient;
             SpawnManager.Instance.OnPlayerLeft += DeleteTileForClient;
+            var count = NetworkManager.Singleton.ConnectedClients.Count;
+            Debug.LogFormat($"there are {count} clients connected");
+            CreateTileForClient(0);
         }
 
-        private void CreateTileForClient(NetworkObject clientObject) {
-            var DFPlayer = clientObject.GetComponent<DFPlayer>();
-            var clientPlayerId = DFPlayer.playerID.Value;
-            if (_playerTiles.TryGetValue(clientPlayerId, out var tile)) {
+        public bool AllReady() {
+            return playerTileContainer.GetComponentsInChildren<ReadyButton>().All(
+                tile => tile._ready
+            );
+        }
+
+        private void CreateTileForClient(ulong clientId) {
+            var DFPlayer = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<DFPlayer>();
+
+            Debug.Log(DFPlayer.playerName);
+            Debug.LogFormat("We're creating a tile for a player with ID: {0}", DFPlayer.NetworkObject.OwnerClientId);
+            if (_playerTiles.TryGetValue(clientId, out var tile)) {
                 // update the existing tile
                 tile.GetComponent<PlayerTile>().Player = DFPlayer;
             } else {
                 // if the prefs include an ID we don't have in our tile list, add a new tile
                 var newTile = Instantiate(playerTilePrefab, playerTileContainer.transform, false);
                 newTile.GetComponent<PlayerTile>().Player = DFPlayer;
-                _playerTiles.Add(clientPlayerId, newTile);
+                _playerTiles.Add(clientId, newTile);
             }
 
-            //we also need to remove entries and tiles that aren't reflected by the pref data
+            //we also need to remove entries and tiles that aren't reflected by the clients list
             var tileIds = _playerTiles.Keys.ToArray();
             var prefIds = NetworkManager.Singleton.ConnectedClients.Keys.ToArray();
             var leftovers = tileIds.Except(prefIds);

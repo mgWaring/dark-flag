@@ -24,7 +24,7 @@ public class Scoreboard : MonoBehaviour
         for(int i = 0; i < gameController.playerCount; i++) {
             GameObject row = transform.GetChild(i + 1).gameObject;
             Racer racer = gameController.racers[i];
-            float bestLap = gameController.bestLapFor(racer);
+            float bestLap = gameController.BestLapFor(racer);
 
             row.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = string.Format("{0}", i + 1);
             row.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = racer.name;

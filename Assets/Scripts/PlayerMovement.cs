@@ -1,8 +1,8 @@
-using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.InputSystem;
 
 //Add this script to vehicles that the player will be controlling.
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     MovementController mc;
     ShipDurability sd;
@@ -47,8 +47,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        mc.ThrustController(thrustInput.ReadValue<float>(), boostInput.ReadValue<float>());
-        mc.YawController(yawInput.ReadValue<float>());
-        sd.BoostDamage(boostInput.ReadValue<float>());
+        if (IsClient && IsOwner) {
+            mc.ThrustController(thrustInput.ReadValue<float>(), boostInput.ReadValue<float>());
+            mc.YawController(yawInput.ReadValue<float>());
+            sd.BoostDamage(boostInput.ReadValue<float>());
+        }
     }
 }
