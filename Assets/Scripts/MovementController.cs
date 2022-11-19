@@ -82,7 +82,6 @@ public class MovementController : MonoBehaviour
     {
         accelerationMult = thrustInput * (boostInput + boostMult);
         shipAudioSource.pitch = engineDefaultPitch + (pitchLimiter * velocity * Time.fixedDeltaTime);
-        Debug.Log(shipAudioSource.pitch);
     }
 
     public void YawController(float yawInput)
