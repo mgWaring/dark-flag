@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         boostInput.Enable();
         fireInput.Enable();
         bombInput.Enable();
-        cameraControl.Enable();
+        cameraFlip.Enable();
     }
 
     //Required for new input system. Don't ask me why.
@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
         cameraFlip.Disable();
     }
 
+    //Calls relevent methods and gives them player input values.
     void Update()
     {
         mc.ThrustController(thrustInput.ReadValue<float>(), boostInput.ReadValue<float>());
