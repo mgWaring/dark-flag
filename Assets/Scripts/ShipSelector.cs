@@ -33,7 +33,7 @@ public class ShipSelector : MonoBehaviour {
 
     // Start is called before the first frame update
     private void Start() {
-        selectableShips = selectableShipNames.Select(name => name.shipModel).ToArray();
+        selectableShips = selectableShipNames.Select(name => name.shipShowcase).ToArray();
         SetValues();
     }
 
