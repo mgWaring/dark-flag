@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using RelaySystem.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.Netcode;
 
 public class GameController : MonoBehaviour {
     [SerializeField] private bool devmode;
@@ -20,6 +22,7 @@ public class GameController : MonoBehaviour {
     [HideInInspector] public Racer[] racers;
     public Dictionary<Racer, List<float>> laps = new();
     private List<Player> _players;
+    private List<DFPlayer> _networkPlayers;
     private List<Bot> _bots;
 
     private float _countdownTimer = 5.0f;
@@ -35,6 +38,9 @@ public class GameController : MonoBehaviour {
     private Animator _firstCamAnim;
 
     private void DoBasicSetup() {
+        _players = new List<Player>();
+        _networkPlayers = new List<DFPlayer>();
+        _bots = new List<Bot>();
         if (CrossScene.cameFromMainMenu) {
             playerCount = CrossScene.racerInfo.Length;
             map = CrossScene.map;
@@ -53,56 +59,39 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    private void Start() {
-        DoBasicSetup();
-        _players = new List<Player>();
-        _bots = new List<Bot>();
+    private void DoMapSetup() {
         var mapObj = Instantiate(map.prefab);
         _mMap = mapObj.GetComponent<Map>();
         _checkpoints = _mMap.checkpoints;
         _startingPositions = _mMap.startingPositions;
         state = "prerace";
         racers = new Racer[playerCount];
-        var checkpointCount = _checkpoints.transform.childCount;
-        var lastCheck = _checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<Checkpoint>();
-        var nextCheck = _checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
+
+    }
+
+    private void Start() {
+        DoBasicSetup();
+        
         for (var i = 0; i < playerCount; i++) {
             var info = CrossScene.racerInfo[i];
+            
             var startPos = _startingPositions.GetChild(i).transform;
             var pos = startPos.position;
             var rot = startPos.rotation;
+            
             Racer racer;
             if (info.IsBot) {
-                var botGo = Instantiate(botPrefab);
-                var bot = botGo.GetComponent<Bot>();
-                _bots.Add(bot);
-                bot.ss = info.Ship;
-                bot.Init();
-                racer = bot.racer;
-                bot.SetPosRot(pos, rot);
-                if (i == 0) {
-                    _firstCamAnim = bot.camera.GetComponent<Animator>();
-                }
+                racer = SetupBot(info,  i,  pos,  rot);
+            } else if(info.IsNetworkPlayer) {
+                racer = SetupNetworkPlayer(info,  i,  pos,  rot);
             } else {
-                var playerGo = Instantiate(playerPrefab);
-                var player = playerGo.GetComponent<Player>();
-                _players.Add(player);
-                Debug.Log(player);
-                player.ss = info.Ship;
-                player.Init();
-                racer = player.racer;
-                playerRacer = racer;
-                player.SetPosRot(pos, rot);
-                if (i == 0) {
-                    _firstCamAnim = player.camera.GetComponent<Animator>();
-                }
-                //this needs to worked into the block above
-                if (info.IsNetworkPlayer) {
-                    //var relevantClient = NetworkManager.Singleton.ConnectedClients[info.ClientId];
-                    //newShip.transform.parent = relevantClient.PlayerObject.transform;
-                    //relevantClient.PlayerObject.GetComponent<DFPlayer>().ClaimShip(newShip);
-                }
+                racer = SetupPlayer(info,  i,  pos,  rot);
             }
+            
+            var checkpointCount = _checkpoints.transform.childCount;
+            var lastCheck = _checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<Checkpoint>();
+            var nextCheck = _checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
+
 
             racer.id = i;
             racer.name = info.Name;
@@ -122,6 +111,48 @@ public class GameController : MonoBehaviour {
             lapTimer.running = true;
             state = "race";
         }
+    }
+
+    private Racer SetupBot(RacerInfo info, int i, Vector3 pos, Quaternion rot) {
+        var botGo = Instantiate(botPrefab);
+        var bot = botGo.GetComponent<Bot>();
+        _bots.Add(bot);
+        bot.ss = info.Ship;
+        bot.Init();
+        bot.SetPosRot(pos, rot);
+        if (i == 0) {
+            _firstCamAnim = bot.camera.GetComponent<Animator>();
+        }
+        return bot.racer;
+    }    
+    private Racer SetupNetworkPlayer(RacerInfo info, int i, Vector3 pos, Quaternion rot) {
+        var relevantClient = NetworkManager.Singleton.ConnectedClients[info.ClientId];
+        var player = relevantClient.PlayerObject.GetComponent<DFPlayer>();
+        _networkPlayers.Add(player);
+        Debug.Log(player);
+        player.ss = info.Ship;
+        player.Init();
+        player.SetPosRot(pos, rot);
+        if (i == 0) {
+            _firstCamAnim = player.camera.GetComponent<Animator>();
+        }
+
+        return player.racer;
+    }
+
+    private Racer SetupPlayer(RacerInfo info, int i, Vector3 pos, Quaternion rot) {
+        var playerGo = Instantiate(playerPrefab);
+        var player = playerGo.GetComponent<Player>();
+        _players.Add(player);
+        Debug.Log(player);
+        player.ss = info.Ship;
+        player.Init();
+        player.SetPosRot(pos, rot);
+        if (i == 0) {
+            _firstCamAnim = player.camera.GetComponent<Animator>();
+        }
+
+        return player.racer;
     }
 
     private void SetUITarget() {
@@ -227,7 +258,7 @@ public class GameController : MonoBehaviour {
                 if (RacerIsFinished(racer)) {
                     scoreboard.SetActive(true);
                     racer.gameObject.GetComponent<BotMovement>().enabled = true;
-                    racer.gameObject.GetComponent<PlayerMovement>().enabled = false;
+                    racer.gameObject.GetComponent<PlayerInput>().enabled = false;
                 }
             }
         }

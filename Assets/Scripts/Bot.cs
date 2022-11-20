@@ -16,7 +16,7 @@ public class Bot : MonoBehaviour
         racer = ship.GetComponent<Racer>();
         mc = ship.GetComponentInChildren<MovementController>();
         mc.enabled = false;
-        PlayerMovement pm = ship.GetComponent<PlayerMovement>();
+        PlayerInput pm = ship.GetComponent<PlayerInput>();
         pm.enabled = false;
     }
 
