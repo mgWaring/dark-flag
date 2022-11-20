@@ -326,93 +326,70 @@ MonoBehaviour:
       m_Action: Yaw Input
       m_Flags: 8
     m_Flags: 0
-  cameraControl:
-    m_Name: Camera Control
+  cameraControlY:
+    m_Name: Camera Control Y
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 630855ae-f3c5-4689-a1eb-759fc4727c56
+    m_Id: 82657a33-bbe1-45f2-9664-334a53610c85
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
-    - m_Name: 2D Vector Mouse
-      m_Id: aaf61630-57cd-4f4a-a05d-487d492f567a
-      m_Path: 2DVector
+    - m_Name: 1D Axis Gamepad
+      m_Id: f87d273a-1b84-4621-86a9-18da325abb02
+      m_Path: 1DAxis
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Camera Control
+      m_Action: Camera Control Y
       m_Flags: 4
-    - m_Name: up
-      m_Id: 50abf960-1770-445c-a3e0-9eb45562a14e
-      m_Path: <Mouse>/delta/y
+    - m_Name: negative
+      m_Id: 9c4b293e-459d-43e8-8dfe-e848dc28657c
+      m_Path: <Gamepad>/rightStick/down
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Camera Control
+      m_Action: Camera Control Y
       m_Flags: 8
-    - m_Name: down
-      m_Id: a61a6bdf-91a9-4208-b163-ac9a18077f0a
-      m_Path: <Mouse>/delta/y
+    - m_Name: positive
+      m_Id: ff17861c-e38a-47ac-8910-c79f4e92ea12
+      m_Path: <Gamepad>/rightStick/up
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Camera Control
+      m_Action: Camera Control Y
       m_Flags: 8
-    - m_Name: left
-      m_Id: 1a6126a5-b307-4ec7-8231-d8c2afceeb3a
-      m_Path: <Mouse>/position/x
+    m_Flags: 0
+  cameraControlX:
+    m_Name: Camera Control X
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: cc683b58-2de6-47dd-a09a-90123a7691e9
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 1D Axis Gamepad
+      m_Id: 209dfc44-bb49-4579-b5f4-fda6211e2c00
+      m_Path: 1DAxis
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Camera Control
-      m_Flags: 8
-    - m_Name: right
-      m_Id: 0f442056-7c0a-40d7-8f46-3d38b073182d
-      m_Path: <Mouse>/position/y
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Camera Control
-      m_Flags: 8
-    - m_Name: 2D Vector Gamepad Stick
-      m_Id: a384ca78-30ea-4807-a807-5b7e6c11767a
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Camera Control
+      m_Action: Camera Control X
       m_Flags: 4
-    - m_Name: up
-      m_Id: 010589e0-d3cf-48f6-bf89-cd8fe64c77e8
-      m_Path: <Gamepad>/rightStick/y
+    - m_Name: negative
+      m_Id: 7474013e-1fce-46c5-ab97-c092112c771a
+      m_Path: <Gamepad>/rightStick/left
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Camera Control
+      m_Action: Camera Control X
       m_Flags: 8
-    - m_Name: down
-      m_Id: bca8f577-23ee-4fe5-94af-8fbc1849d9d6
-      m_Path: <Gamepad>/rightStick/y
+    - m_Name: positive
+      m_Id: 45fd16f7-1cde-4bd8-aea5-72de008ee308
+      m_Path: <Gamepad>/rightStick/right
       m_Interactions: 
       m_Processors: 
       m_Groups: 
-      m_Action: Camera Control
-      m_Flags: 8
-    - m_Name: left
-      m_Id: 951f1eb2-99c9-4143-ae87-7eb63d4af830
-      m_Path: <Gamepad>/leftStick/x
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Camera Control
-      m_Flags: 8
-    - m_Name: right
-      m_Id: aea33bc0-9040-468a-ac70-bda3071a5a3b
-      m_Path: <Gamepad>/leftStick/x
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Camera Control
+      m_Action: Camera Control X
       m_Flags: 8
     m_Flags: 0
   boostInput:
@@ -667,31 +644,6 @@ MonoBehaviour:
   bulletSpawn: {fileID: 6194179295276075254}
   ammoCount: 25
   firingDelay: 0.1
-  fireInput:
-    m_Name: Fire Input
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 43bdd166-6762-4327-9bcb-6e1183de6aee
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 025559d1-49f9-4800-a797-03305670b88c
-      m_Path: <Gamepad>/buttonSouth
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Fire Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: f389e69e-0032-4cf4-bc93-69a129118bc3
-      m_Path: <Keyboard>/space
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Fire Input
-      m_Flags: 0
-    m_Flags: 0
 --- !u!114 &6086227926494204140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,31 +660,6 @@ MonoBehaviour:
   bombSpawn: {fileID: 7195995219743435209}
   ammoCount: 1
   firingDelay: 2
-  fireInput:
-    m_Name: Fire Input
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 168ac7f1-b02e-4b46-aff4-7ffae5897d48
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 791bc447-13a8-4182-8955-190dac2227dc
-      m_Path: <Keyboard>/b
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Fire Input
-      m_Flags: 0
-    - m_Name: 
-      m_Id: 5dd49cd9-12af-4843-9bc5-1fde04805936
-      m_Path: <Gamepad>/buttonEast
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Fire Input
-      m_Flags: 0
-    m_Flags: 0
 --- !u!1 &5379698523083374124
 GameObject:
   m_ObjectHideFlags: 0

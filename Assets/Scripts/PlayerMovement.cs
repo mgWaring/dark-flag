@@ -1,17 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-//Add this script to vehicles that the player will be controlling.
+//Add this script to player.
 public class PlayerMovement : MonoBehaviour
 {
     MovementController mc;
+    PlayerCameraController pcc;
     ShipDurability sd;
     FrontWeapon fw;
     BackWeapon bw;
-    public bool invertY;// doesn't do anything right now.
+    public bool invertY = false;
+    float yInversion;
     public InputAction thrustInput;//Value is between -1 and 1.
     public InputAction yawInput;//Value is between -1 and 1.
-    public InputAction cameraControl;
+    public InputAction cameraControlY;//Value is between -1 and 1. Unity didn't like having x and y combined, so now they are seperate.
+    public InputAction cameraControlX;//Value is between -1 and 1.
     public InputAction boostInput;//Value is either 0 or 1.
     public InputAction fireInput;//Value is either 0 or 1.
     public InputAction bombInput;//Value is either 0 or 1.
@@ -19,10 +22,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-      mc = GetComponent<MovementController>();
-      sd = GetComponent<ShipDurability>();
-      fw = GetComponent<FrontWeapon>();
-      bw = GetComponent<BackWeapon>();
+        mc = GetComponentInChildren<MovementController>();
+        pcc = GetComponentInChildren<PlayerCameraController>();
+        sd = GetComponentInChildren<ShipDurability>();
+        fw = GetComponentInChildren<FrontWeapon>();
+        bw = GetComponentInChildren<BackWeapon>();
+        InverY();      
     }
 
     //Required for new input system. Don't ask me why.
@@ -30,7 +35,8 @@ public class PlayerMovement : MonoBehaviour
     {
         thrustInput.Enable();
         yawInput.Enable();
-        cameraControl.Enable();
+        cameraControlY.Enable();
+        cameraControlX.Enable();
         boostInput.Enable();
         fireInput.Enable();
         bombInput.Enable();
@@ -42,7 +48,8 @@ public class PlayerMovement : MonoBehaviour
     {
         thrustInput.Disable();
         yawInput.Disable();
-        cameraControl.Disable();
+        cameraControlY.Disable();
+        cameraControlX.Disable();
         boostInput.Disable();
         fireInput.Disable();
         bombInput.Disable();
@@ -55,7 +62,23 @@ public class PlayerMovement : MonoBehaviour
         mc.ThrustController(thrustInput.ReadValue<float>(), boostInput.ReadValue<float>());
         mc.YawController(yawInput.ReadValue<float>());
         sd.BoostDamage(boostInput.ReadValue<float>());
+        pcc.CameraControl(cameraControlY.ReadValue<float>() * yInversion, cameraControlX.ReadValue<float>());
         fw.ShootGun(fireInput.ReadValue<float>());
         bw.BombRelease(bombInput.ReadValue<float>());
     }
+
+    //This one's for all you weirdos out there.
+    void InverY()
+    {
+        if (invertY)
+        {
+            yInversion = -1;
+        }
+        else
+        {
+            yInversion = 1;
+        }
+    }
+
+
 }

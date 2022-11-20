@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class GameController : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        InputSystem.settings.SetInternalFeatureFlag("DISABLE_SHORTCUT_SUPPORT", true);
         if (CrossScene.cameFromMainMenu) {
             playerCount = CrossScene.racerInfo.Length;
             map = CrossScene.map;

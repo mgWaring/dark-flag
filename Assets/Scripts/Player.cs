@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,9 +6,9 @@ public class Player : MonoBehaviour
     [HideInInspector] public Racer racer;
     [HideInInspector] public ShipsScriptable ss;
     [HideInInspector] public MovementController mc;
+    [HideInInspector] public PlayerCameraController pcc;
     GameObject ship;
 
-    // Start is called before the first frame update
     public void Init()
     {
         ship = Instantiate(ss.shipModel);
@@ -37,18 +35,12 @@ public class Player : MonoBehaviour
         ship.transform.SetParent(transform, true);
     }
 
+    //Tells PlayerCameraController what it's is and then enables it.
     public void AttachCamera() {
         camera.gameObject.GetComponent<Animator>().enabled = false;
-        Transform ship = racer.transform;
         Transform camTransform = camera.transform;
-        camTransform.SetParent(ship);
-        camTransform.position = ship.position;
-        camTransform.position += ship.up * 2;
-        camTransform.position -= ship.forward * 3.5f;
-        camTransform.rotation = ship.rotation;
-        camTransform.Rotate(15,0,0);
-        //PlayerCameraController pcc = camTransform.gameObject.GetComponent<PlayerCameraController>();
-        //pcc.PCameraSetup(racer.gameObject.GetComponentInChildren<Rigidbody>());
-        //pcc.PCamEnable(true);
+        pcc = camTransform.gameObject.GetComponent<PlayerCameraController>();
+        pcc.PCameraSetup(racer.gameObject.GetComponentInChildren<Transform>());
+        pcc.PCamEnable(true);
     }
 }
