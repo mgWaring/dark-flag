@@ -11,32 +11,33 @@ public class MultiPlayerOptions : MonoBehaviour {
     public Selector mapSelector;
     public Selector lapSelector;
     public Selector botSelector;
-    private Dictionary<string, MapScriptable> _maps;
+    private Dictionary<string, MapScriptable> _maps = new();
     private Dictionary<string, ShipsScriptable> _ships = new();
     [SerializeField] private PlayerList playerList;
+    public ShipsScriptable[] shipList; 
+    public MapScriptable[] mapList; 
 
     private void Start() {
         FindShips();
         FindMaps();
+        if (false) {
+            transform.GetChild(0).gameObject.SetActive(false);
+            transform.GetChild(1).gameObject.SetActive(false);
+            transform.GetChild(2).gameObject.SetActive(false);
+        }
     }
 
     private void FindShips() {
-        var theShipIds = AssetDatabase.FindAssets("t:ShipsScriptable", new[] { "Assets/ScriptableObjects/Ships" });
-
-        foreach (var guid in theShipIds) {
-            var path = AssetDatabase.GUIDToAssetPath(guid);
-            var theShip = (ShipsScriptable)AssetDatabase.LoadAssetAtPath(path, typeof(ShipsScriptable));
-            _ships.Add(theShip.shipName, theShip);
+        for (int i = 0; i < shipList.Length; i++) {
+            ShipsScriptable ss = shipList[i];
+            _ships.Add(ss.shipName, ss);
         }
     }
 
     private void FindMaps() {
-        var mapIds = AssetDatabase.FindAssets("t:MapScriptable", new[] { "Assets/MapScriptableObjects/Maps" });
-
-        foreach (var guid in mapIds) {
-            var path = AssetDatabase.GUIDToAssetPath(guid);
-            var theMap = (MapScriptable)AssetDatabase.LoadAssetAtPath(path, typeof(MapScriptable));
-            _maps.Add(theMap.name, theMap);
+        for (int i = 0; i < mapList.Length; i++) {
+            MapScriptable ms = mapList[i];
+            _maps.Add(ms.name, ms);
         }
     }
 

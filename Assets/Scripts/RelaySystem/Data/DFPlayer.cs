@@ -6,8 +6,11 @@ using UnityEngine;
  */
 namespace RelaySystem.Data {
      public class DFPlayer : NetworkBehaviour {
-    
-          public string playerName = "Lizard";
+          public NetworkVariable<int> _selectedShipIndex = new();
+          public NetworkVariable<bool> _ready = new();
+
+          public bool shipChanged = false;
+          public string playerName;
           public string playerShipName;
           //need to implement a serializable version of these two
           public Color playerColour;
@@ -23,11 +26,23 @@ namespace RelaySystem.Data {
               if (IsServer) Debug.Log("I'm a server DFPLAYER");
               if (IsClient && IsOwner) Debug.Log("I'm your local DFPlayer bebe");
               DontDestroyOnLoad(gameObject);
+              _selectedShipIndex.Value = 0;
+              _ready.Value = false;
+              _selectedShipIndex.OnValueChanged += UpdateShipSelector;
           }
+
+          private void UpdateShipSelector(int previous, int current) {
+            shipChanged = true;
+          }
+        
 
           //just in case we want to do something to the ship
           public void ClaimShip(GameObject ship) {
               Ship = ship;
+          }
+
+          void Start() {
+            playerName = PlayerPrefs.GetString("playerName");
           }
      }
 }

@@ -5,12 +5,13 @@ using System.Linq;
 using UI.Pregame;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using Unity.Netcode;
 
 public class ShipSelector : MonoBehaviour {
     //max
     [SerializeField] private bool useModal;
     [SerializeField] private PlayerTile playerTile;
-    public event Action<string> OnShipChange;
+    public event Action<int> OnShipChange;
 
     //andrew
     public TextMeshProUGUI nameText;
@@ -23,7 +24,7 @@ public class ShipSelector : MonoBehaviour {
     public GameObject confirmationModal;
     private GameObject[] selectableShips;
     private GameObject currentShip;
-    private int index = 0;
+    [HideInInspector] public int index = 0;
     [HideInInspector] public ShipsScriptable value;
     public InputAction leftInput;
     public InputAction rightInput;
@@ -114,7 +115,7 @@ public class ShipSelector : MonoBehaviour {
         value = selectableShipNames[index];
         currentShip = selectableShips[index];
         // if anything is listening for this event let it know
-        OnShipChange?.Invoke(value.shipName);
+        OnShipChange?.Invoke(index);
         if (shipHolder.childCount > 0) {
             Destroy(shipHolder.GetChild(0).gameObject);
         }
@@ -126,6 +127,9 @@ public class ShipSelector : MonoBehaviour {
         ship.GetComponent<BotMovement>().enabled = false;
         ship.GetComponent<AntiGravManager>().enabled = false;
         ship.GetComponent<RigidbodyController>().enabled = false;
+        ship.GetComponent<ShipDurability>().enabled = false;
+        ship.GetComponent<FrontWeapon>().enabled = false;
+        ship.GetComponent<BackWeapon>().enabled = false;
         ship.GetComponent<Racer>().enabled = false;
         ship.transform.SetParent(shipHolder);
         ship.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
