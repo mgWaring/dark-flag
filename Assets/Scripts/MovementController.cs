@@ -1,4 +1,3 @@
-using Unity.Mathematics;
 using UnityEngine;
 
 //Add this script to the vehicle object that has a rigidbody.
@@ -34,9 +33,6 @@ public class MovementController : MonoBehaviour
         yawAngularVelocity = Vector3.zero;
         vehicleRB.velocity = Vector3.zero;
         vehicleRB.angularVelocity = Vector3.zero;
-        
-        
-
     }
 
     private void Start()
