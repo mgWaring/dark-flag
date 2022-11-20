@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class BackWeapon : MonoBehaviour
 {
@@ -9,20 +6,8 @@ public class BackWeapon : MonoBehaviour
     public Transform bombSpawn;
     public int ammoCount;
     public float firingDelay;
-    public InputAction fireInput;
     float currentFiringDelay;
 
-    void OnEnable()
-    {
-        fireInput.Enable();
-    }
-
-    void OnDisable()
-    {
-        fireInput.Disable();
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
         currentFiringDelay = firingDelay;
@@ -38,17 +23,17 @@ public class BackWeapon : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void BombRelease(float input)
     {
         currentFiringDelay -= Time.deltaTime;
-        if (fireInput.ReadValue<float>() > 0 && currentFiringDelay <= 0 && ammoCount > 0) {
+        if (input > 0 && currentFiringDelay <= 0 && ammoCount > 0)
+        {
             ammoCount--;
             currentFiringDelay = firingDelay;
             GameObject bomb = Instantiate(bombPrefab);
             bomb.transform.position = bombSpawn.position;
             bomb.transform.rotation = bombSpawn.rotation;
-            bomb.transform.Rotate(90f,0f,0f);
+            bomb.transform.Rotate(90f, 0f, 0f);
             bomb.GetComponent<Rigidbody>().AddForce(bomb.transform.up * 10f, ForceMode.Impulse);
         }
     }
