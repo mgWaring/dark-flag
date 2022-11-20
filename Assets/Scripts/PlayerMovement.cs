@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     MovementController mc;
     ShipDurability sd;
+    FrontWeapon fw;
     BackWeapon bw;
     public bool invertY;// doesn't do anything right now.
     public InputAction thrustInput;//Value is between -1 and 1.
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     {
       mc = GetComponent<MovementController>();
       sd = GetComponent<ShipDurability>();
+      fw = GetComponent<FrontWeapon>();
       bw = GetComponent<BackWeapon>();
     }
 
@@ -52,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
         mc.ThrustController(thrustInput.ReadValue<float>(), boostInput.ReadValue<float>());
         mc.YawController(yawInput.ReadValue<float>());
         sd.BoostDamage(boostInput.ReadValue<float>());
+        fw.ShootGun(fireInput.ReadValue<float>());
         bw.BombRelease(bombInput.ReadValue<float>());
     }
 }

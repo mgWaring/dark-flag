@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class FrontWeapon : MonoBehaviour
 {
@@ -9,20 +6,8 @@ public class FrontWeapon : MonoBehaviour
     public Transform bulletSpawn;
     public int ammoCount;
     public float firingDelay;
-    public InputAction fireInput;
     float currentFiringDelay;
 
-    void OnEnable()
-    {
-        fireInput.Enable();
-    }
-
-    void OnDisable()
-    {
-        fireInput.Disable();
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
         currentFiringDelay = firingDelay;
@@ -37,12 +22,12 @@ public class FrontWeapon : MonoBehaviour
             }
         }
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    public void ShootGun(float input)
     {
         currentFiringDelay -= Time.deltaTime;
-        if (fireInput.ReadValue<float>() > 0 && currentFiringDelay <= 0 && ammoCount > 0) {
+        if (input > 0 && currentFiringDelay <= 0 && ammoCount > 0)
+        {
             ammoCount--;
             currentFiringDelay = firingDelay;
             GameObject bullet = Instantiate(bulletPrefab);
