@@ -35,7 +35,7 @@ public class RacerInfo
     
 
     // totally necessary
-    string GenerateFakeName() {
+    private string GenerateFakeName() {
         string[] names = {
             "Abe",
             "Bart",

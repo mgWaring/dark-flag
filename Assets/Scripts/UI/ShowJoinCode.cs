@@ -8,7 +8,7 @@ namespace UI {
         private TMP_Text JoinCodeText =>
             gameObject.GetComponent<TMP_Text>();
 
-        void Start() {
+        private void Start() {
             UpdateActiveJoinCode();
         }
 

@@ -18,7 +18,10 @@ MonoBehaviour:
   drag: 1.5
   angularDrag: 5
   thrustSpeed: 6000
+  boost: 1
   yawSpeed: 100
+  torqueLimiter: 0.04
+  turnTiltMaximum: {x: 0, y: 0, z: 0.2419219, w: 0.9702957}
   hoverForce: 22
   hoverStiffness: 10
   pitchRollStiffness: 4.3
@@ -30,6 +33,9 @@ MonoBehaviour:
   fineTuneOffset: {x: 0.1, y: 0, z: 0.5}
   armour: 50
   fireDamage: 0.5
+  boostDamageRate: 0.1
   roofRayDistance: 0.2
   roofRayOffset: {x: 0, y: 0.55, z: 0}
+  engineIdleSound: {fileID: 0}
   botSpeedModifier: 1
+  cameraOffset: {x: 0, y: 0, z: 0}

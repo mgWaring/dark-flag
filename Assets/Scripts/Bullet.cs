@@ -5,9 +5,10 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float damage;
-    float maxLifetime = 10.0f;
+
+    private float maxLifetime = 10.0f;
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         maxLifetime -= Time.deltaTime;
         if (maxLifetime <= 0) {

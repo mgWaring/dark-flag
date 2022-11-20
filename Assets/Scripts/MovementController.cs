@@ -4,25 +4,30 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {    
     //Change accelerationVar in ss to adjust forward and backwards speed.
-    float accelerationVar;
+    private float accelerationVar;
     //Change yawSpeedVar in ss to adjust yaw rotational speed.
-    float yawSpeedVar;
+    private float yawSpeedVar;
     //accelerationMult and yawMult determine direction as positive or negative numbers.
-    float accelerationMult = 0;
-    float boostMult;
-    float yawSpeedMult = 0;
-    float torqueLimit;
-    float acceleration = 0;
-    float yawSpeed = 0;
-    Vector3 yawAngularVelocity = new Vector3(0, 0, 0);
+    private float accelerationMult = 0;
+    private float boostMult;
+    private float yawSpeedMult = 0;
+    private float torqueLimit;
+    private float acceleration = 0;
+    private float yawSpeed = 0;
+    private Vector3 yawAngularVelocity = new Vector3(0, 0, 0);
 
-    float velocity;
+    private float velocity;
     public Quaternion tiltMaxLeft;
     public Quaternion tiltMaxRight;
 
 
-    Rigidbody vehicleRB;
-    ShipsScriptable ss;
+    private Rigidbody vehicleRB;
+
+    private ShipsScriptable ss;
+    //AudioClip engineSound;
+    private AudioSource shipAudioSource;
+    private float engineDefaultPitch = 1.0f;
+    private float pitchLimiter = 0.9f;
 
     public void Reset() 
     {
@@ -45,9 +50,14 @@ public class MovementController : MonoBehaviour
         torqueLimit = ss.torqueLimiter;
         tiltMaxLeft = ss.turnTiltMaximum;
         tiltMaxRight = Quaternion.Euler(0.0f, 0.0f, 360.0f - tiltMaxLeft.z);
+        shipAudioSource = GetComponent<AudioSource>();
+        //engineSound = ss.engineIdleSound;
+        shipAudioSource.Play();
+        
+
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         velocity = vehicleRB.velocity.magnitude;
 
@@ -71,6 +81,7 @@ public class MovementController : MonoBehaviour
     public void ThrustController(float thrustInput, float boostInput)
     {
         accelerationMult = thrustInput * (boostInput + boostMult);
+        shipAudioSource.pitch = engineDefaultPitch + (pitchLimiter * velocity * Time.fixedDeltaTime);
     }
 
     public void YawController(float yawInput)
@@ -78,7 +89,7 @@ public class MovementController : MonoBehaviour
         yawSpeedMult = yawInput;
     }
 
-    float SpeedSet(float multiplier, float variable)
+    private float SpeedSet(float multiplier, float variable)
     {
         float speed;
         speed = multiplier * variable;

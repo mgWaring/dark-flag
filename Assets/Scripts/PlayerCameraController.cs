@@ -3,11 +3,11 @@ using UnityEngine;
 public class PlayerCameraController : MonoBehaviour
 {
     public float cameraSmoothing = 0.125f;
-    Rigidbody target;
+    private Rigidbody target;
     public Vector3 cameraOffset = new Vector3(0.0f,0.0f,0.0f);
-    Vector3 desiredPosition;
-    Vector3 smoothedPosition;
-    bool playerCamEnabled;
+    private Vector3 desiredPosition;
+    private Vector3 smoothedPosition;
+    private bool playerCamEnabled;
 
     private void LateUpdate()
     {

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class BotMovement : MonoBehaviour
 {
-    float botSpeedMult;
+    private float botSpeedMult;
     public LayerMask wallLayer;
     public float sensorDistance;
-    MovementController mc;
-    Rigidbody rb;
-    Racer racer;
-    ShipsScriptable ss;
+    private MovementController mc;
+    private Rigidbody rb;
+    private Racer racer;
+    private ShipsScriptable ss;
 
-    void Start() {
+    private void Start() {
         ss = GetComponent<Ship>().details;
         mc = GetComponent<MovementController>();
         rb = GetComponent<Rigidbody>();
@@ -21,7 +21,7 @@ public class BotMovement : MonoBehaviour
         botSpeedMult = ss.botSpeedModifier;
     }
 
-    void Update()
+    private void Update()
     {
         LimitVelocity();
         TurnIfWrongWay();
@@ -37,13 +37,13 @@ public class BotMovement : MonoBehaviour
         }
     }
 
-    void LimitVelocity() {
+    private void LimitVelocity() {
         if (rb.velocity.magnitude > 45) {
             rb.velocity *= 0.7f;
         }
     }
 
-    void TurnIfWrongWay() {
+    private void TurnIfWrongWay() {
         Vector3 target = racer.nextCheckpoint.transform.position;
         target.y = transform.position.y;
         float shipDist = Vector3.Distance(transform.position, target);
@@ -51,9 +51,9 @@ public class BotMovement : MonoBehaviour
         if (forwardDist > shipDist) {
             transform.Rotate(0.0f, 180.0f, 0.0f);
         }
-    } 
+    }
 
-    float DetectDirection() {
+    private float DetectDirection() {
         RaycastHit hit;
         float buffer = 0.0f;
         if (Physics.Raycast(transform.position, transform.right.normalized, out hit, 2.5f, wallLayer)) {

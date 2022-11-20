@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 //Add this script to vehicles that the player will be controlling.
 public class PlayerMovement : NetworkBehaviour
 {
-    MovementController mc;
-    ShipDurability sd;
+    private MovementController mc;
+    private ShipDurability sd;
     public bool invertY;// doesn't do anything right now.
     public InputAction thrustInput;//Value is between -1 and 1.
     public InputAction yawInput;//Value is between -1 and 1.
@@ -15,14 +15,14 @@ public class PlayerMovement : NetworkBehaviour
     public InputAction bombInput;//Value is either 0 or 1.
     public InputAction cameraFlip;//Value is either 0 or 1.
 
-    void Start()
+    private void Start()
     {
       mc = GetComponent<MovementController>();
       sd = GetComponent<ShipDurability>();
     }
 
     //Required for new input system. Don't ask me why.
-    void OnEnable()
+    private void OnEnable()
     {
         thrustInput.Enable();
         yawInput.Enable();
@@ -34,7 +34,7 @@ public class PlayerMovement : NetworkBehaviour
     }
 
     //Required for new input system. Don't ask me why.
-    void OnDisable()
+    private void OnDisable()
     {
         thrustInput.Disable();
         yawInput.Disable();
@@ -45,7 +45,7 @@ public class PlayerMovement : NetworkBehaviour
         cameraFlip.Disable();
     }
 
-    void Update()
+    private void Update()
     {
         if (IsClient && IsOwner) {
             mc.ThrustController(thrustInput.ReadValue<float>(), boostInput.ReadValue<float>());

@@ -5,53 +5,53 @@ using UnityEngine;
 //Forces applied by the AntiGravManager are affected by the rigidbody mass.
 public class AntiGravManager : MonoBehaviour
 {
-    ShipsScriptable ss;
+    private ShipsScriptable ss;
 
     //Unity editor options.//
     public bool aGMRaysOn = true;
-    public float debugRayTime = 0.02f;    
+    public float debugRayTime = 0.02f;
 
-    Rigidbody vehicleRB;
-    Vector3 stableOffsetVector;
+    private Rigidbody vehicleRB;
+    private Vector3 stableOffsetVector;
 
     //Collider finding stuff.
-    Collider[] colliderList;
-    Vector3[] colliderSizes;
-    Vector3 ultimateVector;
-    Vector3 centerOffset;
+    private Collider[] colliderList;
+    private Vector3[] colliderSizes;
+    private Vector3 ultimateVector;
+    private Vector3 centerOffset;
 
     //y axis force.
-    float hoverForce;
-    float hoverConstant;
-    RaycastHit hoverHitInfo;     
+    private float hoverForce;
+    private float hoverConstant;
+    private RaycastHit hoverHitInfo;     
 
     //z axis torque.
-    Ray rollRay1;
-    Ray rollRay2;
-    float rollDiff;
-    float rollRayDistance;
-    float rollForce;
-    RaycastHit rollHit1;
-    RaycastHit rollHit2;
-    float rollHitInfo1;
-    float rollHitInfo2;
-    bool pitchIsStable;
+    private Ray rollRay1;
+    private Ray rollRay2;
+    private float rollDiff;
+    private float rollRayDistance;
+    private float rollForce;
+    private RaycastHit rollHit1;
+    private RaycastHit rollHit2;
+    private float rollHitInfo1;
+    private float rollHitInfo2;
+    private bool pitchIsStable;
 
     //x axis torque.
-    Ray pitchRay1;
-    Ray pitchRay2;
-    Ray bowRay;
-    float pitchDiff;
-    float pitchRayDistance;
-    float bowHitDistance = 0.6f;
-    float pitchForce;
-    float pitchRollConstant;
-    RaycastHit pitchHit1;
-    RaycastHit pitchHit2;
-    float pitchHitInfo1;
-    float pitchHitInfo2;    
+    private Ray pitchRay1;
+    private Ray pitchRay2;
+    private Ray bowRay;
+    private float pitchDiff;
+    private float pitchRayDistance;
+    private float bowHitDistance = 0.6f;
+    private float pitchForce;
+    private float pitchRollConstant;
+    private RaycastHit pitchHit1;
+    private RaycastHit pitchHit2;
+    private float pitchHitInfo1;
+    private float pitchHitInfo2;
 
-    void Start()
+    private void Start()
     {
         ss = GetComponent<Ship>().details;
         vehicleRB = GetComponent<Rigidbody>();        
@@ -126,7 +126,7 @@ public class AntiGravManager : MonoBehaviour
         }      
     }
 
-    float HoverSmoother(Ray[] inputRays)
+    private float HoverSmoother(Ray[] inputRays)
     {
         float distanceToFloor = 0.0f;
 
@@ -144,7 +144,7 @@ public class AntiGravManager : MonoBehaviour
         return newForce;
     }
 
-    float RollPitchSmoother(float distanceDifference)
+    private float RollPitchSmoother(float distanceDifference)
     {
         float newForce = 0.0f;
 

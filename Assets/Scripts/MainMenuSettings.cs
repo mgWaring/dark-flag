@@ -7,7 +7,7 @@ public class MainMenuSettings : MonoBehaviour
 {
     public TMP_InputField inputField;
 
-    void OnEnable()
+    private void OnEnable()
     {
         string playerName = PlayerPrefs.GetString("playerName");
         if (playerName != "") {

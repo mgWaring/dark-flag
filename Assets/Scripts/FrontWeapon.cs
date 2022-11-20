@@ -10,26 +10,36 @@ public class FrontWeapon : MonoBehaviour
     public int ammoCount;
     public float firingDelay;
     public InputAction fireInput;
-    float currentFiringDelay;
+    private float currentFiringDelay;
 
-    void OnEnable()
+    private void OnEnable()
     {
         fireInput.Enable();
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         fireInput.Disable();
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         currentFiringDelay = firingDelay;
     }
 
+    private void OnTriggerEnter(Collider other) {
+        if (other.tag == "Pickup") {
+            Pickup pickup = other.gameObject.GetComponent<Pickup>();
+            if (pickup.type == Pickup.PickupType.Ammo) {
+                ammoCount += (int)pickup.value;
+                Destroy(other.gameObject);
+            }
+        }
+    }
+
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         currentFiringDelay -= Time.deltaTime;
         if (fireInput.ReadValue<float>() > 0 && currentFiringDelay <= 0 && ammoCount > 0) {

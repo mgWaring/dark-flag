@@ -7,9 +7,9 @@ public class Racer : MonoBehaviour
     [HideInInspector] public Checkpoint lastCheckpoint;
     [HideInInspector] public Checkpoint nextCheckpoint;
     [HideInInspector] public int lap = 0;
-    int checkpointCount;
+    private int checkpointCount;
 
-    void Start() {
+    private void Start() {
         checkpointCount = lastCheckpoint.gameObject.transform.parent.childCount;
     }
 

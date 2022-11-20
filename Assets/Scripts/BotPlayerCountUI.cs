@@ -7,7 +7,7 @@ public class BotPlayerCountUI : MonoBehaviour {
     public Selector botSelector;
 
     // Update is called once per frame
-    void Update() {
+    private void Update() {
         var occupiedSlots = 0;
         if (playerSelector) {
             int.TryParse(playerSelector.value, out occupiedSlots);

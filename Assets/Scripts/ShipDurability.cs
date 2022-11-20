@@ -5,32 +5,34 @@ using UnityEngine;
 public class ShipDurability : MonoBehaviour
 {
     [HideInInspector] public float hp = 100.0f;
-    Rigidbody rb;
-    float startHeight;
+    private Rigidbody rb;
+    private float startHeight;
     public Material loadingMaterial;
     public GameObject explosionFab;
     public MeshRenderer shieldRenderer;
-    float deathTimer = 1.25f;
-    float spawnTimer = 1.5f;
-    float shieldDisplayTimer = 0.25f;
-    bool showingShield = false;
-    enum State { Healthy, Exploding, Spawning };
-    State state = State.Healthy;
-    GameObject explosion;
-    bool isBot;
-    public AudioClip[] clips;
-    ShipsScriptable ss;
-    MapScriptable ms;
-    Dictionary<int, Material[]> rememberedMaterials = new Dictionary<int, Material[]>();
-    float heightLimit = 60.0f;
-    float depthLimit = -30.0f;
-    float fireDamage;
-    Ray roofRay;
-    float roofRayDistance;
-    Vector3 roofRayOffset;
-    float boostDamageRate;
+    private float deathTimer = 1.25f;
+    private float spawnTimer = 1.5f;
+    private float shieldDisplayTimer = 0.25f;
+    private bool showingShield = false;
 
-    void Start() {
+    private enum State { Healthy, Exploding, Spawning };
+
+    private State state = State.Healthy;
+    private GameObject explosion;
+    private bool isBot;
+    public AudioClip[] clips;
+    private ShipsScriptable ss;
+    private MapScriptable ms;
+    private Dictionary<int, Material[]> rememberedMaterials = new Dictionary<int, Material[]>();
+    private float heightLimit = 60.0f;
+    private float depthLimit = -30.0f;
+    private float fireDamage;
+    private Ray roofRay;
+    private float roofRayDistance;
+    private Vector3 roofRayOffset;
+    private float boostDamageRate;
+
+    private void Start() {
         ss = GetComponent<Ship>().details;
         rb = GetComponent<Rigidbody>();
         startHeight = transform.position.y;
@@ -58,7 +60,7 @@ public class ShipDurability : MonoBehaviour
         }
     }
 
-    void Update() {
+    private void Update() {
         if (showingShield) {
             shieldRenderer.enabled = true;
             shieldDisplayTimer -= Time.deltaTime;
@@ -124,7 +126,7 @@ public class ShipDurability : MonoBehaviour
         YLimitCheck();
     }
 
-    void ChangeMaterial() {
+    private void ChangeMaterial() {
         MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
         for (int i = 0; i < meshes.Length; i++) { 
             MeshRenderer mesh = meshes[i];
@@ -139,7 +141,7 @@ public class ShipDurability : MonoBehaviour
         shieldRenderer.enabled = false;
     }
 
-    void ChangeMaterialBack() {
+    private void ChangeMaterialBack() {
         MeshRenderer[] meshes = GetComponentsInChildren<MeshRenderer>();
         for (int i = 0; i < meshes.Length; i++) { 
             MeshRenderer mesh = meshes[i];
@@ -148,18 +150,31 @@ public class ShipDurability : MonoBehaviour
         shieldRenderer.enabled = false;
     }
 
-    void OnTriggerEnter(Collider other) {
-        Debug.Log("HIT");
+    public void takeDamage(float damage) {
+        float removal = damage - ss.armour;
+        showingShield = true;
+        if (removal > 0.0f) {
+            hp = hp - removal;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
         if (other.tag == "Bullet") {
             float removal = other.GetComponent<Bullet>().damage - ss.armour;
-            showingShield = true;
-            if (removal > 0.0f) {
-                hp = hp - removal;
+            takeDamage(other.GetComponent<Bullet>().damage);
+        } else if (other.tag == "Pickup") {
+            Pickup pickup = other.gameObject.GetComponent<Pickup>();
+            if (pickup.type == Pickup.PickupType.Health) {
+                hp += pickup.value;
+                if (hp >= 150f) {
+                    hp = 150f;
+                }
+                Destroy(other.gameObject);
             }
         }
     }
 
-    void OnCollisionEnter(Collision collision) {
+    private void OnCollisionEnter(Collision collision) {
         if(collision.gameObject.tag != "Checkpoint") {
             float removal = collision.impulse.magnitude - ss.armour;
             showingShield = true;
@@ -175,7 +190,7 @@ public class ShipDurability : MonoBehaviour
         }
     }
 
-    void YLimitCheck()
+    private void YLimitCheck()
     {
         if (rb.position.y >= heightLimit || rb.position.y <= depthLimit)
         {
@@ -184,7 +199,7 @@ public class ShipDurability : MonoBehaviour
         //Display out of bounds warning if getting really close?
     }
 
-    void OnFire()
+    private void OnFire()
     {
         hp = hp - fireDamage;
         //play fire sound.

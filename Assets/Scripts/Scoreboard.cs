@@ -10,7 +10,7 @@ public class Scoreboard : MonoBehaviour
     public GameObject rowPrefab;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         for(int i = 0; i < gameController.playerCount; i++) {
             GameObject row = Instantiate(rowPrefab);
@@ -19,7 +19,7 @@ public class Scoreboard : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         for(int i = 0; i < gameController.playerCount; i++) {
             GameObject row = transform.GetChild(i + 1).gameObject;

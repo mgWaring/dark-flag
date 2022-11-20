@@ -6,19 +6,19 @@ using TMPro;
 public class PositionUI : MonoBehaviour
 {
     public GameController gameController;
-    TextMeshProUGUI text;
+    private TextMeshProUGUI text;
 
-    void Start()
+    private void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
     }
 
-    void Update()
+    private void Update()
     {
         text.text = PositionFromInt(gameController.PositionForPlayer());
     }
 
-    string PositionFromInt(int pos) {
+    private string PositionFromInt(int pos) {
         switch(pos) {
             case 0:
               return "1st";

@@ -3,8 +3,8 @@ using UnityEngine;
 //Attach this script to vehicle with Rigidbody.
 public class RigidbodyController : MonoBehaviour
 {
-    Rigidbody rb;
-    ShipsScriptable ss;
+    private Rigidbody rb;
+    private ShipsScriptable ss;
 
     //Sets rigidbody values.
     private void Start()

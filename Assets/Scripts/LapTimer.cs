@@ -7,11 +7,11 @@ public class LapTimer : MonoBehaviour
 {
     public TextMeshProUGUI bestTimeText;
     [HideInInspector] public bool running;
-    float currentTime;
-    TextMeshProUGUI text;
-    float best = 1000000000.0f;
+    private float currentTime;
+    private TextMeshProUGUI text;
+    private float best = 1000000000.0f;
 
-    void Start()
+    private void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
         running = false;
@@ -19,7 +19,7 @@ public class LapTimer : MonoBehaviour
         bestTimeText.text = "Best: N/A";
     }
 
-    void Update()
+    private void Update()
     {
         if (running) { 
             currentTime += Time.deltaTime;

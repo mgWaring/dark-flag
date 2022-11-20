@@ -21,23 +21,23 @@ public class ShipSelector : MonoBehaviour {
     public ShipsScriptable[] selectableShipNames;
     public Transform shipHolder;
     public GameObject confirmationModal;
-    GameObject[] selectableShips;
-    GameObject currentShip;
-    int index = 0;
+    private GameObject[] selectableShips;
+    private GameObject currentShip;
+    private int index = 0;
     [HideInInspector] public ShipsScriptable value;
     public InputAction leftInput;
     public InputAction rightInput;
     public InputAction submitInput;
     public InputAction backInput;
-    float submitTimer = 0.25f;
+    private float submitTimer = 0.25f;
 
     // Start is called before the first frame update
-    void Start() {
+    private void Start() {
         selectableShips = selectableShipNames.Select(name => name.shipModel).ToArray();
         SetValues();
     }
 
-    void OnEnable() {
+    private void OnEnable() {
         leftInput.Enable();
         rightInput.Enable();
         submitInput.Enable();
@@ -45,7 +45,7 @@ public class ShipSelector : MonoBehaviour {
     }
 
     //Required for new input system. Don't ask me why.
-    void OnDisable() {
+    private void OnDisable() {
         leftInput.Disable();
         rightInput.Disable();
         submitInput.Disable();
@@ -53,7 +53,7 @@ public class ShipSelector : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    private void Update() {
         if (submitTimer > 0.0f) {
             submitTimer -= Time.deltaTime;
         }
@@ -92,7 +92,7 @@ public class ShipSelector : MonoBehaviour {
         SceneManager.LoadScene(2);
     }
 
-    RacerInfo[] generateRacerInfo() {
+    private RacerInfo[] generateRacerInfo() {
         int racerCount = CrossScene.players + CrossScene.bots;
         RacerInfo[] racers = new RacerInfo[racerCount];
 

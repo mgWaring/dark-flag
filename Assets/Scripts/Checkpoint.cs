@@ -6,10 +6,10 @@ using System.Linq;
 public class Checkpoint : MonoBehaviour
 {
     [HideInInspector] public int id;
-    GameController gameController;
-    Transform[] spawnPoints;
+    private GameController gameController;
+    private Transform[] spawnPoints;
 
-    void Start() {
+    private void Start() {
         spawnPoints = new Transform[transform.childCount];
         for (int i = 0; i < transform.childCount; i++) {
             spawnPoints[i] = transform.GetChild(i);
@@ -28,7 +28,7 @@ public class Checkpoint : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider collider) {
+    private void OnTriggerEnter(Collider collider) {
         if(collider.tag == "Ship") {
             Racer racer = collider.gameObject.GetComponentInParent<Racer>();
 
@@ -48,7 +48,7 @@ public class Checkpoint : MonoBehaviour
         }
     }
 
-    Checkpoint NextCheckpoint() {
+    private Checkpoint NextCheckpoint() {
         int max = transform.parent.childCount - 1;
         if (id + 1 > max) {
             return null;

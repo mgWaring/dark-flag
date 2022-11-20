@@ -7,7 +7,7 @@ public class RandomSoundClip : MonoBehaviour
 {
     public AudioClip[] clips;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         var rand = new System.Random();
         AudioSource source = GetComponent<AudioSource>();

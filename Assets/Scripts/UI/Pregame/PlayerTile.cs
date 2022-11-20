@@ -31,23 +31,23 @@ namespace UI.Pregame {
             nameInput.onValueChanged.AddListener(SetPlayerName);
         }
 
-        void PopulateAnthemsList() {
+        private void PopulateAnthemsList() {
             
         }
-        
-        void SetPlayerName(string playerName) {
+
+        private void SetPlayerName(string playerName) {
             Player.playerName = playerName;
         }
 
-        void SetPlayerShip(string shipName) {
+        private void SetPlayerShip(string shipName) {
             Player.playerShipName = shipName;
         }
 
-        void SetPlayerColour() {
+        private void SetPlayerColour() {
             
         }
 
-        void SetPlayerAnthem() {
+        private void SetPlayerAnthem() {
             
         }
     }

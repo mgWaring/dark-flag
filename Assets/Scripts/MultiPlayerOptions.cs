@@ -20,7 +20,7 @@ public class MultiPlayerOptions : MonoBehaviour {
         FindMaps();
     }
 
-    void FindShips() {
+    private void FindShips() {
         var theShipIds = AssetDatabase.FindAssets("t:ShipsScriptable", new[] { "Assets/ScriptableObjects/Ships" });
 
         foreach (var guid in theShipIds) {

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class InGameMenu : MonoBehaviour
 {
-    GameObject child;
+    private GameObject child;
     public InputAction menuInput;
     public GameObject firstSelected;
 
@@ -21,21 +21,21 @@ public class InGameMenu : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         menuInput.Enable();
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
         menuInput.Disable();
     }
 
-    void Start() {
+    private void Start() {
         child = transform.GetChild(0).gameObject;
     }
 
-    void Update() {
+    private void Update() {
         if (menuInput.triggered) {
             child.SetActive(!child.activeSelf);
             firstSelected.GetComponent<Selectable>().Select();
