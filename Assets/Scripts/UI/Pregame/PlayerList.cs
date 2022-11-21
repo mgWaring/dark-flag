@@ -13,7 +13,8 @@ namespace UI.Pregame
     private List<GameObject> _playerTiles = new();
     [SerializeField] private GameObject playerTilePrefab;
     [SerializeField] private GameObject playerTileContainer;
-    float timer = 10.0f;
+    float timer = 1.0f;
+    bool sentName = false;
     //
 
     void Awake()
@@ -21,22 +22,21 @@ namespace UI.Pregame
       DFLogger.Instance.LogInfo("PLAYER LIST AWAKE");
     }
 
-    public override void OnNetworkSpawn()
-    {
-      DFLogger.Instance.LogInfo("wdeadwad");
-      SpawnManager.Instance._playerReadies.Add(false);
-      SpawnManager.Instance._playerShips.Add(1);
-      SpawnManager.Instance._playerNames.Add(100);
-    }
-
     void Update()
     {
       Debug.Log(HasNetworkObject);
       Debug.Log(_playerTiles.Count);
-      Debug.Log(SpawnManager.Instance._playerShips.Count);
-      if (_playerTiles.Count < SpawnManager.Instance._playerShips.Count)
+      Debug.Log(SpawnManager.Instance._players.Count);
+      if (_playerTiles.Count < SpawnManager.Instance._players.Count)
       {
         CreateTile();
+      }
+
+      timer -= Time.deltaTime;
+      if (timer <= 0 && !sentName)
+      {
+        SpawnManager.Instance.SetPlayerName(PlayerPrefs.GetString("playerName"));
+        sentName = true;
       }
     }
 
@@ -46,7 +46,7 @@ namespace UI.Pregame
       DFLogger.Instance.Log("Starting player list");
       SpawnManager.Instance.OnPlayerJoined += CreateTile;
       SpawnManager.Instance.OnPlayerLeft += DeleteTileForClient;
-      SpawnManager.Instance.ShipUpdate += ShipUpdate;
+      SpawnManager.Instance.ValueUpdate += TileUpdate;
     }
 
     public bool AllReady()
@@ -56,16 +56,22 @@ namespace UI.Pregame
       );
     }
 
-    private void ShipUpdate(int i)
+    private void TileUpdate(int i)
     {
       if (_playerTiles.Count <= i)
       {
         return;
       }
 
+      MultiplayerMenuPlayer player = SpawnManager.Instance._players[i];
+
       ShipSelector ss = _playerTiles[i].GetComponentInChildren<ShipSelector>();
-      ss.index = SpawnManager.Instance._playerShips[i];
+      ss.index = player.shipIndex;
       ss.DisplayValues();
+
+      PlayerTile tile = _playerTiles[i].GetComponent<PlayerTile>();
+      tile.UpdateName(player.name.ToString());
+      tile.readyButton.SetReady(player.ready);
     }
 
     private void CreateTile()

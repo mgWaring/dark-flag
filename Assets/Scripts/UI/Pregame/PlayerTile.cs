@@ -14,8 +14,8 @@ namespace UI.Pregame
 {
   public class PlayerTile : MonoBehaviour
   {
-    public TMP_InputField nameInput;
-    public bool ready { get; }
+    public TextMeshProUGUI nameText;
+    public ReadyButton readyButton;
     public Camera camera;
     public RawImage shipImage;
     int index;
@@ -43,9 +43,15 @@ namespace UI.Pregame
       if (SpawnManager.Instance.CurrentPlayerIndex() != index)
       {
         _shipSelector.SetReadOnly();
+        readyButton.SetReadOnly();
       }
 
-      nameInput.text = SpawnManager.Instance._playerNames[index].ToString();
+      UpdateName("New Player");
+    }
+
+    public void UpdateName(string name)
+    {
+      nameText.text = name;
     }
 
     private void PopulateAnthemsList()

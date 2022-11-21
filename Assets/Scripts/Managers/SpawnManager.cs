@@ -4,18 +4,17 @@ using Unity.Netcode;
 using UnityEngine;
 using Utils;
 using RelaySystem.Data;
+using Unity.Collections;
 
 namespace Managers
 {
   public class SpawnManager : LonelyNetworkBehaviour<SpawnManager>
   {
     public event Action OnPlayerJoined;
-    public event Action<int> ShipUpdate;
+    public event Action<int> ValueUpdate;
     public event Action<DFPlayer> OnClientJoined;
     public event Action<ulong> OnPlayerLeft;
-    [HideInInspector] public NetworkList<bool> _playerReadies = new();
-    [HideInInspector] public NetworkList<int> _playerShips = new();
-    [HideInInspector] public NetworkList<int> _playerNames = new();
+    [HideInInspector] public NetworkList<MultiplayerMenuPlayer> _players = new NetworkList<MultiplayerMenuPlayer>();
 
     public void Start()
     {
@@ -32,23 +31,26 @@ namespace Managers
       {
         NetworkManager.OnClientConnectedCallback += Baws;
         DFLogger.Instance.LogInfo("SPAWNINGING");
-        _playerShips.Add(0);
+        MultiplayerMenuPlayer p = new MultiplayerMenuPlayer(0);
+        _players.Add(p);
       }
-      _playerShips.OnListChanged += OnSomeValueChanged;
+      _players.OnListChanged += OnSomeValueChanged;
     }
 
     private void Baws(ulong obj)
     {
       DFLogger.Instance.LogInfo("BAWS");
       Debug.Log("BAWS");
-      _playerShips.Add(0);
+      int id = (int)NetworkManager.Singleton.LocalClientId;
+      MultiplayerMenuPlayer p = new MultiplayerMenuPlayer(id);
+      _players.Add(p);
     }
 
-    private void OnSomeValueChanged(NetworkListEvent<int> evnt)
+    private void OnSomeValueChanged(NetworkListEvent<MultiplayerMenuPlayer> evnt)
     {
-      if (evnt.Type == NetworkListEvent<int>.EventType.Value)
+      if (evnt.Type == NetworkListEvent<MultiplayerMenuPlayer>.EventType.Value)
       {
-        ShipUpdate.Invoke(evnt.Index);
+        ValueUpdate?.Invoke(evnt.Index);
       }
     }
 
@@ -85,7 +87,37 @@ namespace Managers
     [ServerRpc(RequireOwnership = false)]
     public void SetShipServerRpc(int user_index, int ship_index)
     {
-      _playerShips[user_index] = ship_index;
+      MultiplayerMenuPlayer old = _players[user_index];
+      MultiplayerMenuPlayer newer = new MultiplayerMenuPlayer(old.name, old.clientId, ship_index, old.ready);
+      _players[user_index] = newer;
+    }
+
+    public void SetPlayerReady(bool ready)
+    {
+      int userIndex = (int)NetworkManager.Singleton.LocalClientId;
+      SetReadyServerRpc(userIndex, ready);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SetReadyServerRpc(int user_index, bool ready)
+    {
+      MultiplayerMenuPlayer old = _players[user_index];
+      MultiplayerMenuPlayer newer = new MultiplayerMenuPlayer(old.name, old.clientId, old.shipIndex, ready);
+      _players[user_index] = newer;
+    }
+
+    public void SetPlayerName(string name)
+    {
+      int userIndex = (int)NetworkManager.Singleton.LocalClientId;
+      SetNameServerRpc(userIndex, name);
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SetNameServerRpc(int user_index, string name)
+    {
+      MultiplayerMenuPlayer old = _players[user_index];
+      MultiplayerMenuPlayer newer = new MultiplayerMenuPlayer((FixedString128Bytes)name, old.clientId, old.shipIndex, old.ready);
+      _players[user_index] = newer;
     }
 
     [ServerRpc]
