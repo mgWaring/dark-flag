@@ -18,6 +18,8 @@ namespace Managers {
 
         [SerializeField] private string environment = "production";
 
+        public event Action<DFPlayer> OnStart;
+
         private UnityTransport Transport =>
             gameObject.GetComponent<UnityTransport>();
 

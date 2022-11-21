@@ -2259,6 +2259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   nameInput: {fileID: 8581166653035427782}
+  camera: {fileID: 4319466516484566719}
+  shipImage: {fileID: 552857467595424625}
   _shipSelector: {fileID: 2236122868921132783}
 --- !u!1 &8885301885943622656
 GameObject:

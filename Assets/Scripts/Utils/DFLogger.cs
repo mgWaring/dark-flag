@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using System;
@@ -12,11 +12,8 @@ namespace Utils {
         [SerializeField] private int maxLines = 15;
 
         void Awake() {
-            if (debugAreaText == null) {
-                debugAreaText = GetComponent<TextMeshProUGUI>();
-            }
-
-            debugAreaText.text = string.Empty;
+            DontDestroyOnLoad(gameObject); //WHAT THE FUCK!?
+            debugAreaText.text = string.Empty; 
         }
 
         void OnEnable() {
