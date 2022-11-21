@@ -3182,8 +3182,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SinglePlayerOptions, Assembly-CSharp
+      - m_Target: {fileID: 3677175698029924592}
+        m_TargetAssemblyTypeName: MultiPlayerOptions, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
