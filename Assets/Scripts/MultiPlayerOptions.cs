@@ -60,7 +60,7 @@ public class MultiPlayerOptions : MonoBehaviour {
         foreach (var (_, client) in NetworkManager.Singleton.ConnectedClients) {
             var pdata = client.PlayerObject.GetComponent<DFPlayer>();
             racerList.Add(
-                new RacerInfo(pdata.playerName, _ships[pdata.playerShipName], client.ClientId)
+                new RacerInfo(pdata.playerName.Value, _ships[pdata.playerShipName], client.ClientId)
             );
         }
 

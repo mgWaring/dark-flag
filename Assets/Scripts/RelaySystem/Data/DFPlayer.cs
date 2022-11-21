@@ -6,9 +6,9 @@ using UnityEngine;
  */
 namespace RelaySystem.Data {
     public class DFPlayer : NetworkBehaviour {
-        public string playerName = "Lizard";
+        public NetworkVariable<NetworkString> playerName = new();
 
-        public string playerShipName;
+    public string playerShipName;
 
         //need to implement a serializable version of these two
         public Color playerColour;

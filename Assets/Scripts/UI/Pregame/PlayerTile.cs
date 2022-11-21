@@ -26,7 +26,7 @@ namespace UI.Pregame {
         }
 
         private void Start() {
-            nameInput.text = Player.playerName;
+            nameInput.text = Player.playerName.Value;
             // when the input is changed update the player object with the new name
             nameInput.onValueChanged.AddListener(SetPlayerName);
         }
@@ -36,7 +36,7 @@ namespace UI.Pregame {
         }
 
         private void SetPlayerName(string playerName) {
-            Player.playerName = playerName;
+            Player.playerName.Value = playerName;
         }
 
         private void SetPlayerShip(string shipName) {

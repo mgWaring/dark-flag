@@ -4,15 +4,17 @@ using Managers;
 using RelaySystem.Data;
 using UnityEngine;
 using Unity.Netcode;
+using Utils;
 
 namespace UI.Pregame {
-    public class PlayerList : NetworkBehaviour {
+    public class PlayerList : MonoBehaviour {
         private Dictionary<ulong, GameObject> _playerTiles = new();
         [SerializeField] private GameObject playerTilePrefab;
         [SerializeField] private GameObject playerTileContainer;
-
+        private NetworkList<int> _playerShips = new();
         public void Start() {
             Debug.Log("waking player list");
+            DFLogger.Instance.Log("waking player list");
             SpawnManager.Instance.OnPlayerJoined += CreateTileForClient;
             SpawnManager.Instance.OnPlayerLeft += DeleteTileForClient;
             var count = NetworkManager.Singleton.ConnectedClients.Count;
@@ -28,7 +30,7 @@ namespace UI.Pregame {
 
         private void CreateTileForClient(ulong clientId) {
             var DFPlayer = NetworkManager.Singleton.ConnectedClients[clientId].PlayerObject.GetComponent<DFPlayer>();
-
+            var otherPlayer = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<DFPlayer>();
             Debug.Log(DFPlayer.playerName);
             Debug.LogFormat("We're creating a tile for a player with ID: {0}", DFPlayer.NetworkObject.OwnerClientId);
             if (_playerTiles.TryGetValue(clientId, out var tile)) {

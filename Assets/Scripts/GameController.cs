@@ -74,7 +74,6 @@ public class GameController : MonoBehaviour {
         
         for (var i = 0; i < playerCount; i++) {
             var info = CrossScene.racerInfo[i];
-            
             var startPos = _startingPositions.GetChild(i).transform;
             var pos = startPos.position;
             var rot = startPos.rotation;
@@ -91,8 +90,7 @@ public class GameController : MonoBehaviour {
             var checkpointCount = _checkpoints.transform.childCount;
             var lastCheck = _checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<Checkpoint>();
             var nextCheck = _checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
-
-
+            
             racer.id = i;
             racer.name = info.Name;
             racer.lastCheckpoint = lastCheck;

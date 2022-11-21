@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: longShip
   shipModel: {fileID: 8508418995549443820, guid: dac3942921fa85b4e83c3b78db20b48d, type: 3}
+  shipShowcase: {fileID: 8508418995549443820, guid: 48282d8b71b5e2b4e8d900ee490f9952, type: 3}
   mass: 2.9
   drag: 1.5
   angularDrag: 5

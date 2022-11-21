@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: testShip
   shipModel: {fileID: 8508418995549443820, guid: bd058f3d9f7fa2644a7e706ff5d43b3c, type: 3}
+  shipShowcase: {fileID: 8508418995549443820, guid: 9db3619acc9effb4b8270bf524932e52, type: 3}
   mass: 3
   drag: 1.5
   angularDrag: 5
