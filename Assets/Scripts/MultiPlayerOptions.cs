@@ -93,8 +93,9 @@ public class MultiPlayerOptions : MonoBehaviour
     foreach (var (_, client) in NetworkManager.Singleton.ConnectedClients)
     {
       var pdata = client.PlayerObject.GetComponent<DFPlayer>();
+      var p = SpawnManager.Instance._players[(int)client.ClientId];
       racerList.Add(
-          new RacerInfo(pdata.playerName, _ships[pdata.playerShipName], client.ClientId)
+          new RacerInfo(p.name.ToString(), shipList[p.shipIndex], client.ClientId)
       );
     }
 
@@ -104,6 +105,6 @@ public class MultiPlayerOptions : MonoBehaviour
     CrossScene.players = playerCount;
     CrossScene.bots = botCount;
     CrossScene.cameFromMainMenu = true;
-    SceneManager.LoadScene(2);
+    NetworkManager.Singleton.SceneManager.LoadScene("Multiplayer", LoadSceneMode.Single);
   }
 }
