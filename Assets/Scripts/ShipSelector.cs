@@ -109,7 +109,7 @@ public class ShipSelector : MonoBehaviour
         }
         GameObject ship = Instantiate(currentShip);
         ship.GetComponent<Rigidbody>().useGravity = false;
-        ship.GetComponent<PlayerMovement>().enabled = false;
+        ship.GetComponentInParent<PlayerMovement>().enabled = false;//problems?
         ship.GetComponent<MovementController>().enabled = false;
         ship.GetComponent<BotMovement>().enabled = false;
         ship.GetComponent<AntiGravManager>().enabled = false;
