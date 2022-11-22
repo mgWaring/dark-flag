@@ -82,7 +82,7 @@ public class ShipDurability : MonoBehaviour
                 if (isBot) {
                     GetComponent<BotMovement>().enabled = false;
                 } else {
-                    GetComponent<PlayerMovement>().enabled = false;
+                    GetComponentInParent<PlayerMovement>().enabled = false;
                 }
                 explosion = Instantiate(explosionFab);
                 explosion.transform.SetParent(transform);
@@ -105,7 +105,7 @@ public class ShipDurability : MonoBehaviour
                     if (isBot) {
                         GetComponent<BotMovement>().enabled = true;
                     } else {
-                        GetComponent<PlayerMovement>().enabled = true;
+                        GetComponentInParent<PlayerMovement>().enabled = true;
                     }
                     GetComponent<MovementController>().Reset();
                 } else if (deathTimer <= 1.0f) {

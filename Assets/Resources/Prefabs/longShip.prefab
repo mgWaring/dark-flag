@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5d6b189f7798e942b51336d9d8ea211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aGMRaysOn: 0
+  aGMRaysOn: 1
   debugRayTime: 0.02
 --- !u!82 &4063442319365698124
 AudioSource:

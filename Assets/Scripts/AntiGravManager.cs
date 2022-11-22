@@ -84,7 +84,7 @@ public class AntiGravManager : MonoBehaviour
 ;       //Draws all rays for dev purposes. Disable in editor.
         if (aGMRaysOn)
         {
-            Debug.DrawRay(rollRay1.origin, rollRay1.direction * rollRayDistance, Color.blue, debugRayTime, true);
+            Debug.DrawRay(rollRay1.origin, rollRay1.direction * rollRayDistance, Color.white, debugRayTime, true);
             Debug.DrawRay(rollRay2.origin, rollRay2.direction * rollRayDistance, Color.blue, debugRayTime, true);
             Debug.DrawRay(pitchRay1.origin, pitchRay1.direction * pitchRayDistance, Color.red, debugRayTime, true);
             Debug.DrawRay(pitchRay2.origin, pitchRay2.direction * pitchRayDistance, Color.red, debugRayTime, true);

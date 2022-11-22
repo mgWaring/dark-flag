@@ -22,12 +22,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        InverY();
         mc = GetComponentInChildren<MovementController>();
         pcc = GetComponentInChildren<PlayerCameraController>();
         sd = GetComponentInChildren<ShipDurability>();
         fw = GetComponentInChildren<FrontWeapon>();
-        bw = GetComponentInChildren<BackWeapon>();
-        InverY();      
+        bw = GetComponentInChildren<BackWeapon>();              
     }
 
     //Required for new input system. Don't ask me why.
@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         mc.ThrustController(thrustInput.ReadValue<float>(), boostInput.ReadValue<float>());
         mc.YawController(yawInput.ReadValue<float>());
         sd.BoostDamage(boostInput.ReadValue<float>());
-        pcc.CameraControl(cameraControlY.ReadValue<float>() * yInversion, cameraControlX.ReadValue<float>());
+        pcc.CameraControl((cameraControlY.ReadValue<float>() * yInversion), cameraControlX.ReadValue<float>());
         fw.ShootGun(fireInput.ReadValue<float>());
         bw.BombRelease(bombInput.ReadValue<float>());
     }

@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     public void AttachCamera() {
         camera.gameObject.GetComponent<Animator>().enabled = false;
         Transform camTransform = camera.transform;
-        pcc = camTransform.gameObject.GetComponent<PlayerCameraController>();
+        pcc = camTransform.gameObject.GetComponentInChildren<PlayerCameraController>();
         pcc.PCameraSetup(racer.gameObject.GetComponentInChildren<Transform>());
         pcc.PCamEnable(true);
     }
