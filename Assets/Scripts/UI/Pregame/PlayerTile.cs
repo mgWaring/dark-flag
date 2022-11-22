@@ -30,7 +30,7 @@ namespace UI.Pregame {
         }
 
         private void Start() {
-            nameInput.text = Player.playerName.Value;
+            nameInput.text = Player.playerName;
             // when the input is changed update the player object with the new name
             nameInput.onValueChanged.AddListener(SetPlayerName);
             index = transform.GetSiblingIndex();
@@ -53,7 +53,7 @@ namespace UI.Pregame {
         }
 
         private void SetPlayerName(string playerName) {
-            Player.playerName.Value = playerName;
+            Player.playerName = playerName;
         }
 
         private void SetPlayerShip(int shipIndex) {

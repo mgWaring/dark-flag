@@ -49,11 +49,11 @@ namespace Managers {
             if (OnPlayerJoined == null) {
                 DFLogger.Instance.Log("Waiting 0.5 sec for client");
                 yield return new WaitForSeconds(0.5f);
-                DFLogger.Instance.Log("client Done waiting, triggering self");
+                DFLogger.Instance.Log("genuine client Done waiting, triggering self");
                 WaitAndAddGenuineClient(player);
             }
 
-            DFLogger.Instance.Log("Calling client connected in response to server starting");
+            DFLogger.Instance.Log("Calling genuine client connected in response to server starting");
             ClientConnected(NetworkManager.ServerClientId);
         }
 
@@ -76,8 +76,10 @@ namespace Managers {
                 //work out how many already connected clients, and populate the tile list!
                 var DFPlayer = NetworkManager.Singleton.LocalClient.PlayerObject.GetComponent<DFPlayer>();
                 if(OnClientJoined != null) {
+                    DFLogger.Instance.LogInfo("Trying to add a client");
                     OnClientJoined.Invoke(DFPlayer);
-                } else {
+                } else {                    
+                    DFLogger.Instance.LogInfo("Enqueing an add client call");
                     StartCoroutine(WaitAndAddGenuineClient(DFPlayer));
                 }
             }

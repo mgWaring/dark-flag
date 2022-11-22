@@ -9,8 +9,8 @@ using Utils;
 namespace UI.Pregame {
     public class PlayerList : NetworkBehaviour {
         private List<GameObject> _playerTiles = new();
-        private NetworkList<bool> _playerReadies;
-        private NetworkList<int> _playerShips;
+        private List<bool> _playerReadies;
+        private List<int> _playerShips;
         [SerializeField] private GameObject playerTilePrefab;
         [SerializeField] private GameObject playerTileContainer;
         public DFPlayer player;
@@ -18,8 +18,8 @@ namespace UI.Pregame {
 
         void Awake() {
             DFLogger.Instance.LogInfo("PLAYER LIST AWAKE");
-            _playerReadies = new NetworkList<bool>();
-            _playerShips = new NetworkList<int>();
+            _playerReadies = new List<bool>();
+            _playerShips = new List<int>();
         }
 
         public void Start() {

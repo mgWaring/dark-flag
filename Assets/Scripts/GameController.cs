@@ -125,14 +125,14 @@ public class GameController : MonoBehaviour {
     }    
     private Racer SetupNetworkPlayer(RacerInfo info, int i, Vector3 pos, Quaternion rot) {
         var relevantClient = NetworkManager.Singleton.ConnectedClients[info.ClientId];
-        var player = relevantClient.PlayerObject.GetComponent<DFPlayer>();
+        DFPlayer player = relevantClient.PlayerObject.GetComponent<DFPlayer>();
         _networkPlayers.Add(player);
         Debug.Log(player);
         player.ss = info.Ship;
         player.Init();
         player.SetPosRot(pos, rot);
         if (i == 0) {
-            _firstCamAnim = player.camera.GetComponent<Animator>();
+            _firstCamAnim = player.GetComponent<Camera>().GetComponent<Animator>();
         }
 
         return player.racer;
