@@ -4,12 +4,6 @@ using UnityEngine.UI;
 using Managers;
 using Multiplayer;
 
-/*
-* todo: Extend the player tile so that it can handle input to handle:
-* changing colour,
-* changing anthem,
- * */
-
 namespace UI.Pregame
 {
   public class PlayerTile : MonoBehaviour
@@ -20,7 +14,7 @@ namespace UI.Pregame
     public RawImage shipImage;
     int index;
 
-    [SerializeField] private ShipSelector _shipSelector;
+    [SerializeField] private MultiplayerShipSelector _shipSelector;
 
     private void OnEnable()
     {
@@ -46,7 +40,7 @@ namespace UI.Pregame
         readyButton.SetReadOnly();
       }
 
-      UpdateName("New Player");
+      UpdateName("New MultiPlayer");
     }
 
     public void UpdateName(string name)

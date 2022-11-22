@@ -1,5 +1,4 @@
 ﻿using System;
-using Multiplayer;
 using Unity.Netcode;
 using UnityEngine;
 using Utils;
@@ -15,9 +14,8 @@ namespace Managers
     public event Action<int> MapUpdate;
     public event Action<int> LapUpdate;
     public event Action<int> BotUpdate;
-    public event Action<DFPlayer> OnClientJoined;
-    public event Action<ulong> OnPlayerLeft;
-    [HideInInspector] public NetworkList<MultiplayerMenuPlayer> _players = new NetworkList<MultiplayerMenuPlayer>();
+    
+    public NetworkList<MultiplayerMenuPlayer> _players = new();
     [HideInInspector] public NetworkVariable<int> _mapIndex = new();
     [HideInInspector] public NetworkVariable<int> _botIndex = new();
     [HideInInspector] public NetworkVariable<int> _lapIndex = new();
@@ -26,16 +24,13 @@ namespace Managers
     {
       Debug.Log("Spawn manager is managing some spawning");
       DFLogger.Instance.Log("Spawn manager is managing some spawning");
-
-      NetworkManager.Singleton.OnClientConnectedCallback += ClientConnected;
-      NetworkManager.Singleton.OnClientDisconnectCallback += ClientDisconnected;
     }
 
     public override void OnNetworkSpawn()
     {
       if (IsServer)
       {
-        NetworkManager.OnClientConnectedCallback += Baws;
+        NetworkManager.OnClientConnectedCallback += AddPlayerForClient;
         DFLogger.Instance.LogInfo("SPAWNINGING");
         MultiplayerMenuPlayer p = new MultiplayerMenuPlayer(0);
         _players.Add(p);
@@ -54,10 +49,10 @@ namespace Managers
       return (int)NetworkManager.Singleton.LocalClientId;
     }
 
-    private void Baws(ulong obj)
+    private void AddPlayerForClient(ulong obj)
     {
-      DFLogger.Instance.LogInfo("BAWS");
-      Debug.Log("BAWS");
+      DFLogger.Instance.LogInfo("Adding MultiPlayer");
+      Debug.Log("Adding MultiPlayer");
       int id = (int)NetworkManager.Singleton.LocalClientId;
       MultiplayerMenuPlayer p = new MultiplayerMenuPlayer(id);
       _players.Add(p);
@@ -85,26 +80,7 @@ namespace Managers
         ValueUpdate?.Invoke(evnt.Index);
       }
     }
-
-
-    private void HostStarted()
-    {
-      DFLogger.Instance.Log("HOST STARTED");
-    }
-
-    private void ClientConnected(ulong clientId)
-    {
-    }
-
-    private void ClientDisconnected(ulong clientId)
-    {
-      Debug.LogFormat($"{clientId} has left");
-      if (IsServer)
-      {
-        OnPlayerLeft?.Invoke(clientId);
-      }
-    }
-
+    
     public int CurrentPlayerIndex()
     {
       return (int)NetworkManager.Singleton.LocalClientId;
@@ -166,12 +142,6 @@ namespace Managers
       MultiplayerMenuPlayer old = _players[user_index];
       MultiplayerMenuPlayer newer = new MultiplayerMenuPlayer((FixedString128Bytes)name, old.clientId, old.shipIndex, old.ready);
       _players[user_index] = newer;
-    }
-
-    [ServerRpc]
-    private void DoSomeMagicServerRpc()
-    {
-
     }
   }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using Managers;
 using Multiplayer;
+using RelaySystem.Data;
 using UnityEngine;
 using Unity.Netcode;
 using Utils;
@@ -64,7 +65,7 @@ namespace UI.Pregame
 
       MultiplayerMenuPlayer player = SpawnManager.Instance._players[i];
 
-      ShipSelector ss = _playerTiles[i].GetComponentInChildren<ShipSelector>();
+      MultiplayerShipSelector ss = _playerTiles[i].GetComponentInChildren<MultiplayerShipSelector>();
       ss.index = player.shipIndex;
       ss.DisplayValues();
 
