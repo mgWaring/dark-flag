@@ -290,7 +290,7 @@ public class GameController : MonoBehaviour
         {
           scoreboard.SetActive(true);
           racer.gameObject.GetComponent<BotMovement>().enabled = true;
-          racer.gameObject.GetComponent<PlayerMovement>().enabled = false;
+          racer.gameObject.GetComponent<PlayerInput>().enabled = false;
         }
       }
     }

@@ -153,7 +153,7 @@ public class ShipSelector : MonoBehaviour
     GameObject ship = Instantiate(currentShip);
     ship.GetComponent<NetworkObject>().enabled = false;
     ship.GetComponent<Rigidbody>().useGravity = false;
-    ship.GetComponent<PlayerMovement>().enabled = false;
+    ship.GetComponent<PlayerInput>().enabled = false;
     ship.GetComponent<MovementController>().enabled = false;
     ship.GetComponent<BotMovement>().enabled = false;
     ship.GetComponent<AntiGravManager>().enabled = false;
@@ -185,7 +185,7 @@ public class ShipSelector : MonoBehaviour
     GameObject ship = Instantiate(currentShip);
     ship.GetComponent<NetworkObject>().enabled = false;
     ship.GetComponent<Rigidbody>().useGravity = false;
-    ship.GetComponent<PlayerMovement>().enabled = false;
+    ship.GetComponent<PlayerInput>().enabled = false;
     ship.GetComponent<MovementController>().enabled = false;
     ship.GetComponent<BotMovement>().enabled = false;
     ship.GetComponent<AntiGravManager>().enabled = false;
