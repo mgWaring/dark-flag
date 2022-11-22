@@ -1,11 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Linq;
 using RelaySystem.Data;
-using UI.Pregame;
 using Unity.Netcode;
-using UnityEditor;
 using Managers;
 
 public class MultiPlayerOptions : MonoBehaviour
@@ -15,7 +12,6 @@ public class MultiPlayerOptions : MonoBehaviour
   public Selector botSelector;
   private Dictionary<string, MapScriptable> _maps = new();
   private Dictionary<string, ShipsScriptable> _ships = new();
-  [SerializeField] private PlayerList playerList;
   public ShipsScriptable[] shipList;
   public MapScriptable[] mapList;
 
@@ -23,28 +19,16 @@ public class MultiPlayerOptions : MonoBehaviour
   {
     FindShips();
     FindMaps();
-    if (false)
-    {
-      transform.GetChild(0).gameObject.SetActive(false);
-      transform.GetChild(1).gameObject.SetActive(false);
-      transform.GetChild(2).gameObject.SetActive(false);
-    }
   }
 
-  private void FindShips()
-  {
-    for (int i = 0; i < shipList.Length; i++)
-    {
-      ShipsScriptable ss = shipList[i];
+  private void FindShips() {
+    foreach (var ss in shipList) {
       _ships.Add(ss.shipName, ss);
     }
   }
 
-  private void FindMaps()
-  {
-    for (int i = 0; i < mapList.Length; i++)
-    {
-      MapScriptable ms = mapList[i];
+  private void FindMaps() {
+    foreach (var ms in mapList) {
       _maps.Add(ms.name, ms);
     }
   }
@@ -58,25 +42,14 @@ public class MultiPlayerOptions : MonoBehaviour
   {
     if (SpawnManager.Instance != null)
     {
-      if (SpawnManager.Instance.GetClientId() != 0)
-      {
-        return;
-      }
-
-      bool canStart = true;
-      for (int i = 0; i < SpawnManager.Instance._players.Count; i++)
-      {
-        MultiplayerMenuPlayer p = SpawnManager.Instance._players[i];
-        if (!p.ready)
-        {
-          canStart = false;
-        }
-      }
-
-      if (!canStart)
-      {
-        return;
-      }
+      if (SpawnManager.Instance.GetClientId() != 0) return;
+      
+      var canStart = new List<bool>();
+      foreach (var p in SpawnManager.Instance._players) canStart.Add(p.ready);
+      
+      //if any entry in the can start array is false, then we can't start
+      if (canStart.Any(b => !b)) return;
+      
     }
 
     var playerCount = NetworkManager.Singleton.ConnectedClients.Count;
@@ -85,11 +58,8 @@ public class MultiPlayerOptions : MonoBehaviour
 
     var racerList = new List<RacerInfo>();
 
-    for (var i = 0; i < botCount; i++)
-    {
-      racerList.Add(new RacerInfo(_ships.Values.ToArray()));
-    }
-
+    for (var i = 0; i < botCount; i++) racerList.Add(new RacerInfo(_ships.Values.ToArray()));
+    
     foreach (var (_, client) in NetworkManager.Singleton.ConnectedClients)
     {
       var pdata = client.PlayerObject.GetComponent<DFPlayer>();
@@ -105,6 +75,9 @@ public class MultiPlayerOptions : MonoBehaviour
     CrossScene.players = playerCount;
     CrossScene.bots = botCount;
     CrossScene.cameFromMainMenu = true;
-    NetworkManager.Singleton.SceneManager.LoadScene("Multiplayer", LoadSceneMode.Single);
+
+    //make a call to our friendly neighborhood network enabled scene management manager
+    //(does that make it a  meta-manager? But then... who manages the managers that manage the managers?!)
+    DFSceneManager.Instance.TryLoadScene("Multiplayer");
   }
 }
