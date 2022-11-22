@@ -1296,10 +1296,10 @@ MonoBehaviour:
   weightText: {fileID: 585965702}
   durabilityText: {fileID: 24190509}
   selectableShipNames:
-  - {fileID: 11400000, guid: ab38fa60089fbed40af712c21048d41c, type: 2}
-  - {fileID: 11400000, guid: 627da91991676624387263bcf47ef8d4, type: 2}
   - {fileID: 11400000, guid: 30016bfa08dcb144cad2c27c1f708494, type: 2}
   - {fileID: 11400000, guid: edb7e5c1a1ae0f445a28b05f4569bdf4, type: 2}
+  - {fileID: 11400000, guid: b23fc344d65d8c743aaa9f0a0be49762, type: 2}
+  - {fileID: 11400000, guid: 12a7d69743b59b94fb668f734baf586c, type: 2}
   shipHolder: {fileID: 2130054422}
   confirmationModal: {fileID: 1271520471}
   value: {fileID: 0}

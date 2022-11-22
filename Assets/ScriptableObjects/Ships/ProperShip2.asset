@@ -21,7 +21,7 @@ MonoBehaviour:
   boost: 1
   yawSpeed: 100
   torqueLimiter: 0.04
-  turnTiltMaximum: {x: 0, y: 0, z: 0.2419219, w: 0.9702957}
+  turnTiltMaximum: {x: 0, y: 0, z: 0.25881904, w: 0.9659258}
   hoverForce: 20
   hoverStiffness: 10
   pitchRollStiffness: 4.3

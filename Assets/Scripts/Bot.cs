@@ -16,8 +16,8 @@ public class Bot : MonoBehaviour
         racer = ship.GetComponent<Racer>();
         mc = ship.GetComponentInChildren<MovementController>();
         mc.enabled = false;
-        PlayerMovement pm = ship.GetComponent<PlayerMovement>();
-        pm.enabled = false;
+        PlayerMovement pm = ship.GetComponentInParent<PlayerMovement>();//problems?
+        pm.enabled = false;//problems?
     }
 
     public void PlayOpening(string clipName) {

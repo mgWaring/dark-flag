@@ -19,7 +19,7 @@ MonoBehaviour:
   angularDrag: 5
   thrustSpeed: 7000
   boost: 1
-  yawSpeed: 80
+  yawSpeed: 75
   torqueLimiter: 0.01
   turnTiltMaximum: {x: 0, y: 0, z: 0.21643962, w: 0.976296}
   hoverForce: 20
@@ -31,7 +31,7 @@ MonoBehaviour:
   pitchRayDistance: 2
   colliderCalcOffset: {x: 0, y: -0.53, z: -1.9}
   fineTuneOffset: {x: 0.2, y: 0, z: 0.4}
-  armour: 50
+  armour: 40
   fireDamage: 0.5
   boostDamageRate: 0.1
   roofRayDistance: 0.35

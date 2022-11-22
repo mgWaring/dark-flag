@@ -224,7 +224,7 @@ public class GameController : MonoBehaviour
                 if (RacerIsFinished(racer)) {
                     scoreboard.SetActive(true);
                     racer.gameObject.GetComponent<BotMovement>().enabled = true;
-                    racer.gameObject.GetComponent<PlayerMovement>().enabled = false;
+                    racer.gameObject.GetComponent<PlayerMovement>().enabled = false;//problems?
                 }
             }
         }

@@ -1880,13 +1880,13 @@ MonoBehaviour:
   durabilityUI: {fileID: 2039097234}
   lapTimer: {fileID: 553016916}
   lapCount: 4
-  shipScriptable: {fileID: 11400000, guid: edb7e5c1a1ae0f445a28b05f4569bdf4, type: 2}
+  shipScriptable: {fileID: 11400000, guid: b23fc344d65d8c743aaa9f0a0be49762, type: 2}
   straightToRace: 1
   state: 
   racers: []
   playerId: 0
   playerRacer: {fileID: 0}
-  map: {fileID: 11400000, guid: 45c55deb856152741b3a968aa5063252, type: 2}
+  map: {fileID: 11400000, guid: b99a1e71936ac3c46afb7dd00490402e, type: 2}
   playerPrefab: {fileID: 341128055221354090, guid: 8b7dc839387693d4597225e2607d7e59, type: 3}
   botPrefab: {fileID: 6108957804242051475, guid: c0fbda787b42f184c856ff147ccdd704, type: 3}
 --- !u!114 &765611359
