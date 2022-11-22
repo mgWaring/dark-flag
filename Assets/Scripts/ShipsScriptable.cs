@@ -6,6 +6,7 @@ public class ShipsScriptable : ScriptableObject
     //Please take a note of all ship specific values (the ones in unity, not here) before messing around with this. Re ordering the list can reset ships to default values.
     public string shipName;
     public GameObject shipModel;
+    public GameObject displayShipModel;
     [Header("Rigidbody")]
     public float mass = 3.0f;
     public float drag = 1.5f;
@@ -38,4 +39,3 @@ public class ShipsScriptable : ScriptableObject
     public float botSpeedModifier = 1.0f;
     public Vector3 cameraOffset = new Vector3(0.0f, 0.0f, 0.0f);
 }
- 

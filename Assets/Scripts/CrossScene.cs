@@ -1,3 +1,4 @@
+
 public static class CrossScene
 {
     public static MapScriptable map { get; set; }

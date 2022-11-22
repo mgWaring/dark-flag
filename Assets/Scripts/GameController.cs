@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -76,11 +75,11 @@ public class GameController : MonoBehaviour
             Vector3 pos = startPos.position;
             Quaternion rot = startPos.rotation;
             Racer racer;
-            if (info.isBot) {
+            if (info.IsBot) {
                 GameObject botGO= Instantiate(botPrefab);
                 Bot bot = botGO.GetComponent<Bot>();
                 bots.Add(bot);
-                bot.ss = info.ship;
+                bot.ss = info.Ship;
                 bot.Init();
                 racer = bot.racer;
                 bot.SetPosRot(pos, rot);
@@ -92,7 +91,7 @@ public class GameController : MonoBehaviour
                 Player player = playerGO.GetComponent<Player>();
                 players.Add(player);
                 Debug.Log(player);
-                player.ss = info.ship;
+                player.ss = info.Ship;
                 player.Init();
                 racer = player.racer;
                 playerRacer = racer;
@@ -102,7 +101,7 @@ public class GameController : MonoBehaviour
                 }
             }
             racer.id = i;
-            racer.name = info.name;
+            racer.name = info.Name;
             racer.lastCheckpoint = lastCheck;
             racer.nextCheckpoint = nextCheck;
             racers[i] = racer;

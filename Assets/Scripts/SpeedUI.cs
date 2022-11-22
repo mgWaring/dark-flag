@@ -10,6 +10,12 @@ public class SpeedUI : MonoBehaviour
     Rigidbody rb;
     TextMeshProUGUI text;
 
+    public void SetTarget(GameObject t)
+    {
+        target = t;
+        rb = target.GetComponent<Rigidbody>();
+        text = GetComponent<TextMeshProUGUI>();
+    }
     void Start() {
         rb = target.GetComponent<Rigidbody>();
         text = GetComponent<TextMeshProUGUI>();

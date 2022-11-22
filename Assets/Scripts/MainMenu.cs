@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +10,10 @@ public class MainMenu : MonoBehaviour
     {
         singleplayerOptions.SetActive(true);
         mainMenuOptions.SetActive(false);
+    }
+    
+    public void Multiplayer() {
+        SceneManager.LoadSceneAsync("MP_menu");
     }
 
     public void Exit()
