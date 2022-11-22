@@ -51,7 +51,11 @@ namespace Managers
 
     public int GetClientId()
     {
-      return (int)NetworkManager.Singleton.LocalClientId;
+      if (NetworkManager.Singleton) {
+        return (int)NetworkManager.Singleton.LocalClientId;
+      }
+
+      return 0;
     }
 
     private void Baws(ulong obj)
