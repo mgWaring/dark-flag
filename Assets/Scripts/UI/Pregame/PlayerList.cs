@@ -6,66 +6,94 @@ using UnityEngine;
 using Unity.Netcode;
 using Utils;
 
-namespace UI.Pregame {
-    public class PlayerList : NetworkBehaviour {
-        private List<GameObject> _playerTiles = new();
-        private List<bool> _playerReadies;
-        private List<int> _playerShips;
-        [SerializeField] private GameObject playerTilePrefab;
-        [SerializeField] private GameObject playerTileContainer;
-        public DFPlayer player;
-        //
+namespace UI.Pregame
+{
+  public class PlayerList : NetworkBehaviour
+  {
+    private List<GameObject> _playerTiles = new();
+    [SerializeField] private GameObject playerTilePrefab;
+    [SerializeField] private GameObject playerTileContainer;
+    float timer = 1.0f;
+    bool sentName = false;
+    //
 
-        void Awake() {
-            DFLogger.Instance.LogInfo("PLAYER LIST AWAKE");
-            _playerReadies = new List<bool>();
-            _playerShips = new List<int>();
-        }
-
-        public void Start() {
-            Debug.Log("waking player list");
-            DFLogger.Instance.Log("waking player list");
-            SpawnManager.Instance.OnPlayerJoined += CreateTileForClient;
-            SpawnManager.Instance.OnPlayerLeft += DeleteTileForClient;            
-            SpawnManager.Instance.OnClientJoined += DrawExistingTilesForClient;
-        }
-
-        public bool AllReady() {
-            return playerTileContainer.GetComponentsInChildren<ReadyButton>().All(
-                tile => tile._ready
-            );
-        }
-
-        private void CreateTileForClient(DFPlayer DFPlayer) {
-            DFLogger.Instance.LogInfo("CREATING TILE FOR CLIENT");
-            var clientId = System.Convert.ToInt32(DFPlayer.OwnerClientId);
-            Debug.Log(DFPlayer.playerName);
-            Debug.LogFormat("We're creating a tile for a player with ID: {0}", DFPlayer.NetworkObject.OwnerClientId);
-            if (_playerTiles.Count < clientId) {
-                // update the existing tile
-                _playerTiles[clientId].GetComponent<PlayerTile>().Player = DFPlayer;
-            } else {
-                // if the prefs include an ID we don't have in our tile list, add a new tile
-                var newTile = Instantiate(playerTilePrefab, playerTileContainer.transform, false);
-                newTile.GetComponent<PlayerTile>().Player = DFPlayer;
-                _playerTiles.Add(newTile);
-                _playerReadies.Add(false);
-                _playerShips.Add(0);
-            }
-
-        }
-
-        private void DeleteTileForClient(ulong beans) {
-            var clientId = System.Convert.ToInt32(beans);
-            Destroy(_playerTiles[clientId]);
-            _playerTiles.RemoveAt(clientId);
-        }
-
-        public void DrawExistingTilesForClient(DFPlayer player){
-            DFLogger.Instance.Log("I would add another tile");
-            for(var i = 0; i < _playerReadies.Count; i++) {
-                DFLogger.Instance.Log($"I would add another tile for player {i}");
-            }
-        }
+    void Awake()
+    {
+      DFLogger.Instance.LogInfo("PLAYER LIST AWAKE");
     }
+
+    void Update()
+    {
+      Debug.Log(HasNetworkObject);
+      Debug.Log(_playerTiles.Count);
+      Debug.Log(SpawnManager.Instance._players.Count);
+      if (_playerTiles.Count < SpawnManager.Instance._players.Count)
+      {
+        CreateTile();
+      }
+
+      timer -= Time.deltaTime;
+      if (timer <= 0 && !sentName)
+      {
+        SpawnManager.Instance.SetPlayerName(PlayerPrefs.GetString("playerName"));
+        sentName = true;
+      }
+    }
+
+    public void Start()
+    {
+      Debug.Log("Starting player list");
+      DFLogger.Instance.Log("Starting player list");
+      SpawnManager.Instance.OnPlayerJoined += CreateTile;
+      SpawnManager.Instance.OnPlayerLeft += DeleteTileForClient;
+      SpawnManager.Instance.ValueUpdate += TileUpdate;
+    }
+
+    public bool AllReady()
+    {
+      return playerTileContainer.GetComponentsInChildren<ReadyButton>().All(
+          tile => tile._ready
+      );
+    }
+
+    private void TileUpdate(int i)
+    {
+      if (_playerTiles.Count <= i)
+      {
+        return;
+      }
+
+      MultiplayerMenuPlayer player = SpawnManager.Instance._players[i];
+
+      ShipSelector ss = _playerTiles[i].GetComponentInChildren<ShipSelector>();
+      ss.index = player.shipIndex;
+      ss.DisplayValues();
+
+      PlayerTile tile = _playerTiles[i].GetComponent<PlayerTile>();
+      tile.UpdateName(player.name.ToString());
+      tile.readyButton.SetReady(player.ready);
+    }
+
+    private void CreateTile()
+    {
+      Utils.DFLogger.Instance.LogInfo("CREATING TILE FOR CLIENT");
+      var newTile = Instantiate(playerTilePrefab, playerTileContainer.transform, false);
+      _playerTiles.Add(newTile);
+    }
+
+    private void DeleteTileForClient(ulong beans)
+    {
+      //var clientId = System.Convert.ToInt32(beans);
+      //Destroy(_playerTiles[clientId]);
+      //_playerTiles.RemoveAt(clientId);
+    }
+
+    public void DrawExistingTilesForClient()
+    {
+      //DFLogger.Instance.Log("I would add another tile");
+      //for(var i = 0; i < SpawnManager.Instance._playerReadies.Count; i++) {
+      //    DFLogger.Instance.Log($"I would add another tile for player {i}");
+      //}
+    }
+  }
 }

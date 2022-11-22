@@ -2060,6 +2060,7 @@ MonoBehaviour:
   - 10
   value: 1
   index: 0
+  type: 
 --- !u!224 &855748364
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4472,6 +4473,7 @@ MonoBehaviour:
   - 8
   value: 0
   index: 0
+  type: 
 --- !u!1 &1425344922
 GameObject:
   m_ObjectHideFlags: 0
@@ -6186,6 +6188,7 @@ MonoBehaviour:
   - Scrap Palace
   value: Janktown
   index: 0
+  type: 
 --- !u!1 &2006949365
 GameObject:
   m_ObjectHideFlags: 0
@@ -6407,6 +6410,7 @@ MonoBehaviour:
   - 0
   value: 1
   index: 0
+  type: 
 --- !u!1 &2118160170
 GameObject:
   m_ObjectHideFlags: 0

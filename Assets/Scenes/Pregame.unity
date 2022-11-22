@@ -828,6 +828,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a0a81f52194ece8300896218a4e386, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mapIndex:
+    m_InternalValue: 0
+  _botIndex:
+    m_InternalValue: 0
+  _lapIndex:
+    m_InternalValue: 0
 --- !u!1 &975836312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1494,7 +1500,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTilePrefab: {fileID: 6882509700076806402, guid: 90d2865039258324896e271285a85000, type: 3}
   playerTileContainer: {fileID: 291064827}
-  player: {fileID: 0}
 --- !u!114 &1913163179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2582,6 +2587,7 @@ MonoBehaviour:
   - Scrap Palace
   value: Janktown
   index: 0
+  type: map
 --- !u!114 &3677175697977105544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3176,8 +3182,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SinglePlayerOptions, Assembly-CSharp
+      - m_Target: {fileID: 3677175698029924592}
+        m_TargetAssemblyTypeName: MultiPlayerOptions, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -3674,6 +3680,7 @@ MonoBehaviour:
   - 8
   value: 0
   index: 0
+  type: bot
 --- !u!1 &3677175698474428610
 GameObject:
   m_ObjectHideFlags: 0
@@ -4040,6 +4047,7 @@ MonoBehaviour:
   - 10
   value: 1
   index: 0
+  type: lap
 --- !u!114 &3677175699030565168
 MonoBehaviour:
   m_ObjectHideFlags: 0

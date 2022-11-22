@@ -5162,6 +5162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5814136075095897786}
   - component: {fileID: 9069231247432301189}
+  - component: {fileID: -4991460938758494404}
   m_Layer: 0
   m_Name: TrackJanktownSpeedway
   m_TagString: Untagged
@@ -5227,6 +5228,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkpoints: {fileID: 1596408047316020689}
   startingPositions: {fileID: 7220999822371248859}
+--- !u!114 &-4991460938758494404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5814136075095897797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &5814136075114168897
 GameObject:
   m_ObjectHideFlags: 0
