@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
 using TMPro;
+using Managers;
+using RelaySystem.Data;
 
-public class GameController : MonoBehaviour
+public class GameController : NetworkBehaviour
 {
   [SerializeField] private bool devmode;
   public int playerCount;
@@ -26,7 +28,6 @@ public class GameController : MonoBehaviour
 
   private float _countdownTimer = 5.0f;
   private float _postRaceTimer = 10.0f;
-  public int playerId;
   [HideInInspector] public Racer playerRacer;
   private GameObject _checkpoints;
   private Transform _startingPositions;
@@ -35,6 +36,7 @@ public class GameController : MonoBehaviour
   public GameObject playerPrefab;
   public GameObject botPrefab;
   private Animator _firstCamAnim;
+  Player player;
 
   private void DoBasicSetup()
   {
@@ -48,93 +50,106 @@ public class GameController : MonoBehaviour
     }
     else
     {
-      CrossScene.racerInfo = new RacerInfo[playerCount];
-      if (playerId < playerCount)
-      {
-        CrossScene.racerInfo[playerId] = new RacerInfo(PlayerPrefs.GetString("playerName"), shipScriptable);
-      }
-
-      var available = new[] { shipScriptable };
-      for (var i = 0; i < playerCount; i++)
-      {
-        CrossScene.racerInfo[i] ??= new RacerInfo(available);
-      }
+      Debug.Log("DIDNT COME FROM MENU IN MULTIPLAYER");
     }
   }
 
   private void Start()
   {
-    DoBasicSetup();
-    _players = new List<Player>();
-    _bots = new List<Bot>();
-    Debug.Log("SPAWNING MAP");
-    var mapObj = Instantiate(map.prefab);
-    mapObj.GetComponent<NetworkObject>().Spawn();
-    _mMap = mapObj.GetComponent<Map>();
-    _checkpoints = _mMap.checkpoints;
-    _startingPositions = _mMap.startingPositions;
     state = "prerace";
-    racers = new Racer[playerCount];
-    var checkpointCount = _checkpoints.transform.childCount;
-    var lastCheck = _checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<Checkpoint>();
-    var nextCheck = _checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
-    for (var i = 0; i < playerCount; i++)
+    if (SpawnManager.Instance.GetClientId() == 0)
     {
-      Debug.Log("creating players");
-      var info = CrossScene.racerInfo[i];
-      var startPos = _startingPositions.GetChild(i).transform;
-      var pos = startPos.position;
-      var rot = startPos.rotation;
-      Racer racer;
-      if (info.IsBot)
+      var dfPlayers = GameObject.FindObjectsOfType<DFPlayer>();
+      DoBasicSetup();
+      _players = new List<Player>();
+      _bots = new List<Bot>();
+      Debug.Log("SPAWNING MAP");
+      var mapObj = Instantiate(map.prefab);
+      mapObj.GetComponent<NetworkObject>().Spawn();
+      _mMap = mapObj.GetComponent<Map>();
+      _checkpoints = _mMap.checkpoints;
+      _startingPositions = _mMap.startingPositions;
+      racers = new Racer[playerCount];
+      var checkpointCount = _checkpoints.transform.childCount;
+      var lastCheck = _checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<Checkpoint>();
+      var nextCheck = _checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
+      for (var i = 0; i < playerCount; i++)
       {
-        var botGo = Instantiate(botPrefab);
-        botGo.GetComponent<NetworkObject>().Spawn();
-        var bot = botGo.GetComponent<Bot>();
-        _bots.Add(bot);
-        bot.ss = info.Ship;
-        bot.Init();
-        racer = bot.racer;
-        bot.SetPosRot(pos, rot);
-        if (i == 0)
+        Debug.Log("creating players");
+        var info = CrossScene.racerInfo[i];
+        var startPos = _startingPositions.GetChild(i).transform;
+        var pos = startPos.position;
+        var rot = startPos.rotation;
+        Racer racer;
+        if (info.IsBot)
         {
-          _firstCamAnim = bot.camera.GetComponent<Animator>();
+          var botGo = Instantiate(botPrefab);
+          botGo.GetComponent<NetworkObject>().Spawn();
+          var bot = botGo.GetComponent<Bot>();
+          _bots.Add(bot);
+          bot.ss = info.Ship;
+          bot.Init();
+          racer = bot.racer;
+          bot.SetPosRot(pos, rot);
+          if (i == 0)
+          {
+            _firstCamAnim = bot.camera.GetComponent<Animator>();
+          }
         }
-      }
-      else
-      {
-        Debug.Log("Creating a player");
-        var playerGo = Instantiate(playerPrefab);
-        var player = playerGo.GetComponent<Player>();
-        playerGo.GetComponent<NetworkObject>().Spawn();
-        _players.Add(player);
-        Debug.Log(player);
-        player.ss = info.Ship;
-        player.Init();
-        racer = player.racer;
-        playerRacer = racer;
-        player.SetPosRot(pos, rot);
-        if (i == 0)
+        else
         {
-          _firstCamAnim = player.camera.GetComponent<Animator>();
+          Debug.Log("Creating a player");
+          var playerGo = Instantiate(playerPrefab);
+          var dfplayer = dfPlayers.Single(dfp => dfp.OwnerClientId == info.ClientId);
+          var player = playerGo.GetComponent<Player>();
+          player.clientId = info.ClientId;
+          playerGo.GetComponent<NetworkObject>().SpawnWithOwnership(info.ClientId);
+          playerGo.transform.SetParent(dfplayer.transform, true);
+          _players.Add(player);
+          Debug.Log(player);
+          player.ss = info.Ship;
+          player.Init();
+          racer = player.racer;
+          playerRacer = racer;
+          player.SetPosRot(pos, rot);
+          if (i == 0)
+          {
+            _firstCamAnim = player.camera.GetComponent<Animator>();
+          }
         }
-        //this needs to worked into the block above
-        if (info.IsNetworkPlayer)
-        {
-          //var relevantClient = NetworkManager.Singleton.ConnectedClients[info.ClientId];
-          //newShip.transform.parent = relevantClient.PlayerObject.transform;
-          //relevantClient.PlayerObject.GetComponent<DFPlayer>().ClaimShip(newShip);
-        }
-      }
 
-      racer.id = i;
-      racer.name = info.Name;
-      racer.lastCheckpoint = lastCheck;
-      racer.nextCheckpoint = nextCheck;
-      racers[i] = racer;
-      laps[racer] = new List<float>();
+        racer.id = i;
+        racer.name = info.Name;
+        racer.lastCheckpoint = lastCheck;
+        racer.nextCheckpoint = nextCheck;
+        racers[i] = racer;
+        laps[racer] = new List<float>();
+      }
+    }
+    else
+    {
+      racers = GameObject.FindObjectsOfType<Racer>();
+      _players = GameObject.FindObjectsOfType<Player>().ToList();
+      _mMap = GameObject.FindObjectsOfType<Map>()[0];
+      _checkpoints = _mMap.checkpoints;
+      var checkpointCount = _checkpoints.transform.childCount;
+      var lastCheck = _checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<Checkpoint>();
+      var nextCheck = _checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
+      for (int i = 0; i < _players.Count; i++)
+      {
+        _players[i].Init();
+        _players[i].racer.lastCheckpoint = lastCheck;
+        _players[i].racer.nextCheckpoint = nextCheck;
+        laps[_players[i].racer] = new List<float>();
+      }
+      for (int i = 0; i < checkpointCount; i++)
+      {
+        _checkpoints.transform.GetChild(i).GetComponent<Checkpoint>().gameController = this;
+      }
     }
 
+    player = _players.Single(p => p.IsOwner);
+    player.ship.GetComponent<BotMovement>().enabled = false;
     SetUITarget();
     PlayOpening();
 
@@ -150,48 +165,26 @@ public class GameController : MonoBehaviour
 
   private void SetUITarget()
   {
-    playerRacer = racers[0];
-    playerId = 0;
-    MovementController mc;
-    if (_players.Count == 0)
-    {
-      mc = _bots[0].mc;
-    }
-    else
-    {
-      mc = _players[0].mc;
-    }
+    playerRacer = player.racer;
+    MovementController mc = player.mc;
 
     var o = mc.gameObject;
-    speedUI.target = o;
+    speedUI.SetTarget(o);
     durabilityUI.target = o;
 
-    for (int i = 0; i < _players.Count; i++)
+    var cameras = GameObject.FindObjectsOfType<Camera>();
+    for (int i = 0; i < cameras.Length; i++)
     {
-      if (_players[i].racer.id != playerId)
-      {
-        _players[i].camera.enabled = false;
-      }
+      cameras[i].enabled = false;
     }
-    for (int i = 0; i < _bots.Count; i++)
-    {
-      if (_bots[i].racer.id != playerId)
-      {
-        _bots[i].camera.enabled = false;
-      }
-    }
+
+    player.camera.enabled = true;
   }
 
   private void PlayOpening()
   {
-    for (int i = 0; i < _players.Count; i++)
-    {
-      _players[i].PlayOpening(map.cameraClipName);
-    }
-    for (int i = 0; i < _bots.Count; i++)
-    {
-      _bots[i].PlayOpening(map.cameraClipName);
-    }
+    _firstCamAnim = player.camera.GetComponent<Animator>();
+    player.PlayOpening("JanktownOpeningCamera");
   }
 
   private void AttachCamera()
@@ -200,32 +193,39 @@ public class GameController : MonoBehaviour
     {
       _players[i].AttachCamera();
     }
-    for (int i = 0; i < _bots.Count; i++)
+    if (_bots != null)
     {
-      _bots[i].AttachCamera();
+      for (int i = 0; i < _bots.Count; i++)
+      {
+        _bots[i].AttachCamera();
+      }
     }
   }
 
   private void AllowPlay()
   {
-    for (int i = 0; i < _players.Count; i++)
+
+    player.AllowPlay();
+
+    if (_bots != null)
     {
-      _players[i].AllowPlay();
-    }
-    for (int i = 0; i < _bots.Count; i++)
-    {
-      _bots[i].AllowPlay();
+      for (int i = 0; i < _bots.Count; i++)
+      {
+        _bots[i].AllowPlay();
+      }
     }
   }
 
   private void Update()
   {
+    Debug.Log($"DONKEY:::::{player.ship.GetComponent<BotMovement>().enabled}");
     if (state == "prerace")
     {
       HandlePreRace();
     }
     else if (state == "countdown")
     {
+      Debug.Log("COUNTDOWN");
       UpdatePositions();
       HandleCountdown();
     }
@@ -244,6 +244,7 @@ public class GameController : MonoBehaviour
   {
     if (_firstCamAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f)
     {
+      Debug.Log("ATTACHING THE CAM");
       AttachCamera();
       state = "countdown";
     }
@@ -283,7 +284,7 @@ public class GameController : MonoBehaviour
     {
       times.Add(raceTimer.currentTime);
       racer.lap += 1;
-      if (racer.id == playerId)
+      if (racer.IsOwner)
       {
         lapTimer.Lap();
         if (RacerIsFinished(racer))
@@ -317,18 +318,14 @@ public class GameController : MonoBehaviour
   private void HandleCountdown()
   {
     _countdownTimer -= Time.deltaTime;
-    if (_countdownTimer <= 0.0f || devmode)
+    if (_countdownTimer <= 0.0f)
     {
       state = "race";
       raceTimer.running = true;
       lapTimer.running = true;
       countdownText.SetText("ACTIVATE!");
+      Debug.Log("COUNTDOWN DONE");
       AllowPlay();
-      for (var i = 0; i < playerCount; i++)
-      {
-        var mc = racers[i].gameObject.GetComponentInChildren<MovementController>();
-        mc.enabled = true;
-      }
     }
     else
     {

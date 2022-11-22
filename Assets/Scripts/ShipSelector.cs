@@ -2,13 +2,19 @@ using System;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using UI.Pregame;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Unity.Netcode;
 
 public class ShipSelector : MonoBehaviour
 {
+  //max
+  [SerializeField] private bool useModal;
+  [SerializeField] private PlayerTile playerTile;
   public event Action<int> OnShipChange;
+
+  //andrew
   public TextMeshProUGUI nameText;
   public TextMeshProUGUI speedText;
   public TextMeshProUGUI handlingText;
@@ -31,7 +37,7 @@ public class ShipSelector : MonoBehaviour
   // Start is called before the first frame update
   private void Start()
   {
-    selectableShips = selectableShipNames.Select(name => name.shipShowcase).ToArray();
+    selectableShips = selectableShipNames.Select(name => name.displayShipModel).ToArray();
     SetValues();
   }
 
@@ -92,8 +98,15 @@ public class ShipSelector : MonoBehaviour
         confirmationModal.SetActive(true);
       }
     }
+
+    BindDataToPlayer();
   }
-  
+
+  private void BindDataToPlayer()
+  {
+    //playerTile.set
+  }
+
   public void StartGame()
   {
     CrossScene.racerInfo = generateRacerInfo();
@@ -138,17 +151,6 @@ public class ShipSelector : MonoBehaviour
     }
 
     GameObject ship = Instantiate(currentShip);
-    ship.GetComponent<NetworkObject>().enabled = false;
-    ship.GetComponent<Rigidbody>().useGravity = false;
-    ship.GetComponent<PlayerInput>().enabled = false;
-    ship.GetComponent<MovementController>().enabled = false;
-    ship.GetComponent<BotMovement>().enabled = false;
-    ship.GetComponent<AntiGravManager>().enabled = false;
-    ship.GetComponent<RigidbodyController>().enabled = false;
-    ship.GetComponent<ShipDurability>().enabled = false;
-    ship.GetComponent<FrontWeapon>().enabled = false;
-    ship.GetComponent<BackWeapon>().enabled = false;
-    ship.GetComponent<Racer>().enabled = false;
     ship.transform.SetParent(shipHolder);
     ship.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
     ship.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
@@ -170,17 +172,6 @@ public class ShipSelector : MonoBehaviour
     }
 
     GameObject ship = Instantiate(currentShip);
-    // ship.GetComponent<NetworkObject>().enabled = false;
-    // ship.GetComponent<Rigidbody>().useGravity = false;
-    // ship.GetComponent<PlayerInput>().enabled = false;
-    // ship.GetComponent<MovementController>().enabled = false;
-    // ship.GetComponent<BotMovement>().enabled = false;
-    // ship.GetComponent<AntiGravManager>().enabled = false;
-    // ship.GetComponent<RigidbodyController>().enabled = false;
-    // ship.GetComponent<ShipDurability>().enabled = false;
-    // ship.GetComponent<FrontWeapon>().enabled = false;
-    // ship.GetComponent<BackWeapon>().enabled = false;
-    // ship.GetComponent<Racer>().enabled = false;
     ship.transform.SetParent(shipHolder);
     ship.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
     ship.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);

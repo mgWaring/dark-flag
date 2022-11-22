@@ -49,7 +49,7 @@ namespace RelaySystem.Data {
           }
           
           
-          // Copied from Palyer
+          // Copied from Player
           public void Init()
           {
               ship = Instantiate(ss.shipModel);
