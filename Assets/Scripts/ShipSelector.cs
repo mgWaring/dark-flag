@@ -37,7 +37,7 @@ public class ShipSelector : MonoBehaviour
   // Start is called before the first frame update
   private void Start()
   {
-    selectableShips = selectableShipNames.Select(name => name.shipModel).ToArray();
+    selectableShips = selectableShipNames.Select(name => name.displayShipModel).ToArray();
     SetValues();
   }
 
@@ -151,17 +151,6 @@ public class ShipSelector : MonoBehaviour
     }
 
     GameObject ship = Instantiate(currentShip);
-    ship.GetComponent<NetworkObject>().enabled = false;
-    ship.GetComponent<Rigidbody>().useGravity = false;
-    ship.GetComponent<PlayerMovement>().enabled = false;
-    ship.GetComponent<MovementController>().enabled = false;
-    ship.GetComponent<BotMovement>().enabled = false;
-    ship.GetComponent<AntiGravManager>().enabled = false;
-    ship.GetComponent<RigidbodyController>().enabled = false;
-    ship.GetComponent<ShipDurability>().enabled = false;
-    ship.GetComponent<FrontWeapon>().enabled = false;
-    ship.GetComponent<BackWeapon>().enabled = false;
-    ship.GetComponent<Racer>().enabled = false;
     ship.transform.SetParent(shipHolder);
     ship.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
     ship.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
@@ -183,17 +172,6 @@ public class ShipSelector : MonoBehaviour
     }
 
     GameObject ship = Instantiate(currentShip);
-    ship.GetComponent<NetworkObject>().enabled = false;
-    ship.GetComponent<Rigidbody>().useGravity = false;
-    ship.GetComponent<PlayerMovement>().enabled = false;
-    ship.GetComponent<MovementController>().enabled = false;
-    ship.GetComponent<BotMovement>().enabled = false;
-    ship.GetComponent<AntiGravManager>().enabled = false;
-    ship.GetComponent<RigidbodyController>().enabled = false;
-    ship.GetComponent<ShipDurability>().enabled = false;
-    ship.GetComponent<FrontWeapon>().enabled = false;
-    ship.GetComponent<BackWeapon>().enabled = false;
-    ship.GetComponent<Racer>().enabled = false;
     ship.transform.SetParent(shipHolder);
     ship.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
     ship.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);

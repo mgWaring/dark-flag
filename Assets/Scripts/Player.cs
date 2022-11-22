@@ -2,26 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using Managers;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
   public Camera camera;
   [HideInInspector] public Racer racer;
   [HideInInspector] public ShipsScriptable ss;
   [HideInInspector] public MovementController mc;
-  private GameObject ship;
+  public GameObject ship;
+  public ulong clientId;
 
   // Start is called before the first frame update
   public void Init()
   {
-    ship = Instantiate(ss.shipModel);
-    ship.GetComponent<NetworkObject>().Spawn();
-    racer = ship.GetComponent<Racer>();
-    mc = ship.GetComponentInChildren<MovementController>();
-    mc.enabled = false;
-    camera = GetComponentInChildren<Camera>();
-    BotMovement bot = ship.GetComponent<BotMovement>();
-    bot.enabled = false;
+    if (SpawnManager.Instance.GetClientId() == 0)
+    {
+      ship = Instantiate(ss.shipModel);
+      ship.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId);
+      racer = ship.GetComponent<Racer>();
+      mc = ship.GetComponentInChildren<MovementController>();
+      mc.enabled = false;
+      camera = GetComponentInChildren<Camera>();
+      BotMovement bot = ship.GetComponent<BotMovement>();
+      bot.enabled = false;
+    }
+    else
+    {
+      ship = transform.GetChild(1).gameObject;
+      racer = ship.GetComponent<Racer>();
+      mc = ship.GetComponentInChildren<MovementController>();
+      mc.enabled = false;
+      camera = GetComponentInChildren<Camera>();
+      BotMovement bot = ship.GetComponentInChildren<BotMovement>();
+      bot.enabled = false;
+    }
   }
 
   public void PlayOpening(string clipName)
