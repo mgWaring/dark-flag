@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Managers;
-using RelaySystem.Data;
+using Multiplayer;
 using UnityEngine;
 using Unity.Netcode;
 using Utils;
@@ -14,7 +14,7 @@ namespace UI.Pregame
     [SerializeField] private GameObject playerTilePrefab;
     [SerializeField] private GameObject playerTileContainer;
     float timer = 1.0f;
-    bool sentName = false;
+    bool sentName;
     //
 
     void Awake()
@@ -45,7 +45,6 @@ namespace UI.Pregame
       Debug.Log("Starting player list");
       DFLogger.Instance.Log("Starting player list");
       SpawnManager.Instance.OnPlayerJoined += CreateTile;
-      SpawnManager.Instance.OnPlayerLeft += DeleteTileForClient;
       SpawnManager.Instance.ValueUpdate += TileUpdate;
     }
 
@@ -76,24 +75,9 @@ namespace UI.Pregame
 
     private void CreateTile()
     {
-      Utils.DFLogger.Instance.LogInfo("CREATING TILE FOR CLIENT");
+      DFLogger.Instance.LogInfo("CREATING TILE FOR CLIENT");
       var newTile = Instantiate(playerTilePrefab, playerTileContainer.transform, false);
       _playerTiles.Add(newTile);
-    }
-
-    private void DeleteTileForClient(ulong beans)
-    {
-      //var clientId = System.Convert.ToInt32(beans);
-      //Destroy(_playerTiles[clientId]);
-      //_playerTiles.RemoveAt(clientId);
-    }
-
-    public void DrawExistingTilesForClient()
-    {
-      //DFLogger.Instance.Log("I would add another tile");
-      //for(var i = 0; i < SpawnManager.Instance._playerReadies.Count; i++) {
-      //    DFLogger.Instance.Log($"I would add another tile for player {i}");
-      //}
     }
   }
 }

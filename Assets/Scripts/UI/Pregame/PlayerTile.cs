@@ -1,8 +1,8 @@
-﻿using RelaySystem.Data;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Managers;
+using Multiplayer;
 
 /*
 * todo: Extend the player tile so that it can handle input to handle:
@@ -54,24 +54,10 @@ namespace UI.Pregame
       nameText.text = name;
     }
 
-    private void PopulateAnthemsList()
-    {
-
-    }
-
     private void SetPlayerShip(int shipIndex)
     {
       SpawnManager.Instance.SetPlayerShip(shipIndex);
     }
-
-    private void SetPlayerColour()
-    {
-
-    }
-
-    private void SetPlayerAnthem()
-    {
-
-    }
+    
   }
 }
