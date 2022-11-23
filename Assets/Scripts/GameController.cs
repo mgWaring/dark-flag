@@ -90,7 +90,6 @@ public class GameController : MonoBehaviour
                 GameObject playerGO = Instantiate(playerPrefab);
                 Player player = playerGO.GetComponent<Player>();
                 players.Add(player);
-                Debug.Log(player);
                 player.ss = info.Ship;
                 player.Init();
                 racer = player.racer;
@@ -223,7 +222,7 @@ public class GameController : MonoBehaviour
                 if (RacerIsFinished(racer)) {
                     scoreboard.SetActive(true);
                     racer.gameObject.GetComponent<BotMovement>().enabled = true;
-                    racer.gameObject.GetComponent<PlayerMovement>().enabled = false;//problems?
+                    racer.gameObject.GetComponentInParent<PlayerMovement>().enabled = false;
                 }
             }
         }

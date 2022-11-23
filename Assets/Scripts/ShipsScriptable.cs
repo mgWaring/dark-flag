@@ -6,6 +6,7 @@ public class ShipsScriptable : ScriptableObject
     //Please take a note of all ship specific values (the ones in unity, not here) before messing around with this. Re ordering the list can reset ships to default values.
     public string shipName;
     public GameObject shipModel;
+    public GameObject multiplayerShipModel;
     public GameObject displayShipModel;
     [Header("Rigidbody")]
     public float mass = 3.0f;

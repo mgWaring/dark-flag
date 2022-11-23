@@ -7,7 +7,8 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Multiplayer {
+namespace Multiplayer
+{
   public class MultiplayerGameController : NetworkBehaviour
   {
     public int playerCount;
@@ -54,9 +55,11 @@ namespace Multiplayer {
       }
     }
 
-    private void Start() {
+    private void Start()
+    {
       state = "prerace";
-      if (SpawnManager.Instance.GetClientId() == 0) {
+      if (SpawnManager.Instance.GetClientId() == 0)
+      {
         DoBasicSetup();
         SetUpMap();
         _players = new List<MultiPlayer>();
@@ -65,7 +68,8 @@ namespace Multiplayer {
         int checkpointCount = _checkpoints.transform.childCount;
         MultiplayerCheckpoint lastCheck = _checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<MultiplayerCheckpoint>();
         MultiplayerCheckpoint nextCheck = _checkpoints.transform.GetChild(0).GetComponent<MultiplayerCheckpoint>();
-        for (int i = 0; i < playerCount; i++) {
+        for (int i = 0; i < playerCount; i++)
+        {
           Debug.Log("creating players");
           RacerInfo info = CrossScene.racerInfo[i];
           Transform startPos = _startingPositions.GetChild(i).transform;
@@ -80,7 +84,9 @@ namespace Multiplayer {
           racers[i] = racer;
           laps[racer] = new List<float>();
         }
-      } else {
+      }
+      else
+      {
         racers = FindObjectsOfType<MultiplayerRacer>();
         _players = FindObjectsOfType<MultiPlayer>().ToList();
         _mMap = FindObjectsOfType<Map>()[0];
@@ -88,7 +94,8 @@ namespace Multiplayer {
         int checkpointCount = _checkpoints.transform.childCount;
         MultiplayerCheckpoint lastCheck = _checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<MultiplayerCheckpoint>();
         MultiplayerCheckpoint nextCheck = _checkpoints.transform.GetChild(0).GetComponent<MultiplayerCheckpoint>();
-        foreach (MultiPlayer player in _players) {
+        foreach (MultiPlayer player in _players)
+        {
           player.Init();
           player.racer.lastCheckpoint = lastCheck;
           player.racer.nextCheckpoint = nextCheck;
@@ -112,7 +119,8 @@ namespace Multiplayer {
       state = "race";
     }
 
-    private void SetUpMap() {
+    private void SetUpMap()
+    {
       Debug.Log("SPAWNING MAP");
       var mapObj = Instantiate(map.prefab);
       mapObj.GetComponent<NetworkObject>().Spawn();
@@ -121,11 +129,12 @@ namespace Multiplayer {
       _startingPositions = _mMap.startingPositions;
     }
 
-    private MultiplayerRacer CreateRacer(int index, RacerInfo info, Vector3 pos, Quaternion rot) {
+    private MultiplayerRacer CreateRacer(int index, RacerInfo info, Vector3 pos, Quaternion rot)
+    {
       Debug.Log("Creating a multiPlayer");
-      DFPlayer[] dfPlayers = FindObjectsOfType<DFPlayer>();
-      DFPlayer dfplayer = dfPlayers.Single(dfp => dfp.OwnerClientId == info.ClientId);
-      var playerGo = Instantiate(playerPrefab, dfplayer.transform, true);
+      //DFPlayer[] dfPlayers = FindObjectsOfType<DFPlayer>();
+      //DFPlayer dfplayer = dfPlayers.Single(dfp => dfp.OwnerClientId == info.ClientId);
+      var playerGo = Instantiate(playerPrefab);
       MultiPlayer multiPlayer = playerGo.GetComponent<MultiPlayer>();
       multiPlayer.clientId = info.ClientId;
       playerGo.GetComponent<NetworkObject>().SpawnWithOwnership(info.ClientId);
@@ -140,7 +149,8 @@ namespace Multiplayer {
       return multiPlayer.racer;
     }
 
-    private MultiplayerRacer CreateBot(int index, RacerInfo info, Vector3 pos, Quaternion rot) {
+    private MultiplayerRacer CreateBot(int index, RacerInfo info, Vector3 pos, Quaternion rot)
+    {
       var botGo = Instantiate(botPrefab);
       botGo.GetComponent<NetworkObject>().Spawn();
       MultiplayerBot bot = botGo.GetComponent<MultiplayerBot>();
@@ -163,7 +173,8 @@ namespace Multiplayer {
       durabilityUI.target = o;
 
       var cameras = GameObject.FindObjectsOfType<Camera>();
-      foreach (Camera cam in cameras) {
+      foreach (Camera cam in cameras)
+      {
         cam.enabled = false;
       }
 
@@ -176,11 +187,12 @@ namespace Multiplayer {
       _multiPlayer.PlayOpening("JanktownOpeningCamera");
     }
 
-    private void AttachCamera() {
+    private void AttachCamera()
+    {
       foreach (var player in _players) player.AttachCamera();
 
       if (_bots == null) return;
-    
+
       foreach (MultiplayerBot bot in _bots) bot.AttachCamera();
     }
 
@@ -189,13 +201,15 @@ namespace Multiplayer {
       _multiPlayer.AllowPlay();
 
       if (_bots == null) return;
-    
+
       foreach (MultiplayerBot bot in _bots) bot.AllowPlay();
     }
 
-    private void Update() {
+    private void Update()
+    {
       Debug.Log($"DONKEY:::::{_multiPlayer.ship.GetComponent<BotMovement>().enabled}");
-      switch (state) {
+      switch (state)
+      {
         case "prerace":
           HandlePreRace();
           break;
@@ -214,9 +228,10 @@ namespace Multiplayer {
       }
     }
 
-    private void HandlePreRace() {
+    private void HandlePreRace()
+    {
       if (!(_firstCamAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f)) return;
-    
+
       Debug.Log("ATTACHING THE CAM");
       AttachCamera();
       state = "countdown";
@@ -233,9 +248,10 @@ namespace Multiplayer {
       return laps[racer].Count > lapCount;
     }
 
-    private float FinishFor(MultiplayerRacer racer) {
-      return laps[racer].Count > lapCount 
-        ? laps[racer].Last() 
+    private float FinishFor(MultiplayerRacer racer)
+    {
+      return laps[racer].Count > lapCount
+        ? laps[racer].Last()
         : 0.0f;
     }
 
@@ -263,13 +279,13 @@ namespace Multiplayer {
       }
 
       if (!laps.Values.All(l => l.Count > lapCount)) return;
-    
+
       state = "postrace";
       raceTimer.running = false;
       lapTimer.running = false;
       scoreboard.SetActive(true);
     }
-  
+
     public int PositionForPlayer()
     {
       return System.Array.IndexOf(racers, playerRacer);
@@ -305,9 +321,10 @@ namespace Multiplayer {
       else SceneManager.LoadScene(0); //todo - call networking scene manager if we're in MP
     }
 
-    public float BestLapFor(MultiplayerRacer racer) {
-      return laps[racer].Count == 1 
-        ? 0.0f 
+    public float BestLapFor(MultiplayerRacer racer)
+    {
+      return laps[racer].Count == 1
+        ? 0.0f
         : laps[racer].GetRange(1, laps[racer].Count - 1).Min();
     }
   }

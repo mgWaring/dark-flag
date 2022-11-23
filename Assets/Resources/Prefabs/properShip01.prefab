@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7195995219743435209}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BombSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,9 +53,7 @@ GameObject:
   - component: {fileID: 8286877713419928190}
   - component: {fileID: 4732455174172086529}
   - component: {fileID: 6086227926494204140}
-  - component: {fileID: -5915597390368719979}
-  - component: {fileID: 2906004362816463550}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: properShip01
   m_TagString: Ship
   m_Icon: {fileID: 0}
@@ -139,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cadb928ff937734185da66104222987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reverseLimit: 0.1
   tiltMaxLeft: {x: 0, y: 0, z: 0, w: 0}
   tiltMaxRight: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &4298976098401725298
@@ -368,48 +367,6 @@ MonoBehaviour:
   bombSpawn: {fileID: 7195995219743435209}
   ammoCount: 1
   firingDelay: 2
---- !u!114 &-5915597390368719979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4298976098401725311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncPositionX: 1
-  SyncPositionY: 1
-  SyncPositionZ: 1
-  SyncRotAngleX: 1
-  SyncRotAngleY: 1
-  SyncRotAngleZ: 1
-  SyncScaleX: 0
-  SyncScaleY: 0
-  SyncScaleZ: 0
-  PositionThreshold: 0.001
-  RotAngleThreshold: 0.01
-  ScaleThreshold: 0.01
-  InLocalSpace: 0
-  Interpolate: 1
---- !u!114 &2906004362816463550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4298976098401725311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!1 &5379698523083374124
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6194179295276075254}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -504,6 +461,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Booster (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 8755236452316955815, guid: caf15bdb2ba920c4ebb06b868a270698, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caf15bdb2ba920c4ebb06b868a270698, type: 3}
 --- !u!4 &6125179922744195236 stripped
@@ -574,6 +535,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Booster
       objectReference: {fileID: 0}
+    - target: {fileID: 8755236452316955815, guid: caf15bdb2ba920c4ebb06b868a270698, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caf15bdb2ba920c4ebb06b868a270698, type: 3}
 --- !u!4 &5287119404268496491 stripped
@@ -643,6 +608,10 @@ PrefabInstance:
     - target: {fileID: 8755236452316955815, guid: caf15bdb2ba920c4ebb06b868a270698, type: 3}
       propertyPath: m_Name
       value: Booster (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8755236452316955815, guid: caf15bdb2ba920c4ebb06b868a270698, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caf15bdb2ba920c4ebb06b868a270698, type: 3}
@@ -738,6 +707,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JT_SHIP_01
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0f6ea22973f4f04458d5bc1eff464f64, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f6ea22973f4f04458d5bc1eff464f64, type: 3}
 --- !u!4 &4333516727793003090 stripped
@@ -807,6 +780,10 @@ PrefabInstance:
     - target: {fileID: 8755236452316955815, guid: caf15bdb2ba920c4ebb06b868a270698, type: 3}
       propertyPath: m_Name
       value: Booster (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8755236452316955815, guid: caf15bdb2ba920c4ebb06b868a270698, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: caf15bdb2ba920c4ebb06b868a270698, type: 3}
@@ -893,6 +870,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6a4326f63b46a9d44917873f596d38c2, type: 3}
       propertyPath: m_Name
       value: shield (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6a4326f63b46a9d44917873f596d38c2, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a4326f63b46a9d44917873f596d38c2, type: 3}

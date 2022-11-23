@@ -29,7 +29,7 @@ public class ShipSelector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        selectableShips = selectableShipNames.Select(name => name.shipModel).ToArray();
+        selectableShips = selectableShipNames.Select(name => name.displayShipModel).ToArray();
         SetValues();
     }
 
@@ -108,13 +108,6 @@ public class ShipSelector : MonoBehaviour
             Destroy(shipHolder.GetChild(0).gameObject);
         }
         GameObject ship = Instantiate(currentShip);
-        ship.GetComponent<Rigidbody>().useGravity = false;
-        ship.GetComponentInParent<PlayerMovement>().enabled = false;//problems?
-        ship.GetComponent<MovementController>().enabled = false;
-        ship.GetComponent<BotMovement>().enabled = false;
-        ship.GetComponent<AntiGravManager>().enabled = false;
-        ship.GetComponent<RigidbodyController>().enabled = false;
-        ship.GetComponent<Racer>().enabled = false;
         ship.transform.SetParent(shipHolder);
         ship.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
         ship.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);

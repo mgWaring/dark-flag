@@ -86,7 +86,10 @@ public class MovementController : MonoBehaviour
         {
             accelerationMult = accelerationMult * reverseLimit;
         }
-        shipAudioSource.pitch = engineDefaultPitch + (pitchLimiter * velocity * Time.fixedDeltaTime);
+        if (shipAudioSource != null)
+        {
+          shipAudioSource.pitch = engineDefaultPitch + (pitchLimiter * velocity * Time.fixedDeltaTime);
+        }
     }
 
     public void YawController(float yawInput)
