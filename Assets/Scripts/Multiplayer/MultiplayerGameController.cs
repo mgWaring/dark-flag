@@ -77,12 +77,9 @@ namespace Multiplayer
             ? CreateBot(i, info, startPos.position, startPos.rotation)
             : CreateRacer(i, info, startPos.position, startPos.rotation);
 
-          Debug.Log($"{racer} RACER");
           racer.id = i;
           racer.name = info.Name;
-          Debug.Log($"{lastCheck} LAS CHECK");
           racer.lastCheckpoint = lastCheck;
-          Debug.Log($"{racer.lastCheckpoint} LAST CHECK2");
           racer.nextCheckpoint = nextCheck;
           racers[i] = racer;
           laps[racer] = new List<float>();
@@ -90,6 +87,7 @@ namespace Multiplayer
       }
       else
       {
+        lapCount = SpawnManager.Instance._lapIndex.Value + 1;
         racers = FindObjectsOfType<MultiplayerRacer>();
         _players = FindObjectsOfType<MultiPlayer>().ToList();
         _mMap = FindObjectsOfType<Map>()[0];
