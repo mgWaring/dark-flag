@@ -21,8 +21,10 @@ public class PlayerCameraController : MonoBehaviour
     //Turret
     public bool PCCRaysOn = true;
     public Transform turretTarget;
+    public Vector3 turretTargetOffset = new(0.0f,0.0f,0.0f);//Put this in ss.
     Ray turretRay;
-    RaycastHit hitInfo;        
+    RaycastHit hitInfo;
+    float turretRayDistance = 20.0f;
 
     private void FixedUpdate()
     {       
@@ -36,8 +38,8 @@ public class PlayerCameraController : MonoBehaviour
             transform.LookAt(target.position + cameraLookOffset + (cameraLookSpeed.y * transform.up) + (cameraLookSpeed.x * transform.right));
 
             //Ray goes where camera looks, moves empty transform to end of ray, turret looks at empty transform.
-            turretRay = new Ray(transform.position, transform.forward);
-            Physics.Raycast(turretRay, out hitInfo);
+            turretRay = new Ray(transform.position, transform.forward /*+ (turretTargetOffset.y * transform.up)*//* + (target.up * target.position.y)*/);
+            Physics.Raycast(turretRay, out hitInfo, turretRayDistance);
             turretTarget.position = hitInfo.point;
             if (PCCRaysOn)
             {

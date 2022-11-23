@@ -17,7 +17,10 @@ public class Turret : MonoBehaviour
 
     public void TurretLook(Transform target)
     {
-        turret.LookAt(target);
+
+            turret.LookAt(target);
+
+        
     }
 
     public void TurretSetup(Transform turretTarget)
