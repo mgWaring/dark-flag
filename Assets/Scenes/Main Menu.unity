@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 215.61914, g: 226.90332, b: 204.93488, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -466,13 +466,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 254094392}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db29baaeda7a83341bf3b90735cf9936, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   debugAreaText: {fileID: 1489932885}
-  enableDebug: 1
+  enableDebug: 0
   maxLines: 15
 --- !u!1 &290655705
 GameObject:
@@ -2060,7 +2060,6 @@ MonoBehaviour:
   - 10
   value: 1
   index: 0
-  type: 
 --- !u!224 &855748364
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4473,7 +4472,6 @@ MonoBehaviour:
   - 8
   value: 0
   index: 0
-  type: 
 --- !u!1 &1425344922
 GameObject:
   m_ObjectHideFlags: 0
@@ -6188,7 +6186,6 @@ MonoBehaviour:
   - Scrap Palace
   value: Janktown
   index: 0
-  type: 
 --- !u!1 &2006949365
 GameObject:
   m_ObjectHideFlags: 0
@@ -6410,7 +6407,6 @@ MonoBehaviour:
   - 0
   value: 1
   index: 0
-  type: 
 --- !u!1 &2118160170
 GameObject:
   m_ObjectHideFlags: 0
