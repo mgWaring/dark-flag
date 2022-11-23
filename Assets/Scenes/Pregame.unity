@@ -2286,7 +2286,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3677175698466907759}
-        m_TargetAssemblyTypeName: Selector, Assembly-CSharp
+        m_TargetAssemblyTypeName: Multiplayer.MultiplayerSelector, Assembly-CSharp
         m_MethodName: GoRight
         m_Mode: 1
         m_Arguments:
@@ -2488,7 +2488,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3677175698466907759}
-        m_TargetAssemblyTypeName: Selector, Assembly-CSharp
+        m_TargetAssemblyTypeName: Multiplayer.MultiplayerSelector, Assembly-CSharp
         m_MethodName: GoLeft
         m_Mode: 1
         m_Arguments:
@@ -2508,7 +2508,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3677175697937257171}
-  - component: {fileID: 3677175697937257180}
+  - component: {fileID: 3677175697937257172}
   m_Layer: 5
   m_Name: map
   m_TagString: Untagged
@@ -2540,7 +2540,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 654.98, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &3677175697937257180
+--- !u!114 &3677175697937257172
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2549,7 +2549,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3677175697937257170}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f170e2632cd8d5b4e9285028981c6106, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f2d6a350d8687147a40bee0935282d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -2584,9 +2584,10 @@ MonoBehaviour:
   title: Map
   selection:
   - Janktown
-  - Scrap Palace
+  - Scrapyard
   value: Janktown
   index: 0
+  type: map
 --- !u!114 &3677175697977105544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2708,8 +2709,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3677175697937257180}
-        m_TargetAssemblyTypeName: Selector, Assembly-CSharp
+      - m_Target: {fileID: 3677175697937257172}
+        m_TargetAssemblyTypeName: Multiplayer.MultiplayerSelector, Assembly-CSharp
         m_MethodName: GoRight
         m_Mode: 1
         m_Arguments:
@@ -2746,21 +2747,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &3677175698029924585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3677175698029924590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 537c6462c7fddab4cbe109efe417a024, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxBots: 8
-  playerSelector: {fileID: 0}
-  botSelector: {fileID: 3677175698466907759}
 --- !u!1 &3677175698029924590
 GameObject:
   m_ObjectHideFlags: 0
@@ -2771,7 +2757,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3677175698029924591}
   - component: {fileID: 3677175698029924584}
-  - component: {fileID: 3677175698029924585}
   - component: {fileID: 3677175698029924592}
   m_Layer: 5
   m_Name: GameOptions
@@ -2817,7 +2802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc130cb01b34e65bd3d6a9123a884fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSelector: {fileID: 3677175697937257180}
+  mapSelector: {fileID: 3677175697937257172}
   lapSelector: {fileID: 3677175699015528655}
   botSelector: {fileID: 3677175698466907759}
   playerList: {fileID: 1913163178}
@@ -3391,8 +3376,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3677175697937257180}
-        m_TargetAssemblyTypeName: Selector, Assembly-CSharp
+      - m_Target: {fileID: 3677175697937257172}
+        m_TargetAssemblyTypeName: Multiplayer.MultiplayerSelector, Assembly-CSharp
         m_MethodName: GoLeft
         m_Mode: 1
         m_Arguments:
@@ -3635,7 +3620,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3677175698466907757}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f170e2632cd8d5b4e9285028981c6106, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f2d6a350d8687147a40bee0935282d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -3676,10 +3661,9 @@ MonoBehaviour:
   - 4
   - 5
   - 6
-  - 7
-  - 8
   value: 0
   index: 0
+  type: bot
 --- !u!1 &3677175698474428610
 GameObject:
   m_ObjectHideFlags: 0
@@ -4000,7 +3984,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3677175699015528654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f170e2632cd8d5b4e9285028981c6106, type: 3}
+  m_Script: {fileID: 11500000, guid: 7f2d6a350d8687147a40bee0935282d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
@@ -4046,6 +4030,7 @@ MonoBehaviour:
   - 10
   value: 1
   index: 0
+  type: lap
 --- !u!114 &3677175699030565168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4091,7 +4076,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3677175699015528655}
-        m_TargetAssemblyTypeName: Selector, Assembly-CSharp
+        m_TargetAssemblyTypeName: Multiplayer.MultiplayerSelector, Assembly-CSharp
         m_MethodName: GoRight
         m_Mode: 1
         m_Arguments:
@@ -4406,7 +4391,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3677175699015528655}
-        m_TargetAssemblyTypeName: Selector, Assembly-CSharp
+        m_TargetAssemblyTypeName: Multiplayer.MultiplayerSelector, Assembly-CSharp
         m_MethodName: GoLeft
         m_Mode: 1
         m_Arguments:

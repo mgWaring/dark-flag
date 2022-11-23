@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Managers;
+
 namespace Multiplayer {
   public class MultiplayerLapUI : MonoBehaviour
   {
@@ -11,7 +13,8 @@ namespace Multiplayer {
 
       void Start() {
           text = GetComponent<TextMeshProUGUI>();
-          laps = gameController.lapCount;
+          Debug.Log($"LAPS: {SpawnManager.Instance._lapIndex.Value}");
+          laps = SpawnManager.Instance._lapIndex.Value + 1;
       }
 
       // Update is called once per frame

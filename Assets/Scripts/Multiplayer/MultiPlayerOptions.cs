@@ -11,9 +11,9 @@ using Utils;
 namespace Multiplayer {
   public class MultiPlayerOptions : MonoBehaviour
   {
-    public Selector mapSelector;
-    public Selector lapSelector;
-    public Selector botSelector;
+    public MultiplayerSelector mapSelector;
+    public MultiplayerSelector lapSelector;
+    public MultiplayerSelector botSelector;
     private Dictionary<string, MapScriptable> _maps = new();
     private Dictionary<string, ShipsScriptable> _ships = new();
     [SerializeField] private PlayerList playerList;
