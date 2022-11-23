@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Multiplayer;
 
 public class ShipDurability : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class ShipDurability : MonoBehaviour
         ss = GetComponent<Ship>().details;
         rb = GetComponent<Rigidbody>();
         startHeight = transform.position.y;
-        isBot = GetComponent<BotMovement>().enabled;
+        isBot = GetComponentInParent<Bot>() != null;
         Physics.IgnoreLayerCollision(8, 9); // Ignore collisions between ships and loading ships
         fireDamage = ss.fireDamage;
         roofRayDistance = ss.roofRayDistance;
@@ -95,9 +96,17 @@ public class ShipDurability : MonoBehaviour
                     hp = 100.0f;
                     Destroy(explosion);
                     Racer racer = GetComponent<Racer>();
-                    Transform spawnPoint = racer.lastCheckpoint.spawnPointFor(transform.position);
-                    transform.position = spawnPoint.position;
-                    transform.rotation = spawnPoint.rotation;
+                    Transform spawnPoint;
+                    if (racer.lastCheckpoint == null) {
+                        MultiplayerRacer mracer = GetComponent<MultiplayerRacer>();
+                        spawnPoint = mracer.lastCheckpoint.spawnPointFor(transform.position);
+                        transform.position = spawnPoint.position;
+                        transform.rotation = spawnPoint.rotation;
+                    } else {
+                        spawnPoint = racer.lastCheckpoint.spawnPointFor(transform.position);
+                        transform.position = spawnPoint.position;
+                        transform.rotation = spawnPoint.rotation;
+                    }
                     deathTimer = 1.25f;
                     gameObject.layer = 9; // loading layer
                     state = State.Spawning;

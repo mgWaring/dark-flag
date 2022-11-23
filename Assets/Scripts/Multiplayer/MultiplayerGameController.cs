@@ -140,15 +140,9 @@ namespace Multiplayer
       playerGo.GetComponent<NetworkObject>().SpawnAsPlayerObject(info.ClientId);
       multiPlayer.clientId = info.ClientId;
       _players.Add(multiPlayer);
-      Debug.Log(multiPlayer);
       multiPlayer.ss = info.Ship;
-      Debug.Log("YO");
-      multiPlayer.Init();
-      Debug.Log("YO2");
-      Debug.Log("YO3");
+      multiPlayer.InitWithPosition(pos, rot);
       playerRacer = multiPlayer.racer;
-      multiPlayer.SetPosRot(pos, rot);
-      Debug.Log($"PLAYER RACER {playerRacer}");
       if (index == 0) _firstCamAnim = multiPlayer.camera.GetComponent<Animator>();
 
       return multiPlayer.racer;
