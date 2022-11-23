@@ -16,6 +16,7 @@ public class MovementController : MonoBehaviour
     float acceleration = 0;
     float yawSpeed = 0;
     Vector3 yawAngularVelocity = new Vector3(0, 0, 0);
+    public float reverseLimit = 0.1f;
 
     float velocity;
     public Quaternion tiltMaxLeft;
@@ -81,6 +82,10 @@ public class MovementController : MonoBehaviour
     public void ThrustController(float thrustInput, float boostInput)
     {
         accelerationMult = thrustInput * (boostInput + boostMult);
+        if (accelerationMult < 0)
+        {
+            accelerationMult = accelerationMult * reverseLimit;
+        }
         shipAudioSource.pitch = engineDefaultPitch + (pitchLimiter * velocity * Time.fixedDeltaTime);
     }
 
