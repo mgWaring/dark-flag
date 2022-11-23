@@ -5,7 +5,7 @@ namespace Multiplayer {
     public class MultiplayerCheckpoint : MonoBehaviour
     {
         [HideInInspector] public int id;
-        public MultiplayerGameController gameController;
+        [HideInInspector] public MultiplayerGameController gameController;
         Transform[] spawnPoints;
 
         void Start() {

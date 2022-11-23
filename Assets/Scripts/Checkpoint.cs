@@ -15,7 +15,11 @@ public class Checkpoint : MonoBehaviour
             spawnPoints[i] = transform.GetChild(i);
         }
         id = transform.GetSiblingIndex();
-        gameController = GameObject.Find("/GameController").GetComponent<GameController>();
+        if (GameObject.Find("/GameController").GetComponent<GameController>() == null) {
+          Destroy(this);
+        } else {
+          gameController = GameObject.Find("/GameController").GetComponent<GameController>();
+        }
     }
 
     public Transform spawnPointFor(Vector3 pos) {
