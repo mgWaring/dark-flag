@@ -1888,7 +1888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useModal: 0
-  playerTile: {fileID: 4965884645637645813, guid: 868960d24ded1c54aba06a7193aff5c2, type: 3}
+  playerTile: {fileID: 4965884645637645813}
   nameText: {fileID: 4857421166343951310}
   speedText: {fileID: 4857421166227020054}
   handlingText: {fileID: 4857421166465601998}

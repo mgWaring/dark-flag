@@ -6,6 +6,7 @@ using UI.Pregame;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utils;
 
 namespace Multiplayer {
   public class MultiPlayerOptions : MonoBehaviour
@@ -50,8 +51,10 @@ namespace Multiplayer {
 
     public void StartGame()
     {
+      Debug.Log("HAJIME!");
       if (SpawnManager.Instance != null)
       {
+        DFLogger.Instance.Log("We have a spawn manager");
         if (SpawnManager.Instance.GetClientId() != 0)
         {
           return;
@@ -69,6 +72,7 @@ namespace Multiplayer {
 
         if (!canStart)
         {
+          DFLogger.Instance.Log("we cannot start");
           return;
         }
       }
@@ -86,7 +90,6 @@ namespace Multiplayer {
 
       foreach (var (_, client) in NetworkManager.Singleton.ConnectedClients)
       {
-        var pdata = client.PlayerObject.GetComponent<DFPlayer>();
         var p = SpawnManager.Instance._players[(int)client.ClientId];
         racerList.Add(
           new RacerInfo(p.name.ToString(), shipList[p.shipIndex], client.ClientId)

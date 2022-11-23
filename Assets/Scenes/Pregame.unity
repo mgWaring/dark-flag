@@ -1498,7 +1498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4344e0afaf774eea9770ec5d0db8aa49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTilePrefab: {fileID: 6882509700076806402, guid: 90d2865039258324896e271285a85000, type: 3}
+  playerTilePrefab: {fileID: 6882509700076806402, guid: 868960d24ded1c54aba06a7193aff5c2, type: 3}
   playerTileContainer: {fileID: 291064827}
 --- !u!114 &1913163179
 MonoBehaviour:
@@ -2587,7 +2587,6 @@ MonoBehaviour:
   - Scrap Palace
   value: Janktown
   index: 0
-  type: map
 --- !u!114 &3677175697977105544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2815,7 +2814,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3677175698029924590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 647e7996a1bb41aeb5bf42721f6b0cf1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8fc130cb01b34e65bd3d6a9123a884fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mapSelector: {fileID: 3677175697937257180}
@@ -2823,9 +2822,10 @@ MonoBehaviour:
   botSelector: {fileID: 3677175698466907759}
   playerList: {fileID: 1913163178}
   shipList:
-  - {fileID: 11400000, guid: 627da91991676624387263bcf47ef8d4, type: 2}
   - {fileID: 11400000, guid: 30016bfa08dcb144cad2c27c1f708494, type: 2}
-  - {fileID: 11400000, guid: ab38fa60089fbed40af712c21048d41c, type: 2}
+  - {fileID: 11400000, guid: edb7e5c1a1ae0f445a28b05f4569bdf4, type: 2}
+  - {fileID: 11400000, guid: b23fc344d65d8c743aaa9f0a0be49762, type: 2}
+  - {fileID: 11400000, guid: 12a7d69743b59b94fb668f734baf586c, type: 2}
   mapList:
   - {fileID: 11400000, guid: b99a1e71936ac3c46afb7dd00490402e, type: 2}
   - {fileID: 11400000, guid: 45c55deb856152741b3a968aa5063252, type: 2}
@@ -3183,7 +3183,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3677175698029924592}
-        m_TargetAssemblyTypeName: MultiPlayerOptions, Assembly-CSharp
+        m_TargetAssemblyTypeName: Multiplayer.MultiPlayerOptions, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -3680,7 +3680,6 @@ MonoBehaviour:
   - 8
   value: 0
   index: 0
-  type: bot
 --- !u!1 &3677175698474428610
 GameObject:
   m_ObjectHideFlags: 0
@@ -4047,7 +4046,6 @@ MonoBehaviour:
   - 10
   value: 1
   index: 0
-  type: lap
 --- !u!114 &3677175699030565168
 MonoBehaviour:
   m_ObjectHideFlags: 0
