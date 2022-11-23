@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: properShip04
   shipModel: {fileID: 4298976098401725311, guid: de596ac587924a444998c9e51bbe701b, type: 3}
+  multiplayerShipModel: {fileID: 9153168339596015548, guid: e5005f70bdef41a43bd1100fd3f10dcb, type: 3}
   displayShipModel: {fileID: 4298976098401725311, guid: 30cc9012483a404478022bfdba29ad2f, type: 3}
   mass: 3
   drag: 1.3
