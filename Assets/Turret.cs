@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Attach this to the turret prefab.
 public class Turret : MonoBehaviour
 {
     Transform turret;

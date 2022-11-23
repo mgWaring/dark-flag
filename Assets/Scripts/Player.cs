@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         ship.transform.SetParent(transform, true);
     }
 
-    //Tells PlayerCameraController what it's is and then enables it.
+    //Tells PlayerCameraController what it's target is and then enables it. Does the same for Turret.
     public void AttachCamera() {
         camera.gameObject.GetComponent<Animator>().enabled = false;
         Transform camTransform = camera.transform;
