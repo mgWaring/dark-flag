@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public ShipsScriptable ss;
     [HideInInspector] public MovementController mc;
     [HideInInspector] public PlayerCameraController pcc;
+    [HideInInspector] public Turret trt;
     GameObject ship;
 
     public void Init()
@@ -44,5 +45,7 @@ public class Player : MonoBehaviour
         pcc = camTransform.gameObject.GetComponentInChildren<PlayerCameraController>();
         pcc.PCameraSetup(racer.gameObject.GetComponentInChildren<Transform>());
         pcc.PCamEnable(true);
+        trt = GetComponentInChildren<Turret>();
+        trt.TurretSetup(pcc.TurretTargetHunter());
     }
 }

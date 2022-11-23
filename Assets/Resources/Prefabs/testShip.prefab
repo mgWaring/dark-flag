@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cadb928ff937734185da66104222987, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reverseLimit: 0.1
   tiltMaxLeft: {x: 0, y: 0, z: 0, w: 0}
   tiltMaxRight: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &7297732876776564532
@@ -361,7 +362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4872813831117450451, guid: 9d4d65f72b086bf4ab3d2bae9c20639b, type: 3}
   bulletSpawn: {fileID: 7755613647485268343}
-  ammoCount: 25
+  ammoCount: 0
   firingDelay: 0.1
 --- !u!114 &6193891073794758447
 MonoBehaviour:
@@ -377,7 +378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bombPrefab: {fileID: 5502508073657117986, guid: 1c7172c84f444ee498d07e02ad0cdc94, type: 3}
   bombSpawn: {fileID: 2684318716406957165}
-  ammoCount: 1
+  ammoCount: 0
   firingDelay: 2
 --- !u!1001 &3373895108588121592
 PrefabInstance:

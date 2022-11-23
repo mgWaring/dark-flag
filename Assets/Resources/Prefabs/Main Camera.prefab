@@ -32,7 +32,8 @@ Transform:
   m_LocalPosition: {x: -155.6, y: 60.7, z: 16}
   m_LocalScale: {x: 1, y: 2.6289198, z: 0.70442}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6699412748762955120}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 15, y: 90, z: 0}
@@ -248,3 +249,35 @@ MonoBehaviour:
   cameraPosOffset: {x: 0, y: 2, z: -3}
   cameraLookOffset: {x: 0, y: 1.2, z: 0}
   cameraLookConstant: {x: 1, y: 10, z: 50}
+  turretTarget: {fileID: 6699412748762955120}
+--- !u!1 &4894336523049522938
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6699412748762955120}
+  m_Layer: 0
+  m_Name: TurretTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6699412748762955120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4894336523049522938}
+  m_LocalRotation: {x: -0.09229593, y: -0.7010574, z: 0.09229593, w: 0.7010574}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.1999949, y: 0.39999953, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6743450230273158490}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
