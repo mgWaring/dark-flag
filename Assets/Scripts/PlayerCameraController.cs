@@ -30,7 +30,7 @@ public class PlayerCameraController : MonoBehaviour
             turretRay = new Ray(transform.position, transform.forward);
             Physics.Raycast(turretRay, out hitInfo);
             turretTarget.position = hitInfo.point;
-            Debug.DrawLine(turretRay.origin, hitInfo.point, Color.yellow);
+            Debug.DrawRay(turretRay.origin, hitInfo.point, Color.yellow);
         }
 
     }

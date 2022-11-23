@@ -410,7 +410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6002055022131186097, guid: c432493f1e50ab14b97e3a4a3b5a26b2, type: 3}
       propertyPath: positionSmoothing
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 6002055022131186097, guid: c432493f1e50ab14b97e3a4a3b5a26b2, type: 3}
       propertyPath: cameraLookConstant.x

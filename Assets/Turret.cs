@@ -4,10 +4,14 @@ public class Turret : MonoBehaviour
 {
     Transform turret;
     Transform target;
+    bool turretEnable;
 
     private void FixedUpdate()
     {
-        TurretLook(target);
+        if (turretEnable)
+        {
+            TurretLook(target);
+        }        
     }
 
     public void TurretLook(Transform target)
@@ -19,5 +23,10 @@ public class Turret : MonoBehaviour
     {
         turret = GetComponent<Transform>();
         target = turretTarget.GetComponent<Transform>();
+    }
+
+    public void TurretEnable(bool tf)
+    {
+        turretEnable = tf;
     }
 }

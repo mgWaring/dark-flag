@@ -47,5 +47,6 @@ public class Player : MonoBehaviour
         pcc.PCamEnable(true);
         trt = GetComponentInChildren<Turret>();
         trt.TurretSetup(pcc.TurretTargetHunter());
+        trt.TurretEnable(true);
     }
 }
