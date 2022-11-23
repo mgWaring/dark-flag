@@ -39,6 +39,30 @@ namespace Multiplayer {
       }
     }
 
+    public void InitWithPosition(Vector3 pos, Quaternion rot)
+    {
+      if (SpawnManager.Instance.GetClientId() == 0)
+      {
+        ship = Instantiate(ss.multiplayerShipModel);
+        ship.transform.position = pos;
+        ship.transform.rotation = rot;
+
+        ship.GetComponent<NetworkObject>().SpawnWithOwnership(clientId);
+        ship.transform.SetParent(transform,true);
+        ship.GetComponent<Racer>().enabled = false;
+        racer = ship.GetComponent<MultiplayerRacer>();
+        mc = ship.GetComponentInChildren<MovementController>();
+        mc.enabled = false;
+        camera = GetComponentInChildren<Camera>();
+        BotMovement bot = ship.GetComponent<BotMovement>();
+        bot.enabled = false;
+      }
+      else
+      {
+        Debug.Log("why has this been hit");
+      }
+    }
+
     public void PlayOpening(string clipName)
     {
       camera.gameObject.GetComponent<Animator>().Play(clipName);
@@ -47,14 +71,6 @@ namespace Multiplayer {
     public void AllowPlay()
     {
       mc.enabled = true;
-    }
-
-    public void SetPosRot(Vector3 pos, Quaternion rot)
-    {
-      transform.position = Vector3.zero;
-      ship.transform.position = pos;
-      ship.transform.rotation = rot;
-      ship.transform.SetParent(transform, true);
     }
 
     public void AttachCamera()
