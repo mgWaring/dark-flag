@@ -51,6 +51,7 @@ MonoBehaviour:
   ss: {fileID: 0}
   mc: {fileID: 0}
   pcc: {fileID: 0}
+  trt: {fileID: 0}
 --- !u!114 &8840867380476214674
 MonoBehaviour:
   m_ObjectHideFlags: 0

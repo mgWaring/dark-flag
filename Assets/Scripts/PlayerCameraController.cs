@@ -14,6 +14,7 @@ public class PlayerCameraController : MonoBehaviour
     public Vector3 cameraPosOffset = new Vector3(0.0f, 1.8f, -2.8f);//These should be in ss.
     Vector3 desiredPosition;
     Vector3 smoothedPosition;
+    float cameraFlip = 1.0f;
     Transform target;
     bool playerCamEnabled;
 
@@ -28,7 +29,7 @@ public class PlayerCameraController : MonoBehaviour
         if (playerCamEnabled)
         {            
             //Follows behind ship with lerp.
-            desiredPosition = target.position + (target.forward * cameraPosOffset.z) + (Vector3.up * cameraPosOffset.y);           
+            desiredPosition = target.position + (target.forward * cameraPosOffset.z * cameraFlip) + (Vector3.up * cameraPosOffset.y);           
             smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, positionSmoothing);
             transform.position = smoothedPosition;
             //Makes camera look at ship.
@@ -70,5 +71,17 @@ public class PlayerCameraController : MonoBehaviour
         cameraMult.y = yInput;
         cameraMult.x = xInput;   
         cameraLookSpeed = new (cameraMult.x * cameraLookConstant.x, cameraMult.y * cameraLookConstant.y, cameraMult.z * cameraLookConstant.z);
-    } 
+    }
+    
+    public void CameraFlip(float input)
+    {
+        if (input > 0)
+        {
+            cameraFlip = -1;
+        }
+        else
+        {
+            cameraFlip = 1;
+        }
+    }
 }

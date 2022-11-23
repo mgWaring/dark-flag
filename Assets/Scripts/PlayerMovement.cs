@@ -62,7 +62,8 @@ public class PlayerMovement : MonoBehaviour
         mc.ThrustController(thrustInput.ReadValue<float>(), boostInput.ReadValue<float>());
         mc.YawController(yawInput.ReadValue<float>());
         sd.BoostDamage(boostInput.ReadValue<float>());
-        pcc.CameraControl((cameraControlY.ReadValue<float>() * yInversion), cameraControlX.ReadValue<float>());
+        pcc.CameraControl(cameraControlY.ReadValue<float>() * yInversion, cameraControlX.ReadValue<float>());
+        pcc.CameraFlip(cameraFlip.ReadValue<float>());
         fw.ShootGun(fireInput.ReadValue<float>());
         bw.BombRelease(bombInput.ReadValue<float>());
     }
