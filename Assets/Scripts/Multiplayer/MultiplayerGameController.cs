@@ -137,6 +137,7 @@ namespace Multiplayer
       Debug.Log("Creating a multiPlayer");
       var playerGo = Instantiate(playerPrefab);
       MultiPlayer multiPlayer = playerGo.GetComponent<MultiPlayer>();
+      playerGo.GetComponent<NetworkObject>().SpawnAsPlayerObject(info.ClientId);
       multiPlayer.clientId = info.ClientId;
       _players.Add(multiPlayer);
       Debug.Log(multiPlayer);
@@ -144,7 +145,6 @@ namespace Multiplayer
       Debug.Log("YO");
       multiPlayer.Init();
       Debug.Log("YO2");
-      playerGo.GetComponent<NetworkObject>().SpawnAsPlayerObject(info.ClientId);
       Debug.Log("YO3");
       playerRacer = multiPlayer.racer;
       multiPlayer.SetPosRot(pos, rot);
