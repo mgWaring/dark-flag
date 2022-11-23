@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 8286877713419928190}
   - component: {fileID: 4732455174172086529}
   - component: {fileID: 6086227926494204140}
+  - component: {fileID: -5046599836852905824}
   m_Layer: 8
   m_Name: properShip03
   m_TagString: Ship
@@ -366,6 +367,23 @@ MonoBehaviour:
   bombSpawn: {fileID: 7195995219743435209}
   ammoCount: 1
   firingDelay: 2
+--- !u!114 &-5046599836852905824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298976098401725311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7063c55e929a40368002f693c491dc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  name: 
+  lastCheckpoint: {fileID: 0}
+  nextCheckpoint: {fileID: 0}
+  lap: 0
 --- !u!1 &5379698523083374124
 GameObject:
   m_ObjectHideFlags: 0

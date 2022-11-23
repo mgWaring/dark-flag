@@ -17,8 +17,8 @@ namespace Multiplayer {
     {
       if (SpawnManager.Instance.GetClientId() == 0)
       {
-        ship = Instantiate(ss.multiplayerShipModel);
-        ship.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId);
+        ship = Instantiate(ss.shipModel);
+        ship.GetComponent<Racer>().enabled = false;
         racer = ship.GetComponent<MultiplayerRacer>();
         mc = ship.GetComponentInChildren<MovementController>();
         mc.enabled = false;

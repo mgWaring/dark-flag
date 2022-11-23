@@ -10,7 +10,7 @@ namespace Multiplayer {
         GameObject ship;
 
         public void Init() {
-            ship = Instantiate(ss.multiplayerShipModel);
+            ship = Instantiate(ss.shipModel);
             camera = GetComponentInChildren<Camera>();
             racer = ship.GetComponent<MultiplayerRacer>();
             mc = ship.GetComponentInChildren<MovementController>();

@@ -77,9 +77,12 @@ namespace Multiplayer
             ? CreateBot(i, info, startPos.position, startPos.rotation)
             : CreateRacer(i, info, startPos.position, startPos.rotation);
 
+          Debug.Log($"{racer} RACER");
           racer.id = i;
           racer.name = info.Name;
+          Debug.Log($"{lastCheck} LAS CHECK");
           racer.lastCheckpoint = lastCheck;
+          Debug.Log($"{racer.lastCheckpoint} LAST CHECK2");
           racer.nextCheckpoint = nextCheck;
           racers[i] = racer;
           laps[racer] = new List<float>();
@@ -132,18 +135,20 @@ namespace Multiplayer
     private MultiplayerRacer CreateRacer(int index, RacerInfo info, Vector3 pos, Quaternion rot)
     {
       Debug.Log("Creating a multiPlayer");
-      //DFPlayer[] dfPlayers = FindObjectsOfType<DFPlayer>();
-      //DFPlayer dfplayer = dfPlayers.Single(dfp => dfp.OwnerClientId == info.ClientId);
       var playerGo = Instantiate(playerPrefab);
       MultiPlayer multiPlayer = playerGo.GetComponent<MultiPlayer>();
       multiPlayer.clientId = info.ClientId;
-      playerGo.GetComponent<NetworkObject>().SpawnWithOwnership(info.ClientId);
       _players.Add(multiPlayer);
       Debug.Log(multiPlayer);
       multiPlayer.ss = info.Ship;
+      Debug.Log("YO");
       multiPlayer.Init();
+      Debug.Log("YO2");
+      playerGo.GetComponent<NetworkObject>().SpawnAsPlayerObject(info.ClientId);
+      Debug.Log("YO3");
       playerRacer = multiPlayer.racer;
       multiPlayer.SetPosRot(pos, rot);
+      Debug.Log($"PLAYER RACER {playerRacer}");
       if (index == 0) _firstCamAnim = multiPlayer.camera.GetComponent<Animator>();
 
       return multiPlayer.racer;
