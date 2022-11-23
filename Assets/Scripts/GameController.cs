@@ -9,7 +9,6 @@ using RelaySystem.Data;
 
 public class GameController : NetworkBehaviour
 {
-  [SerializeField] private bool devmode;
   public int playerCount;
   public RaceTimer raceTimer;
   public TextMeshProUGUI countdownText;
@@ -54,76 +53,24 @@ public class GameController : NetworkBehaviour
     }
   }
 
-  private void Start()
-  {
+  private void Start() {
     state = "prerace";
-    if (SpawnManager.Instance.GetClientId() == 0)
-    {
-      var dfPlayers = GameObject.FindObjectsOfType<DFPlayer>();
+    if (SpawnManager.Instance.GetClientId() == 0) {
       DoBasicSetup();
+      SetUpMap();
       _players = new List<Player>();
       _bots = new List<Bot>();
-      Debug.Log("SPAWNING MAP");
-      var mapObj = Instantiate(map.prefab);
-      mapObj.GetComponent<NetworkObject>().Spawn();
-      _mMap = mapObj.GetComponent<Map>();
-      _checkpoints = _mMap.checkpoints;
-      _startingPositions = _mMap.startingPositions;
       racers = new Racer[playerCount];
-      var checkpointCount = _checkpoints.transform.childCount;
-      var lastCheck = _checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<Checkpoint>();
-      var nextCheck = _checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
-      for (var i = 0; i < playerCount; i++)
-      {
+      int checkpointCount = _checkpoints.transform.childCount;
+      Checkpoint lastCheck = _checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<Checkpoint>();
+      Checkpoint nextCheck = _checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
+      for (int i = 0; i < playerCount; i++) {
         Debug.Log("creating players");
-        var info = CrossScene.racerInfo[i];
-        var startPos = _startingPositions.GetChild(i).transform;
-        var pos = startPos.position;
-        var rot = startPos.rotation;
-        Racer racer;
-        if (info.IsBot)
-        {
-          var botGo = Instantiate(botPrefab);
-          botGo.GetComponent<NetworkObject>().Spawn();
-          var bot = botGo.GetComponent<Bot>();
-          _bots.Add(bot);
-          bot.ss = info.Ship;
-          bot.Init();
-          racer = bot.racer;
-          bot.SetPosRot(pos, rot);
-          if (i == 0)
-          {
-            _firstCamAnim = bot.camera.GetComponent<Animator>();
-          }
-        }
-        else
-        {
-          Debug.Log("Creating a player");
-          var playerGo = Instantiate(playerPrefab);
-          var dfplayer = dfPlayers.Single(dfp => dfp.OwnerClientId == info.ClientId);
-          var player = playerGo.GetComponent<Player>();
-          player.clientId = info.ClientId;
-          playerGo.GetComponent<NetworkObject>().SpawnWithOwnership(info.ClientId);
-          playerGo.transform.SetParent(dfplayer.transform, true);
-          _players.Add(player);
-          Debug.Log(player);
-          player.ss = info.Ship;
-          player.Init();
-          racer = player.racer;
-          playerRacer = racer;
-          player.SetPosRot(pos, rot);
-          if (i == 0)
-          {
-            _firstCamAnim = player.camera.GetComponent<Animator>();
-          }
-          //this needs to worked into the block above
-          if (info.IsNetworkPlayer)
-          {
-            //var relevantClient = NetworkManager.Singleton.ConnectedClients[info.ClientId];
-            //newShip.transform.parent = relevantClient.PlayerObject.transform;
-            //relevantClient.PlayerObject.GetComponent<DFPlayer>().ClaimShip(newShip);
-          }
-        }
+        RacerInfo info = CrossScene.racerInfo[i];
+        Transform startPos = _startingPositions.GetChild(i).transform;
+        Racer racer = info.IsBot
+            ? CreateBot(i, info, startPos.position, startPos.rotation)
+            : CreateRacer(i, info, startPos.position, startPos.rotation);
 
         racer.id = i;
         racer.name = info.Name;
@@ -132,27 +79,23 @@ public class GameController : NetworkBehaviour
         racers[i] = racer;
         laps[racer] = new List<float>();
       }
-    }
-    else
-    {
-      racers = GameObject.FindObjectsOfType<Racer>();
-      _players = GameObject.FindObjectsOfType<Player>().ToList();
-      _mMap = GameObject.FindObjectsOfType<Map>()[0];
+    } else {
+      racers = FindObjectsOfType<Racer>();
+      _players = FindObjectsOfType<Player>().ToList();
+      _mMap = FindObjectsOfType<Map>()[0];
       _checkpoints = _mMap.checkpoints;
-      var checkpointCount = _checkpoints.transform.childCount;
-      var lastCheck = _checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<Checkpoint>();
-      var nextCheck = _checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
-      for (int i = 0; i < _players.Count; i++)
-      {
-        _players[i].Init();
-        _players[i].racer.lastCheckpoint = lastCheck;
-        _players[i].racer.nextCheckpoint = nextCheck;
-        laps[_players[i].racer] = new List<float>();
+      int checkpointCount = _checkpoints.transform.childCount;
+      Checkpoint lastCheck = _checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<Checkpoint>();
+      Checkpoint nextCheck = _checkpoints.transform.GetChild(0).GetComponent<Checkpoint>();
+      foreach (Player player in _players) {
+          player.Init();
+          player.racer.lastCheckpoint = lastCheck;
+          player.racer.nextCheckpoint = nextCheck;
+          laps[player.racer] = new List<float>();
       }
+
       for (int i = 0; i < checkpointCount; i++)
-      {
-        _checkpoints.transform.GetChild(i).GetComponent<Checkpoint>().gameController = this;
-      }
+          _checkpoints.transform.GetChild(i).GetComponent<Checkpoint>().gameController = this;
     }
 
     player = _players.Single(p => p.IsOwner);
@@ -160,14 +103,53 @@ public class GameController : NetworkBehaviour
     SetUITarget();
     PlayOpening();
 
-    if (straightToRace)
-    {
-      AttachCamera();
-      AllowPlay();
-      raceTimer.running = true;
-      lapTimer.running = true;
-      state = "race";
-    }
+    if (!straightToRace) return;
+    AttachCamera();
+    AllowPlay();
+    raceTimer.running = true;
+    lapTimer.running = true;
+    state = "race";
+  }
+
+  private void SetUpMap() {
+    Debug.Log("SPAWNING MAP");
+    var mapObj = Instantiate(map.prefab);
+    mapObj.GetComponent<NetworkObject>().Spawn();
+    _mMap = mapObj.GetComponent<Map>();
+    _checkpoints = _mMap.checkpoints;
+    _startingPositions = _mMap.startingPositions;
+  }
+
+  private Racer CreateRacer(int index, RacerInfo info, Vector3 pos, Quaternion rot) {
+    Debug.Log("Creating a player");
+    DFPlayer[] dfPlayers = FindObjectsOfType<DFPlayer>();
+    DFPlayer dfplayer = dfPlayers.Single(dfp => dfp.OwnerClientId == info.ClientId);
+    var playerGo = Instantiate(playerPrefab, dfplayer.transform, true);
+    Player player = playerGo.GetComponent<Player>();
+    player.clientId = info.ClientId;
+    playerGo.GetComponent<NetworkObject>().SpawnWithOwnership(info.ClientId);
+    _players.Add(player);
+    Debug.Log(player);
+    player.ss = info.Ship;
+    player.Init();
+    playerRacer = player.racer;
+    player.SetPosRot(pos, rot);
+    if (index == 0) _firstCamAnim = player.camera.GetComponent<Animator>();
+
+    return player.racer;
+  }
+
+  private Racer CreateBot(int index, RacerInfo info, Vector3 pos, Quaternion rot) {
+    var botGo = Instantiate(botPrefab);
+    botGo.GetComponent<NetworkObject>().Spawn();
+    Bot bot = botGo.GetComponent<Bot>();
+    _bots.Add(bot);
+    bot.ss = info.Ship;
+    bot.Init();
+    bot.SetPosRot(pos, rot);
+    if (index == 0) _firstCamAnim = bot.camera.GetComponent<Animator>();
+
+    return bot.racer;
   }
 
   private void SetUITarget()
@@ -180,9 +162,8 @@ public class GameController : NetworkBehaviour
     durabilityUI.target = o;
 
     var cameras = GameObject.FindObjectsOfType<Camera>();
-    for (int i = 0; i < cameras.Length; i++)
-    {
-      cameras[i].enabled = false;
+    foreach (Camera cam in cameras) {
+      cam.enabled = false;
     }
 
     player.camera.enabled = true;
@@ -194,67 +175,50 @@ public class GameController : NetworkBehaviour
     player.PlayOpening("JanktownOpeningCamera");
   }
 
-  private void AttachCamera()
-  {
-    for (int i = 0; i < _players.Count; i++)
-    {
-      _players[i].AttachCamera();
-    }
-    if (_bots != null)
-    {
-      for (int i = 0; i < _bots.Count; i++)
-      {
-        _bots[i].AttachCamera();
-      }
-    }
+  private void AttachCamera() {
+    foreach (var player in _players) player.AttachCamera();
+
+    if (_bots == null) return;
+    
+    foreach (Bot bot in _bots) bot.AttachCamera();
   }
 
   private void AllowPlay()
   {
-
     player.AllowPlay();
 
-    if (_bots != null)
-    {
-      for (int i = 0; i < _bots.Count; i++)
-      {
-        _bots[i].AllowPlay();
-      }
-    }
+    if (_bots == null) return;
+    
+    foreach (Bot bot in _bots) bot.AllowPlay();
   }
 
-  private void Update()
-  {
+  private void Update() {
     Debug.Log($"DONKEY:::::{player.ship.GetComponent<BotMovement>().enabled}");
-    if (state == "prerace")
-    {
-      HandlePreRace();
-    }
-    else if (state == "countdown")
-    {
-      Debug.Log("COUNTDOWN");
-      UpdatePositions();
-      HandleCountdown();
-    }
-    else if (state == "race")
-    {
-      UpdatePositions();
-      HandleRace();
-    }
-    else if (state == "postrace")
-    {
-      HandlePostRace();
+    switch (state) {
+      case "prerace":
+        HandlePreRace();
+        break;
+      case "countdown":
+        Debug.Log("COUNTDOWN");
+        UpdatePositions();
+        HandleCountdown();
+        break;
+      case "race":
+        UpdatePositions();
+        HandleRace();
+        break;
+      case "postrace":
+        HandlePostRace();
+        break;
     }
   }
 
-  private void HandlePreRace()
-  {
-    if (_firstCamAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f)
-    {
-      Debug.Log("ATTACHING THE CAM");
-      AttachCamera();
-      state = "countdown";
-    }
+  private void HandlePreRace() {
+    if (!(_firstCamAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f)) return;
+    
+    Debug.Log("ATTACHING THE CAM");
+    AttachCamera();
+    state = "countdown";
   }
 
   private void UpdatePositions()
@@ -268,21 +232,15 @@ public class GameController : NetworkBehaviour
     return laps[racer].Count > lapCount;
   }
 
-  private float FinishFor(Racer racer)
-  {
-    if (laps[racer].Count > lapCount)
-    {
-      return laps[racer].Last();
-    }
-    else
-    {
-      return 0.0f;
-    }
+  private float FinishFor(Racer racer) {
+    return laps[racer].Count > lapCount 
+      ? laps[racer].Last() 
+      : 0.0f;
   }
 
   public void RegisterLap(Racer racer)
   {
-    var times = laps[racer];
+    List<float> times = laps[racer];
     if (times.Count == 0)
     {
       times.Add(0.0f);
@@ -303,20 +261,14 @@ public class GameController : NetworkBehaviour
       }
     }
 
-    if (laps.Values.All(l => l.Count > lapCount))
-    {
-      state = "postrace";
-      raceTimer.running = false;
-      lapTimer.running = false;
-      scoreboard.SetActive(true);
-    }
+    if (!laps.Values.All(l => l.Count > lapCount)) return;
+    
+    state = "postrace";
+    raceTimer.running = false;
+    lapTimer.running = false;
+    scoreboard.SetActive(true);
   }
-
-  public int PositionFor(Racer racer)
-  {
-    return System.Array.IndexOf(racers, racer);
-  }
-
+  
   public int PositionForPlayer()
   {
     return System.Array.IndexOf(racers, playerRacer);
@@ -342,37 +294,19 @@ public class GameController : NetworkBehaviour
 
   private void HandleRace()
   {
-    if (_countdownTimer >= -1.0f)
-    {
-      _countdownTimer -= Time.deltaTime;
-    }
-    else
-    {
-      countdownText.SetText("");
-    }
+    if (_countdownTimer >= -1.0f) _countdownTimer -= Time.deltaTime;
+    else countdownText.SetText("");
   }
 
   private void HandlePostRace()
   {
-    if (_postRaceTimer > 0.0)
-    {
-      _postRaceTimer -= Time.deltaTime;
-    }
-    else
-    {
-      SceneManager.LoadScene(0);
-    }
+    if (_postRaceTimer > 0.0) _postRaceTimer -= Time.deltaTime;
+    else SceneManager.LoadScene(0); //todo - call networking scene manager if we're in MP
   }
 
-  public float BestLapFor(Racer racer)
-  {
-    if (laps[racer].Count == 1)
-    {
-      return 0.0f;
-    }
-    else
-    {
-      return laps[racer].GetRange(1, laps[racer].Count - 1).Min();
-    }
+  public float BestLapFor(Racer racer) {
+    return laps[racer].Count == 1 
+      ? 0.0f 
+      : laps[racer].GetRange(1, laps[racer].Count - 1).Min();
   }
 }
