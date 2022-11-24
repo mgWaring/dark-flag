@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
+using Managers;
 
 namespace Multiplayer {
   public class MultiplayerScoreboard : MonoBehaviour
@@ -13,7 +14,7 @@ namespace Multiplayer {
       // Start is called before the first frame update
       void Start()
       {
-          for(int i = 0; i < gameController.playerCount; i++) {
+          for(int i = 0; i < SpawnManager.Instance._players.Count; i++) {
               GameObject row = Instantiate(rowPrefab);
               row.transform.SetParent(transform);
           }
@@ -22,7 +23,7 @@ namespace Multiplayer {
       // Update is called once per frame
       void Update()
       {
-          for(int i = 0; i < gameController.playerCount; i++) {
+          for(int i = 0; i < SpawnManager.Instance._players.Count; i++) {
               GameObject row = transform.GetChild(i + 1).gameObject;
               MultiplayerRacer racer = gameController.racers[i];
               float bestLap = gameController.BestLapFor(racer);

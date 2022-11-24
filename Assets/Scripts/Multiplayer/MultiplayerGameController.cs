@@ -269,8 +269,8 @@ namespace Multiplayer
           if (RacerIsFinished(racer))
           {
             scoreboard.SetActive(true);
-            racer.gameObject.GetComponent<BotMovement>().enabled = true;
-            racer.gameObject.GetComponent<PlayerMovement>().enabled = false;
+            racer.gameObject.GetComponentInParent<BotMovement>().enabled = true;
+            racer.gameObject.GetComponentInParent<PlayerMovement>().enabled = false;
           }
         }
       }
