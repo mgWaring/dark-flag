@@ -25,28 +25,28 @@ namespace UI.Pregame
 
     void Update()
     {
-      Debug.Log(HasNetworkObject);
-      Debug.Log(_playerTiles.Count);
-      Debug.Log(SpawnManager.Instance._players.Count);
-      if (_playerTiles.Count < SpawnManager.Instance._players.Count)
-      {
-        CreateTile();
-      }
-
       timer -= Time.deltaTime;
       if (timer <= 0 && !sentName)
       {
         SpawnManager.Instance.SetPlayerName(PlayerPrefs.GetString("playerName"));
         sentName = true;
       }
+
+      if (_playerTiles.Count < SpawnManager.Instance._players.Count) {
+        int diff = SpawnManager.Instance._players.Count - _playerTiles.Count;
+        for (int i = 0; i < diff; i++) {
+          CreateTileForExistingPlayer();
+        }
+      }
     }
 
     public void Start()
     {
-      Debug.Log("Starting player list");
-      DFLogger.Instance.Log("Starting player list");
       SpawnManager.Instance.OnPlayerJoined += CreateTile;
       SpawnManager.Instance.ValueUpdate += TileUpdate;
+      if (SpawnManager.Instance.GetClientId() == 0) {
+        CreateTileForExistingPlayer();
+      }
     }
 
     public bool AllReady()
@@ -79,6 +79,13 @@ namespace UI.Pregame
       DFLogger.Instance.LogInfo("CREATING TILE FOR CLIENT");
       var newTile = Instantiate(playerTilePrefab, playerTileContainer.transform, false);
       _playerTiles.Add(newTile);
+    }
+
+    private void CreateTileForExistingPlayer()
+    {
+      var newTile = Instantiate(playerTilePrefab, playerTileContainer.transform, false);
+      _playerTiles.Add(newTile);
+      TileUpdate(_playerTiles.Count - 1);
     }
   }
 }

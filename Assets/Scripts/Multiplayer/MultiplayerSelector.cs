@@ -18,6 +18,25 @@ namespace Multiplayer
     public string type;
     bool readOnly = false;
 
+    private void Update() {
+      int expectedIndex = 0;
+      switch (type)
+      {
+        case "map":
+          expectedIndex = SpawnManager.Instance._mapIndex.Value;
+          break;
+        case "lap":
+          expectedIndex = SpawnManager.Instance._lapIndex.Value;
+          break;
+        case "bot":
+          expectedIndex = SpawnManager.Instance._botIndex.Value;
+          break;
+      }
+      if (index != expectedIndex) {
+        index = expectedIndex;
+        SetText();
+      }
+    }
     // Start is called before the first frame update
     private new void Start()
     {

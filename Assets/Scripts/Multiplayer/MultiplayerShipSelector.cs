@@ -38,7 +38,7 @@ namespace Multiplayer {
     private void Start()
     {
       selectableShips = selectableShipNames.Select(name => name.displayShipModel).ToArray();
-      SetValues();
+      DisplayValues();
     }
 
     private void OnEnable()

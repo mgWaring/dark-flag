@@ -104,15 +104,16 @@ namespace Managers
 
     public void SetPlayerShip(int shipIndex)
     {
-      int userIndex = (int)NetworkManager.Singleton.LocalClientId;
-      SetShipServerRpc(userIndex, shipIndex);
+      SetShipServerRpc(shipIndex);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void SetShipServerRpc(int user_index, int ship_index)
+    public void SetShipServerRpc(int shipIndex, ServerRpcParams para = default)
     {
+      int user_index = (int)para.Receive.SenderClientId;
+      Debug.Log($"BEHING CALLED FOR {user_index} : {shipIndex}");
       MultiplayerMenuPlayer old = _players[user_index];
-      MultiplayerMenuPlayer newer = new MultiplayerMenuPlayer(old.name, old.clientId, ship_index, old.ready);
+      MultiplayerMenuPlayer newer = new MultiplayerMenuPlayer(old.name, old.clientId, shipIndex, old.ready);
       _players[user_index] = newer;
     }
 
