@@ -97,7 +97,7 @@ namespace Multiplayer {
       }
 
       CrossScene.racerInfo = racerList.ToArray();
-      CrossScene.map = _maps[mapSelector.value];
+      CrossScene.map = mapList[mapSelector.index];
       CrossScene.laps = lapCount;
       CrossScene.players = playerCount;
       CrossScene.bots = botCount;
