@@ -19,6 +19,7 @@ namespace Managers
     [HideInInspector] public NetworkVariable<int> _mapIndex = new();
     [HideInInspector] public NetworkVariable<int> _botIndex = new();
     [HideInInspector] public NetworkVariable<int> _lapIndex = new();
+    [HideInInspector] public NetworkVariable<FixedString128Bytes> _code = new();
 
     public void Start()
     {
@@ -37,6 +38,7 @@ namespace Managers
         _lapIndex.Value = 0;
         _mapIndex.Value = 0;
         _botIndex.Value = 0;
+        _code.Value = RelayManager.Instance.CurrentRelayHostData.joinCode;
       }
       _players.OnListChanged += OnSomeValueChanged;
       _mapIndex.OnValueChanged += OnMapSelectionChanged;

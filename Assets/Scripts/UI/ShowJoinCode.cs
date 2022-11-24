@@ -1,20 +1,26 @@
 using Managers;
-using RelaySystem;
 using TMPro;
 using UnityEngine;
+using Unity.Netcode;
 
 namespace UI {
     public class ShowJoinCode : MonoBehaviour {
         private TMP_Text JoinCodeText =>
             gameObject.GetComponent<TMP_Text>();
+        bool _haveSetText = false;
 
-        private void Start() {
-            UpdateActiveJoinCode();
+        private void Update() {
+          if (!_haveSetText) {
+            SetText();
+          }
         }
 
-        private void UpdateActiveJoinCode() {
-            if (null != RelayManager.Instance.CurrentRelayHostData.joinCode)
-                JoinCodeText.text = RelayManager.Instance.CurrentRelayHostData.joinCode;
+        private void SetText()
+        {
+            if (SpawnManager.Instance._code.Value.ToString() != "") {
+              JoinCodeText.text = SpawnManager.Instance._code.Value.ToString();
+              _haveSetText = true;
+            }
         }
     }
 }
