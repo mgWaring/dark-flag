@@ -4,6 +4,7 @@ using UnityEngine;
 using Utils;
 using RelaySystem.Data;
 using Unity.Collections;
+using Multiplayer;
 
 namespace Managers
 {
@@ -145,6 +146,22 @@ namespace Managers
       MultiplayerMenuPlayer old = _players[user_index];
       MultiplayerMenuPlayer newer = new MultiplayerMenuPlayer((FixedString128Bytes)name, old.clientId, old.shipIndex, old.ready);
       _players[user_index] = newer;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnBombServerRpc(ServerRpcParams para = default)
+    {
+      ulong userIndex = para.Receive.SenderClientId;
+      var po = NetworkManager.Singleton.ConnectedClients[userIndex].PlayerObject;
+      po.GetComponentInChildren<MultiplayerBackWeapon>().SpawnBomb();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void SpawnBulletServerRpc(ServerRpcParams para = default)
+    {
+      ulong userIndex = para.Receive.SenderClientId;
+      var po = NetworkManager.Singleton.ConnectedClients[userIndex].PlayerObject;
+      po.GetComponentInChildren<MultiplayerFrontWeapon>().SpawnBullet();
     }
   }
 }

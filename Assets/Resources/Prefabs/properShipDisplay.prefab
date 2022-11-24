@@ -7,6 +7,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7320816773009289007, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 951099334
+      objectReference: {fileID: 0}
+    - target: {fileID: 303871638125012727, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 303871638125012727, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
+      propertyPath: m_VersionIndex
+      value: 531
+      objectReference: {fileID: 0}
+    - target: {fileID: 1894100142212059927, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2906004362816463550, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
       propertyPath: GlobalObjectIdHash
       value: 951099334
@@ -63,6 +79,10 @@ PrefabInstance:
       propertyPath: GlobalObjectIdHash
       value: 951099334
       objectReference: {fileID: 0}
+    - target: {fileID: 7844891966217991547, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4298976098401725303, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
     - {fileID: 6698693705497660121, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
@@ -80,4 +100,5 @@ PrefabInstance:
     - {fileID: 4632005297297370496, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
     - {fileID: -5915597390368719979, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
     - {fileID: 2906004362816463550, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 6db73a0092e06354b87a006f938798ea, type: 3}

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Multiplayer;
 
 //Add this script to player.
 public class PlayerMovement : MonoBehaviour
@@ -9,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     ShipDurability sd;
     FrontWeapon fw;
     BackWeapon bw;
+    MultiplayerFrontWeapon mfw;
+    MultiplayerBackWeapon mbw;
     public bool invertY = false;
     float yInversion;
     public InputAction thrustInput;//Value is between -1 and 1.
@@ -28,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
         sd = GetComponentInChildren<ShipDurability>();
         fw = GetComponentInChildren<FrontWeapon>();
         bw = GetComponentInChildren<BackWeapon>();              
+        mfw = GetComponentInChildren<MultiplayerFrontWeapon>();
+        mbw = GetComponentInChildren<MultiplayerBackWeapon>();              
     }
 
     //Required for new input system. Don't ask me why.
@@ -64,8 +69,18 @@ public class PlayerMovement : MonoBehaviour
         sd.BoostDamage(boostInput.ReadValue<float>());
         pcc.CameraControl(cameraControlY.ReadValue<float>() * yInversion, cameraControlX.ReadValue<float>());
         pcc.CameraFlip(cameraFlip.ReadValue<float>());
-        fw.ShootGun(fireInput.ReadValue<float>());
-        bw.BombRelease(bombInput.ReadValue<float>());
+        if (fw != null) {
+          fw.ShootGun(fireInput.ReadValue<float>());
+        }
+        if (bw != null) {
+          bw.BombRelease(bombInput.ReadValue<float>());
+        }
+        if (mfw != null) {
+          mfw.ShootGun(fireInput.ReadValue<float>());
+        }
+        if (mbw != null) {
+          mbw.BombRelease(bombInput.ReadValue<float>());
+        }
     }
 
     //This one's for all you weirdos out there.
