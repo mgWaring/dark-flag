@@ -33,6 +33,7 @@ namespace Multiplayer {
     public InputAction backInput;
     private float submitTimer = 0.25f;
     [HideInInspector] public bool readOnly = false;
+    public float[] customScales;
 
     // Start is called before the first frame update
     private void Start()
@@ -152,6 +153,8 @@ namespace Multiplayer {
 
       GameObject ship = Instantiate(currentShip);
       ship.transform.SetParent(shipHolder);
+      float scale = customScales[index];
+      shipHolder.localScale = new Vector3(scale, scale, scale);
       ship.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
       ship.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
@@ -173,6 +176,8 @@ namespace Multiplayer {
 
       GameObject ship = Instantiate(currentShip);
       ship.transform.SetParent(shipHolder);
+      float scale = customScales[index];
+      shipHolder.localScale = new Vector3(scale, scale, scale);
       ship.transform.localPosition = new Vector3(0.0f, 0.0f, 0.0f);
       ship.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 

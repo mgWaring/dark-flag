@@ -30,8 +30,8 @@ namespace UI.Pregame
     {
       // when the input is changed update the player object with the new name
       index = transform.GetSiblingIndex();
-      transform.GetChild(0).transform.position += new Vector3(1000.0f * index, 1000.0f * index, 1000.0f * index);
-      RenderTexture outputTexture = new RenderTexture(256, 256, 16, RenderTextureFormat.ARGB32);
+      transform.GetChild(0).transform.position += new Vector3(3000.0f * (index + 1), 3000.0f * (index + 1), 3000.0f * (index + 1));
+      RenderTexture outputTexture = new RenderTexture(384, 256, 16, RenderTextureFormat.ARGB32);
       camera.targetTexture = outputTexture;
       shipImage.texture = outputTexture;
       if (SpawnManager.Instance.CurrentPlayerIndex() != index)
