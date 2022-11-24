@@ -14,8 +14,8 @@ namespace UI.Pregame
     private List<GameObject> _playerTiles = new();
     [SerializeField] private GameObject playerTilePrefab;
     [SerializeField] private GameObject playerTileContainer;
-    float timer = 1.0f;
-    bool sentName;
+    float timer = 0.5f;
+    bool firstUpdateDone;
     //
 
     void Awake()
@@ -26,16 +26,20 @@ namespace UI.Pregame
     void Update()
     {
       timer -= Time.deltaTime;
-      if (timer <= 0 && !sentName)
+      if (timer <= 0 && !firstUpdateDone)
       {
         SpawnManager.Instance.SetPlayerName(PlayerPrefs.GetString("playerName"));
-        sentName = true;
+        firstUpdateDone = true;
+
+        for (int i = 0; i < _playerTiles.Count; i++) {
+          TileUpdate(i);
+        }
       }
 
       if (_playerTiles.Count < SpawnManager.Instance._players.Count) {
         int diff = SpawnManager.Instance._players.Count - _playerTiles.Count;
         for (int i = 0; i < diff; i++) {
-          CreateTileForExistingPlayer();
+          CreateTile();
         }
       }
     }
@@ -45,7 +49,7 @@ namespace UI.Pregame
       SpawnManager.Instance.OnPlayerJoined += CreateTile;
       SpawnManager.Instance.ValueUpdate += TileUpdate;
       if (SpawnManager.Instance.GetClientId() == 0) {
-        CreateTileForExistingPlayer();
+        CreateTile();
       }
     }
 
@@ -79,13 +83,6 @@ namespace UI.Pregame
       DFLogger.Instance.LogInfo("CREATING TILE FOR CLIENT");
       var newTile = Instantiate(playerTilePrefab, playerTileContainer.transform, false);
       _playerTiles.Add(newTile);
-    }
-
-    private void CreateTileForExistingPlayer()
-    {
-      var newTile = Instantiate(playerTilePrefab, playerTileContainer.transform, false);
-      _playerTiles.Add(newTile);
-      TileUpdate(_playerTiles.Count - 1);
     }
   }
 }
