@@ -53,6 +53,12 @@ namespace UI.Pregame
       }
     }
 
+    void OnDestroy()
+    {
+      SpawnManager.Instance.OnPlayerJoined -= CreateTile;
+      SpawnManager.Instance.ValueUpdate -= TileUpdate;
+    }
+
     public bool AllReady()
     {
       return playerTileContainer.GetComponentsInChildren<ReadyButton>().All(

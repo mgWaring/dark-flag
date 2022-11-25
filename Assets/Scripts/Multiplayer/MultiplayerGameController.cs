@@ -314,8 +314,23 @@ namespace Multiplayer
 
     private void HandlePostRace()
     {
-      if (_postRaceTimer > 0.0) _postRaceTimer -= Time.deltaTime;
-      else SceneManager.LoadScene(0); //todo - call networking scene manager if we're in MP
+      if (SpawnManager.Instance.GetClientId() == 0) {
+        if (_postRaceTimer > 0.0)
+        {
+          _postRaceTimer -= Time.deltaTime;
+        } else {
+          _mMap.gameObject.GetComponent<NetworkObject>().Despawn();
+          Destroy(_mMap.gameObject);
+          for (int i = 0; i < _players.Count; i++) {
+            MultiPlayer p = _players[i];
+            p.ship.GetComponent<NetworkObject>().Despawn();
+            Destroy(p.ship);
+            p.gameObject.GetComponent<NetworkObject>().Despawn();
+            Destroy(p.gameObject);
+          }
+          NetworkManager.Singleton.SceneManager.LoadScene("Pregame", LoadSceneMode.Single);
+        }
+      }
     }
 
     public float BestLapFor(MultiplayerRacer racer)

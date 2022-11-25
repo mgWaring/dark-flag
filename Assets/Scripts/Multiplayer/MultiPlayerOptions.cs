@@ -102,6 +102,7 @@ namespace Multiplayer {
       CrossScene.players = playerCount;
       CrossScene.bots = botCount;
       CrossScene.cameFromMainMenu = true;
+      SpawnManager.Instance.ResetReadies();
       NetworkManager.Singleton.SceneManager.LoadScene("Multiplayer", LoadSceneMode.Single);
     }
   }

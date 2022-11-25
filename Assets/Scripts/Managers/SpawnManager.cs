@@ -47,6 +47,14 @@ namespace Managers
       _botIndex.OnValueChanged += OnBotSelectionChanged;
     }
 
+    public void ResetReadies() {
+      for (int i = 0; i < NetworkManager.Singleton.ConnectedClients.Count; i++) {
+        MultiplayerMenuPlayer old = _players[i];
+        MultiplayerMenuPlayer newer = new MultiplayerMenuPlayer(old.name, old.clientId, old.shipIndex, false);
+        _players[i] = newer;
+      }
+    }
+
     public int GetClientId()
     {
       return (int)NetworkManager.Singleton.LocalClientId;
