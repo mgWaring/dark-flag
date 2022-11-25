@@ -5,12 +5,14 @@ using Utils;
 using RelaySystem.Data;
 using Unity.Collections;
 using Multiplayer;
+using UnityEngine.SceneManagement;
 
 namespace Managers
 {
   public class SpawnManager : LonelyNetworkBehaviour<SpawnManager>
   {
     public event Action OnPlayerJoined;
+    public event Action<int> OnPlayerLeave;
     public event Action<int> ValueUpdate;
     public event Action<int> MapUpdate;
     public event Action<int> LapUpdate;
@@ -30,6 +32,7 @@ namespace Managers
 
     public override void OnNetworkSpawn()
     {
+      NetworkManager.OnClientDisconnectCallback += RemovePlayerForClient;
       if (IsServer)
       {
         NetworkManager.OnClientConnectedCallback += AddPlayerForClient;
@@ -64,9 +67,36 @@ namespace Managers
     {
       DFLogger.Instance.LogInfo("Adding MultiPlayer");
       Debug.Log("Adding MultiPlayer");
-      int id = (int)NetworkManager.Singleton.LocalClientId;
+      int id = (int)obj;
       MultiplayerMenuPlayer p = new MultiplayerMenuPlayer(id);
       _players.Add(p);
+    }
+
+    private void RemovePlayerForClient(ulong obj)
+    {
+      if (obj == 0) {
+        NetworkManager.Singleton.Shutdown();
+        Destroy(NetworkManager.Singleton.gameObject);
+        var go = SpawnManager.Instance.gameObject;
+        SpawnManager.Instance.Nuke();
+        SpawnManager.allowSpawning = false;
+        var soundManagers = GameObject.FindObjectsOfType<SoundManager>();
+        for (int i = 0; i < soundManagers.Length; i++) {
+          Destroy(soundManagers[i].gameObject);
+        }
+        Destroy(GameObject.Find("/baws"));
+        SceneManager.LoadScene(0);
+      }
+
+      if (GetClientId() == 0) {
+        int index = 0;
+        for (int i = 0; i < _players.Count; i++) {
+          if (_players[i].clientId == (int)obj) {
+            index = i;
+          }
+        }
+        _players.RemoveAt(index);
+      }
     }
 
     private void OnMapSelectionChanged(int before, int after)
@@ -84,17 +114,35 @@ namespace Managers
       BotUpdate.Invoke(after);
     }
 
+    public void Nuke() {
+      Destroy(gameObject);
+      Destroy(this);
+    }
+
     private void OnSomeValueChanged(NetworkListEvent<MultiplayerMenuPlayer> evnt)
     {
       if (evnt.Type == NetworkListEvent<MultiplayerMenuPlayer>.EventType.Value)
       {
         ValueUpdate?.Invoke(evnt.Index);
+      } else if (evnt.Type == NetworkListEvent<MultiplayerMenuPlayer>.EventType.RemoveAt) {
+        OnPlayerLeave?.Invoke(evnt.Index);
       }
     }
     
     public int CurrentPlayerIndex()
     {
       return (int)NetworkManager.Singleton.LocalClientId;
+    }
+
+    public int IndexFor(ulong id)
+    {
+      int index = 0;
+      for (int i = 0; i < _players.Count; i++) {
+        if (_players[i].clientId == (int)id) {
+          index = i;
+        }
+      }
+      return index;
     }
 
     public void SetSelection(string type, int index)
@@ -121,8 +169,8 @@ namespace Managers
     [ServerRpc(RequireOwnership = false)]
     public void SetShipServerRpc(int shipIndex, ServerRpcParams para = default)
     {
-      int user_index = (int)para.Receive.SenderClientId;
-      Debug.Log($"BEHING CALLED FOR {user_index} : {shipIndex}");
+      ulong id = para.Receive.SenderClientId;
+      int user_index = IndexFor(id);
       MultiplayerMenuPlayer old = _players[user_index];
       MultiplayerMenuPlayer newer = new MultiplayerMenuPlayer(old.name, old.clientId, shipIndex, old.ready);
       _players[user_index] = newer;
@@ -130,13 +178,14 @@ namespace Managers
 
     public void SetPlayerReady(bool ready)
     {
-      int userIndex = (int)NetworkManager.Singleton.LocalClientId;
-      SetReadyServerRpc(userIndex, ready);
+      SetReadyServerRpc(ready);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void SetReadyServerRpc(int user_index, bool ready)
+    public void SetReadyServerRpc(bool ready, ServerRpcParams para = default)
     {
+      ulong id = para.Receive.SenderClientId;
+      int user_index = IndexFor(id);
       MultiplayerMenuPlayer old = _players[user_index];
       MultiplayerMenuPlayer newer = new MultiplayerMenuPlayer(old.name, old.clientId, old.shipIndex, ready);
       _players[user_index] = newer;
@@ -144,13 +193,14 @@ namespace Managers
 
     public void SetPlayerName(string name)
     {
-      int userIndex = (int)NetworkManager.Singleton.LocalClientId;
-      SetNameServerRpc(userIndex, name);
+      SetNameServerRpc(name);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void SetNameServerRpc(int user_index, string name)
+    public void SetNameServerRpc(string name, ServerRpcParams para = default)
     {
+      ulong id = para.Receive.SenderClientId;
+      int user_index = IndexFor(id);
       MultiplayerMenuPlayer old = _players[user_index];
       MultiplayerMenuPlayer newer = new MultiplayerMenuPlayer((FixedString128Bytes)name, old.clientId, old.shipIndex, old.ready);
       _players[user_index] = newer;
@@ -159,16 +209,16 @@ namespace Managers
     [ServerRpc(RequireOwnership = false)]
     public void SpawnBombServerRpc(ServerRpcParams para = default)
     {
-      ulong userIndex = para.Receive.SenderClientId;
-      var po = NetworkManager.Singleton.ConnectedClients[userIndex].PlayerObject;
+      ulong id = para.Receive.SenderClientId;
+      var po = NetworkManager.Singleton.ConnectedClients[id].PlayerObject;
       po.GetComponentInChildren<MultiplayerBackWeapon>().SpawnBomb();
     }
 
     [ServerRpc(RequireOwnership = false)]
     public void SpawnBulletServerRpc(ServerRpcParams para = default)
     {
-      ulong userIndex = para.Receive.SenderClientId;
-      var po = NetworkManager.Singleton.ConnectedClients[userIndex].PlayerObject;
+      ulong id = para.Receive.SenderClientId;
+      var po = NetworkManager.Singleton.ConnectedClients[id].PlayerObject;
       po.GetComponentInChildren<MultiplayerFrontWeapon>().SpawnBullet();
     }
   }

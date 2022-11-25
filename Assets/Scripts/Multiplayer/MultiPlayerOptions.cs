@@ -46,7 +46,17 @@ namespace Multiplayer {
 
     public void Back()
     {
-      Debug.Log("YOU MAY NEVER RETURN!!");
+      NetworkManager.Singleton.Shutdown();
+      Destroy(NetworkManager.Singleton.gameObject);
+      var go = SpawnManager.Instance.gameObject;
+      SpawnManager.Instance.Nuke();
+      SpawnManager.allowSpawning = false;
+      var soundManagers = GameObject.FindObjectsOfType<SoundManager>();
+      for (int i = 0; i < soundManagers.Length; i++) {
+        Destroy(soundManagers[i].gameObject);
+      }
+      Destroy(GameObject.Find("/baws"));
+      SceneManager.LoadScene(0);
     }
 
     public void StartGame()
@@ -88,11 +98,10 @@ namespace Multiplayer {
         racerList.Add(new RacerInfo(_ships.Values.ToArray()));
       }
 
-      foreach (var (_, client) in NetworkManager.Singleton.ConnectedClients)
-      {
-        var p = SpawnManager.Instance._players[(int)client.ClientId];
+      for (int i = 0; i < SpawnManager.Instance._players.Count; i++) {
+        var p = SpawnManager.Instance._players[i];
         racerList.Add(
-          new RacerInfo(p.name.ToString(), shipList[p.shipIndex], client.ClientId)
+          new RacerInfo(p.name.ToString(), shipList[p.shipIndex], (ulong)p.clientId)
         );
       }
 

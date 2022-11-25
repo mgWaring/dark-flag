@@ -275,7 +275,7 @@ namespace Multiplayer
         }
       }
 
-      if (!laps.Values.All(l => l.Count > lapCount)) return;
+      if (laps.Values.Count(l => l.Count > lapCount) < SpawnManager.Instance._players.Count) return;
 
       state = "postrace";
       raceTimer.running = false;
@@ -310,6 +310,10 @@ namespace Multiplayer
     {
       if (_countdownTimer >= -1.0f) _countdownTimer -= Time.deltaTime;
       else countdownText.SetText("");
+
+      if (laps.Values.Count(l => l.Count > lapCount) < SpawnManager.Instance._players.Count) return;
+
+      state = "postrace";
     }
 
     private void HandlePostRace()
@@ -323,10 +327,12 @@ namespace Multiplayer
           Destroy(_mMap.gameObject);
           for (int i = 0; i < _players.Count; i++) {
             MultiPlayer p = _players[i];
-            p.ship.GetComponent<NetworkObject>().Despawn();
-            Destroy(p.ship);
-            p.gameObject.GetComponent<NetworkObject>().Despawn();
-            Destroy(p.gameObject);
+            if (p.ship != null) {
+              p.ship.GetComponent<NetworkObject>().Despawn();
+              Destroy(p.ship);
+              p.gameObject.GetComponent<NetworkObject>().Despawn();
+              Destroy(p.gameObject);
+            }
           }
           NetworkManager.Singleton.SceneManager.LoadScene("Pregame", LoadSceneMode.Single);
         }

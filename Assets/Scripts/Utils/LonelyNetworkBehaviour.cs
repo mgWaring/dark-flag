@@ -3,9 +3,14 @@ using UnityEngine;
 
 namespace Utils {
     public class LonelyNetworkBehaviour<T> : NetworkBehaviour where T : Component {
+        public static bool allowSpawning = true;
         private static T _instance = null;
         public static T Instance {
             get {
+                if (!allowSpawning) {
+                  return null;
+                }
+
                 if (_instance == null) _instance = FindObjectOfType<T>();
                 if (_instance != null) return _instance;
                 var gob = new GameObject {

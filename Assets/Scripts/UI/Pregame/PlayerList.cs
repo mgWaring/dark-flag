@@ -25,6 +25,13 @@ namespace UI.Pregame
 
     void Update()
     {
+      if (_playerTiles.Count < SpawnManager.Instance._players.Count) {
+        int diff = SpawnManager.Instance._players.Count - _playerTiles.Count;
+        for (int i = 0; i < diff; i++) {
+          CreateTile();
+        }
+      }
+
       timer -= Time.deltaTime;
       if (timer <= 0 && !firstUpdateDone)
       {
@@ -36,26 +43,19 @@ namespace UI.Pregame
         }
       }
 
-      if (_playerTiles.Count < SpawnManager.Instance._players.Count) {
-        int diff = SpawnManager.Instance._players.Count - _playerTiles.Count;
-        for (int i = 0; i < diff; i++) {
-          CreateTile();
-        }
-      }
     }
 
     public void Start()
     {
       SpawnManager.Instance.OnPlayerJoined += CreateTile;
+      SpawnManager.Instance.OnPlayerLeave += RemoveTile;
       SpawnManager.Instance.ValueUpdate += TileUpdate;
-      if (SpawnManager.Instance.GetClientId() == 0) {
-        CreateTile();
-      }
     }
 
     void OnDestroy()
     {
       SpawnManager.Instance.OnPlayerJoined -= CreateTile;
+      SpawnManager.Instance.OnPlayerLeave -= RemoveTile;
       SpawnManager.Instance.ValueUpdate -= TileUpdate;
     }
 
@@ -84,9 +84,15 @@ namespace UI.Pregame
       tile.readyButton.SetReady(player.ready);
     }
 
+    private void RemoveTile(int index)
+    {
+      
+      Destroy(_playerTiles[index]);
+      _playerTiles.RemoveAt(index);
+    }
+
     private void CreateTile()
     {
-      DFLogger.Instance.LogInfo("CREATING TILE FOR CLIENT");
       var newTile = Instantiate(playerTilePrefab, playerTileContainer.transform, false);
       _playerTiles.Add(newTile);
     }
