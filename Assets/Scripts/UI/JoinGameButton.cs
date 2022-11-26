@@ -14,6 +14,7 @@ namespace UI {
             var connected = await RelayManager.Instance.JoinGame(input.text);
         
             if (connected) {
+                Destroy(GameObject.FindObjectsOfType<MainMenu>()[0].gameObject);
                 SceneManager.LoadSceneAsync("Pregame");
             }
         }

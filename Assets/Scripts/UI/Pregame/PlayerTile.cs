@@ -37,7 +37,7 @@ namespace UI.Pregame
         setClientId = true;
       }
       transform.GetChild(0).transform.position += new Vector3(3000.0f * (index + 1), 3000.0f * (index + 1), 3000.0f * (index + 1));
-      RenderTexture outputTexture = new RenderTexture(384, 256, 16, RenderTextureFormat.ARGB32);
+      RenderTexture outputTexture = new RenderTexture(384,115, 16, RenderTextureFormat.ARGB32);
       camera.targetTexture = outputTexture;
       shipImage.texture = outputTexture;
       if (SpawnManager.Instance.GetClientId() != clientId)

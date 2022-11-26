@@ -49,7 +49,7 @@ namespace UI.Pregame
     private void UpdateDisplay()
     {
       _button.color = _ready ? readyColor : notReadyColor;
-      readyText.text = _ready ? "ready" : "not ready";
+      readyText.text = _ready ? "Ready" : "Not Ready";
       SoundManager.Instance.PlayOnce(toggleSound);
     }
 

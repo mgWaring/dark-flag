@@ -15,6 +15,11 @@ namespace UI {
           }
         }
 
+        public void CopyToClipboard()
+        {
+          GUIUtility.systemCopyBuffer = JoinCodeText.text;
+        }
+
         private void SetText()
         {
             if (SpawnManager.Instance._code.Value.ToString() != "") {

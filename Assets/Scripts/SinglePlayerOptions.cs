@@ -33,6 +33,7 @@ public class SinglePlayerOptions : MonoBehaviour
         CrossScene.players = playerCount;
         CrossScene.bots = botCount;
         CrossScene.cameFromMainMenu = true;
+        Destroy(GameObject.FindObjectsOfType<MainMenu>()[0].gameObject);
         SceneManager.LoadScene(1);
     }
 

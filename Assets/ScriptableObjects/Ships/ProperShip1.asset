@@ -17,7 +17,7 @@ MonoBehaviour:
   multiplayerShipModel: {fileID: 6533875629835017675, guid: a1ea0c338dbb8b64798dc7756c0aa726, type: 3}
   displayShipModel: {fileID: 1627213283676664755, guid: c5339800f052e11418a4b67be687dd33, type: 3}
   mass: 3
-  drag: 0.1
+  drag: 1.5
   angularDrag: 5
   thrustSpeed: 6000
   boost: 1
@@ -33,7 +33,7 @@ MonoBehaviour:
   pitchRayDistance: 2
   colliderCalcOffset: {x: 0.15, y: 0, z: 0}
   fineTuneOffset: {x: 0.1, y: 0.5, z: 0.5}
-  armour: 5000
+  armour: 50
   fireDamage: 0.5
   boostDamageRate: 0.1
   roofRayDistance: 0.35

@@ -21,6 +21,7 @@ namespace UI {
             var gameUp = await RelayManager.Instance.HostGame();
 
             if (gameUp) {
+                Destroy(GameObject.FindObjectsOfType<MainMenu>()[0].gameObject);
                 SceneManager.LoadSceneAsync("Pregame");
             }
         }

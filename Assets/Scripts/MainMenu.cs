@@ -18,7 +18,13 @@ public class MainMenu : MonoBehaviour
     }
 
     public void Multiplayer() {
-        SceneManager.LoadSceneAsync("MP_menu");
+      SceneManager.LoadSceneAsync("MP_menu");
+      for (int i = 0; i < transform.childCount; i++) {
+        if (i != 0 && i != 1) {
+          GameObject go = transform.GetChild(i).gameObject;
+          Destroy(go);
+        }
+      }
     }
 
     public void Exit()
