@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour
     public GameObject scoreboard;
     public SpeedUI speedUI;
     public DurabilityUI durabilityUI;
+    public AmmoUI ammoUI;
     public LapTimer lapTimer;
     public int lapCount = 1;
     public ShipsScriptable shipScriptable;
@@ -131,6 +132,7 @@ public class GameController : MonoBehaviour
         }
         speedUI.target = mc.gameObject;
         durabilityUI.target = mc.gameObject;
+        ammoUI.target = mc.gameObject;
 
         for (int i = 0; i < players.Count; i++) {
             if (players[i].racer.id != playerId) {

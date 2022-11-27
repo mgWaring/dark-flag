@@ -17,6 +17,7 @@ namespace Multiplayer
     public GameObject scoreboard;
     public SpeedUI speedUI;
     public DurabilityUI durabilityUI;
+    public MultiplayerAmmoUI ammoUI;
     public LapTimer lapTimer;
     public int lapCount = 1;
     public ShipsScriptable shipScriptable;
@@ -168,6 +169,7 @@ namespace Multiplayer
       var o = mc.gameObject;
       speedUI.SetTarget(o);
       durabilityUI.target = o;
+      ammoUI.target = o;
 
       var cameras = GameObject.FindObjectsOfType<Camera>();
       foreach (Camera cam in cameras)
