@@ -33,7 +33,7 @@ MonoBehaviour:
   pitchRayDistance: 2
   colliderCalcOffset: {x: 0, y: -0.53, z: -1.9}
   fineTuneOffset: {x: 0.2, y: 0, z: 0.4}
-  armour: 40
+  armour: 60
   fireDamage: 0.5
   boostDamageRate: 0.1
   roofRayDistance: 0.35
