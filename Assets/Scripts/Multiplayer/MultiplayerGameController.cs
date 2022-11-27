@@ -101,6 +101,8 @@ namespace Multiplayer
           player.racer.lastCheckpoint = lastCheck;
           player.racer.nextCheckpoint = nextCheck;
           laps[player.racer] = new List<float>();
+          int index = SpawnManager.Instance.IndexFor(player.clientId);
+          player.racer.name = SpawnManager.Instance._players[index].name.ToString();
         }
 
         for (int i = 0; i < checkpointCount; i++)

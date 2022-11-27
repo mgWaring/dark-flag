@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 215.61914, g: 226.90332, b: 204.93488, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2445,6 +2445,7 @@ GameObject:
   - component: {fileID: 765611357}
   - component: {fileID: 765611358}
   - component: {fileID: 765611359}
+  - component: {fileID: 765611360}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -2512,6 +2513,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   running: 0
   currentTime: 0
+--- !u!114 &765611360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765611356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a80a1abfeb912f479d652ad8d3f724b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input:
+    m_Name: Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 45aa47ad-0b31-4234-9a62-0ba0dc55ac1f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 5bd75b2b-840d-4b85-ab65-e747961d4348
+      m_Path: <Gamepad>/select
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input
+      m_Flags: 0
+    - m_Name: 
+      m_Id: e2a28871-6350-4e68-9ad4-51ea457c3fc4
+      m_Path: <Keyboard>/tab
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &801679065
 GameObject:
   m_ObjectHideFlags: 0

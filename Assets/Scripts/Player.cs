@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public MovementController mc;
     [HideInInspector] public PlayerCameraController pcc;
     [HideInInspector] public Turret trt;
-    GameObject ship;
+    [HideInInspector] public GameObject ship;
 
     public void Init()
     {
