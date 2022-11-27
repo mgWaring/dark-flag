@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     MovementController mc;
     PlayerCameraController pcc;
+    Turret trt;
     ShipDurability sd;
     FrontWeapon fw;
     BackWeapon bw;
@@ -28,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
         InverY();
         mc = GetComponentInChildren<MovementController>();
         pcc = GetComponentInChildren<PlayerCameraController>();
+        trt = GetComponentInChildren<Turret>();
         sd = GetComponentInChildren<ShipDurability>();
         fw = GetComponentInChildren<FrontWeapon>();
         bw = GetComponentInChildren<BackWeapon>();              
@@ -69,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
         sd.BoostDamage(boostInput.ReadValue<float>());
         pcc.CameraControl(cameraControlY.ReadValue<float>() * yInversion, cameraControlX.ReadValue<float>());
         pcc.CameraFlip(cameraFlip.ReadValue<float>());
+        trt.TurretControl(cameraControlX.ReadValue<float>());
         if (fw != null) {
           fw.ShootGun(fireInput.ReadValue<float>());
         }

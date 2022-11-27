@@ -83,7 +83,7 @@ namespace Multiplayer {
       pcc.PCameraSetup(racer.gameObject.GetComponentInChildren<Transform>());
       pcc.PCamEnable(true);
       trt = GetComponentInChildren<Turret>();
-      trt.TurretSetup(pcc.TurretTargetHunter());
+      trt.TurretSetup();
       trt.TurretEnable(true);
       //I've left this stuff here incase you need it for bots.
       /*camTransform.SetParent(ship);

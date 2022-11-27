@@ -3,30 +3,49 @@ using UnityEngine;
 //Attach this to the turret prefab.
 public class Turret : MonoBehaviour
 {
+    //Transforms.
+    public Transform meshHolder;
+    public Transform target;
     Transform turret;
-    Transform target;
+    
+    //Turret and target movement.
+    public Vector3 targetOffset = new(0.0f, 0.0f, 0.0f);//should be in ss.
+    public Vector3 turretLookRange = new(1.5f, 0.0f, 0.0f);
+    Vector3 turretMult;    
+    Vector3 turretSwivelAmount;    
+    Vector3 turretSwivel;
+    public float targetSmoothing = 0.75f;
+
     bool turretEnable;
 
     private void FixedUpdate()
     {
         if (turretEnable)
         {
-            TurretLook(target);
+            TurretLook();
         }        
     }
 
-    public void TurretLook(Transform target)
+    //Tells target where to be and turret where to look. Turret will look at target + player's camera input.
+    private void TurretLook()
     {
-
-            turret.LookAt(target);
-
-        
+        turretSwivel = Vector3.zero + (turretSwivelAmount.x * transform.right);
+        target.position = Vector3.Lerp(target.position, transform.position + (targetOffset.z * transform.forward), targetSmoothing);
+        turret.LookAt(target.position + turretSwivel);
     }
 
-    public void TurretSetup(Transform turretTarget)
+    //Assigns transforms.
+    public void TurretSetup()
     {
-        turret = GetComponent<Transform>();
-        target = turretTarget.GetComponent<Transform>();
+        turret = meshHolder.GetComponent<Transform>();
+        target = target.GetComponent<Transform>();
+    }
+
+    //Player input.
+    public void TurretControl(float xInput)
+    {
+        turretMult.x = xInput;
+        turretSwivelAmount = new(turretMult.x * turretLookRange.x, turretMult.y * turretLookRange.y, turretMult.z * turretLookRange.z);
     }
 
     public void TurretEnable(bool tf)

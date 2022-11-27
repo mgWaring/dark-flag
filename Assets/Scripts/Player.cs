@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
         pcc.PCameraSetup(racer.gameObject.GetComponentInChildren<Transform>());
         pcc.PCamEnable(true);
         trt = GetComponentInChildren<Turret>();
-        trt.TurretSetup(pcc.TurretTargetHunter());
+        trt.TurretSetup();
         trt.TurretEnable(true);
     }
 }

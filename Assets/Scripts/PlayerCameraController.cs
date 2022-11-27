@@ -17,14 +17,7 @@ public class PlayerCameraController : MonoBehaviour
     float cameraFlip = 1.0f;
     Transform target;
     bool playerCamEnabled;
-
-    //Turret
-    public bool PCCRaysOn = true;
-    public Transform turretTarget;
-    public Vector3 turretTargetOffset = new(0.0f,0.0f,0.0f);//Put this in ss.
-    Ray turretRay;
-    RaycastHit hitInfo;
-    float turretRayDistance = 20.0f;
+    Vector3 cameraRotation;
 
     private void FixedUpdate()
     {       
@@ -35,16 +28,8 @@ public class PlayerCameraController : MonoBehaviour
             smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, positionSmoothing);
             transform.position = smoothedPosition;
             //Makes camera look at ship.
-            transform.LookAt(target.position + cameraLookOffset + (cameraLookSpeed.y * transform.up) + (cameraLookSpeed.x * transform.right));
-
-            //Ray goes where camera looks, moves empty transform to end of ray, turret looks at empty transform.
-            turretRay = new Ray(transform.position, transform.forward /*+ (turretTargetOffset.y * transform.up)*//* + (target.up * target.position.y)*/);
-            Physics.Raycast(turretRay, out hitInfo, turretRayDistance);
-            turretTarget.position = hitInfo.point;
-            if (PCCRaysOn)
-            {
-                Debug.DrawRay(turretRay.origin, hitInfo.point, Color.yellow);
-            }            
+            cameraRotation = cameraLookOffset + (cameraLookSpeed.y * transform.up) + (cameraLookSpeed.x * transform.right);
+            transform.LookAt(target.position + cameraRotation);         
         }
     }
 
@@ -52,13 +37,6 @@ public class PlayerCameraController : MonoBehaviour
     public void PCameraSetup(Transform playerTran)
     {        
         target = playerTran.GetComponent<Transform>();        
-    }
-
-    //Tells Turret.cs what it's target is.
-    public Transform TurretTargetHunter()
-    {
-        turretTarget = turretTarget.GetComponent<Transform>();
-        return turretTarget;
     }
 
     //Enables or disables camera.
