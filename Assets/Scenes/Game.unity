@@ -2126,7 +2126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &680748197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2479,6 +2479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b1de23efe04244fa3a0e3077131ceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiHolder: {fileID: 680748196}
   playerCount: 1
   raceTimer: {fileID: 765611359}
   countdownText: {fileID: 1226155478}

@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject uiHolder;
     public int playerCount;
     public RaceTimer raceTimer;
     public TextMeshProUGUI countdownText;
@@ -156,6 +157,7 @@ public class GameController : MonoBehaviour
     }
 
     void AttachCamera() {
+        uiHolder.SetActive(true);
         for (int i = 0; i < players.Count; i++) {
             players[i].AttachCamera();
         }

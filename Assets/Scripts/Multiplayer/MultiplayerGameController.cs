@@ -11,6 +11,7 @@ namespace Multiplayer
 {
   public class MultiplayerGameController : NetworkBehaviour
   {
+    public GameObject uiHolder;
     public int playerCount;
     public RaceTimer raceTimer;
     public TextMeshProUGUI countdownText;
@@ -184,6 +185,7 @@ namespace Multiplayer
 
     private void AttachCamera()
     {
+      uiHolder.SetActive(true);
       foreach (var player in _players) player.AttachCamera();
 
       if (_bots == null) return;
