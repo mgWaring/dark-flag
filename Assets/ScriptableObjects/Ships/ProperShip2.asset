@@ -18,22 +18,22 @@ MonoBehaviour:
   displayShipModel: {fileID: 4298976098401725311, guid: 1e3893f9b7cb62a4dba7b6dff6f22c1c, type: 3}
   mass: 3
   drag: 1.5
-  angularDrag: 5
+  angularDrag: 20
   thrustSpeed: 6000
   boost: 1
   yawSpeed: 100
-  torqueLimiter: 0.04
+  torqueLimiter: 0.11
   turnTiltMaximum: {x: 0, y: 0, z: 0.25881904, w: 0.9659258}
-  hoverForce: 20
+  hoverForce: 23
   hoverStiffness: 10
   pitchRollStiffness: 4.3
-  rollForce: 10
+  rollForce: 40
   rollRayDistance: 8
-  pitchForce: 10
+  pitchForce: 40
   pitchRayDistance: 2
   colliderCalcOffset: {x: 0, y: -0.15, z: -0.3}
   fineTuneOffset: {x: 0.1, y: 0, z: 0.5}
-  armour: 50
+  armour: 65
   fireDamage: 0.5
   boostDamageRate: 0.1
   roofRayDistance: 0.35
