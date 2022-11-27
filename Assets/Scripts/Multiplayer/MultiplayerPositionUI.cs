@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+
 namespace Multiplayer {
   public class MultiplayerPositionUI : MonoBehaviour
   {
@@ -15,7 +16,7 @@ namespace Multiplayer {
 
       void Update()
       {
-          text.text = PositionFromInt(gameController.PositionForPlayer());
+        text.text = $"Pos: {PositionFromInt(gameController.PositionForPlayer())}";
       }
 
       string PositionFromInt(int pos) {

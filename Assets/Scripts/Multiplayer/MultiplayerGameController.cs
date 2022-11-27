@@ -11,12 +11,14 @@ namespace Multiplayer
 {
   public class MultiplayerGameController : NetworkBehaviour
   {
+    public GameObject uiHolder;
     public int playerCount;
     public RaceTimer raceTimer;
     public TextMeshProUGUI countdownText;
     public GameObject scoreboard;
     public SpeedUI speedUI;
     public DurabilityUI durabilityUI;
+    public MultiplayerAmmoUI ammoUI;
     public LapTimer lapTimer;
     public int lapCount = 1;
     public ShipsScriptable shipScriptable;
@@ -44,7 +46,6 @@ namespace Multiplayer
       if (CrossScene.cameFromMainMenu)
       {
         playerCount = CrossScene.racerInfo.Length;
-        Debug.Log($"There are {playerCount} players");
         map = CrossScene.map;
         lapCount = CrossScene.laps;
         straightToRace = false;
@@ -70,7 +71,6 @@ namespace Multiplayer
         MultiplayerCheckpoint nextCheck = _checkpoints.transform.GetChild(0).GetComponent<MultiplayerCheckpoint>();
         for (int i = 0; i < playerCount; i++)
         {
-          Debug.Log("creating players");
           RacerInfo info = CrossScene.racerInfo[i];
           Transform startPos = _startingPositions.GetChild(i).transform;
           MultiplayerRacer racer = info.IsBot
@@ -101,6 +101,8 @@ namespace Multiplayer
           player.racer.lastCheckpoint = lastCheck;
           player.racer.nextCheckpoint = nextCheck;
           laps[player.racer] = new List<float>();
+          int index = SpawnManager.Instance.IndexFor(player.clientId);
+          player.racer.name = SpawnManager.Instance._players[index].name.ToString();
         }
 
         for (int i = 0; i < checkpointCount; i++)
@@ -122,7 +124,6 @@ namespace Multiplayer
 
     private void SetUpMap()
     {
-      Debug.Log("SPAWNING MAP");
       var mapObj = Instantiate(map.prefab);
       mapObj.GetComponent<NetworkObject>().Spawn();
       _mMap = mapObj.GetComponent<Map>();
@@ -132,7 +133,6 @@ namespace Multiplayer
 
     private MultiplayerRacer CreateRacer(int index, RacerInfo info, Vector3 pos, Quaternion rot)
     {
-      Debug.Log("Creating a multiPlayer");
       var playerGo = Instantiate(playerPrefab);
       MultiPlayer multiPlayer = playerGo.GetComponent<MultiPlayer>();
       playerGo.GetComponent<NetworkObject>().SpawnAsPlayerObject(info.ClientId);
@@ -168,6 +168,7 @@ namespace Multiplayer
       var o = mc.gameObject;
       speedUI.SetTarget(o);
       durabilityUI.target = o;
+      ammoUI.target = o;
 
       var cameras = GameObject.FindObjectsOfType<Camera>();
       foreach (Camera cam in cameras)
@@ -186,6 +187,7 @@ namespace Multiplayer
 
     private void AttachCamera()
     {
+      uiHolder.SetActive(true);
       foreach (var player in _players) player.AttachCamera();
 
       if (_bots == null) return;
@@ -204,14 +206,12 @@ namespace Multiplayer
 
     private void Update()
     {
-      Debug.Log($"DONKEY:::::{_multiPlayer.ship.GetComponent<BotMovement>().enabled}");
       switch (state)
       {
         case "prerace":
           HandlePreRace();
           break;
         case "countdown":
-          Debug.Log("COUNTDOWN");
           UpdatePositions();
           HandleCountdown();
           break;
@@ -229,7 +229,6 @@ namespace Multiplayer
     {
       if (!(_firstCamAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f)) return;
 
-      Debug.Log("ATTACHING THE CAM");
       AttachCamera();
       state = "countdown";
     }
@@ -296,8 +295,7 @@ namespace Multiplayer
         state = "race";
         raceTimer.running = true;
         lapTimer.running = true;
-        countdownText.SetText("ACTIVATE!");
-        Debug.Log("COUNTDOWN DONE");
+        countdownText.SetText("ENGAGE");
         AllowPlay();
       }
       else

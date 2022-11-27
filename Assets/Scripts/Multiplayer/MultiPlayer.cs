@@ -30,7 +30,7 @@ namespace Multiplayer {
       }
       else
       {
-        ship = transform.GetChild(1).gameObject;
+        ship = transform.GetChild(2).gameObject;
         racer = ship.GetComponent<MultiplayerRacer>();
         mc = ship.GetComponentInChildren<MovementController>();
         mc.enabled = false;

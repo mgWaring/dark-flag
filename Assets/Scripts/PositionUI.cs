@@ -15,7 +15,7 @@ public class PositionUI : MonoBehaviour
 
     void Update()
     {
-        text.text = PositionFromInt(gameController.positionForPlayer());
+        text.text = $"Pos: {PositionFromInt(gameController.positionForPlayer())}";
     }
 
     string PositionFromInt(int pos) {

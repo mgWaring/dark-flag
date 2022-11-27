@@ -7,12 +7,14 @@ using UnityEngine.InputSystem;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject uiHolder;
     public int playerCount;
     public RaceTimer raceTimer;
     public TextMeshProUGUI countdownText;
     public GameObject scoreboard;
     public SpeedUI speedUI;
     public DurabilityUI durabilityUI;
+    public AmmoUI ammoUI;
     public LapTimer lapTimer;
     public int lapCount = 1;
     public ShipsScriptable shipScriptable;
@@ -131,6 +133,7 @@ public class GameController : MonoBehaviour
         }
         speedUI.target = mc.gameObject;
         durabilityUI.target = mc.gameObject;
+        ammoUI.target = mc.gameObject;
 
         for (int i = 0; i < players.Count; i++) {
             if (players[i].racer.id != playerId) {
@@ -154,6 +157,7 @@ public class GameController : MonoBehaviour
     }
 
     void AttachCamera() {
+        uiHolder.SetActive(true);
         for (int i = 0; i < players.Count; i++) {
             players[i].AttachCamera();
         }
@@ -249,7 +253,7 @@ public class GameController : MonoBehaviour
             state = "race";
             raceTimer.running = true;
             lapTimer.running = true;
-            countdownText.SetText("ACTIVATE!");
+            countdownText.SetText("ENGAGE");
             AllowPlay();
         } else if (countdownTimer <= 1.0f) {
             countdownText.SetText("1");
