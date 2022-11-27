@@ -28,7 +28,7 @@ public class SinglePlayerOptions : MonoBehaviour
         int.TryParse(playerSelector.value, out playerCount);
         int.TryParse(botSelector.value, out botCount);
 
-        CrossScene.map = maps.Single(m => m.name == mapSelector.value);
+        CrossScene.map = maps[mapSelector.index];
         CrossScene.laps = lapCount;
         CrossScene.players = playerCount;
         CrossScene.bots = botCount;
