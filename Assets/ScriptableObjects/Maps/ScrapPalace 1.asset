@@ -15,3 +15,7 @@ MonoBehaviour:
   name: Scrap Palace
   prefab: {fileID: 2157989023783136929, guid: 4845cdb3023023044a0aad2fe14059e4, type: 3}
   cameraClipName: ScrapPalaceOpeningCamera
+  killCeilingHeight: 140
+  killFloorDepth: -140
+  singleplayerScene: ScrapPalaceSingleplayer
+  multiplayerScene: ScrapPalaceMultiplayer
