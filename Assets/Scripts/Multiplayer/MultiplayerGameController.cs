@@ -34,7 +34,7 @@ namespace Multiplayer
     [HideInInspector] public MultiplayerRacer playerRacer;
     private GameObject _checkpoints;
     private Transform _startingPositions;
-    private Map _mMap;
+    public Map _mMap;
     public MapScriptable map;
     public GameObject playerPrefab;
     public GameObject botPrefab;
@@ -46,7 +46,6 @@ namespace Multiplayer
       if (CrossScene.cameFromMainMenu)
       {
         playerCount = CrossScene.racerInfo.Length;
-        map = CrossScene.map;
         lapCount = CrossScene.laps;
         straightToRace = false;
       }
@@ -124,9 +123,6 @@ namespace Multiplayer
 
     private void SetUpMap()
     {
-      var mapObj = Instantiate(map.prefab);
-      mapObj.GetComponent<NetworkObject>().Spawn();
-      _mMap = mapObj.GetComponent<Map>();
       _checkpoints = _mMap.checkpoints;
       _startingPositions = _mMap.startingPositions;
     }

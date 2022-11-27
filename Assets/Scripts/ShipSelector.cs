@@ -80,7 +80,7 @@ public class ShipSelector : MonoBehaviour
 
     public void StartGame() {
         CrossScene.racerInfo = generateRacerInfo();
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(CrossScene.map.singleplayerScene);
     }
 
     RacerInfo[] generateRacerInfo() {

@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour
     [HideInInspector] public Racer playerRacer;
     GameObject checkpoints;
     Transform startingPositions;
-    Map mMap;
+    public Map mMap;
     public MapScriptable map;
     public GameObject playerPrefab;
     public GameObject botPrefab;
@@ -42,7 +42,6 @@ public class GameController : MonoBehaviour
         InputSystem.settings.SetInternalFeatureFlag("DISABLE_SHORTCUT_SUPPORT", true);
         if (CrossScene.cameFromMainMenu) {
             playerCount = CrossScene.racerInfo.Length;
-            map = CrossScene.map;
             lapCount = CrossScene.laps;
             straightToRace = false;
         } else {
@@ -62,8 +61,6 @@ public class GameController : MonoBehaviour
         players = new List<Player>();
         bots = new List<Bot>();
 
-        GameObject mapObj = Instantiate(map.prefab);
-        mMap = mapObj.GetComponent<Map>();
         checkpoints = mMap.checkpoints;
         startingPositions = mMap.startingPositions;
         state = "prerace";

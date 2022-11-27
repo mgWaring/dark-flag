@@ -112,7 +112,8 @@ namespace Multiplayer {
       CrossScene.bots = botCount;
       CrossScene.cameFromMainMenu = true;
       SpawnManager.Instance.ResetReadies();
-      NetworkManager.Singleton.SceneManager.LoadScene("Multiplayer", LoadSceneMode.Single);
+      Debug.Log($"MAPAPPPAPAPAPA: {CrossScene.map.name}");
+      NetworkManager.Singleton.SceneManager.LoadScene(CrossScene.map.multiplayerScene, LoadSceneMode.Single);
     }
   }
 }
