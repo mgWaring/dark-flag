@@ -46,22 +46,11 @@ public class PlayerCameraController : MonoBehaviour
     }
 
     //Takes input from PlayerMovement.cs and puts it in a Vector3.
-    public void CameraControl(float yInput, float xInput)
+    public void CameraControl(float yInput, float xInput, float cFlip)
     {
         cameraMult.y = yInput;
-        cameraMult.x = xInput;   
+        cameraMult.x = xInput;
+        cameraFlip = cFlip;
         cameraLookSpeed = new (cameraMult.x * cameraLookConstant.x, cameraMult.y * cameraLookConstant.y, cameraMult.z * cameraLookConstant.z);
-    }
-    
-    public void CameraFlip(float input)
-    {
-        if (input > 0)
-        {
-            cameraFlip = -1;
-        }
-        else
-        {
-            cameraFlip = 1;
-        }
     }
 }

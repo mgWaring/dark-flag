@@ -15,6 +15,7 @@ public class Turret : MonoBehaviour
     Vector3 turretSwivelAmount;    
     Vector3 turretSwivel;
     public float targetSmoothing = 0.75f;
+    float cameraFlip;
 
     bool turretEnable;
 
@@ -29,8 +30,8 @@ public class Turret : MonoBehaviour
     //Tells target where to be and turret where to look. Turret will look at target + player's camera input.
     private void TurretLook()
     {
-        turretSwivel = Vector3.zero + (turretSwivelAmount.x * transform.right);
-        target.position = Vector3.Lerp(target.position, transform.position + (targetOffset.z * transform.forward), targetSmoothing);
+        turretSwivel = Vector3.zero + (turretSwivelAmount.x * transform.right * cameraFlip);
+        target.position = Vector3.Lerp(target.position, transform.position + (targetOffset.z * transform.forward * cameraFlip), targetSmoothing);
         turret.LookAt(target.position + turretSwivel);
     }
 
@@ -42,9 +43,10 @@ public class Turret : MonoBehaviour
     }
 
     //Player input.
-    public void TurretControl(float xInput)
+    public void TurretControl(float xInput, float cFlip)
     {
         turretMult.x = xInput;
+        cameraFlip = cFlip;
         turretSwivelAmount = new(turretMult.x * turretLookRange.x, turretMult.y * turretLookRange.y, turretMult.z * turretLookRange.z);
     }
 

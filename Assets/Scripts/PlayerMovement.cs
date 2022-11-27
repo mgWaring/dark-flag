@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Multiplayer;
+using UnityEngine.Windows;
+using static UnityEditor.Rendering.CameraUI;
 
 //Add this script to player.
 public class PlayerMovement : MonoBehaviour
@@ -69,9 +71,8 @@ public class PlayerMovement : MonoBehaviour
         mc.ThrustController(thrustInput.ReadValue<float>(), boostInput.ReadValue<float>());
         mc.YawController(yawInput.ReadValue<float>());
         sd.BoostDamage(boostInput.ReadValue<float>());
-        pcc.CameraControl(cameraControlY.ReadValue<float>() * yInversion, cameraControlX.ReadValue<float>());
-        pcc.CameraFlip(cameraFlip.ReadValue<float>());
-        trt.TurretControl(cameraControlX.ReadValue<float>());
+        pcc.CameraControl(cameraControlY.ReadValue<float>() * yInversion, cameraControlX.ReadValue<float>(), CameraFlipper(cameraFlip.ReadValue<float>()));
+        trt.TurretControl(cameraControlX.ReadValue<float>(), CameraFlipper(cameraFlip.ReadValue<float>()));
         if (fw != null) {
           fw.ShootGun(fireInput.ReadValue<float>());
         }
@@ -97,6 +98,21 @@ public class PlayerMovement : MonoBehaviour
         {
             yInversion = 1;
         }
+    }
+
+    //Turns cameraFlip into a usable value.
+    float CameraFlipper(float input)
+    {
+        float output;
+        if (input > 0)
+        {
+            output = -1;
+        }
+        else
+        {
+            output = 1;
+        }
+        return output;
     }
 
 
