@@ -251,7 +251,7 @@ public class GameController : MonoBehaviour
             state = "race";
             raceTimer.running = true;
             lapTimer.running = true;
-            countdownText.SetText("ACTIVATE!");
+            countdownText.SetText("ENGAGE");
             AllowPlay();
         } else if (countdownTimer <= 1.0f) {
             countdownText.SetText("1");
