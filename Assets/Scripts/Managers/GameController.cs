@@ -36,9 +36,28 @@ public class GameController : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject botPrefab;
     Animator firstCamAnim;
+    AudioClip threeSoundClip;
+    AudioClip twoSoundClip;
+    AudioClip oneSoundClip;
+    AudioClip startSoundClip;
+    AudioClip threeLapsClip;
+    AudioClip twoLapsClip;
+    AudioClip oneLapsClip;
+
+    void FindAudio()
+    {
+      threeSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/three");
+      twoSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/two");
+      oneSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/one");
+      startSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/engage");
+      threeLapsClip= Resources.Load<AudioClip>("Audio/SoundClip/Laps/three");
+      twoLapsClip= Resources.Load<AudioClip>("Audio/SoundClip/Laps/two");
+      oneLapsClip= Resources.Load<AudioClip>("Audio/SoundClip/Laps/final");
+    }
 
     void Start()
     {
+        FindAudio();
         InputSystem.settings.SetInternalFeatureFlag("DISABLE_SHORTCUT_SUPPORT", true);
         if (CrossScene.cameFromMainMenu) {
             playerCount = CrossScene.racerInfo.Length;
@@ -154,6 +173,9 @@ public class GameController : MonoBehaviour
     }
 
     void AttachCamera() {
+        if (map.titleClip != null) {
+          GetComponent<AudioSource>().PlayOneShot(map.titleClip, 0.7f);
+        }
         uiHolder.SetActive(true);
         for (int i = 0; i < players.Count; i++) {
             players[i].AttachCamera();
@@ -219,6 +241,14 @@ public class GameController : MonoBehaviour
             times.Add(raceTimer.currentTime);
             racer.lap += 1;
             if (racer.id == playerId) {
+                int diff = lapCount - racer.lap;
+                if (diff == 3) {
+                  GetComponent<AudioSource>().PlayOneShot(threeLapsClip, 0.7f);
+                } else if (diff == 2) {
+                  GetComponent<AudioSource>().PlayOneShot(twoLapsClip, 0.7f);
+                } else if (diff == 1) {
+                  GetComponent<AudioSource>().PlayOneShot(oneLapsClip, 0.7f);
+                }
                 lapTimer.Lap();
                 if (RacerIsFinished(racer)) {
                     scoreboard.SetActive(true);
@@ -250,13 +280,25 @@ public class GameController : MonoBehaviour
             state = "race";
             raceTimer.running = true;
             lapTimer.running = true;
+            if (countdownText.text != "ENGAGE") {
+              GetComponent<AudioSource>().PlayOneShot(startSoundClip, 0.7F);
+            }
             countdownText.SetText("ENGAGE");
             AllowPlay();
         } else if (countdownTimer <= 1.0f) {
+            if (countdownText.text != "1") {
+              GetComponent<AudioSource>().PlayOneShot(oneSoundClip, 0.7F);
+            }
             countdownText.SetText("1");
         } else if (countdownTimer <= 2.0f) {
+            if (countdownText.text != "2") {
+              GetComponent<AudioSource>().PlayOneShot(twoSoundClip, 0.7F);
+            }
             countdownText.SetText("2");
         } else if (countdownTimer <= 3.0f) {
+            if (countdownText.text != "3") {
+              GetComponent<AudioSource>().PlayOneShot(threeSoundClip, 0.7F);
+            }
             countdownText.SetText("3");
         } else if (countdownTimer <= 4.0f) {
             countdownText.SetText("4");

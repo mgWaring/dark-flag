@@ -19,3 +19,4 @@ MonoBehaviour:
   killFloorDepth: -140
   singleplayerScene: ScrapPalaceSingleplayer
   multiplayerScene: ScrapPalaceMultiplayer
+  titleClip: {fileID: 8300000, guid: f47d516ab4445674f989f3787ea6f1ea, type: 3}

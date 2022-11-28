@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Multiplayer;
 using UnityEngine.Windows;
-using static UnityEditor.Rendering.CameraUI;
 
 //Add this script to player.
 public class PlayerMovement : MonoBehaviour

@@ -41,6 +41,25 @@ namespace Multiplayer
     private Animator _firstCamAnim;
     MultiPlayer _multiPlayer;
 
+    AudioClip threeSoundClip;
+    AudioClip twoSoundClip;
+    AudioClip oneSoundClip;
+    AudioClip startSoundClip;
+    AudioClip threeLapsClip;
+    AudioClip twoLapsClip;
+    AudioClip oneLapsClip;
+
+    void FindAudio()
+    {
+      threeSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/three");
+      twoSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/two");
+      oneSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/one");
+      startSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/engage");
+      threeLapsClip= Resources.Load<AudioClip>("Audio/SoundClip/Laps/three");
+      twoLapsClip= Resources.Load<AudioClip>("Audio/SoundClip/Laps/two");
+      oneLapsClip= Resources.Load<AudioClip>("Audio/SoundClip/Laps/final");
+    }
+
     private void DoBasicSetup()
     {
       if (CrossScene.cameFromMainMenu)
@@ -57,6 +76,7 @@ namespace Multiplayer
 
     private void Start()
     {
+      FindAudio();
       state = "prerace";
       if (SpawnManager.Instance.GetClientId() == 0)
       {
@@ -183,6 +203,9 @@ namespace Multiplayer
 
     private void AttachCamera()
     {
+      if (map.titleClip != null) {
+        GetComponent<AudioSource>().PlayOneShot(map.titleClip, 0.7f);
+      }
       uiHolder.SetActive(true);
       foreach (var player in _players) player.AttachCamera();
 
@@ -260,6 +283,14 @@ namespace Multiplayer
         racer.lap += 1;
         if (racer.IsOwner)
         {
+          int diff = lapCount - racer.lap;
+          if (diff == 3) {
+            GetComponent<AudioSource>().PlayOneShot(threeLapsClip, 0.7f);
+          } else if (diff == 2) {
+            GetComponent<AudioSource>().PlayOneShot(twoLapsClip, 0.7f);
+          } else if (diff == 1) {
+            GetComponent<AudioSource>().PlayOneShot(oneLapsClip, 0.7f);
+          }
           lapTimer.Lap();
           if (RacerIsFinished(racer))
           {
@@ -286,17 +317,34 @@ namespace Multiplayer
     private void HandleCountdown()
     {
       _countdownTimer -= Time.deltaTime;
-      if (_countdownTimer <= 0.0f)
-      {
-        state = "race";
-        raceTimer.running = true;
-        lapTimer.running = true;
-        countdownText.SetText("ENGAGE");
-        AllowPlay();
-      }
-      else
-      {
-        countdownText.SetText(Mathf.Ceil(_countdownTimer).ToString());
+      if (_countdownTimer <= 0.0f) {
+          state = "race";
+          raceTimer.running = true;
+          lapTimer.running = true;
+          if (countdownText.text != "ENGAGE") {
+            GetComponent<AudioSource>().PlayOneShot(startSoundClip, 0.7F);
+          }
+          countdownText.SetText("ENGAGE");
+          AllowPlay();
+      } else if (_countdownTimer <= 1.0f) {
+          if (countdownText.text != "1") {
+            GetComponent<AudioSource>().PlayOneShot(oneSoundClip, 0.7F);
+          }
+          countdownText.SetText("1");
+      } else if (_countdownTimer <= 2.0f) {
+          if (countdownText.text != "2") {
+            GetComponent<AudioSource>().PlayOneShot(twoSoundClip, 0.7F);
+          }
+          countdownText.SetText("2");
+      } else if (_countdownTimer <= 3.0f) {
+          if (countdownText.text != "3") {
+            GetComponent<AudioSource>().PlayOneShot(threeSoundClip, 0.7F);
+          }
+          countdownText.SetText("3");
+      } else if (_countdownTimer <= 4.0f) {
+          countdownText.SetText("4");
+      } else if (_countdownTimer <= 5.0f) {
+          countdownText.SetText("5");
       }
     }
 

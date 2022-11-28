@@ -19,3 +19,4 @@ MonoBehaviour:
   killFloorDepth: -140
   singleplayerScene: JanktownSingleplayer
   multiplayerScene: JanktownMultiplayer
+  titleClip: {fileID: 8300000, guid: a2264c411cd6e0240b9065f043f5ff9c, type: 3}

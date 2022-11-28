@@ -12,4 +12,5 @@ public class MapScriptable : ScriptableObject
     public float killFloorDepth = -140.0f;
     public string singleplayerScene;
     public string multiplayerScene;
+    public AudioClip titleClip;
 }
