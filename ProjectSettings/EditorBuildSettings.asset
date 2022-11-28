@@ -35,5 +35,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Singleplayer Tracks/ScrapPalaceSingleplayer.unity
     guid: de1827c736a522845a5365d610a6802a
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer Tracks/TwisterMultiplayer.unity
+    guid: 5c080cf2c5109294c8bf01482c726cb5
+  - enabled: 1
+    path: Assets/Scenes/Singleplayer Tracks/TwisterSingleplayer.unity
+    guid: 2e243a3f3c771d945980d48efebeca7d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 8a4a5e14ff963534b9092bcce245a970, type: 2}

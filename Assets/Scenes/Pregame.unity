@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.14234746, g: 0.09607738, b: 0.10556078, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2507,6 +2507,7 @@ MonoBehaviour:
   selection:
   - Janktown
   - Scrap Palace
+  - Twister
   value: Janktown
   index: 0
   type: map
@@ -2736,6 +2737,7 @@ MonoBehaviour:
   mapList:
   - {fileID: 11400000, guid: b99a1e71936ac3c46afb7dd00490402e, type: 2}
   - {fileID: 11400000, guid: 5b63a95008b908e40ae65086852e0688, type: 2}
+  - {fileID: 11400000, guid: b146fa737d799a449844f597aeb7d31c, type: 2}
 --- !u!114 &3677175698231828944
 MonoBehaviour:
   m_ObjectHideFlags: 0

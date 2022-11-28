@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Twister
   m_EditorClassIdentifier: 
   name: Twister
-  prefab: {fileID: 0}
-  cameraClipName: 
+  prefab: {fileID: 8368503695488208935, guid: 05478e4cded88354c8146bff952d6faa, type: 3}
+  cameraClipName: TwisterOpeningCamera
   killCeilingHeight: 140
   killFloorDepth: -140
-  singleplayerScene: 
-  multiplayerScene: 
+  singleplayerScene: TwisterSingleplayer
+  multiplayerScene: TwisterMultiplayer
+  titleClip: {fileID: 0}
