@@ -351,11 +351,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4872813831117450451, guid: 9d4d65f72b086bf4ab3d2bae9c20639b, type: 3}
   bulletSpawn: {fileID: 6194179295276075254}
-  ammoCount: 100000
-  firingDelay: 0.05
+  ammoCount: 0
+  firingDelay: 0.1
   bulletSpawner: {fileID: 5379698523083374124}
   gunSound: {fileID: 8300000, guid: fad4d54b55d3ccb4c96830f5de0d542e, type: 3}
-  gunVolume: 0.4
   minVolume: 0.1
   maxVolume: 0.3
   minPitch: 0.9
