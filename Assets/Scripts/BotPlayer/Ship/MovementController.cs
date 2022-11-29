@@ -10,6 +10,7 @@ public class MovementController : MonoBehaviour
     float yawSpeedVar;
     //accelerationMult and yawMult determine direction as positive or negative numbers.
     float accelerationMult = 0;
+    float boostVar;
     float boostMult;
     float yawSpeedMult = 0;
     float torqueLimit;
@@ -25,10 +26,14 @@ public class MovementController : MonoBehaviour
 
     Rigidbody vehicleRB;
     ShipsScriptable ss;
+
     //AudioClip engineSound;
     AudioSource shipAudioSource;
+    public AudioClip boostAudio;
     float engineDefaultPitch = 1.0f;
     float pitchLimiter = 0.9f;
+    AudioEchoFilter echoFilter;
+
 
     public void Reset() 
     {
@@ -39,6 +44,7 @@ public class MovementController : MonoBehaviour
         yawAngularVelocity = Vector3.zero;
         vehicleRB.velocity = Vector3.zero;
         vehicleRB.angularVelocity = Vector3.zero;
+        shipAudioSource.pitch = engineDefaultPitch;
     }
 
     private void Start()
@@ -52,10 +58,9 @@ public class MovementController : MonoBehaviour
         tiltMaxLeft = ss.turnTiltMaximum;
         tiltMaxRight = Quaternion.Euler(0.0f, 0.0f, 360.0f - tiltMaxLeft.z);
         shipAudioSource = GetComponent<AudioSource>();
-        //engineSound = ss.engineIdleSound;
+        boostAudio = GetComponent<AudioClip>();
         shipAudioSource.Play();
-        
-
+        echoFilter = GetComponent<AudioEchoFilter>();
     }
 
     void FixedUpdate()
@@ -76,20 +81,18 @@ public class MovementController : MonoBehaviour
         {
             vehicleRB.AddRelativeTorque(Vector3.forward * (yawSpeedMult * -1) * (velocity * torqueLimit), ForceMode.Force);
         }
-        
+
+        ThrustAudio();        
     }
 
     public void ThrustController(float thrustInput, float boostInput)
     {
-        accelerationMult = thrustInput * (boostInput + boostMult);
+        boostVar = BoostEnabler(thrustInput, boostInput);
+        accelerationMult = thrustInput * (boostVar + boostMult);
         if (accelerationMult < 0)
         {
             accelerationMult = accelerationMult * reverseLimit;
-        }
-        if (shipAudioSource != null)
-        {
-          shipAudioSource.pitch = engineDefaultPitch + (pitchLimiter * velocity * Time.fixedDeltaTime);
-        }
+        }        
     }
 
     public void YawController(float yawInput)
@@ -103,5 +106,39 @@ public class MovementController : MonoBehaviour
         speed = multiplier * variable;
 
         return speed;
+    }
+
+    float BoostEnabler(float tInput, float bInput)
+    {
+        float newBoost;
+        if (tInput > 0 && bInput > 0)
+        {
+             newBoost = bInput;
+        }
+        else
+        {
+            newBoost = 0;
+        }
+
+        return newBoost;
+    }
+
+    void ThrustAudio()
+    {        
+        if (shipAudioSource != null)
+        {
+            //Changes engine sound pitch with velocity.
+            shipAudioSource.pitch = engineDefaultPitch + (pitchLimiter * velocity * Time.fixedDeltaTime);
+
+            //Adds echo if ship is moving forward and boosting.
+            if (boostVar * velocity > 0)
+            {
+                echoFilter.enabled = true;
+            }
+            else
+            {
+                echoFilter.enabled = false;
+            }
+        }        
     }
 }
