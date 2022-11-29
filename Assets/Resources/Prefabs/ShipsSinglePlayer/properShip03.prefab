@@ -483,6 +483,7 @@ GameObject:
   - component: {fileID: 4298976098401725308}
   - component: {fileID: 749492794039491753}
   - component: {fileID: 7370398645800970976}
+  - component: {fileID: -5635806190462395223}
   - component: {fileID: 3287847817425627180}
   - component: {fileID: 8286877713419928190}
   - component: {fileID: 4732455174172086529}
@@ -578,6 +579,7 @@ MonoBehaviour:
   reverseLimit: 0.1
   tiltMaxLeft: {x: 0, y: 0, z: 0, w: 0}
   tiltMaxRight: {x: 0, y: 0, z: 0, w: 0}
+  boostAudio: {fileID: 0}
 --- !u!114 &4298976098401725298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,6 +666,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 50b762b5071dc48448a0523f5fe7d7bf, type: 3}
   - {fileID: 8300000, guid: da9a0aeb98c81f040a388d443bc5b23d, type: 3}
   - {fileID: 8300000, guid: 8c67bb42c92ea7445a5b2632471df706, type: 3}
+--- !u!168 &-5635806190462395223
+AudioEchoFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298976098401725311}
+  m_Enabled: 0
+  m_Delay: 130
+  m_DecayRatio: 0.175
+  m_WetMix: 0.9
+  m_DryMix: 1
 --- !u!82 &3287847817425627180
 AudioSource:
   m_ObjectHideFlags: 0
