@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 878211374}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Entries: []
 --- !u!4 &103897236
 Transform:
   m_ObjectHideFlags: 19
@@ -1529,6 +1530,7 @@ MonoBehaviour:
   m_Script: {fileID: 1218942188}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Entries: []
 --- !u!4 &516545526
 Transform:
   m_ObjectHideFlags: 19
@@ -2647,7 +2649,7 @@ MonoBehaviour:
   ammoUI: {fileID: 1431489340}
   lapTimer: {fileID: 553016916}
   lapCount: 4
-  shipScriptable: {fileID: 11400000, guid: b23fc344d65d8c743aaa9f0a0be49762, type: 2}
+  shipScriptable: {fileID: 11400000, guid: 12a7d69743b59b94fb668f734baf586c, type: 2}
   straightToRace: 1
   state: 
   racers: []

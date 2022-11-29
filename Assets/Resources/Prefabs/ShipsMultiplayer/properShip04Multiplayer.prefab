@@ -66,7 +66,28 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6086227926494204140, guid: de596ac587924a444998c9e51bbe701b, type: 3}
     - {fileID: 4732455174172086529, guid: de596ac587924a444998c9e51bbe701b, type: 3}
+    - {fileID: 749492794039491753, guid: de596ac587924a444998c9e51bbe701b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: de596ac587924a444998c9e51bbe701b, type: 3}
+--- !u!108 &278676920257486041 stripped
+Light:
+  m_CorrespondingSourceObject: {fileID: 5148070436375216154, guid: de596ac587924a444998c9e51bbe701b, type: 3}
+  m_PrefabInstance: {fileID: 4949334940884524227}
+  m_PrefabAsset: {fileID: 0}
+--- !u!199 &377355034295384912 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 4725177060848854931, guid: de596ac587924a444998c9e51bbe701b, type: 3}
+  m_PrefabInstance: {fileID: 4949334940884524227}
+  m_PrefabAsset: {fileID: 0}
+--- !u!199 &388930701826379990 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 4740693428541787157, guid: de596ac587924a444998c9e51bbe701b, type: 3}
+  m_PrefabInstance: {fileID: 4949334940884524227}
+  m_PrefabAsset: {fileID: 0}
+--- !u!199 &433125615531749857 stripped
+ParticleSystemRenderer:
+  m_CorrespondingSourceObject: {fileID: 4804589372797988130, guid: de596ac587924a444998c9e51bbe701b, type: 3}
+  m_PrefabInstance: {fileID: 4949334940884524227}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2842578824358442250 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7195995219743435209, guid: de596ac587924a444998c9e51bbe701b, type: 3}
@@ -98,6 +119,38 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &1976233870204423192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9153168339596015548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da89b40d08222cf42b0ef55df654f1a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8388025962477709844, guid: 30605989f4beaba42b2d68610f71100b, type: 3}
+  bulletSpawn: {fileID: 7818780860542321800}
+  ammoCount: 0
+  firingDelay: 0.1
+--- !u!114 &2349012487370188492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9153168339596015548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e46c3023f851c4a8061f2db07efe16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bombPrefab: {fileID: 7904646581161424158, guid: ed45fbc7addfd15438ffa7a4846081db, type: 3}
+  bombSpawn: {fileID: 2842578824358442250}
+  ammoCount: 0
+  firingDelay: 2
 --- !u!114 &3486930347306985397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +177,7 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
---- !u!114 &2349012487370188492
+--- !u!114 &6583896939711012939
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,14 +186,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 9153168339596015548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5e46c3023f851c4a8061f2db07efe16, type: 3}
+  m_Script: {fileID: 11500000, guid: 519da6f7bb2c4c26b175fee070db4639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombPrefab: {fileID: 7904646581161424158, guid: ed45fbc7addfd15438ffa7a4846081db, type: 3}
-  bombSpawn: {fileID: 2842578824358442250}
-  ammoCount: 0
-  firingDelay: 2
---- !u!114 &1976233870204423192
+  engineLights:
+  - {fileID: 278676920257486041}
+  brightness: 2.5
+  particleRenderers:
+  - {fileID: 433125615531749857}
+  - {fileID: 377355034295384912}
+  - {fileID: 388930701826379990}
+  normalMaterial: {fileID: 2100000, guid: df18cfd7f381e3e47a962ebe63eb95a6, type: 2}
+  boostMaterial: {fileID: 2100000, guid: cf2cf97f33c7424449a9cb5b5d0e4819, type: 2}
+--- !u!114 &1969527261873967711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,10 +207,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9153168339596015548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da89b40d08222cf42b0ef55df654f1a8, type: 3}
+  m_Script: {fileID: 11500000, guid: 7063c55e929a40368002f693c491dc07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8388025962477709844, guid: 30605989f4beaba42b2d68610f71100b, type: 3}
-  bulletSpawn: {fileID: 7818780860542321800}
-  ammoCount: 0
-  firingDelay: 0.1
+  id: 0
+  name: 
+  lastCheckpoint: {fileID: 0}
+  nextCheckpoint: {fileID: 0}
+  lap: 0

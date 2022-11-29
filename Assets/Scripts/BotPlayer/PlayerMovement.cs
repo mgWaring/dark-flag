@@ -1,3 +1,4 @@
+using BotPlayer.Ship;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Multiplayer;
@@ -14,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     BackWeapon bw;
     MultiplayerFrontWeapon mfw;
     MultiplayerBackWeapon mbw;
+    private EngineGlow glow;
     public bool invertY = false;
     float yInversion;
     public InputAction thrustInput;//Value is between -1 and 1.
@@ -35,7 +37,8 @@ public class PlayerMovement : MonoBehaviour
         fw = GetComponentInChildren<FrontWeapon>();
         bw = GetComponentInChildren<BackWeapon>();              
         mfw = GetComponentInChildren<MultiplayerFrontWeapon>();
-        mbw = GetComponentInChildren<MultiplayerBackWeapon>();              
+        mbw = GetComponentInChildren<MultiplayerBackWeapon>();
+        glow = GetComponentInChildren<EngineGlow>();
     }
 
     //Required for new input system. Don't ask me why.
@@ -68,6 +71,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         mc.ThrustController(thrustInput.ReadValue<float>(), boostInput.ReadValue<float>());
+        glow.Glow(thrustInput.ReadValue<float>(), boostInput.ReadValue<float>());
         mc.YawController(yawInput.ReadValue<float>());
         sd.BoostDamage(boostInput.ReadValue<float>());
         pcc.CameraControl(cameraControlY.ReadValue<float>() * yInversion, cameraControlX.ReadValue<float>(), CameraFlipper(cameraFlip.ReadValue<float>()));
