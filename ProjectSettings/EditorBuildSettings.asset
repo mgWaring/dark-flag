@@ -41,5 +41,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Singleplayer Tracks/TwisterSingleplayer.unity
     guid: 2e243a3f3c771d945980d48efebeca7d
+  - enabled: 1
+    path: Assets/Scenes/Singleplayer Tracks/MonsterSingleplayer.unity
+    guid: 8e8dccd46d9f8be4cba16e41ad11240e
+  - enabled: 1
+    path: Assets/Scenes/Multiplayer Tracks/MonsterMultiplayer.unity
+    guid: 6388785801847474eb300bb3d5856a13
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 8a4a5e14ff963534b9092bcce245a970, type: 2}

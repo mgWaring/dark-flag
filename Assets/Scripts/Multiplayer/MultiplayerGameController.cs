@@ -51,13 +51,13 @@ namespace Multiplayer
 
     void FindAudio()
     {
-      threeSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/three");
-      twoSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/two");
-      oneSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/one");
-      startSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/engage");
-      threeLapsClip= Resources.Load<AudioClip>("Audio/SoundClip/Laps/three");
-      twoLapsClip= Resources.Load<AudioClip>("Audio/SoundClip/Laps/two");
-      oneLapsClip= Resources.Load<AudioClip>("Audio/SoundClip/Laps/final");
+      threeSoundClip = Resources.Load<AudioClip>("Audio/Voices/Countdown/three");
+      twoSoundClip = Resources.Load<AudioClip>("Audio/Voices/Countdown/two");
+      oneSoundClip = Resources.Load<AudioClip>("Audio/Voices/Countdown/one");
+      startSoundClip = Resources.Load<AudioClip>("Audio/Voices/Countdown/engage");
+      threeLapsClip= Resources.Load<AudioClip>("Audio/Voices/Laps/three");
+      twoLapsClip= Resources.Load<AudioClip>("Audio/Voices/Laps/two");
+      oneLapsClip= Resources.Load<AudioClip>("Audio/Voices/Laps/final");
     }
 
     private void DoBasicSetup()
@@ -198,7 +198,7 @@ namespace Multiplayer
     private void PlayOpening()
     {
       _firstCamAnim = _multiPlayer.camera.GetComponent<Animator>();
-      _multiPlayer.PlayOpening("JanktownOpeningCamera");
+      _multiPlayer.PlayOpening(map.cameraClipName);
     }
 
     private void AttachCamera()

@@ -1706,6 +1706,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2485363472009928056}
   - component: {fileID: 5471148350213154089}
+  - component: {fileID: 3007969713421908229}
   m_Layer: 0
   m_Name: Twister
   m_TagString: Untagged
@@ -1749,6 +1750,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkpoints: {fileID: 5315191547177680102}
   startingPositions: {fileID: 7636043289473707097}
+--- !u!114 &3007969713421908229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8368503695488208935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &8454015938400109481
 GameObject:
   m_ObjectHideFlags: 0
