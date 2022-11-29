@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
@@ -411,7 +411,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: eaa8ba4865ebe9543b225448a30e3c6e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Volume: 0.215
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2501,10 +2501,6 @@ MonoBehaviour:
   map: {fileID: 11400000, guid: 5b9dbc4b8e9bd304292969b748d640e6, type: 2}
   playerPrefab: {fileID: 341128055221354090, guid: 8b7dc839387693d4597225e2607d7e59, type: 3}
   botPrefab: {fileID: 6108957804242051475, guid: c0fbda787b42f184c856ff147ccdd704, type: 3}
-  threeSoundClip: {fileID: 8300000, guid: 89a1891d5dcc22040887c5408d1fb312, type: 3}
-  twoSoundClip: {fileID: 8300000, guid: 46d67d0cf46ab3e4ca120d670278bc24, type: 3}
-  oneSoundClip: {fileID: 8300000, guid: be1b60c863591f641aaa4f0e172b424e, type: 3}
-  startSoundClip: {fileID: 8300000, guid: ec5743f7c68526441849b8c48ec08deb, type: 3}
 --- !u!114 &765611359
 MonoBehaviour:
   m_ObjectHideFlags: 0

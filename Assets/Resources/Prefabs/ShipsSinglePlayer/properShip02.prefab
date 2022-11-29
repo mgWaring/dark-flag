@@ -351,7 +351,12 @@ MonoBehaviour:
   bulletSpawn: {fileID: 6310476976248917315}
   ammoCount: 0
   firingDelay: 0.1
-  bulletSpawner: {fileID: 0}
+  bulletSpawner: {fileID: 5246116794015972249}
+  gunSound: {fileID: 8300000, guid: ea65f3f7ae909ab44b7881fed5497c5d, type: 3}
+  minVolume: 0.1
+  maxVolume: 0.3
+  minPitch: 0.9
+  maxPitch: 1.2
 --- !u!114 &6086227926494204140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,6 +682,11 @@ PrefabInstance:
 --- !u!4 &176732031584710885 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2304272693585041935, guid: e5f8ad96f54d8614a8298b455d78a805, type: 3}
+  m_PrefabInstance: {fileID: 2128385228967701226}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5246116794015972249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6144168261723787635, guid: e5f8ad96f54d8614a8298b455d78a805, type: 3}
   m_PrefabInstance: {fileID: 2128385228967701226}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6310476976248917315 stripped

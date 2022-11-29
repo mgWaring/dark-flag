@@ -254,7 +254,7 @@ AudioSource:
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -351,9 +351,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4872813831117450451, guid: 9d4d65f72b086bf4ab3d2bae9c20639b, type: 3}
   bulletSpawn: {fileID: 6194179295276075254}
-  ammoCount: 0
-  firingDelay: 0.1
-  bulletSpawner: {fileID: 0}
+  ammoCount: 100000
+  firingDelay: 0.05
+  bulletSpawner: {fileID: 5379698523083374124}
+  gunSound: {fileID: 8300000, guid: fad4d54b55d3ccb4c96830f5de0d542e, type: 3}
+  gunVolume: 0.4
+  minVolume: 0.1
+  maxVolume: 0.3
+  minPitch: 0.9
+  maxPitch: 1.2
 --- !u!114 &6086227926494204140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,7 +859,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.08888889
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -868,7 +874,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.537
       inSlope: 0
       outSlope: 0
       tangentMode: 0

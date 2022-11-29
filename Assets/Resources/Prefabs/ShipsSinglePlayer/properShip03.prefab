@@ -29,7 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4298976098401725300}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &4298976098401725311
 GameObject:
@@ -78,7 +78,6 @@ Transform:
   - {fileID: 5359837717510909146}
   - {fileID: 5438832346153527250}
   - {fileID: 6692602517214375007}
-  - {fileID: 6194179295276075254}
   - {fileID: 2908111544794392419}
   - {fileID: 7195995219743435209}
   m_Father: {fileID: 0}
@@ -352,7 +351,12 @@ MonoBehaviour:
   bulletSpawn: {fileID: 9059836940563356357}
   ammoCount: 0
   firingDelay: 0.1
-  bulletSpawner: {fileID: 0}
+  bulletSpawner: {fileID: 7126282029140601887}
+  gunSound: {fileID: 8300000, guid: 2b20ec711ffd1e54a8778a61c414c9f5, type: 3}
+  minVolume: 0.1
+  maxVolume: 0.3
+  minPitch: 0.9
+  maxPitch: 1.2
 --- !u!114 &6086227926494204140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,37 +390,6 @@ MonoBehaviour:
   lastCheckpoint: {fileID: 0}
   nextCheckpoint: {fileID: 0}
   lap: 0
---- !u!1 &5379698523083374124
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6194179295276075254}
-  m_Layer: 8
-  m_Name: BulletSpawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6194179295276075254
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5379698523083374124}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.004, y: -0.225, z: 6.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4298976098401725300}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1567151780466226257
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -744,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2304272693585041935, guid: e5f8ad96f54d8614a8298b455d78a805, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2304272693585041935, guid: e5f8ad96f54d8614a8298b455d78a805, type: 3}
       propertyPath: m_LocalScale.x
@@ -807,6 +780,11 @@ PrefabInstance:
 --- !u!4 &2908111544794392419 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2304272693585041935, guid: e5f8ad96f54d8614a8298b455d78a805, type: 3}
+  m_PrefabInstance: {fileID: 4008726781089185132}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7126282029140601887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6144168261723787635, guid: e5f8ad96f54d8614a8298b455d78a805, type: 3}
   m_PrefabInstance: {fileID: 4008726781089185132}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &9059836940563356357 stripped
