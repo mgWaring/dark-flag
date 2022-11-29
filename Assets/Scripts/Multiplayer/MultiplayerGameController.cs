@@ -198,7 +198,7 @@ namespace Multiplayer
     private void PlayOpening()
     {
       _firstCamAnim = _multiPlayer.camera.GetComponent<Animator>();
-      _multiPlayer.PlayOpening("JanktownOpeningCamera");
+      _multiPlayer.PlayOpening(map.cameraClipName);
     }
 
     private void AttachCamera()

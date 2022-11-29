@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Monster
   prefab: {fileID: 4362807642343345382, guid: 02f3577f2790e344bb1308c328866b68, type: 3}
-  cameraClipName: TwisterOpeningCamera
+  cameraClipName: MonsterOpeningCamera
   killCeilingHeight: 140
   killFloorDepth: -140
   singleplayerScene: MonsterSingleplayer
