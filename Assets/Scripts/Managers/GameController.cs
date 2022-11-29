@@ -46,13 +46,13 @@ public class GameController : MonoBehaviour
 
     void FindAudio()
     {
-      threeSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/three");
-      twoSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/two");
-      oneSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/one");
-      startSoundClip = Resources.Load<AudioClip>("Audio/SoundClip/Countdown/engage");
-      threeLapsClip= Resources.Load<AudioClip>("Audio/SoundClip/Laps/three");
-      twoLapsClip= Resources.Load<AudioClip>("Audio/SoundClip/Laps/two");
-      oneLapsClip= Resources.Load<AudioClip>("Audio/SoundClip/Laps/final");
+      threeSoundClip = Resources.Load<AudioClip>("Audio/Voices/Countdown/three");
+      twoSoundClip = Resources.Load<AudioClip>("Audio/Voices/Countdown/two");
+      oneSoundClip = Resources.Load<AudioClip>("Audio/Voices/Countdown/one");
+      startSoundClip = Resources.Load<AudioClip>("Audio/Voices/Countdown/engage");
+      threeLapsClip= Resources.Load<AudioClip>("Audio/Voices/Laps/three");
+      twoLapsClip= Resources.Load<AudioClip>("Audio/Voices/Laps/two");
+      oneLapsClip= Resources.Load<AudioClip>("Audio/Voices/Laps/final");
     }
 
     void Start()
