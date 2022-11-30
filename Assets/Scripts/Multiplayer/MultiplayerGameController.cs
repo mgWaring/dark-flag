@@ -193,7 +193,17 @@ namespace Multiplayer
       }
 
       _multiPlayer.camera.enabled = true;
-    }
+
+            //Hopefule audio listener fix.
+            var ears = GameObject.FindObjectsOfType<AudioListener>();
+            foreach (AudioListener ear in ears)
+            {
+                ear.enabled = false;
+            }
+            _multiPlayer.camera.gameObject.GetComponent<AudioListener>().enabled = true;
+
+
+        }
 
     private void PlayOpening()
     {
