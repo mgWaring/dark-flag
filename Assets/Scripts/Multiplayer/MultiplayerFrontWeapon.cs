@@ -1,6 +1,7 @@
 using UnityEngine;
 using Managers;
 using Unity.Netcode;
+using Unity.VisualScripting;
 
 namespace Multiplayer
 {
@@ -10,12 +11,23 @@ namespace Multiplayer
       public Transform bulletSpawn;
       public int ammoCount;
       public float firingDelay;
+      public GameObject bulletSpawner;
       float currentFiringDelay;
 
-      void Start()
-      {
+        //Front Weapon Audio.
+        AudioSource gunSoundSource;
+        public AudioClip gunSound;
+        public float minVolume = 0.1f;
+        public float maxVolume = 0.3f;
+        public float minPitch = 0.9f;
+        public float maxPitch = 1.2f;
+
+        void Start()
+        {
           currentFiringDelay = firingDelay;
-      }
+          gunSoundSource = bulletSpawner.GetComponent<AudioSource>();
+          gunSound = gunSound.GetComponent<AudioClip>();
+        }
 
       void OnTriggerEnter(Collider other) {
           if (other.tag == "Pickup") {
@@ -35,7 +47,10 @@ namespace Multiplayer
               ammoCount--;
               currentFiringDelay = firingDelay;
               SpawnManager.Instance.SpawnBulletServerRpc();
-          }
+              gunSoundSource.pitch = PitchShifter();
+              gunSoundSource.volume = VolumeShifter();
+              gunSoundSource.PlayOneShot(gunSound);
+            }
       }
 
       public void SpawnBullet()
@@ -47,5 +62,19 @@ namespace Multiplayer
           bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * 40f, ForceMode.Impulse);
           bullet.GetComponent<NetworkObject>().Spawn();
       }
-  }
+
+        //Randomises gunSound pitch in range.
+        private float PitchShifter()
+        {
+            float gunPitch = Random.Range(minPitch, maxPitch);
+            return gunPitch;
+        }
+
+        //Randomises gunSound volume in range.
+        private float VolumeShifter()
+        {
+            float gunVolume = Random.Range(minVolume, maxVolume);
+            return gunVolume;
+        }
+    }
 }

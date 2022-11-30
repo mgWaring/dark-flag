@@ -31,13 +31,13 @@ MonoBehaviour:
   rollRayDistance: 8
   pitchForce: 40
   pitchRayDistance: 2
-  colliderCalcOffset: {x: 0, y: -0.15, z: -0.3}
+  colliderCalcOffset: {x: 0, y: -0.3, z: -0.7}
   fineTuneOffset: {x: 0.1, y: 0, z: 0.5}
   armour: 65
   fireDamage: 0.5
   boostDamageRate: 0.1
-  roofRayDistance: 0.35
-  roofRayOffset: {x: 0, y: -0.1, z: 0}
+  roofRayDistance: 0.7
+  roofRayOffset: {x: 0, y: 0.18, z: 0}
   engineIdleSound: {fileID: 8300000, guid: 4016305318bf21a409ee7c6fec72201b, type: 3}
   botSpeedModifier: 1
   cameraOffset: {x: 0, y: 0, z: 0}

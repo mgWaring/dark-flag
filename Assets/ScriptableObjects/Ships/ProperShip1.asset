@@ -36,7 +36,7 @@ MonoBehaviour:
   armour: 60
   fireDamage: 0.5
   boostDamageRate: 0.1
-  roofRayDistance: 0.35
+  roofRayDistance: 0.6
   roofRayOffset: {x: 0, y: 0.2, z: 0}
   engineIdleSound: {fileID: 8300000, guid: 2edd9bc3dc147a44fbbd059bfb7783d8, type: 3}
   botSpeedModifier: 1
