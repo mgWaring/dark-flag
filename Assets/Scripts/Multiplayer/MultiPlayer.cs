@@ -29,6 +29,7 @@ namespace Multiplayer {
         bot.enabled = false;
         gameObject.GetComponentInChildren<MultiplayerFrontWeapon>().enabled = false;
         gameObject.GetComponentInChildren<MultiplayerBackWeapon>().enabled = false;
+        gameObject.GetComponent<PlayerMovement>().enabled = false;
       }
       else
       {
@@ -41,6 +42,7 @@ namespace Multiplayer {
         bot.enabled = false;
         gameObject.GetComponentInChildren<MultiplayerFrontWeapon>().enabled = false;
         gameObject.GetComponentInChildren<MultiplayerBackWeapon>().enabled = false;
+        gameObject.GetComponent<PlayerMovement>().enabled = false;
       }
     }
 
@@ -86,6 +88,7 @@ namespace Multiplayer {
       mc.enabled = true;
       gameObject.GetComponentInChildren<MultiplayerFrontWeapon>().enabled = true;
       gameObject.GetComponentInChildren<MultiplayerBackWeapon>().enabled = true;
+      gameObject.GetComponent<PlayerMovement>().enabled = true;
     }
 
     public void AttachCamera()
