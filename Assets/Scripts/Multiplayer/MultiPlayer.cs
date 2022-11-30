@@ -27,6 +27,8 @@ namespace Multiplayer {
         camera = GetComponentInChildren<Camera>();
         BotMovement bot = ship.GetComponent<BotMovement>();
         bot.enabled = false;
+        gameObject.GetComponentInChildren<MultiplayerFrontWeapon>().enabled = false;
+        gameObject.GetComponentInChildren<MultiplayerBackWeapon>().enabled = false;
       }
       else
       {
@@ -37,6 +39,8 @@ namespace Multiplayer {
         camera = GetComponentInChildren<Camera>();
         BotMovement bot = ship.GetComponentInChildren<BotMovement>();
         bot.enabled = false;
+        gameObject.GetComponentInChildren<MultiplayerFrontWeapon>().enabled = false;
+        gameObject.GetComponentInChildren<MultiplayerBackWeapon>().enabled = false;
       }
     }
 
@@ -63,6 +67,8 @@ namespace Multiplayer {
         camera = GetComponentInChildren<Camera>();
         BotMovement bot = ship.GetComponent<BotMovement>();
         bot.enabled = false;
+        gameObject.GetComponentInChildren<MultiplayerFrontWeapon>().enabled = false;
+        gameObject.GetComponentInChildren<MultiplayerBackWeapon>().enabled = false;
       }
       else
       {
@@ -78,6 +84,8 @@ namespace Multiplayer {
     public void AllowPlay()
     {
       mc.enabled = true;
+      gameObject.GetComponentInChildren<MultiplayerFrontWeapon>().enabled = true;
+      gameObject.GetComponentInChildren<MultiplayerBackWeapon>().enabled = true;
     }
 
     public void AttachCamera()
