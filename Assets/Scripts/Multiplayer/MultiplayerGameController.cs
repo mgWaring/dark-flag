@@ -49,6 +49,8 @@ namespace Multiplayer
     AudioClip twoLapsClip;
     AudioClip oneLapsClip;
 
+    bool attachedCamera;
+
     void FindAudio()
     {
       threeSoundClip = Resources.Load<AudioClip>("Audio/Voices/Countdown/three");
@@ -216,11 +218,17 @@ namespace Multiplayer
 
     private void AttachCamera()
     {
+      if (attachedCamera) {
+        return;
+      }
+
       if (map.titleClip != null) {
         GetComponent<AudioSource>().PlayOneShot(map.titleClip, 0.7f);
       }
       uiHolder.SetActive(true);
       foreach (var player in _players) player.AttachCamera();
+      SpawnManager.Instance.HasLoadedGameServerRpc();
+      attachedCamera = true;
 
       if (_bots == null) return;
 
@@ -262,6 +270,10 @@ namespace Multiplayer
       if (!(_firstCamAnim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f)) return;
 
       AttachCamera();
+    }
+
+    public void StartCountdown()
+    {
       state = "countdown";
     }
 

@@ -6,6 +6,7 @@ using RelaySystem.Data;
 using Unity.Collections;
 using Multiplayer;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 namespace Managers
 {
@@ -17,6 +18,7 @@ namespace Managers
     public event Action<int> MapUpdate;
     public event Action<int> LapUpdate;
     public event Action<int> BotUpdate;
+    List<ulong> loadedClients = new();
     
     public NetworkList<MultiplayerMenuPlayer> _players = new();
     [HideInInspector] public NetworkVariable<int> _mapIndex = new();
@@ -220,6 +222,25 @@ namespace Managers
       ulong id = para.Receive.SenderClientId;
       var po = NetworkManager.Singleton.ConnectedClients[id].PlayerObject;
       po.GetComponentInChildren<MultiplayerFrontWeapon>().SpawnBullet();
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void HasLoadedGameServerRpc(ServerRpcParams para = default)
+    {
+      ulong id = para.Receive.SenderClientId;
+      if (!loadedClients.Contains(id)) {
+        loadedClients.Add(id);
+      }
+      if (loadedClients.Count == _players.Count) {
+        StartCountdownClientRpc();
+        loadedClients.Clear();
+      }
+    }
+
+    [ClientRpc]
+    public void StartCountdownClientRpc()
+    {
+      GameObject.FindObjectsOfType<MultiplayerGameController>()[0].StartCountdown();
     }
   }
 }

@@ -30,6 +30,10 @@ public class SpeedUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (rb == null) {
+            return;
+        }
+
         float percent = rb.velocity.magnitude / 90f;
         float val = percent * 1000.0f;
         text.text = string.Format("{0:N0}", val);

@@ -55,13 +55,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: BombMultiplayer
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6345927222632676187, guid: 1c7172c84f444ee498d07e02ad0cdc94, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 1c7172c84f444ee498d07e02ad0cdc94, type: 3}
 --- !u!1 &7904646581161424158 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5502508073657117986, guid: 1c7172c84f444ee498d07e02ad0cdc94, type: 3}
   m_PrefabInstance: {fileID: 2444935490083543100}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &-5237402923143761702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7904646581161424158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &-534169424073203481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,7 +105,7 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
---- !u!114 &-5237402923143761702
+--- !u!114 &1872273781011502909
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,10 +114,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7904646581161424158}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Script: {fileID: 11500000, guid: dbc3f39a487c9404c8d6ddb21d129b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
+  points: 100
+  maxRadius: 20
+  speed: 25
+  maxWidth: 2
+  delay: 2
+  force: 1
+  damage: 75
