@@ -59,7 +59,7 @@ namespace Multiplayer
           bullet.transform.position = bulletSpawn.position;
           bullet.transform.rotation = bulletSpawn.rotation;
           bullet.GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity;
-          bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * 40f, ForceMode.Impulse);
+          bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * 80f, ForceMode.Impulse);
           bullet.GetComponent<NetworkObject>().Spawn();
       }
 
