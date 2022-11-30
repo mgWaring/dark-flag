@@ -155,7 +155,7 @@ MonoBehaviour:
   maxWidth: 2
   delay: 2
   force: 1
-  damage: 75
+  damage: 1000
 --- !u!82 &3861613352084309905
 AudioSource:
   m_ObjectHideFlags: 0
