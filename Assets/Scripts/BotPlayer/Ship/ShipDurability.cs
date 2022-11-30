@@ -30,6 +30,7 @@ public class ShipDurability : MonoBehaviour
     float roofRayDistance;
     Vector3 roofRayOffset;
     float boostDamageRate;
+    public bool isMultiplayer = false;
 
     void Start() {
         ss = GetComponent<Ship>().details;
@@ -166,10 +167,23 @@ public class ShipDurability : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.tag == "Bullet") {
-            float removal = other.GetComponent<Bullet>().damage / ss.armour;
-            takeDamage(other.GetComponent<Bullet>().damage);
-        } else if (other.tag == "Pickup") {
+        
+        if (other.tag == "Bullet") 
+        {
+            if (!isMultiplayer)
+            {
+                float removal = other.GetComponent<Bullet>().damage / ss.armour;
+                takeDamage(other.GetComponent<Bullet>().damage);
+            }
+            else
+            {
+                float removal = other.GetComponent<MultiplayerBullet>().damage / ss.armour;
+                takeDamage(other.GetComponent<MultiplayerBullet>().damage);
+            }
+            
+        } 
+        else if (other.tag == "Pickup") 
+        {
             Pickup pickup = other.gameObject.GetComponent<Pickup>();
             if (pickup.type == Pickup.PickupType.Health) {
                 hp += pickup.value;

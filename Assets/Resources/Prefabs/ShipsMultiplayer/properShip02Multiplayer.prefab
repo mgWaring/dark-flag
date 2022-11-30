@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: properShip02Multiplayer
       objectReference: {fileID: 0}
+    - target: {fileID: 7370398645800970976, guid: 2ab73221ec9b3cf4eba02d298033535e, type: 3}
+      propertyPath: isMultiplayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7979203771607986382, guid: 2ab73221ec9b3cf4eba02d298033535e, type: 3}
       propertyPath: m_Mesh
       value: 

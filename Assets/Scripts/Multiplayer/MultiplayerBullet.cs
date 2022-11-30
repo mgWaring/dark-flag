@@ -8,7 +8,7 @@ namespace Multiplayer
   {
       public float damage;
       float maxLifetime = 10.0f;
-      // Update is called once per frame
+
       void Update()
       {
           maxLifetime -= Time.deltaTime;
