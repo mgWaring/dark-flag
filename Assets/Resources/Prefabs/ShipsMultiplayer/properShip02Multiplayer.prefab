@@ -70,7 +70,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 4732455174172086529, guid: 2ab73221ec9b3cf4eba02d298033535e, type: 3}
     - {fileID: 6086227926494204140, guid: 2ab73221ec9b3cf4eba02d298033535e, type: 3}
-    - {fileID: 749492794039491753, guid: 2ab73221ec9b3cf4eba02d298033535e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2ab73221ec9b3cf4eba02d298033535e, type: 3}
 --- !u!4 &1129302547717374550 stripped
 Transform:
@@ -149,6 +148,23 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
+--- !u!114 &371095288582611340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6329913547970380000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7063c55e929a40368002f693c491dc07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
+  name: 
+  lastCheckpoint: {fileID: 0}
+  nextCheckpoint: {fileID: 0}
+  lap: 0
 --- !u!114 &712759343898738883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,22 +181,6 @@ MonoBehaviour:
   bombSpawn: {fileID: 1129302547717374550}
   ammoCount: 0
   firingDelay: 2
---- !u!114 &8534521661351020530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6329913547970380000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da89b40d08222cf42b0ef55df654f1a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8388025962477709844, guid: 30605989f4beaba42b2d68610f71100b, type: 3}
-  bulletSpawn: {fileID: 4315020504916109020}
-  ammoCount: 0
-  firingDelay: 0.1
 --- !u!114 &2244604018748761901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
   - {fileID: 8844451871771426427}
   normalMaterial: {fileID: 2100000, guid: df18cfd7f381e3e47a962ebe63eb95a6, type: 2}
   boostMaterial: {fileID: 2100000, guid: cf2cf97f33c7424449a9cb5b5d0e4819, type: 2}
---- !u!114 &371095288582611340
+--- !u!114 &8534521661351020530
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,14 +213,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6329913547970380000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7063c55e929a40368002f693c491dc07, type: 3}
+  m_Script: {fileID: 11500000, guid: da89b40d08222cf42b0ef55df654f1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
-  name: 
-  lastCheckpoint: {fileID: 0}
-  nextCheckpoint: {fileID: 0}
-  lap: 0
+  bulletPrefab: {fileID: 8388025962477709844, guid: 30605989f4beaba42b2d68610f71100b, type: 3}
+  bulletSpawn: {fileID: 4315020504916109020}
+  ammoCount: 0
+  firingDelay: 0.1
 --- !u!108 &8748038257715888258 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 1519436403983444765, guid: 2ab73221ec9b3cf4eba02d298033535e, type: 3}

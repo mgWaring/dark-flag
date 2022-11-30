@@ -74,7 +74,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6086227926494204140, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
     - {fileID: 4732455174172086529, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
-    - {fileID: 749492794039491753, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
 --- !u!4 &205113064292589437 stripped
 Transform:
@@ -158,38 +157,6 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &2777076823480393988
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6533875629835017675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da89b40d08222cf42b0ef55df654f1a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8388025962477709844, guid: 30605989f4beaba42b2d68610f71100b, type: 3}
-  bulletSpawn: {fileID: 3815639566694907458}
-  ammoCount: 0
-  firingDelay: 0.1
---- !u!114 &8888538359671338902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6533875629835017675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5e46c3023f851c4a8061f2db07efe16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bombPrefab: {fileID: 7904646581161424158, guid: ed45fbc7addfd15438ffa7a4846081db, type: 3}
-  bombSpawn: {fileID: 205113064292589437}
-  ammoCount: 0
-  firingDelay: 2
 --- !u!114 &989872258910945943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +174,22 @@ MonoBehaviour:
   lastCheckpoint: {fileID: 0}
   nextCheckpoint: {fileID: 0}
   lap: 0
+--- !u!114 &2777076823480393988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6533875629835017675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da89b40d08222cf42b0ef55df654f1a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 8388025962477709844, guid: 30605989f4beaba42b2d68610f71100b, type: 3}
+  bulletSpawn: {fileID: 3815639566694907458}
+  ammoCount: 0
+  firingDelay: 0.1
 --- !u!114 &8391942959971990969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +215,22 @@ MonoBehaviour:
   - {fileID: 4608927989072348505}
   normalMaterial: {fileID: 2100000, guid: df18cfd7f381e3e47a962ebe63eb95a6, type: 2}
   boostMaterial: {fileID: 2100000, guid: cf2cf97f33c7424449a9cb5b5d0e4819, type: 2}
+--- !u!114 &8888538359671338902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6533875629835017675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e46c3023f851c4a8061f2db07efe16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bombPrefab: {fileID: 7904646581161424158, guid: ed45fbc7addfd15438ffa7a4846081db, type: 3}
+  bombSpawn: {fileID: 205113064292589437}
+  ammoCount: 0
+  firingDelay: 2
 --- !u!108 &7183913695027785889 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 195794201289754133, guid: 6db73a0092e06354b87a006f938798ea, type: 3}
