@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshHolder: {fileID: 1329531940144757674}
   target: {fileID: 462699432496106192}
-  targetOffset: {x: 0, y: 0.1729, z: 20}
+  targetOffset: {x: 0, y: -0.195, z: 20}
   turretLookRange: {x: 20, y: 0, z: 0}
   targetSmoothing: 0.75
 --- !u!1 &2238075557159119054
@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 1780075641370810077}
   - component: {fileID: 584019715814725372}
   - component: {fileID: 7940008382880316907}
-  - component: {fileID: 4154244865246455695}
   m_Layer: 0
   m_Name: ImportantSphere
   m_TagString: Untagged
@@ -169,19 +168,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4154244865246455695
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4443938025013829574}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6144168261723787635
 GameObject:
   m_ObjectHideFlags: 0

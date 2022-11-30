@@ -477,6 +477,7 @@ GameObject:
   - component: {fileID: 4298976098401725303}
   - component: {fileID: 6698693705497660121}
   - component: {fileID: 6650421728474378717}
+  - component: {fileID: 1799859335252614306}
   - component: {fileID: 4298976098401725299}
   - component: {fileID: 4298976098401725298}
   - component: {fileID: 4298976098401725309}
@@ -564,6 +565,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.476918, y: 1.3013957, z: 3.4587789}
   m_Center: {x: 0, y: -0.8459054, z: -0.790422}
+--- !u!65 &1799859335252614306
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4298976098401725311}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8574528, y: 1.5637387, z: 1.601084}
+  m_Center: {x: 0, y: 0.44871578, z: -0.045398496}
 --- !u!114 &4298976098401725299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -802,9 +816,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4872813831117450451, guid: 9d4d65f72b086bf4ab3d2bae9c20639b, type: 3}
   bulletSpawn: {fileID: 9059836940563356357}
   ammoCount: 0
-  firingDelay: 0.1
+  firingDelay: 0.05
   bulletSpawner: {fileID: 7126282029140601887}
-  gunSound: {fileID: 8300000, guid: 2b20ec711ffd1e54a8778a61c414c9f5, type: 3}
+  gunSound: {fileID: 8300000, guid: fad4d54b55d3ccb4c96830f5de0d542e, type: 3}
   minVolume: 0.1
   maxVolume: 0.3
   minPitch: 0.9

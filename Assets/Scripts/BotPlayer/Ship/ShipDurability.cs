@@ -158,7 +158,7 @@ public class ShipDurability : MonoBehaviour
     }
 
     public void takeDamage(float damage) {
-        float removal = damage - ss.armour;
+        float removal = damage / ss.armour;
         showingShield = true;
         if (removal > 0.0f) {
             hp = hp - removal;
@@ -167,7 +167,7 @@ public class ShipDurability : MonoBehaviour
 
     void OnTriggerEnter(Collider other) {
         if (other.tag == "Bullet") {
-            float removal = other.GetComponent<Bullet>().damage - ss.armour;
+            float removal = other.GetComponent<Bullet>().damage / ss.armour;
             takeDamage(other.GetComponent<Bullet>().damage);
         } else if (other.tag == "Pickup") {
             Pickup pickup = other.gameObject.GetComponent<Pickup>();

@@ -219,7 +219,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8388025962477709844, guid: 30605989f4beaba42b2d68610f71100b, type: 3}
   bulletSpawn: {fileID: 4315020504916109020}
   ammoCount: 0
-  firingDelay: 0.1
+  firingDelay: 0.05
 --- !u!108 &8748038257715888258 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 1519436403983444765, guid: 2ab73221ec9b3cf4eba02d298033535e, type: 3}

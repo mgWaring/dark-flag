@@ -31,7 +31,7 @@ public class Turret : MonoBehaviour
     private void TurretLook()
     {
         turretSwivel = Vector3.zero + (turretSwivelAmount.x * transform.right * cameraFlip);
-        target.position = Vector3.Lerp(target.position, transform.position + (targetOffset.z * transform.forward * cameraFlip), targetSmoothing);
+        target.position = Vector3.Lerp(target.position, transform.position + (targetOffset.z * transform.forward * cameraFlip) + (targetOffset.y * transform.up), targetSmoothing);
         turret.LookAt(target.position + turretSwivel);
     }
 

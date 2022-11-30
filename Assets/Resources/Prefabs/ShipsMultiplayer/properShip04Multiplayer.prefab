@@ -150,7 +150,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8388025962477709844, guid: 30605989f4beaba42b2d68610f71100b, type: 3}
   bulletSpawn: {fileID: 7818780860542321800}
   ammoCount: 0
-  firingDelay: 0.1
+  firingDelay: 0.05
 --- !u!114 &2349012487370188492
 MonoBehaviour:
   m_ObjectHideFlags: 0
