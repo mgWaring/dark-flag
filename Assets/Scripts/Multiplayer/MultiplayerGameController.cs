@@ -114,13 +114,16 @@ namespace Multiplayer
         int checkpointCount = _checkpoints.transform.childCount;
         MultiplayerCheckpoint lastCheck = _checkpoints.transform.GetChild(checkpointCount - 1).GetComponent<MultiplayerCheckpoint>();
         MultiplayerCheckpoint nextCheck = _checkpoints.transform.GetChild(0).GetComponent<MultiplayerCheckpoint>();
+        _startingPositions = _mMap.startingPositions;
         foreach (MultiPlayer player in _players)
         {
           player.Init();
           player.racer.lastCheckpoint = lastCheck;
           player.racer.nextCheckpoint = nextCheck;
           laps[player.racer] = new List<float>();
-          int index = SpawnManager.Instance.IndexFor(player.clientId);
+          int index = SpawnManager.Instance.IndexFor(player.OwnerClientId);
+          Transform startPos = _startingPositions.GetChild(index).transform;
+          player.SetPosition(startPos.position, startPos.rotation);
           player.racer.name = SpawnManager.Instance._players[index].name.ToString();
         }
 

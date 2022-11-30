@@ -40,6 +40,12 @@ namespace Multiplayer {
       }
     }
 
+    public void SetPosition(Vector3 pos, Quaternion rot)
+    {
+      ship.transform.position = pos;
+      ship.transform.rotation = rot;
+    }
+
     public void InitWithPosition(Vector3 pos, Quaternion rot)
     {
       if (SpawnManager.Instance.GetClientId() == 0)
